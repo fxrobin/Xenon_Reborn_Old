@@ -3,23 +3,18 @@ package net.entetrs.xenon;
 import java.util.stream.Stream;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Fader;
+import net.entetrs.xenon.commons.Fader.State;
 import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.helpers.FontLib;
-import net.entetrs.xenon.helpers.SoundLib;
-import net.entetrs.xenon.helpers.TextureManager;
 import net.entetrs.xenon.screens.GamePlayScreen;
 import net.entetrs.xenon.screens.MenuScreen;
 
 public class MainControler extends Game
 {
-
 	private static MainControler instance = new MainControler();
 
 	private MainControler()
@@ -38,107 +33,58 @@ public class MainControler extends Game
 	}
 
 	private SpriteBatch batch;
-
-
-	private float step = 1.0f / C.FADE_SECONDS; // augmentation par secondes
-	private float currentAlpha = 0;
-	private boolean fadeIn = false;
-	private boolean fadeOut = false;
-
 	private Screen currentScreen;
+	private Fader fader;
 
 	@Override
 	public void create()
 	{
 		batch = new SpriteBatch();
+		fader = new Fader();
 		this.showScreen(XenonScreen.MENU);
 	}
 
 	public void showScreen(XenonScreen screen)
 	{
-		startFadeOut();
-
+		if (currentScreen != null) fader.startFadeOut();
+		
 		switch (screen)
 		{
 			case MENU:
-				currentScreen = new MenuScreen(this);
+				currentScreen = new MenuScreen(this);		
 				break;
 			case GAME_PLAY:
 				currentScreen = new GamePlayScreen(this);
 				break;
 			default:
 				System.out.println("Ecran inconnu");
-		}
+		}	
+		this.fade();
 	}
 
 	@Override
 	public void render()
 	{
 		batch.begin();
-		this.checkFadeInFadeOut();
+		GdxCommons.clearScreen();
+		this.fade();
 		super.render();
 		batch.end();
 	}
 
-	private void checkFadeInFadeOut()
+	private void fade()
 	{
-		if (fadeOutFinished())
+		if (fader.getCurrentState().equals(State.BLACK_SCREEN))
 		{
 			this.setScreen(currentScreen);
-			startFadeIn();
-		}
-		clearScreen();
-		float delta = Gdx.graphics.getDeltaTime();
-		if (fadeIn) fadeIn(delta);
-		if (fadeOut) fadeOut(delta);
-		batch.setColor(1, 1, 1, currentAlpha);
-	}
-
-	private void fadeIn(float delta)
-	{
-		currentAlpha = currentAlpha + (step * delta);
-		if (currentAlpha >= 1.0f)
-		{
-			currentAlpha = 1.0f;
-			fadeIn = false;
-		}
-	}
-
-	private void fadeOut(float delta)
-	{
-		currentAlpha = currentAlpha - (step * delta);
-		if (currentAlpha <= 0.0f)
-		{
-			currentAlpha = 0.0f;
-		}
-	}
-
-	public boolean fadeOutFinished()
-	{
-
-		if (currentAlpha == 0f && fadeOut)
-		{
-			fadeOut = false;
-			return true;
-		}
+			fader.startFadeIn();
+		}	
 		else
 		{
-			return false;
+			fader.fade(batch);
 		}
 	}
-
-	public void startFadeIn()
-	{
-		currentAlpha = 0;
-		fadeIn = true;
-
-	}
-
-	public void startFadeOut()
-	{
-		currentAlpha = 1;
-		fadeOut = true;
-	}
+	
 
 	public SpriteBatch getBatch()
 	{
@@ -153,26 +99,9 @@ public class MainControler extends Game
 	}
 
 
-	public void clearScreen()
-	{
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
-
-	public void clearScreen(float alpha)
-	{
-		Gdx.gl.glClearColor(0, 0, 0, alpha);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
-
 	public void setSpriteAlpha(Stream<? extends Sprite> stream)
 	{
-		stream.forEach(s -> MainControler.applyAlpha(s, currentAlpha));
-	}
-
-	public static void applyAlpha(Sprite s, float alpha)
-	{
-		s.setColor(s.getColor().r, s.getColor().g, s.getColor().b, alpha);
+		stream.forEach(s -> GdxCommons.applyAlpha(s, fader.getCurrentAlpha()));
 	}
 
 }

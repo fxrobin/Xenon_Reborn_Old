@@ -24,7 +24,7 @@ public class MainControler extends Game
 
 	private MainControler()
 	{
-		// TODO Auto-generated constructor stub
+		// protection car Singleton.
 	}
 
 	public static MainControler getInstance()
@@ -54,7 +54,6 @@ public class MainControler extends Game
 	public void create()
 	{
 		batch = new SpriteBatch();
-		soundManager = new SoundManager();
 		textureManager = new TextureManager();
 		fontManager = new FontManager();
 		this.showScreen(XenonScreen.MENU);
@@ -62,10 +61,8 @@ public class MainControler extends Game
 
 	public void showScreen(XenonScreen screen)
 	{
-
 		startFadeOut();
 
-		System.out.println("Affichage de : " + screen);
 		switch (screen)
 		{
 			case MENU:

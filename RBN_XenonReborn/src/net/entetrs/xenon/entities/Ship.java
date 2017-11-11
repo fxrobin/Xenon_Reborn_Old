@@ -82,11 +82,11 @@ public class Ship
 			shieldActivated = !shieldActivated;
 			if (shieldActivated)
 			{
-				soundManager.getShieldUpSound().play();
+				SoundManager.SHIELD_UP.play();
 			}
 			else
 			{
-				soundManager.getShieldDownSound().play();
+				SoundManager.SHIELD_DOWN.play();
 			}
 		}
 	}

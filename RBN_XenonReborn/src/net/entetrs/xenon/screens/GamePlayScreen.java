@@ -18,6 +18,7 @@ import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.entities.Enemy;
 import net.entetrs.xenon.entities.Ship;
 import net.entetrs.xenon.managers.ExplosionManager;
+import net.entetrs.xenon.managers.SoundManager;
 import net.entetrs.xenon.managers.TextureManager;
 
 public class GamePlayScreen implements Screen
@@ -123,7 +124,7 @@ public class GamePlayScreen implements Screen
 	{
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE))
 		{
-			this.main.getSoundManager().getClic().play();
+			SoundManager.CLIC.play();
 			this.main.showScreen(MainControler.XenonScreen.MENU);
 		}
 	}
@@ -146,7 +147,7 @@ public class GamePlayScreen implements Screen
 			s.setOriginCenter();
 			s.setCenter(ship.getCenterX(), ship.getCenterY());
 			shoots.add(s);
-			this.main.getSoundManager().getShoot().play();
+			SoundManager.SHOOT.play();
 		}
 	}
 
@@ -220,7 +221,7 @@ public class GamePlayScreen implements Screen
 	@Override
 	public void show()
 	{
-		this.main.getSoundManager().getMusic().loop(0.6f);
+		SoundManager.MUSIC.loop(0.6f);
 		ship = new Ship();
 		position = C.HEIGHT;
 	}
@@ -228,7 +229,7 @@ public class GamePlayScreen implements Screen
 	@Override
 	public void hide()
 	{
-		this.main.getSoundManager().getMusic().stop();
+		SoundManager.MUSIC.stop();
 	}
 
 	@Override

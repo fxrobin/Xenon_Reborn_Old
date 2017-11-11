@@ -6,74 +6,63 @@ import com.badlogic.gdx.utils.Disposable;
 
 import net.entetrs.xenon.commons.GdxCommons;
 
-public class SoundManager implements Disposable
+public enum SoundManager implements Disposable
 {
-	private Sound shoot;
-	private Sound intro;
-	private Sound music;
-	private Sound shieldUpSound;
-	private Sound shieldDownSound;
-	private Sound clic;
-	private Sound explosion;
-
-	public SoundManager()
+	SHOOT("shoot.mp3"), 
+	SHIELD_UP("shield_up.wav"), 
+	SHIELD_DOWN("shield_down.wav"), 
+	CLIC("clic.wav"), 
+	EXPLOSION("explosion.wav"), 
+	INTRO("intro.mp3"), 
+	MUSIC("music.mp3");
+	
+	private Sound sound;
+	
+	private SoundManager(String fileName)
 	{
-		shoot = load("shoot.mp3");
-		intro = load("intro.mp3");
-		music = load("music.mp3");
-		clic = load("clic.wav");
-		explosion = load("explosion.wav");
-		shieldDownSound = load("shield_down.wav");
-		shieldUpSound = load("shield_up.wav");
+		String completeName = String.format("sounds/%s", fileName);
+		this.sound = Gdx.audio.newSound(Gdx.files.internal(completeName));
 	}
 
-	public Sound getShoot()
+	public Sound getSound()
 	{
-		return shoot;
+		return this.sound;
+	}
+	
+	public void play()
+	{
+		this.sound.play();
+	}
+	
+	public void play(float vol)
+	{
+		this.sound.play(vol);
+	}
+	
+	public void loop(float vol)
+	{
+		this.sound.loop(vol);
+	}
+	
+	public void loop()
+	{
+		this.sound.loop();
+	}
+	
+	public void stop()
+	{
+		this.sound.stop();
 	}
 
-	public Sound getMusic()
-	{
-		return music;
-	}
-
-	public Sound getShieldUpSound()
-	{
-		return shieldUpSound;
-	}
-
-	public Sound getShieldDownSound()
-	{
-		return shieldDownSound;
-	}
-
-	public Sound getIntro()
-	{
-		return intro;
-	}
-
-	public Sound getClic()
-	{
-		return clic;
-	}
-
-	public Sound getExplosion()
-	{
-		return explosion;
-	}
 
 	@Override
 	public void dispose()
 	{
 		System.out.print("DISPOSE SOUNDS ...");
-		GdxCommons.disposeAll(shoot, intro, music, shieldUpSound, shieldDownSound);
+		GdxCommons.disposeAll(SoundManager.values());
 		System.out.println("OK");
 	}
 
-	private Sound load(String name)
-	{
-		String completeName = String.format("sounds/%s", name);
-		return Gdx.audio.newSound(Gdx.files.internal(completeName));
-	}
+
 
 }

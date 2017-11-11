@@ -11,6 +11,7 @@ import net.entetrs.xenon.animations.AnimatedSprite;
 import net.entetrs.xenon.animations.AnimationCatalog;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.FontCommons;
+import net.entetrs.xenon.managers.SoundManager;
 
 public class MenuScreen implements Screen
 {
@@ -51,7 +52,7 @@ public class MenuScreen implements Screen
 	@Override
 	public void show()
 	{
-		ctrl.getSoundManager().getIntro().loop();
+		SoundManager.INTRO.loop();
 	}
 
 	private float random()
@@ -123,7 +124,7 @@ public class MenuScreen implements Screen
 
 		if (Gdx.input.isKeyJustPressed(Keys.D))
 		{
-			ctrl.getSoundManager().getExplosion().play();
+			SoundManager.EXPLOSION.play();
 			animatedSprite = new AnimatedSprite(AnimationCatalog.EXPLOSION);
 			animatedSprite.setCenter(640, 480);
 			explode = true;
@@ -131,7 +132,7 @@ public class MenuScreen implements Screen
 
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
 		{
-			ctrl.getSoundManager().getClic().play();
+			SoundManager.CLIC.play();
 			ctrl.showScreen(MainControler.XenonScreen.GAME_PLAY);
 		}
 
@@ -165,7 +166,7 @@ public class MenuScreen implements Screen
 	@Override
 	public void hide()
 	{
-		ctrl.getSoundManager().getIntro().stop();
+		SoundManager.INTRO.stop();
 	}
 
 	@Override

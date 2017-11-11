@@ -3,7 +3,6 @@ package net.entetrs.xenon.commons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.helpers.TextureManager;
 
 public class FontCommons

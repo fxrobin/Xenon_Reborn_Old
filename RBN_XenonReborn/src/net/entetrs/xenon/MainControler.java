@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.managers.FontManager;
-import net.entetrs.xenon.managers.SoundManager;
-import net.entetrs.xenon.managers.TextureManager;
+import net.entetrs.xenon.helpers.FontLib;
+import net.entetrs.xenon.helpers.SoundLib;
+import net.entetrs.xenon.helpers.TextureManager;
 import net.entetrs.xenon.screens.GamePlayScreen;
 import net.entetrs.xenon.screens.MenuScreen;
 
@@ -39,9 +39,6 @@ public class MainControler extends Game
 
 	private SpriteBatch batch;
 
-	private SoundManager soundManager;
-	private TextureManager textureManager;
-	private FontManager fontManager;
 
 	private float step = 1.0f / C.FADE_SECONDS; // augmentation par secondes
 	private float currentAlpha = 0;
@@ -54,8 +51,6 @@ public class MainControler extends Game
 	public void create()
 	{
 		batch = new SpriteBatch();
-		textureManager = new TextureManager();
-		fontManager = new FontManager();
 		this.showScreen(XenonScreen.MENU);
 	}
 
@@ -154,23 +149,9 @@ public class MainControler extends Game
 	public void dispose()
 	{
 		super.dispose();
-		GdxCommons.disposeAll(batch, soundManager, textureManager, fontManager);
+	//	GdxCommons.disposeAll(batch, soundManager, textureManager, fontManager);
 	}
 
-	public SoundManager getSoundManager()
-	{
-		return soundManager;
-	}
-
-	public FontManager getFontManager()
-	{
-		return fontManager;
-	}
-
-	public TextureManager getTextureManager()
-	{
-		return textureManager;
-	}
 
 	public void clearScreen()
 	{

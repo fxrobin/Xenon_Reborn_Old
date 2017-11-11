@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.managers.SoundManager;
-import net.entetrs.xenon.managers.TextureManager;
+import net.entetrs.xenon.helpers.SoundLib;
+import net.entetrs.xenon.helpers.TextureManager;
 
 public class Ship
 {
@@ -41,12 +41,11 @@ public class Ship
 
 	private void loadSprites()
 	{
-		TextureManager tm = MainControler.getInstance().getTextureManager();
-		shipSpriteReactorOn = new Sprite(tm.getShip());
-		shipSpriteLeft = new Sprite(tm.getShipLeft());
-		shipSpriteRight = new Sprite(tm.getShipRight());
-		shipSpriteReactorOff = new Sprite(tm.getShipNoReactor());
-		shieldSprite = new Sprite(tm.getShield());
+		shipSpriteReactorOn = new Sprite(TextureManager.SHIP.get());
+		shipSpriteLeft = new Sprite(TextureManager.SHIP_LEFT.get());
+		shipSpriteRight = new Sprite(TextureManager.SHIP_RIGHT.get());
+		shipSpriteReactorOff = new Sprite(TextureManager.SHIP_NOREACTOR.get());
+		shieldSprite = new Sprite(TextureManager.SHIELD.get());
 	}
 
 	public float getCenterX()
@@ -78,15 +77,14 @@ public class Ship
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER))
 		{
-			SoundManager soundManager = MainControler.getInstance().getSoundManager();
 			shieldActivated = !shieldActivated;
 			if (shieldActivated)
 			{
-				SoundManager.SHIELD_UP.play();
+				SoundLib.SHIELD_UP.play();
 			}
 			else
 			{
-				SoundManager.SHIELD_DOWN.play();
+				SoundLib.SHIELD_DOWN.play();
 			}
 		}
 	}

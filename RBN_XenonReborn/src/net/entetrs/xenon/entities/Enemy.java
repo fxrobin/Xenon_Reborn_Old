@@ -7,15 +7,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.helpers.TextureManager;
 
 public class Enemy extends Sprite
 {
-	private static Texture enemy = MainControler.getInstance().getTextureManager().getEnemy();
-	private static Texture bug = MainControler.getInstance().getTextureManager().getBug();
-	private static Texture perforator = MainControler.getInstance().getTextureManager().getPerforator();
+	private static Texture enemyTexture = TextureManager.ENEMY.get();
+	private static Texture bugTexture = TextureManager.BUG.get();
+	private static Texture perforatorTexture = TextureManager.PERFORATOR.get();
 
-	private static Texture[] textures = { enemy, bug, perforator };
-
+	private static Texture[] textures = { enemyTexture, bugTexture, perforatorTexture };
 	private static Random randomGenerator = new Random();
 
 	private float vX;

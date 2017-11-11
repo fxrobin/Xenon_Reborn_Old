@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import net.entetrs.xenon.animations.AnimatedSprite;
-import net.entetrs.xenon.animations.AnimationCatalog;
+import net.entetrs.xenon.commons.AnimatedSprite;
+import net.entetrs.xenon.helpers.AnimationLib;
 
 public class ExplosionManager
 {
@@ -20,7 +20,7 @@ public class ExplosionManager
 	
 	public static void addExplosion(float centerX, float centerY)
 	{
-		AnimatedSprite animatedSprite = AnimationCatalog.EXPLOSION.createAnimatedSprite();
+		AnimatedSprite animatedSprite = AnimationLib.EXPLOSION.createAnimatedSprite();
 		animatedSprite.setOriginCenter();
 		animatedSprite.setCenter(centerX, centerY);
 		explosions.add(animatedSprite);

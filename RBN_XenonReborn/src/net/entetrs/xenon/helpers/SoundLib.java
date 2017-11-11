@@ -1,4 +1,4 @@
-package net.entetrs.xenon.managers;
+package net.entetrs.xenon.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 import net.entetrs.xenon.commons.GdxCommons;
 
-public enum SoundManager implements Disposable
+public enum SoundLib implements Disposable
 {
 	SHOOT("shoot.mp3"), 
 	SHIELD_UP("shield_up.wav"), 
@@ -18,7 +18,7 @@ public enum SoundManager implements Disposable
 	
 	private Sound sound;
 	
-	private SoundManager(String fileName)
+	private SoundLib(String fileName)
 	{
 		String completeName = String.format("sounds/%s", fileName);
 		this.sound = Gdx.audio.newSound(Gdx.files.internal(completeName));
@@ -59,7 +59,7 @@ public enum SoundManager implements Disposable
 	public void dispose()
 	{
 		System.out.print("DISPOSE SOUNDS ...");
-		GdxCommons.disposeAll(SoundManager.values());
+		GdxCommons.disposeAll(SoundLib.values());
 		System.out.println("OK");
 	}
 

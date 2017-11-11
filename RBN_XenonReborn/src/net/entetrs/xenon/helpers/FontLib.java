@@ -1,17 +1,17 @@
-package net.entetrs.xenon.managers;
+package net.entetrs.xenon.helpers;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 
-public class FontManager implements Disposable
+public enum FontLib implements Disposable
 {
+	DEFAULT;
 
 	private BitmapFont font;
 
-	public FontManager()
+	private FontLib()
 	{
 		font = new BitmapFont();
-
 	}
 
 	public BitmapFont getFont()

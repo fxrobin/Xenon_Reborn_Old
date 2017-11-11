@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import net.entetrs.xenon.MainControler;
+import net.entetrs.xenon.helpers.TextureManager;
 
 public class FontCommons
 {
@@ -16,8 +17,8 @@ public class FontCommons
 
 	static
 	{
-		fontAZ = MainControler.getInstance().getTextureManager().getFontAZ();
-		font09 = MainControler.getInstance().getTextureManager().getFont09();
+		fontAZ = TextureManager.FONT_AZ.get();
+		font09 = TextureManager.FONT_09.get();
 	}
 
 	public static int getWidth(String txt)

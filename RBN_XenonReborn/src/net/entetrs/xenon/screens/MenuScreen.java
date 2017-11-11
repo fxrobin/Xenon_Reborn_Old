@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.MainControler;
-import net.entetrs.xenon.animations.AnimatedSprite;
-import net.entetrs.xenon.animations.AnimationCatalog;
+import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.FontCommons;
-import net.entetrs.xenon.managers.SoundManager;
+import net.entetrs.xenon.helpers.AnimationLib;
+import net.entetrs.xenon.helpers.SoundLib;
+import net.entetrs.xenon.helpers.TextureManager;
 
 public class MenuScreen implements Screen
 {
@@ -33,7 +34,7 @@ public class MenuScreen implements Screen
 	private float titleX;
 	private float titleY;
 
-	private AnimatedSprite animatedSprite = new AnimatedSprite(AnimationCatalog.EXPLOSION);
+	private AnimatedSprite animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION);
 
 	private int accumulator = 0;
 
@@ -41,18 +42,18 @@ public class MenuScreen implements Screen
 
 	public MenuScreen(MainControler ctrl)
 	{
-		System.out.println("Instanciation de GamePlay");
+		System.out.println("Instanciation de MenuScreen");
 		this.ctrl = ctrl;
-		titleTexture = ctrl.getTextureManager().getTitle();
+		titleTexture = TextureManager.TITLE.get();
 		titleX = (C.WIDTH - titleTexture.getWidth()) / 2;
 		titleY = (C.HEIGHT - titleTexture.getHeight()) / 2;
-		spaceTexture = ctrl.getTextureManager().getSpace();
+		spaceTexture = TextureManager.BACKGROUND_SPACE.get();
 	}
 
 	@Override
 	public void show()
 	{
-		SoundManager.INTRO.loop();
+		SoundLib.INTRO.loop();
 	}
 
 	private float random()
@@ -124,15 +125,15 @@ public class MenuScreen implements Screen
 
 		if (Gdx.input.isKeyJustPressed(Keys.D))
 		{
-			SoundManager.EXPLOSION.play();
-			animatedSprite = new AnimatedSprite(AnimationCatalog.EXPLOSION);
+			SoundLib.EXPLOSION.play();
+			animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION);
 			animatedSprite.setCenter(640, 480);
 			explode = true;
 		}
 
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
 		{
-			SoundManager.CLIC.play();
+			SoundLib.CLIC.play();
 			ctrl.showScreen(MainControler.XenonScreen.GAME_PLAY);
 		}
 
@@ -166,7 +167,7 @@ public class MenuScreen implements Screen
 	@Override
 	public void hide()
 	{
-		SoundManager.INTRO.stop();
+		SoundLib.INTRO.stop();
 	}
 
 	@Override

@@ -5,11 +5,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.helpers.SoundLib;
-import net.entetrs.xenon.helpers.TextureManager;
+import net.entetrs.xenon.helpers.TextureLib;
 
 public class Ship
 {
@@ -41,11 +40,11 @@ public class Ship
 
 	private void loadSprites()
 	{
-		shipSpriteReactorOn = new Sprite(TextureManager.SHIP.get());
-		shipSpriteLeft = new Sprite(TextureManager.SHIP_LEFT.get());
-		shipSpriteRight = new Sprite(TextureManager.SHIP_RIGHT.get());
-		shipSpriteReactorOff = new Sprite(TextureManager.SHIP_NOREACTOR.get());
-		shieldSprite = new Sprite(TextureManager.SHIELD.get());
+		shipSpriteReactorOn = new Sprite(TextureLib.SHIP.get());
+		shipSpriteLeft = new Sprite(TextureLib.SHIP_LEFT.get());
+		shipSpriteRight = new Sprite(TextureLib.SHIP_RIGHT.get());
+		shipSpriteReactorOff = new Sprite(TextureLib.SHIP_NOREACTOR.get());
+		shieldSprite = new Sprite(TextureLib.SHIELD.get());
 	}
 
 	public float getCenterX()

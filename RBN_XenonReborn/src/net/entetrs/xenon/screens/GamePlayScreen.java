@@ -14,12 +14,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Fader;
 import net.entetrs.xenon.entities.Enemy;
 import net.entetrs.xenon.entities.Ship;
 import net.entetrs.xenon.helpers.AnimationLib;
 import net.entetrs.xenon.helpers.FontLib;
 import net.entetrs.xenon.helpers.SoundLib;
-import net.entetrs.xenon.helpers.TextureManager;
+import net.entetrs.xenon.helpers.TextureLib;
 import net.entetrs.xenon.managers.ExplosionManager;
 
 public class GamePlayScreen implements Screen {
@@ -45,10 +46,10 @@ public class GamePlayScreen implements Screen {
 	public GamePlayScreen(MainControler ctrl) {
 		System.out.println("Instanciation de GamePlay");
 		this.main = ctrl;
-		space = TextureManager.BACKGROUND_SPACE.get();
-		leftbg = TextureManager.BACKGROUND_LEFT.get();
-		rightbg = TextureManager.BACKGROUND_RIGHT.get();
-		footer = TextureManager.FOOTER.get();
+		space = TextureLib.BACKGROUND_SPACE.get();
+		leftbg = TextureLib.BACKGROUND_LEFT.get();
+		rightbg = TextureLib.BACKGROUND_RIGHT.get();
+		footer = TextureLib.FOOTER.get();
 	}
 
 	private void generateEnemies() {
@@ -136,9 +137,9 @@ public class GamePlayScreen implements Screen {
 	}
 
 	private void setSpritesAlpha() {
-		this.main.setSpriteAlpha(Arrays.asList(ship.getShipSprite(), ship.getShieldSprite()).stream());
-		this.main.setSpriteAlpha(enemies.stream());
-		this.main.setSpriteAlpha(shoots.stream());
+		Fader.getInstance().setSpriteAlpha(Arrays.asList(ship.getShipSprite(), ship.getShieldSprite()).stream());
+		Fader.getInstance().setSpriteAlpha(enemies.stream());
+		Fader.getInstance().setSpriteAlpha(shoots.stream());
 	}
 
 	private void drawWorld(float delta) {
@@ -162,9 +163,9 @@ public class GamePlayScreen implements Screen {
 	private void drawStatusBar() {
 		BitmapFont font = FontLib.DEFAULT.getFont();
 		SpriteBatch batch = this.main.getBatch();
-		int FPS = Gdx.graphics.getFramesPerSecond();
+		int fps = Gdx.graphics.getFramesPerSecond();
 		batch.draw(footer, 0, 0);
-		String titleBar = String.format(FMT_MSG_BAR, FPS, shoots.size(), speed);
+		String titleBar = String.format(FMT_MSG_BAR, fps, shoots.size(), speed);
 		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());
 	}
 

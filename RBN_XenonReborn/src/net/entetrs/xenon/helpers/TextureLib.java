@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 import net.entetrs.xenon.commons.GdxCommons;
 
-public enum TextureManager implements Disposable
+public enum TextureLib implements Disposable
 {
 	TITLE("commons/xenon-reborn.png"),
 	
@@ -32,13 +32,13 @@ public enum TextureManager implements Disposable
 	
 	private Texture texture;
 	
-	private TextureManager(String fileName, TextureWrap wrap)
+	private TextureLib(String fileName, TextureWrap wrap)
 	{
 		this(fileName);
 		this.texture.setWrap(wrap, wrap);
 	}
 
-	private TextureManager(String fileName)
+	private TextureLib(String fileName)
 	{
         this.texture = new Texture(fileName);
 
@@ -58,7 +58,7 @@ public enum TextureManager implements Disposable
 	public static void disposeAll()
 	{
 		System.out.print("DISPOSE TEXTURES ...");
-		GdxCommons.disposeAll(TextureManager.values());
+		GdxCommons.disposeAll(TextureLib.values());
 		System.out.println("DONE");
 	}
 

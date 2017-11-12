@@ -12,7 +12,7 @@ import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.helpers.AnimationLib;
 import net.entetrs.xenon.helpers.SoundLib;
-import net.entetrs.xenon.helpers.TextureManager;
+import net.entetrs.xenon.helpers.TextureLib;
 
 public class MenuScreen implements Screen
 {
@@ -44,10 +44,10 @@ public class MenuScreen implements Screen
 	{
 		System.out.println("Instanciation de MenuScreen");
 		this.ctrl = ctrl;
-		titleTexture = TextureManager.TITLE.get();
+		titleTexture = TextureLib.TITLE.get();
 		titleX = (C.WIDTH - titleTexture.getWidth()) / 2;
 		titleY = (C.HEIGHT - titleTexture.getHeight()) / 2;
-		spaceTexture = TextureManager.BACKGROUND_SPACE.get();
+		spaceTexture = TextureLib.BACKGROUND_SPACE.get();
 	}
 
 	@Override

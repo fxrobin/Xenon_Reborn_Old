@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.helpers.AnimationLib;
+import net.entetrs.xenon.helpers.SoundLib;
 
 public class ExplosionManager
 {
@@ -24,6 +25,7 @@ public class ExplosionManager
 		animatedSprite.setOriginCenter();
 		animatedSprite.setCenter(centerX, centerY);
 		explosions.add(animatedSprite);
+		SoundLib.EXPLOSION.play();
 	}
 	
 	public static void removeFinishedExplosions()

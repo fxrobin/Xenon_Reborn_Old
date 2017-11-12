@@ -15,6 +15,8 @@ import net.entetrs.xenon.screens.MenuScreen;
 
 public class MainControler extends Game
 {
+	// DP SINGLETON
+	
 	private static MainControler instance = new MainControler();
 
 	private MainControler()
@@ -26,6 +28,7 @@ public class MainControler extends Game
 	{
 		return instance;
 	}
+	
 
 	public enum XenonScreen
 	{
@@ -40,7 +43,7 @@ public class MainControler extends Game
 	public void create()
 	{
 		batch = new SpriteBatch();
-		fader = new Fader();
+		fader = Fader.getInstance();
 		this.showScreen(XenonScreen.MENU);
 	}
 
@@ -99,9 +102,6 @@ public class MainControler extends Game
 	}
 
 
-	public void setSpriteAlpha(Stream<? extends Sprite> stream)
-	{
-		stream.forEach(s -> GdxCommons.applyAlpha(s, fader.getCurrentAlpha()));
-	}
+	
 
 }

@@ -3,7 +3,7 @@ package net.entetrs.xenon.commons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import net.entetrs.xenon.helpers.TextureManager;
+import net.entetrs.xenon.helpers.TextureLib;
 
 public class FontCommons
 {
@@ -16,8 +16,8 @@ public class FontCommons
 
 	static
 	{
-		fontAZ = TextureManager.FONT_AZ.get();
-		font09 = TextureManager.FONT_09.get();
+		fontAZ = TextureLib.FONT_AZ.get();
+		font09 = TextureLib.FONT_09.get();
 	}
 
 	public static int getWidth(String txt)

@@ -1,9 +1,23 @@
 package net.entetrs.xenon.commons;
 
+import java.util.stream.Stream;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Fader {
+	
+	private static Fader instance = new Fader();
+	
+	public static Fader getInstance()
+	{
+		return instance;
+	}
+	
+	private Fader() {
+		// protection
+	}
 	
 	public enum State
 	{
@@ -67,6 +81,11 @@ public class Fader {
 			currentAlpha = 0.0f;
 			this.currentState = State.BLACK_SCREEN;
 		}
+	}
+	
+	public void setSpriteAlpha(Stream<? extends Sprite> stream)
+	{
+		stream.forEach(s -> GdxCommons.applyAlpha(s, this.getCurrentAlpha()));
 	}
 
 }

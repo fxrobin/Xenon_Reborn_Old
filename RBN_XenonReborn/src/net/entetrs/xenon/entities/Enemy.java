@@ -5,15 +5,14 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
-import net.entetrs.xenon.helpers.TextureManager;
+import net.entetrs.xenon.helpers.TextureLib;
 
 public class Enemy extends Sprite
 {
-	private static Texture enemyTexture = TextureManager.ENEMY.get();
-	private static Texture bugTexture = TextureManager.BUG.get();
-	private static Texture perforatorTexture = TextureManager.PERFORATOR.get();
+	private static Texture enemyTexture = TextureLib.ENEMY.get();
+	private static Texture bugTexture = TextureLib.BUG.get();
+	private static Texture perforatorTexture = TextureLib.PERFORATOR.get();
 
 	private static Texture[] textures = { enemyTexture, bugTexture, perforatorTexture };
 	private static Random randomGenerator = new Random();

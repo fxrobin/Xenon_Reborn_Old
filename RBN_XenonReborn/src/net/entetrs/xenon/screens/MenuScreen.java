@@ -10,9 +10,9 @@ import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.FontCommons;
-import net.entetrs.xenon.helpers.AnimationLib;
-import net.entetrs.xenon.helpers.SoundLib;
-import net.entetrs.xenon.helpers.TextureLib;
+import net.entetrs.xenon.libs.AnimationLib;
+import net.entetrs.xenon.libs.SoundLib;
+import net.entetrs.xenon.libs.TextureLib;
 
 public class MenuScreen implements Screen
 {

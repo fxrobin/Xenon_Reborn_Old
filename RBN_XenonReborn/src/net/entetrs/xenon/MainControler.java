@@ -1,15 +1,19 @@
 package net.entetrs.xenon;
 
-import java.util.stream.Stream;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Circle;
 
+import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.Fader;
 import net.entetrs.xenon.commons.Fader.State;
 import net.entetrs.xenon.commons.GdxCommons;
+import net.entetrs.xenon.entities.Entity;
+import net.entetrs.xenon.screens.EntityScreen;
 import net.entetrs.xenon.screens.GamePlayScreen;
 import net.entetrs.xenon.screens.MenuScreen;
 
@@ -36,6 +40,7 @@ public class MainControler extends Game
 	}
 
 	private SpriteBatch batch;
+	private ShapeRenderer shareRenderer;
 	private Screen currentScreen;
 	private Fader fader;
 
@@ -44,8 +49,11 @@ public class MainControler extends Game
 	{
 		batch = new SpriteBatch();
 		fader = Fader.getInstance();
+		shareRenderer = new ShapeRenderer();
 		this.showScreen(XenonScreen.MENU);
 	}
+	
+	
 
 	public void showScreen(XenonScreen screen)
 	{
@@ -73,6 +81,19 @@ public class MainControler extends Game
 		this.fade();
 		super.render();
 		batch.end();
+		
+		if (this.getScreen() instanceof EntityScreen)
+		{
+			shareRenderer.begin(ShapeType.Line);
+			shareRenderer.setColor(Color.RED);
+			EntityScreen es = (EntityScreen) this.getScreen();
+			for(Entity e : es.getEntities())
+			{
+				Circle c = e.getCircle();
+				shareRenderer.circle(c.x, c.y, c.radius);
+			}
+			shareRenderer.end();
+		}
 	}
 
 	private void fade()

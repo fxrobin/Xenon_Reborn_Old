@@ -4,13 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.helpers.SoundLib;
-import net.entetrs.xenon.helpers.TextureLib;
+import net.entetrs.xenon.libs.SoundLib;
+import net.entetrs.xenon.libs.TextureLib;
 
-public class Ship
+public class Ship 
 {
 
 	private Sprite shipSpriteReactorOn;
@@ -28,6 +29,9 @@ public class Ship
 	private float vX = 0;
 	private float vY = 0;
 	private float accel = 20f;
+	
+	private Circle boundingCircle;
+
 
 	public Ship()
 	{
@@ -36,6 +40,8 @@ public class Ship
 		GdxCommons.setOriginCenter(shieldSprite);
 		currentSprite = shipSpriteReactorOn;
 		currentSprite.setCenter(C.WIDTH / 2, 80);
+		boundingCircle = new Circle();
+		boundingCircle.setRadius(currentSprite.getWidth() /2);
 	}
 
 	private void loadSprites()
@@ -116,6 +122,9 @@ public class Ship
 		if (currentSprite.getY() < 80) currentSprite.setY(80);
 		if (currentSprite.getX() > C.WIDTH - currentSprite.getWidth()) currentSprite.setX(C.WIDTH - currentSprite.getWidth());
 		if (currentSprite.getY() > C.HEIGHT - currentSprite.getHeight()) currentSprite.setY(C.HEIGHT - currentSprite.getHeight());
+		
+		boundingCircle.setX(this.getCenterX());
+		boundingCircle.setY(this.getCenterY());
 	}
 
 	private void handleInertia()
@@ -221,5 +230,7 @@ public class Ship
 	{
 		return currentSprite.getY();
 	}
+
+	
 
 }

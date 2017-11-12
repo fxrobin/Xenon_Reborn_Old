@@ -1,4 +1,4 @@
-package net.entetrs.xenon.helpers;
+package net.entetrs.xenon.libs;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;

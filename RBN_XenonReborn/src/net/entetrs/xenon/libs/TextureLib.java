@@ -1,4 +1,4 @@
-package net.entetrs.xenon.helpers;
+package net.entetrs.xenon.libs;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;

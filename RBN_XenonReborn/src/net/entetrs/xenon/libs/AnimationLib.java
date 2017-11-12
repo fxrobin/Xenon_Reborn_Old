@@ -1,4 +1,4 @@
-package net.entetrs.xenon.helpers;
+package net.entetrs.xenon.libs;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,9 +18,18 @@ import net.entetrs.xenon.commons.GdxCommons;
 public enum AnimationLib
 {
 	EXPLOSION("shoots/explosion-sheet.png", 8, 6, 2f, PlayMode.NORMAL ), 
-	FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP);
+	FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, 10, 50);
 
 	private Animation<TextureRegion> animation;
+	private float centerX = -1f;
+	private float centerY = -1f;
+	
+	private AnimationLib(String fileName, int cols, int rows, float duration, Animation.PlayMode mode, float centerX, float centerY)
+	{
+		this(fileName,cols,rows,duration,mode);
+		this.centerX = centerX;
+		this.centerY = centerY;
+	}
 	
 	private AnimationLib(String fileName, int cols, int rows, float duration, Animation.PlayMode mode)
 	{
@@ -36,7 +45,16 @@ public enum AnimationLib
 	
 	public AnimatedSprite createAnimatedSprite()
 	{
-		return new AnimatedSprite(this);
+		if (centerX >=0 || centerY >=0)
+		{
+			return new AnimatedSprite(this, centerX, centerY);
+		}
+		else
+		{
+			return new AnimatedSprite(this);
+		}
+		
+		
 	}
 
 }

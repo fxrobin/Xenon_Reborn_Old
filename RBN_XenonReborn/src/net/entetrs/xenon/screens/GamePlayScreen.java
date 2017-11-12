@@ -16,14 +16,16 @@ import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.Fader;
 import net.entetrs.xenon.entities.Enemy;
+import net.entetrs.xenon.entities.Entity;
 import net.entetrs.xenon.entities.Ship;
-import net.entetrs.xenon.helpers.AnimationLib;
-import net.entetrs.xenon.helpers.FontLib;
-import net.entetrs.xenon.helpers.SoundLib;
-import net.entetrs.xenon.helpers.TextureLib;
+import net.entetrs.xenon.libs.AnimationLib;
+import net.entetrs.xenon.libs.FontLib;
+import net.entetrs.xenon.libs.SoundLib;
+import net.entetrs.xenon.libs.TextureLib;
+import net.entetrs.xenon.managers.CollisionManager;
 import net.entetrs.xenon.managers.ExplosionManager;
 
-public class GamePlayScreen implements Screen {
+public class GamePlayScreen implements Screen, EntityScreen {
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f ";
 
 	private MainControler main;
@@ -67,13 +69,16 @@ public class GamePlayScreen implements Screen {
 	}
 
 	private void translateShoots(float delta) {
-		shoots.forEach(s -> s.translateY(delta * speedLaser));
-		shoots.removeIf(s -> s.getY() > C.HEIGHT);
+		shoots.forEach(s -> {
+			s.translateY(delta * speedLaser);
+			if (!s.isAlive()) ExplosionManager.addExplosion(s.getX(), s.getY());
+		});
+		shoots.removeIf(s -> (s.getY() > C.HEIGHT || !s.isAlive()));
 	}
 
 	private void translateEnemies(float delta) {
 		enemies.forEach(e -> e.move(delta));
-		enemies.removeIf(e -> e.getY() < -e.getHeight());
+		enemies.removeIf(e -> e.getY() < e.getHeight() || !e.isAlive());
 	}
 
 	private void checkInput(float delta) {
@@ -120,7 +125,6 @@ public class GamePlayScreen implements Screen {
 	private void checkFire(float delta) {
 		if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT) && !ship.isShieldActivated()) {
 			AnimatedSprite s = AnimationLib.FRIENDLY_SHOOT.createAnimatedSprite();
-			s.setOriginCenter();
 			s.setCenter(ship.getCenterX(), ship.getCenterY());
 			shoots.add(s);
 			SoundLib.SHOOT.play();
@@ -133,6 +137,7 @@ public class GamePlayScreen implements Screen {
 		this.setSpritesAlpha(); // pour l'effet fade-in / fade-out
 		this.generateEnemies();
 		this.translateWorld(delta);
+		CollisionManager.checkCollision(enemies, shoots);
 		this.drawWorld(delta);
 	}
 
@@ -153,11 +158,13 @@ public class GamePlayScreen implements Screen {
 	}
 
 	private void displayShoots(SpriteBatch batch, float delta) {
-		shoots.forEach(s -> s.render(batch, delta));
+		shoots.forEach(s -> { 
+			if (s.isAlive()) s.render(batch, delta);  
+		});
 	}
 
 	private void displayEnemies(SpriteBatch batch) {
-		enemies.forEach(e -> e.draw(batch));
+		enemies.forEach(e -> { if (e.isAlive()) e.draw(batch); });
 	}
 
 	private void drawStatusBar() {
@@ -219,6 +226,13 @@ public class GamePlayScreen implements Screen {
 	public void pause() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<? extends Entity> getEntities() {
+		List <Entity> world =  new LinkedList<>(this.enemies);
+		world.addAll(shoots);
+		return world;
 	}
 
 }

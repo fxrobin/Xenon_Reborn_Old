@@ -1,4 +1,4 @@
-package net.entetrs.xenon.helpers;
+package net.entetrs.xenon.libs;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;

@@ -10,7 +10,8 @@ import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.libs.TextureLib;
 
-public class Enemy extends Sprite implements Entity {
+public class Enemy extends Sprite implements Artefact {
+	
 	private static Texture enemyTexture = TextureLib.ENEMY.get();
 	private static Texture bugTexture = TextureLib.BUG.get();
 	private static Texture perforatorTexture = TextureLib.PERFORATOR.get();
@@ -48,7 +49,7 @@ public class Enemy extends Sprite implements Entity {
 	}
 
 	@Override
-	public Circle getCircle() {
+	public Circle getBoundingCircle() {
 		return boundingCircle;
 	}
 
@@ -65,6 +66,11 @@ public class Enemy extends Sprite implements Entity {
 	@Override
 	public int getImpactForce() {
 		return 10;
+	}
+
+	@Override
+	public Sprite getSprite() {
+		return this;
 	}
 
 }

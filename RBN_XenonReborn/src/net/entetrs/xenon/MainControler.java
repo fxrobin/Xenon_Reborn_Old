@@ -8,12 +8,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.Fader;
 import net.entetrs.xenon.commons.Fader.State;
 import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.entities.Entity;
-import net.entetrs.xenon.screens.EntityScreen;
+import net.entetrs.xenon.entities.Artefact;
+import net.entetrs.xenon.screens.ArtefactsScene;
 import net.entetrs.xenon.screens.GamePlayScreen;
 import net.entetrs.xenon.screens.MenuScreen;
 
@@ -82,14 +81,14 @@ public class MainControler extends Game
 		super.render();
 		batch.end();
 		
-		if (this.getScreen() instanceof EntityScreen)
+		if (this.getScreen() instanceof ArtefactsScene)
 		{
 			shareRenderer.begin(ShapeType.Line);
 			shareRenderer.setColor(Color.RED);
-			EntityScreen es = (EntityScreen) this.getScreen();
-			for(Entity e : es.getEntities())
+			ArtefactsScene as = (ArtefactsScene) this.getScreen();
+			for(Artefact a : as.getArtefacts())
 			{
-				Circle c = e.getCircle();
+				Circle c = a.getBoundingCircle();
 				shareRenderer.circle(c.x, c.y, c.radius);
 			}
 			shareRenderer.end();

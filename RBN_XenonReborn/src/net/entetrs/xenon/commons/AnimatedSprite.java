@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.entities.Entity;
+import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.libs.AnimationLib;
 
 /**
@@ -17,7 +17,7 @@ import net.entetrs.xenon.libs.AnimationLib;
  *
  */
 
-public class AnimatedSprite extends Sprite implements Entity {
+public class AnimatedSprite extends Sprite implements Artefact {
 	private float stateTime;
 	private Animation<TextureRegion> animation;
 	private Circle boundingCircle;
@@ -52,10 +52,6 @@ public class AnimatedSprite extends Sprite implements Entity {
 		return animation.isAnimationFinished(stateTime);
 	}
 
-	@Override
-	public Circle getCircle() {
-		return boundingCircle;
-	}
 
 	@Override
 	public void decreaseLife(int impactForce) {
@@ -71,6 +67,16 @@ public class AnimatedSprite extends Sprite implements Entity {
 	@Override
 	public int getImpactForce() {
 		return 5;
+	}
+
+	@Override
+	public Circle getBoundingCircle() {
+		return boundingCircle;
+	}
+
+	@Override
+	public Sprite getSprite() {
+		return this;
 	}
 
 }

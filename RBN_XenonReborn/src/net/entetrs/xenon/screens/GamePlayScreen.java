@@ -16,7 +16,7 @@ import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.Fader;
 import net.entetrs.xenon.entities.Enemy;
-import net.entetrs.xenon.entities.Entity;
+import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.entities.Ship;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.FontLib;
@@ -25,7 +25,7 @@ import net.entetrs.xenon.libs.TextureLib;
 import net.entetrs.xenon.managers.CollisionManager;
 import net.entetrs.xenon.managers.ExplosionManager;
 
-public class GamePlayScreen implements Screen, EntityScreen {
+public class GamePlayScreen implements Screen, ArtefactsScene {
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f ";
 
 	private MainControler main;
@@ -232,8 +232,8 @@ public class GamePlayScreen implements Screen, EntityScreen {
 	}
 
 	@Override
-	public List<? extends Entity> getEntities() {
-		List <Entity> world =  new LinkedList<>(this.enemies);
+	public List<? extends Artefact> getArtefacts() {
+		List <Artefact> world =  new LinkedList<>(this.enemies);
 		world.addAll(shoots);
 		return world;
 	}

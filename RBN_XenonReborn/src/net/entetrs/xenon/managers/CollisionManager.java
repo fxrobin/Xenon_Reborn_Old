@@ -2,17 +2,17 @@ package net.entetrs.xenon.managers;
 
 import java.util.List;
 
-import net.entetrs.xenon.entities.Entity;
+import net.entetrs.xenon.entities.Artefact;
 
 public class CollisionManager {
 	
-	public static void checkCollision(List <? extends Entity> targets, List <? extends Entity> projectiles)
+	public static void checkCollision(List <? extends Artefact> targets, List <? extends Artefact> projectiles)
 	{
-		for(Entity t : targets)
+		for(Artefact t : targets)
 		{
-			for(Entity p : projectiles)
+			for(Artefact p : projectiles)
 			{
-				if (p.getCircle().overlaps(t.getCircle()))
+				if (p.getBoundingCircle().overlaps(t.getBoundingCircle()))
 				{
 					// collision !!!
 					p.decreaseLife(t.getImpactForce());

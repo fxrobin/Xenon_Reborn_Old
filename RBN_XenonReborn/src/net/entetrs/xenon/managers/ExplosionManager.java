@@ -21,7 +21,12 @@ public class ExplosionManager
 	
 	public static void addExplosion(float centerX, float centerY)
 	{
-		AnimatedSprite animatedSprite = AnimationLib.EXPLOSION.createAnimatedSprite();
+		addExplosion(centerX, centerY, AnimationLib.EXPLOSION_BIG);
+	}
+	
+	public static void addExplosion(float centerX, float centerY, AnimationLib anim)
+	{
+		AnimatedSprite animatedSprite = anim.createAnimatedSprite();
 		animatedSprite.setOriginCenter();
 		animatedSprite.setCenter(centerX, centerY);
 		explosions.add(animatedSprite);

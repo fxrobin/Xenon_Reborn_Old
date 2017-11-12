@@ -34,7 +34,7 @@ public class MenuScreen implements Screen
 	private float titleX;
 	private float titleY;
 
-	private AnimatedSprite animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION);
+	private AnimatedSprite animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION_BIG);
 
 	private int accumulator = 0;
 
@@ -126,7 +126,7 @@ public class MenuScreen implements Screen
 		if (Gdx.input.isKeyJustPressed(Keys.D))
 		{
 			SoundLib.EXPLOSION.play();
-			animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION);
+			animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION_BIG);
 			animatedSprite.setCenter(640, 480);
 			explode = true;
 		}

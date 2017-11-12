@@ -71,14 +71,17 @@ public class GamePlayScreen implements Screen, EntityScreen {
 	private void translateShoots(float delta) {
 		shoots.forEach(s -> {
 			s.translateY(delta * speedLaser);
-			if (!s.isAlive()) ExplosionManager.addExplosion(s.getX(), s.getY());
+			if (!s.isAlive()) ExplosionManager.addExplosion(s.getX(), s.getY(), AnimationLib.EXPLOSION_LITTLE);
 		});
 		shoots.removeIf(s -> (s.getY() > C.HEIGHT || !s.isAlive()));
 	}
 
 	private void translateEnemies(float delta) {
-		enemies.forEach(e -> e.move(delta));
-		enemies.removeIf(e -> e.getY() < e.getHeight() || !e.isAlive());
+		enemies.forEach(e -> { 
+			e.move(delta);
+			if (!e.isAlive()) ExplosionManager.addExplosion(e.getX(), e.getY(), AnimationLib.EXPLOSION_BIG);
+		});
+		enemies.removeIf(e -> e.getY() < -e.getHeight() || !e.isAlive());
 	}
 
 	private void checkInput(float delta) {

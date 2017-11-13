@@ -15,8 +15,9 @@ import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.Fader;
-import net.entetrs.xenon.entities.Enemy;
+import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.entities.Artefact;
+import net.entetrs.xenon.entities.Enemy;
 import net.entetrs.xenon.entities.Ship;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.FontLib;
@@ -26,6 +27,7 @@ import net.entetrs.xenon.managers.CollisionManager;
 import net.entetrs.xenon.managers.ExplosionManager;
 
 public class GamePlayScreen implements Screen, ArtefactsScene {
+	
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f ";
 
 	private MainControler main;
@@ -44,6 +46,7 @@ public class GamePlayScreen implements Screen, ArtefactsScene {
 	float speed = 3f;
 	float speedLaser = 400f;
 	long accumulator = 0;
+	int score = 0;
 
 	public GamePlayScreen(MainControler ctrl) {
 		System.out.println("Instanciation de GamePlay");
@@ -79,7 +82,11 @@ public class GamePlayScreen implements Screen, ArtefactsScene {
 	private void translateEnemies(float delta) {
 		enemies.forEach(e -> { 
 			e.move(delta);
-			if (!e.isAlive()) ExplosionManager.addExplosion(e.getX(), e.getY(), AnimationLib.EXPLOSION_BIG);
+			if (!e.isAlive()) {
+				ExplosionManager.addExplosion(e.getX(), e.getY(), AnimationLib.EXPLOSION_BIG);
+				score +=10;
+			}
+			
 		});
 		enemies.removeIf(e -> e.getY() < -e.getHeight() || !e.isAlive());
 	}
@@ -142,6 +149,14 @@ public class GamePlayScreen implements Screen, ArtefactsScene {
 		this.translateWorld(delta);
 		CollisionManager.checkCollision(enemies, shoots);
 		this.drawWorld(delta);
+		this.drawScore();
+	}
+
+	private void drawScore() {
+		
+		SpriteBatch batch = this.main.getBatch();
+		FontCommons.print(batch, 5, C.HEIGHT - 43, String.format("%010d", score));
+		
 	}
 
 	private void setSpritesAlpha() {

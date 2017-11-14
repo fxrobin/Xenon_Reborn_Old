@@ -61,10 +61,10 @@ public class MainControler extends Game
 		switch (screen)
 		{
 			case MENU:
-				currentScreen = new MenuScreen(this);		
+				currentScreen = new MenuScreen();		
 				break;
 			case GAME_PLAY:
-				currentScreen = new GamePlayScreen(this);
+				currentScreen = new GamePlayScreen();
 				break;
 			default:
 				System.out.println("Ecran inconnu");

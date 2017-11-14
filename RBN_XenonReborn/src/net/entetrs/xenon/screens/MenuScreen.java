@@ -16,9 +16,8 @@ import net.entetrs.xenon.libs.TextureLib;
 
 public class MenuScreen implements Screen
 {
-
-	private MainControler ctrl;
-
+	private MainControler ctrl = MainControler.getInstance();
+	
 	private Texture titleTexture;
 	private Texture spaceTexture;
 
@@ -40,10 +39,9 @@ public class MenuScreen implements Screen
 
 	private boolean explode = false;
 
-	public MenuScreen(MainControler ctrl)
+	public MenuScreen()
 	{
 		System.out.println("Instanciation de MenuScreen");
-		this.ctrl = ctrl;
 		titleTexture = TextureLib.TITLE.get();
 		titleX = (C.WIDTH - titleTexture.getWidth()) / 2;
 		titleY = (C.HEIGHT - titleTexture.getHeight()) / 2;

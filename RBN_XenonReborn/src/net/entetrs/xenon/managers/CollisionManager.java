@@ -17,6 +17,12 @@ public class CollisionManager {
 					// collision !!!
 					p.decreaseLife(t.getImpactForce());
 					t.decreaseLife(p.getImpactForce());
+					
+					// MAJ du score
+					if (!t.isAlive())
+					{
+						ScoreManager.getInstance().add(10);
+					}
 				}
 			}
 		}

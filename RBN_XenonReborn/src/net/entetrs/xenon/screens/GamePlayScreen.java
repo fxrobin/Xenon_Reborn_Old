@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.Fader;
+import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.entities.Ship;
 import net.entetrs.xenon.libs.FontLib;
@@ -21,6 +22,7 @@ import net.entetrs.xenon.managers.CollisionManager;
 import net.entetrs.xenon.managers.EnemyManager;
 import net.entetrs.xenon.managers.ExplosionManager;
 import net.entetrs.xenon.managers.ProjectileManager;
+import net.entetrs.xenon.managers.ScoreManager;
 
 public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 {
@@ -28,7 +30,9 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private BackgroundScrolling scrolling;
 	private EnemyManager em;
+	private ExplosionManager exm;
 	private Ship ship;
+
 	
 	public GamePlayScreen()
 	{
@@ -61,7 +65,17 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.renderShoots(batch, delta);
 		em.render(batch,delta);
 		this.renderShip(delta);
+		exm.render(batch, delta);
 		this.renderStatusBar();
+		this.renderScore();
+	}
+	
+	
+
+	private void renderScore()
+	{
+		SpriteBatch batch = MainControler.getInstance().getBatch();
+		FontCommons.print(batch, 5, C.HEIGHT - 43, String.format("%010d", ScoreManager.getInstance().getScore()));
 	}
 
 	private void renderShoots(SpriteBatch batch, float delta)

@@ -27,12 +27,14 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f ";
 
 	private BackgroundScrolling scrolling;
+	private EnemyManager em;
 	private Ship ship;
 	
 	public GamePlayScreen()
 	{
 		System.out.println("Instanciation de GamePlay");
 		scrolling = new BackgroundScrolling();
+		em = EnemyManager.getInstance();
 	}
 
 	@Override
@@ -40,16 +42,16 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	{
 		this.checkInputKeys(delta);
 		this.setSpritesAlpha(); // pour l'effet fade-in / fade-out
-		EnemyManager.getInstance().generateEnemies(delta);
+		em.generateEnemies(delta);
 		this.translateWorld(delta);
-		CollisionManager.checkCollision(EnemyManager.getInstance().getEnemies(), ProjectileManager.getInstance().getShoots());
+		CollisionManager.checkCollision(em.getEnemies(), ProjectileManager.getInstance().getShoots());
 		this.renderWorld(delta);
 	}
 
 	private void setSpritesAlpha()
 	{
 		Fader.getInstance().setSpriteAlpha(Arrays.asList(ship.getShipSprite(), ship.getShieldSprite()).stream());
-		Fader.getInstance().setSpriteAlpha(EnemyManager.getInstance().getEnemies().stream());
+		Fader.getInstance().setSpriteAlpha(em.getEnemies().stream());
 	}
 
 	private void renderWorld(float delta)
@@ -57,9 +59,8 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		SpriteBatch batch = MainControler.getInstance().getBatch();
 		this.scrolling.render(delta);
 		this.renderShoots(batch, delta);
-		EnemyManager.getInstance().displayEnemies(batch);
+		em.render(batch,delta);
 		this.renderShip(delta);
-		ExplosionManager.render(batch, delta);
 		this.renderStatusBar();
 	}
 
@@ -88,7 +89,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void translateWorld(float delta)
 	{
 		ProjectileManager.getInstance().translateShoots(delta);
-		EnemyManager.getInstance().translateEnemies(delta);
+		em.translateEnemies(delta);
 	}
 
 	private void checkInputKeys(float delta)
@@ -144,7 +145,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	@Override
 	public List<? extends Artefact> getArtefacts()
 	{
-		List<Artefact> world = new LinkedList<>(EnemyManager.getInstance().getEnemies());
+		List<Artefact> world = new LinkedList<>(em.getEnemies());
 		world.addAll(ProjectileManager.getInstance().getShoots());
 		return world;
 	}

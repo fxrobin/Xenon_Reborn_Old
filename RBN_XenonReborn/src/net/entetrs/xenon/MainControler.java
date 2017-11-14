@@ -51,8 +51,6 @@ public class MainControler extends Game
 		shareRenderer = new ShapeRenderer();
 		this.showScreen(XenonScreen.MENU);
 	}
-	
-	
 
 	public void showScreen(XenonScreen screen)
 	{
@@ -108,7 +106,6 @@ public class MainControler extends Game
 		}
 	}
 	
-
 	public SpriteBatch getBatch()
 	{
 		return batch;

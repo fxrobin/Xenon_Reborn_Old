@@ -3,12 +3,13 @@ package net.entetrs.xenon.managers;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
+import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.entities.Enemy;
 import net.entetrs.xenon.libs.AnimationLib;
 
-public class EnemyManager
+public class EnemyManager implements Renderable
 {
 	private static EnemyManager em = new  EnemyManager();
 	
@@ -47,7 +48,8 @@ public class EnemyManager
 		return enemies;
 	}
 	
-	public void displayEnemies(SpriteBatch batch) {
+	@Override
+	public void render(Batch batch, float delta) {
 		enemies.forEach(e -> { if (e.isAlive()) e.draw(batch); });
 	}
 

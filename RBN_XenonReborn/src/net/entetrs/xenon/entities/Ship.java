@@ -15,7 +15,7 @@ import net.entetrs.xenon.libs.TextureLib;
 public class Ship implements Renderable
 {
 	private static final float SHIP_SPEED = 400f;
-	private static final float SHIP_ACCELLERATION = 200f;
+	private static final float SHIP_ACCELLERATION = 20f;
 
 	private Sprite shipSpriteReactorOn;
 	private Sprite shipSpriteLeft;
@@ -76,7 +76,7 @@ public class Ship implements Renderable
 		}
 	}
 
-	public void checkShield(float delta)
+	public void checkShield()
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER))
 		{
@@ -94,17 +94,17 @@ public class Ship implements Renderable
 
 	public void checkShipMoves(float delta)
 	{
-		boolean keyMove = this.checkVerticalMove(delta);
-		keyMove = this.checkHorizontalMove(delta) ? true : keyMove;
-
+		boolean keyMove = this.checkVerticalMove();
+		keyMove = this.checkHorizontalMove() ? true : keyMove;
+		
 		if (!keyMove)
 		{
 			handleInertia();
 		}
 
-		if (!keyMove && currentSprite.equals(shipSpriteReactorOn))
+		if (!keyMove && !currentSprite.equals(shipSpriteReactorOff))
 		{
-			this.changeCurrentSprite(shipSpriteReactorOn);
+			this.changeCurrentSprite(shipSpriteReactorOff);
 		}
 
 		currentSprite.translateX(delta * vX);
@@ -147,7 +147,7 @@ public class Ship implements Renderable
 		}
 	}
 
-	private boolean checkHorizontalMove(float delta)
+	private boolean checkHorizontalMove()
 	{
 
 		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
@@ -158,20 +158,20 @@ public class Ship implements Renderable
 		{
 			keyMove = true;
 			this.changeCurrentSprite(shipSpriteLeft);
-			vX -= SHIP_ACCELLERATION * delta;
+			vX -= SHIP_ACCELLERATION;
 			vX = (vX < -SHIP_SPEED) ? -SHIP_SPEED : vX;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
 			keyMove = true;
 			this.changeCurrentSprite(shipSpriteRight);
-			vX += SHIP_ACCELLERATION * delta;
+			vX += SHIP_ACCELLERATION;
 			vX = (vX > SHIP_SPEED) ? SHIP_SPEED : vX;
 		}
 		return keyMove;
 	}
 
-	private boolean checkVerticalMove(float delta)
+	private boolean checkVerticalMove()
 	{
 
 		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
@@ -182,7 +182,7 @@ public class Ship implements Renderable
 		{
 			keyMove = true;
 			this.changeCurrentSprite(shipSpriteReactorOn);
-			vY += SHIP_ACCELLERATION;
+			vY += SHIP_ACCELLERATION ;
 			vY = (vY > SHIP_SPEED) ? SHIP_SPEED : vY;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))

@@ -30,7 +30,6 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private BackgroundScrolling scrolling;
 	private EnemyManager em;
-	private ExplosionManager exm;
 	private Ship ship;
 
 	
@@ -38,7 +37,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	{
 		System.out.println("Instanciation de GamePlay");
 		scrolling = new BackgroundScrolling();
-		em = EnemyManager.getInstance();
+		em = EnemyManager.getInstance();		
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.renderShoots(batch, delta);
 		em.render(batch,delta);
 		this.renderShip(delta);
-		exm.render(batch, delta);
+		ExplosionManager.render(batch, delta);
 		this.renderStatusBar();
 		this.renderScore();
 	}
@@ -109,7 +108,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void checkInputKeys(float delta)
 	{
 		this.checkFire(delta);
-		ship.checkShield(delta);
+		ship.checkShield();
 		ship.checkShipMoves(delta);
 		this.checkEscape(delta);
 		this.scrolling.checkInput();

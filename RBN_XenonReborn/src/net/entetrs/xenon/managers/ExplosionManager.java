@@ -11,7 +11,7 @@ import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.SoundLib;
 
-public class ExplosionManager implements Renderable
+public class ExplosionManager
 {
 	private static List<AnimatedSprite> explosions = Collections.synchronizedList(new LinkedList<>());
 
@@ -39,7 +39,7 @@ public class ExplosionManager implements Renderable
 		explosions.removeIf( ex -> ex.isFinished());
 	}
 	
-	public void render(Batch batch, float delta)
+	public static void render(Batch batch, float delta)
 	{
 		explosions.forEach( ex -> ex.render(batch, delta));
 		removeFinishedExplosions();

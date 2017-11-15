@@ -2,36 +2,34 @@ package net.entetrs.xenon.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
+import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.libs.TextureLib;
 
-public class Ship 
+public class Ship implements Renderable
 {
+	private static final float SHIP_SPEED = 400f;
+	private static final float SHIP_ACCELLERATION = 200f;
 
 	private Sprite shipSpriteReactorOn;
 	private Sprite shipSpriteLeft;
 	private Sprite shipSpriteRight;
 	private Sprite shipSpriteReactorOff;
+	private Sprite shieldSprite;
 
 	private Sprite currentSprite;
-
-	private Sprite shieldSprite;
 	private boolean shieldActivated = false;
-
-	private static float SHIP_SPEED = 400f;
-
 	private float vX = 0;
 	private float vY = 0;
-	private float accel = 20f;
 	
 	private Circle boundingCircle;
-
 
 	public Ship()
 	{
@@ -68,7 +66,8 @@ public class Ship
 		return shieldActivated;
 	}
 
-	public void render(float delta, SpriteBatch batch)
+	@Override
+	public void render(Batch batch, float delta)
 	{
 		currentSprite.draw(batch);
 		if (shieldActivated)
@@ -105,7 +104,7 @@ public class Ship
 			handleInertia();
 		}
 
-		if (!keyMove && currentSprite != shipSpriteReactorOn)
+		if (!keyMove && currentSprite.equals(shipSpriteReactorOn))
 		{
 			this.changeCurrentSprite(shipSpriteReactorOn);
 		}
@@ -132,21 +131,21 @@ public class Ship
 		// inertie sur X
 		if (vX > 0)
 		{
-			vX -= accel / 2;
+			vX -= SHIP_ACCELLERATION / 2;
 		}
 		else if (vX < 0)
 		{
-			vX += accel / 2;
+			vX += SHIP_ACCELLERATION / 2;
 		}
 
 		// inertie sur Y
 		if (vY > 0)
 		{
-			vY -= accel / 2;
+			vY -= SHIP_ACCELLERATION / 2;
 		}
 		else if (vY < 0)
 		{
-			vY += accel / 2;
+			vY += SHIP_ACCELLERATION / 2;
 		}
 	}
 
@@ -161,14 +160,14 @@ public class Ship
 		{
 			keyMove = true;
 			this.changeCurrentSprite(shipSpriteLeft);
-			vX -= accel;
+			vX -= SHIP_ACCELLERATION * delta;
 			vX = (vX < -SHIP_SPEED) ? -SHIP_SPEED : vX;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
 			keyMove = true;
 			this.changeCurrentSprite(shipSpriteRight);
-			vX += accel;
+			vX += SHIP_ACCELLERATION * delta;
 			vX = (vX > SHIP_SPEED) ? SHIP_SPEED : vX;
 		}
 		return keyMove;
@@ -185,14 +184,14 @@ public class Ship
 		{
 			keyMove = true;
 			this.changeCurrentSprite(shipSpriteReactorOn);
-			vY += accel;
+			vY += SHIP_ACCELLERATION;
 			vY = (vY > SHIP_SPEED) ? SHIP_SPEED : vY;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))
 		{
 			keyMove = true;
 			this.changeCurrentSprite(shipSpriteReactorOff);
-			vY -= accel;
+			vY -= SHIP_ACCELLERATION;
 			vY = (vY < -SHIP_SPEED) ? -SHIP_SPEED : vY;
 		}
 		return keyMove;
@@ -230,6 +229,8 @@ public class Ship
 	{
 		return currentSprite.getY();
 	}
+
+	
 
 	
 

@@ -97,7 +97,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private void renderShip(float delta)
 	{
-		ship.render(delta, MainControler.getInstance().getBatch());
+		ship.render(MainControler.getInstance().getBatch(), delta);
 	}
 
 	private void translateWorld(float delta)

@@ -7,10 +7,8 @@ import net.entetrs.xenon.libs.TextureLib;
 
 public class FontCommons
 {
-
 	private static final int FONT_W = 32;
 	private static final int FONT_H = 38;
-
 	private static Texture fontAZ;
 	private static Texture font09;
 
@@ -32,10 +30,10 @@ public class FontCommons
 
 	public static void print(Batch b, float x, float y, String txt)
 	{
-		txt = txt.toUpperCase();
-		for (int i = 0; i < txt.length(); i++)
+		String upperTxt = txt.toUpperCase();
+		for (int i = 0; i < upperTxt.length(); i++)
 		{
-			char c = txt.charAt(i);
+			char c = upperTxt.charAt(i);
 			print(b, x + (i * FONT_W), y, c);
 		}
 	}

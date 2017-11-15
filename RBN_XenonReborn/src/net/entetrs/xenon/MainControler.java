@@ -18,6 +18,11 @@ import net.entetrs.xenon.screens.MenuScreen;
 
 public class MainControler extends Game
 {
+	private SpriteBatch batch;
+	private ShapeRenderer shareRenderer;
+	private Screen currentScreen;
+	private Fader fader;
+	
 	// DP SINGLETON
 	
 	private static MainControler instance = new MainControler();
@@ -38,10 +43,7 @@ public class MainControler extends Game
 		MENU, GAME_PLAY;
 	}
 
-	private SpriteBatch batch;
-	private ShapeRenderer shareRenderer;
-	private Screen currentScreen;
-	private Fader fader;
+	
 
 	@Override
 	public void create()

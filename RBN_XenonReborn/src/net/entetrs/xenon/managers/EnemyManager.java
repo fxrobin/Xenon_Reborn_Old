@@ -11,16 +11,15 @@ import net.entetrs.xenon.libs.AnimationLib;
 
 public class EnemyManager implements Renderable
 {
-	private static EnemyManager em = new  EnemyManager();
+	private double accumulator = 0;
+	private List<Enemy> enemies = new LinkedList<>();
 	
-	double accumulator = 0;
+	private static EnemyManager em = new  EnemyManager();
 	
 	public static EnemyManager getInstance()
 	{
 		return em;
 	}
-	
-	private List<Enemy> enemies = new LinkedList<>();
 	
 	public void generateEnemies(float delta) {		
 		accumulator+=delta;

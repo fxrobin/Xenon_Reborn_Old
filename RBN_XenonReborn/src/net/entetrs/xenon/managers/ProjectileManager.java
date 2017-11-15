@@ -5,25 +5,25 @@ import java.util.List;
 
 import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.C;
-import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.SoundLib;
 
-public class ProjectileManager {
-	
+public class ProjectileManager
+{
+	private List<AnimatedSprite> shoots = new LinkedList<>();
+
+	private static final float LASER_SPEED = 400f;
 	private static ProjectileManager pm = new ProjectileManager();
-	
+
 	public static ProjectileManager getInstance()
 	{
 		return pm;
 	}
-	
-	private List<AnimatedSprite> shoots = new LinkedList<>();
-	private float speedLaser = 400f;
-	
-	public void translateShoots(float delta) {
+
+	public void translateShoots(float delta)
+	{
 		shoots.forEach(s -> {
-			s.translateY(delta * speedLaser);
+			s.translateY(delta * LASER_SPEED);
 			if (!s.isAlive()) ExplosionManager.addExplosion(s.getX(), s.getY(), AnimationLib.EXPLOSION_LITTLE);
 		});
 		shoots.removeIf(s -> (s.getY() > C.HEIGHT || !s.isAlive()));
@@ -35,16 +35,12 @@ public class ProjectileManager {
 		s.setCenter(centerX, centerY);
 		shoots.add(s);
 		SoundLib.SHOOT.play();
-		
+
 	}
 
-	public List<? extends AnimatedSprite> getShoots()
+	public List<AnimatedSprite> getShoots()
 	{
 		return this.shoots;
 	}
-	
-	
-	
-	
 
 }

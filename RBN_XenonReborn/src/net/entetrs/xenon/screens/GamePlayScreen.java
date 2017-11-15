@@ -107,15 +107,15 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private void checkInputKeys(float delta)
 	{
-		this.checkFire(delta);
+		this.checkFire();
 		ship.checkShield();
 		ship.checkShipMoves(delta);
-		this.checkEscape(delta);
+		this.checkEscape();
 		this.scrolling.checkInput();
-		this.checkExtraKeys(delta);
+		this.checkExtraKeys();
 	}
 
-	private void checkExtraKeys(float delta)
+	private void checkExtraKeys()
 	{
 		if (Gdx.input.isKeyPressed(Keys.D))
 		{
@@ -125,7 +125,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		}
 	}
 
-	private void checkEscape(float delta)
+	private void checkEscape()
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
 		{
@@ -134,7 +134,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		}
 	}
 
-	private void checkFire(float delta)
+	private void checkFire()
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT) && !ship.isShieldActivated())
 		{

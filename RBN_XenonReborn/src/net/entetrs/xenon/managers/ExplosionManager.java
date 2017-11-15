@@ -7,7 +7,6 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import net.entetrs.xenon.commons.AnimatedSprite;
-import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.SoundLib;
 

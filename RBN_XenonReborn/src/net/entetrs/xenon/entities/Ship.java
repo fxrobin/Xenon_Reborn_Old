@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.commons.C;
@@ -95,9 +94,8 @@ public class Ship implements Renderable
 
 	public void checkShipMoves(float delta)
 	{
-		boolean keyMove = false;
-		keyMove = this.checkVerticalMove(delta);
-		keyMove = this.checkHorizontalMove(delta);
+		boolean keyMove = this.checkVerticalMove(delta);
+		keyMove = this.checkHorizontalMove(delta) ? true : keyMove;
 
 		if (!keyMove)
 		{

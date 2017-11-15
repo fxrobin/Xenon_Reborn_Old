@@ -58,17 +58,16 @@ public class MainControler extends Game
 	{
 		if (currentScreen != null) fader.startFadeOut();
 		
-		switch (screen)
+		if (XenonScreen.MENU.equals(screen))
 		{
-			case MENU:
-				currentScreen = new MenuScreen();		
-				break;
-			case GAME_PLAY:
-				currentScreen = new GamePlayScreen();
-				break;
-			default:
-				System.out.println("Ecran inconnu");
-		}	
+			currentScreen = new MenuScreen();
+		}
+		
+		if (XenonScreen.GAME_PLAY.equals(screen))
+		{
+			currentScreen = new GamePlayScreen();
+		}
+		
 		this.fade();
 	}
 

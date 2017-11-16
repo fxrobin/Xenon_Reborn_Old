@@ -7,6 +7,8 @@ import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.entities.Ship;
+import net.entetrs.xenon.entities.ShipJoystick.Horizontal;
+import net.entetrs.xenon.entities.ShipJoystick.Vertical;
 import net.entetrs.xenon.libs.TextureLib;
 
 /**
@@ -87,30 +89,25 @@ public class ShipRenderer implements Renderable
 
 	private void updateSpriteForHorizontalMovement()
 	{
-		switch (ship.getHorizontalControl())
+		if (ship.getHorizontalControl() == Horizontal.LEFT)
 		{
-			case LEFT:
-				this.changeCurrentSprite(shipSpriteLeft);
-				break;
-			case RIGHT:
-				this.changeCurrentSprite(shipSpriteRight);
-				break;
-			default:
-				// rien à faie
+			this.changeCurrentSprite(shipSpriteLeft);
+		}
+		else if (ship.getHorizontalControl() == Horizontal.RIGHT)
+		{
+			this.changeCurrentSprite(shipSpriteRight);
 		}
 	}
 
 	private void updateSpriteForVerticalMovement()
 	{
-		switch (ship.getVerticalControl())
+		if (ship.getVerticalControl() == Vertical.UP)
 		{
-			case UP:
 				this.changeCurrentSprite(shipSpriteReactorOn);
-				break;
-			case DOWN:
-				this.changeCurrentSprite(shipSpriteReactorOff);
-				break;
-			default:
+		}
+		else 
+		{
+			    // dans tous les cas on coupe le réacteur
 				this.changeCurrentSprite(shipSpriteReactorOff);
 		}
 	}

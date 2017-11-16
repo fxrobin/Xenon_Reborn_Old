@@ -1,11 +1,8 @@
 package net.entetrs.xenon.entities;
 
-public final class ShipJoystick
+public enum ShipJoystick
 {
-	private ShipJoystick()
-	{
-		// protection
-	}
+	INSTANCE;
 	
 	public enum Horizontal
 	{
@@ -16,4 +13,5 @@ public final class ShipJoystick
 	{
 		UP,DOWN,NONE;
 	}
+	
 }

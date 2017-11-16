@@ -44,17 +44,10 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	public void render(float delta)
 	{
 		this.checkInputKeys(delta);
-		this.setSpritesAlpha(); // pour l'effet fade-in / fade-out
 		em.generateEnemies(delta);
 		this.translateWorld(delta);
 		CollisionManager.checkCollision(em.getEnemies(), ProjectileManager.getInstance().getShoots());
 		this.renderWorld(delta);
-	}
-
-	private void setSpritesAlpha()
-	{
-		Fader.getInstance().setSpriteAlpha(Arrays.asList(ship.getShipSprite(), ship.getShieldSprite()).stream());
-		Fader.getInstance().setSpriteAlpha(em.getEnemies().stream());
 	}
 
 	private void renderWorld(float delta)

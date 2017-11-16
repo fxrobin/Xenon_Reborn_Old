@@ -9,55 +9,43 @@ import com.badlogic.gdx.math.Circle;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.commons.Renderable;
+import net.entetrs.xenon.entities.ShipControl.Horizontal;
+import net.entetrs.xenon.entities.ShipControl.Vertical;
 import net.entetrs.xenon.libs.SoundLib;
-import net.entetrs.xenon.libs.TextureLib;
+import net.entetrs.xenon.renderers.ShipRenderer;
 
 public class Ship implements Renderable
 {
 	private static final float SHIP_SPEED = 400f;
 	private static final float SHIP_ACCELLERATION = 20f;
 
-	private Sprite shipSpriteReactorOn;
-	private Sprite shipSpriteLeft;
-	private Sprite shipSpriteRight;
-	private Sprite shipSpriteReactorOff;
-	private Sprite shieldSprite;
+	public ShipRenderer shipRenderer;
 
-	private Sprite currentSprite;
+	public ShipControl.Horizontal hControl = ShipControl.Horizontal.NONE;
+	public ShipControl.Vertical vControl = ShipControl.Vertical.NONE;
+
 	private boolean shieldActivated = false;
+
 	private float vX = 0;
 	private float vY = 0;
-	
+
 	private Circle boundingCircle;
 
 	public Ship()
 	{
-		this.loadSprites();
-		GdxCommons.setOriginCenter(shipSpriteLeft, shipSpriteRight, shipSpriteReactorOff, shipSpriteReactorOn);
-		GdxCommons.setOriginCenter(shieldSprite);
-		currentSprite = shipSpriteReactorOn;
-		currentSprite.setCenter(C.WIDTH / 2, 80);
 		boundingCircle = new Circle();
-		boundingCircle.setRadius(currentSprite.getWidth() /2);
-	}
-
-	private void loadSprites()
-	{
-		shipSpriteReactorOn = new Sprite(TextureLib.SHIP.get());
-		shipSpriteLeft = new Sprite(TextureLib.SHIP_LEFT.get());
-		shipSpriteRight = new Sprite(TextureLib.SHIP_RIGHT.get());
-		shipSpriteReactorOff = new Sprite(TextureLib.SHIP_NOREACTOR.get());
-		shieldSprite = new Sprite(TextureLib.SHIELD.get());
+		shipRenderer = new ShipRenderer(this);
+		boundingCircle.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2);
 	}
 
 	public float getCenterX()
 	{
-		return GdxCommons.getCenterX(currentSprite);
+		return shipRenderer.getCenterX();
 	}
 
 	public float getCenterY()
 	{
-		return GdxCommons.getCenterY(currentSprite);
+		return shipRenderer.getCenterY();
 	}
 
 	public boolean isShieldActivated()
@@ -68,12 +56,7 @@ public class Ship implements Renderable
 	@Override
 	public void render(Batch batch, float delta)
 	{
-		currentSprite.draw(batch);
-		if (shieldActivated)
-		{
-			shieldSprite.setCenter(this.getCenterX(), this.getCenterY());
-			shieldSprite.draw(batch);
-		}
+		shipRenderer.render(batch, delta);
 	}
 
 	public void checkShield()
@@ -96,30 +79,32 @@ public class Ship implements Renderable
 	{
 		boolean keyMove = this.checkVerticalMove();
 		keyMove = this.checkHorizontalMove() ? true : keyMove;
-		
+
 		if (!keyMove)
 		{
 			handleInertia();
 		}
 
-		if (!keyMove && !currentSprite.equals(shipSpriteReactorOff))
-		{
-			this.changeCurrentSprite(shipSpriteReactorOff);
-		}
+		// if (!keyMove && !currentSprite.equals(shipSpriteReactorOff))
+		// {
+		// this.changeCurrentSprite(shipSpriteReactorOff);
+		// }
 
-		currentSprite.translateX(delta * vX);
-		currentSprite.translateY(delta * vY);
+		shipRenderer.getCurrentSprite().translateX(delta * vX);
+		shipRenderer.getCurrentSprite().translateY(delta * vY);
 
 		controlPosition();
 	}
 
 	private void controlPosition()
 	{
+		Sprite currentSprite = shipRenderer.getCurrentSprite();
+
 		if (currentSprite.getX() < 0) currentSprite.setX(0);
 		if (currentSprite.getY() < 80) currentSprite.setY(80);
 		if (currentSprite.getX() > C.WIDTH - currentSprite.getWidth()) currentSprite.setX(C.WIDTH - currentSprite.getWidth());
 		if (currentSprite.getY() > C.HEIGHT - currentSprite.getHeight()) currentSprite.setY(C.HEIGHT - currentSprite.getHeight());
-		
+
 		boundingCircle.setX(this.getCenterX());
 		boundingCircle.setY(this.getCenterY());
 	}
@@ -149,22 +134,24 @@ public class Ship implements Renderable
 
 	private boolean checkHorizontalMove()
 	{
+		boolean keyMove = false;
+		this.vControl = Vertical.NONE;
+		this.hControl = Horizontal.NONE;
 
 		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
 		if (GdxCommons.checkConcurrentKeys(Keys.LEFT, Keys.RIGHT)) return false;
 
-		boolean keyMove = false;
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
 		{
+			this.hControl = Horizontal.LEFT;
 			keyMove = true;
-			this.changeCurrentSprite(shipSpriteLeft);
 			vX -= SHIP_ACCELLERATION;
 			vX = (vX < -SHIP_SPEED) ? -SHIP_SPEED : vX;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
+			this.hControl = Horizontal.RIGHT;
 			keyMove = true;
-			this.changeCurrentSprite(shipSpriteRight);
 			vX += SHIP_ACCELLERATION;
 			vX = (vX > SHIP_SPEED) ? SHIP_SPEED : vX;
 		}
@@ -181,55 +168,40 @@ public class Ship implements Renderable
 		if (Gdx.input.isKeyPressed(Keys.UP))
 		{
 			keyMove = true;
-			this.changeCurrentSprite(shipSpriteReactorOn);
-			vY += SHIP_ACCELLERATION ;
+			vY += SHIP_ACCELLERATION;
 			vY = (vY > SHIP_SPEED) ? SHIP_SPEED : vY;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))
 		{
 			keyMove = true;
-			this.changeCurrentSprite(shipSpriteReactorOff);
 			vY -= SHIP_ACCELLERATION;
 			vY = (vY < -SHIP_SPEED) ? -SHIP_SPEED : vY;
 		}
 		return keyMove;
 	}
 
-	private void changeCurrentSprite(Sprite newSprite)
-	{
-		float x = this.getCenterX();
-		float y = this.getCenterY();
-		currentSprite = newSprite;
-		currentSprite.setCenter(x, y);
-	}
-
-	public Sprite getShieldSprite()
-	{
-		return shieldSprite;
-	}
-
-	public Sprite getShipSprite()
-	{
-		return currentSprite;
-	}
-
 	public float getWidth()
 	{
-		return currentSprite.getWidth();
+		return shipRenderer.getCurrentSprite().getWidth();
 	}
 
 	public float getX()
 	{
-		return currentSprite.getX();
+		return shipRenderer.getCurrentSprite().getX();
 	}
 
 	public float getY()
 	{
-		return currentSprite.getY();
+		return shipRenderer.getCurrentSprite().getY();
 	}
 
-	
+	public ShipControl.Horizontal gethControl()
+	{
+		return hControl;
+	}
 
-	
-
+	public ShipControl.Vertical getvControl()
+	{
+		return vControl;
+	}
 }

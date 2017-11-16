@@ -5,17 +5,16 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import net.entetrs.xenon.libs.TextureLib;
 
-public class FontCommons
+public final class FontCommons
 {
 	private static final int FONT_W = 32;
 	private static final int FONT_H = 38;
-	private static Texture fontAZ;
-	private static Texture font09;
+	private static Texture fontAZ = TextureLib.FONT_AZ.get();
+	private static Texture font09 = TextureLib.FONT_09.get();
 
-	static
+	private FontCommons()
 	{
-		fontAZ = TextureLib.FONT_AZ.get();
-		font09 = TextureLib.FONT_09.get();
+		// protection
 	}
 
 	public static int getWidth(String txt)
@@ -23,7 +22,7 @@ public class FontCommons
 		return txt.length() * FONT_W;
 	}
 
-	public static int getHeight(String txt)
+	public static int getHeight(String txt) //NOSONAR
 	{
 		return FONT_H;
 	}

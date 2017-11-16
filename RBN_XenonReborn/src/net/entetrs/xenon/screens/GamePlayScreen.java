@@ -3,6 +3,9 @@ package net.entetrs.xenon.screens;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -26,16 +29,20 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 {
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f ";
 
+	private Log log = LogFactory.getLog(this.getClass());
+	
 	private BackgroundScrolling scrolling;
 	private EnemyManager em;
+	private CollisionManager cm;
 	private Ship ship;
 
 	
 	public GamePlayScreen()
 	{
-		System.out.println("Instanciation de GamePlay");
+		log.info("Instanciation de GamePlay");
 		scrolling = new BackgroundScrolling();
-		em = EnemyManager.getInstance();		
+		em = EnemyManager.getInstance();
+		cm = CollisionManager.getInstance();
 	}
 
 	@Override
@@ -44,7 +51,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.checkInputKeys(delta);
 		em.generateEnemies(delta);
 		this.translateWorld(delta);
-		CollisionManager.checkCollision(em.getEnemies(), ProjectileManager.getInstance().getShoots());
+		cm.checkCollision(em.getEnemies(), ProjectileManager.getInstance().getShoots());
 		this.renderWorld(delta);
 	}
 
@@ -65,7 +72,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void renderScore()
 	{
 		SpriteBatch batch = MainControler.getInstance().getBatch();
-		FontCommons.print(batch, 5, C.HEIGHT - 43, String.format("%010d", ScoreManager.getInstance().getScore()));
+		FontCommons.print(batch, 5, C.HEIGHT - 43f, String.format("%010d", ScoreManager.getInstance().getScore()));
 	}
 
 	private void renderShoots(SpriteBatch batch, float delta)
@@ -147,7 +154,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	}
 
 	@Override
-	public List<? extends Artefact> getArtefacts()
+	public List<Artefact> getArtefacts()
 	{
 		List<Artefact> world = new LinkedList<>(em.getEnemies());
 		world.addAll(ProjectileManager.getInstance().getShoots());

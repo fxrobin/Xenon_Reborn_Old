@@ -1,5 +1,8 @@
 package net.entetrs.xenon.libs;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Disposable;
@@ -16,6 +19,7 @@ public enum SoundLib implements Disposable
 	INTRO("intro.mp3"), 
 	MUSIC("music.mp3");
 	
+	private Log log = LogFactory.getLog(this.getClass());
 	private Sound sound;
 	
 	private SoundLib(String fileName)
@@ -58,9 +62,8 @@ public enum SoundLib implements Disposable
 	@Override
 	public void dispose()
 	{
-		System.out.print("DISPOSE SOUNDS ...");
+		log.info("DISPOSE SOUNDS ...");
 		GdxCommons.disposeAll(SoundLib.values());
-		System.out.println("OK");
 	}
 
 

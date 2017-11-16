@@ -1,39 +1,44 @@
 package net.entetrs.xenon.screens;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.badlogic.gdx.Screen;
 
 public abstract class AbstractScreen implements Screen
-{
+{	
+	private Log log = LogFactory.getLog(this.getClass());
+
 
 	@Override
 	public void hide()
 	{
-		System.out.println("HIDE SCREEN: NO ACTION");
+		log.info("HIDE SCREEN: NO ACTION");
 	}
 
 	@Override
 	public void pause()
 	{
-		System.out.println("PAUSE SCREEN : NO ACTION");
+		log.info("PAUSE SCREEN : NO ACTION");
 	}
 
 	@Override
 	public void resize(int arg0, int arg1)
 	{
-		System.out.println("RESIZE SCREEN : NO ACTION");
+		log.info("RESIZE SCREEN : NO ACTION");
 
 	}
 
 	@Override
 	public void resume()
 	{
-		System.out.println("RESUME SCREEN : NO ACTION");
+		log.info("RESUME SCREEN : NO ACTION");
 	}
 	
 	@Override
 	public void dispose()
 	{
-		System.out.println("DISPOSE SCREEN : NO ACTION");	
+		log.info("DISPOSE SCREEN : NO ACTION");	
 	}
 
 }

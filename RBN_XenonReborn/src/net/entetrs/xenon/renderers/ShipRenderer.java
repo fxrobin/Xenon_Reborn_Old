@@ -9,6 +9,12 @@ import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.entities.Ship;
 import net.entetrs.xenon.libs.TextureLib;
 
+/**
+ * cette classe assure le rendu du vaisseau en fonction de son état.
+ * 
+ * @author robin
+ *
+ */
 public class ShipRenderer implements Renderable
 {
 	private Ship ship;
@@ -29,7 +35,7 @@ public class ShipRenderer implements Renderable
 		GdxCommons.setOriginCenter(shipSpriteLeft, shipSpriteRight, shipSpriteReactorOff, shipSpriteReactorOn);
 		GdxCommons.setOriginCenter(shieldSprite);
 		currentSprite = shipSpriteReactorOn;
-		currentSprite.setCenter(C.WIDTH / 2, 80);
+		currentSprite.setCenter(C.WIDTH / 2f, 80);
 	}
 
 	private void loadSprites()
@@ -61,7 +67,11 @@ public class ShipRenderer implements Renderable
 	{
 		this.setCorrectSprite();
 		currentSprite.draw(batch);
+		this.drawShieldIfActivated(batch);
+	}
 
+	private void drawShieldIfActivated(Batch batch)
+	{
 		if (ship.isShieldActivated())
 		{
 			shieldSprite.setCenter(this.getCenterX(), this.getCenterY());
@@ -71,34 +81,35 @@ public class ShipRenderer implements Renderable
 
 	private void setCorrectSprite()
 	{
-		switch (ship.getvControl())
-		{
-			case UP:
-			{
-				this.changeCurrentSprite(shipSpriteReactorOn);
-				break;
-			}
-			case DOWN:
-			{
-				this.changeCurrentSprite(shipSpriteReactorOff);
-				break;
-			}
-			default:
-				this.changeCurrentSprite(shipSpriteReactorOff);
-		}
+		updateSpriteForVerticalMovement();
+		updateSpriteForHorizontalMovement();
+	}
 
+	private void updateSpriteForHorizontalMovement()
+	{
 		switch (ship.gethControl())
 		{
 			case LEFT:
-			{
 				this.changeCurrentSprite(shipSpriteLeft);
 				break;
-			}
 			case RIGHT:
-			{
 				this.changeCurrentSprite(shipSpriteRight);
 				break;
-			}
+			default:
+				this.changeCurrentSprite(shipSpriteReactorOff);
+		}
+	}
+
+	private void updateSpriteForVerticalMovement()
+	{
+		switch (ship.getvControl())
+		{
+			case UP:
+				this.changeCurrentSprite(shipSpriteReactorOn);
+				break;
+			case DOWN:
+				this.changeCurrentSprite(shipSpriteReactorOff);
+				break;
 			default:
 				this.changeCurrentSprite(shipSpriteReactorOff);
 		}

@@ -1,5 +1,8 @@
 package net.entetrs.xenon.libs;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -7,6 +10,7 @@ public enum FontLib implements Disposable
 {
 	DEFAULT;
 
+	private Log log = LogFactory.getLog(this.getClass());
 	private BitmapFont font;
 
 	private FontLib()
@@ -22,9 +26,9 @@ public enum FontLib implements Disposable
 	@Override
 	public void dispose()
 	{
-		System.out.print("DISPOSE FONTS ...");
+		log.info("DISPOSE FONTS ...");
 		font.dispose();
-		System.out.print("DISPOSE DONE ...");
+		log.info("DISPOSE DONE ...");
 	}
 
 }

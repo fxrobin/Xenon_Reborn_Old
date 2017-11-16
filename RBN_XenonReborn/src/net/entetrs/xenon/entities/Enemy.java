@@ -27,7 +27,7 @@ public class Enemy extends Sprite implements Artefact {
 	public Enemy(Texture texture) {
 		super(texture);
 		boundingCircle = new Circle();
-		boundingCircle.setRadius(texture.getWidth() / 2);
+		boundingCircle.setRadius(texture.getWidth() / 2f);
 	}
 
 	public static Enemy random() {

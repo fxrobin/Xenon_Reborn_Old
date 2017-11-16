@@ -1,5 +1,8 @@
 package net.entetrs.xenon.screens;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -16,6 +19,11 @@ import net.entetrs.xenon.libs.TextureLib;
 
 public class MenuScreen implements Screen
 {
+	private static final String MSG = "PRESS SPACEBAR";
+	private static final int MSG_WIDTH = FontCommons.getWidth(MSG);
+	
+	private Log log = LogFactory.getLog(this.getClass());
+	
 	private MainControler ctrl = MainControler.getInstance();
 	
 	private Texture titleTexture;
@@ -41,10 +49,10 @@ public class MenuScreen implements Screen
 
 	public MenuScreen()
 	{
-		System.out.println("Instanciation de MenuScreen");
+		log.info("Instanciation de MenuScreen");
 		titleTexture = TextureLib.TITLE.get();
-		titleX = (C.WIDTH - titleTexture.getWidth()) / 2;
-		titleY = (C.HEIGHT - titleTexture.getHeight()) / 2;
+		titleX = (C.WIDTH - titleTexture.getWidth()) / 2f;
+		titleY = (C.HEIGHT - titleTexture.getHeight()) / 2f;
 		spaceTexture = TextureLib.BACKGROUND_SPACE.get();
 	}
 
@@ -84,9 +92,7 @@ public class MenuScreen implements Screen
 
 	private void drawMessage()
 	{
-		String MSG = "PRESS SPACEBAR";
-		int W = FontCommons.getWidth(MSG);
-		FontCommons.print(this.ctrl.getBatch(), (C.WIDTH - W) / 2, 60, MSG);
+		FontCommons.print(ctrl.getBatch(), (C.WIDTH - MSG_WIDTH) / 2f, 60, MSG);
 	}
 
 	private void drawTitle()
@@ -144,22 +150,19 @@ public class MenuScreen implements Screen
 	@Override
 	public void resize(int arg0, int arg1)
 	{
-		// TODO Auto-generated method stub
-
+		// inutile dans la version du jeu.
 	}
 
 	@Override
 	public void resume()
 	{
-		// TODO Auto-generated method stub
-
+		// inutile dans la version du jeu.
 	}
 
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
-
+		// à coder éventuellement.
 	}
 
 	@Override
@@ -171,8 +174,7 @@ public class MenuScreen implements Screen
 	@Override
 	public void pause()
 	{
-		// TODO Auto-generated method stub
-
+		// inutile dans la version du jeu.
 	}
 
 }

@@ -9,29 +9,26 @@ import net.entetrs.xenon.commons.GdxCommons;
 public enum TextureLib implements Disposable
 {
 	TITLE("commons/xenon-reborn.png"),
-	
-	BACKGROUND_LEFT("backgrounds/left_bg.png",TextureWrap.Repeat),
-	BACKGROUND_RIGHT("backgrounds/right_bg.png", TextureWrap.Repeat),
-	BACKGROUND_SPACE("backgrounds/space.jpg", TextureWrap.Repeat),
+	BACKGROUND_LEFT("backgrounds/left_bg.png", TextureWrap.Repeat), 
+	BACKGROUND_RIGHT("backgrounds/right_bg.png", TextureWrap.Repeat), 
+	BACKGROUND_SPACE("backgrounds/space.jpg", TextureWrap.Repeat), 
 	FOOTER("backgrounds/footer.png"),
 	
-	
-	SHIELD("ships/shield.png"),
-	SHIP_LEFT("ships/ship_left.png"),
-	SHIP_RIGHT("ships/ship_right.png"),
-	SHIP("ships/ship_normal.png"),
+	SHIELD("ships/shield.png"), 
+	SHIP_LEFT("ships/ship_left.png"), 
+	SHIP_RIGHT("ships/ship_right.png"), 
+	SHIP("ships/ship_normal.png"), 
 	SHIP_NOREACTOR("ships/ship_noreactor.png"),
-	
-	ENEMY("enemies/enemy.png"),
-	BUG("enemies/bug.png"),
+
+	ENEMY("enemies/enemy.png"), 
+	BUG("enemies/bug.png"), 
 	PERFORATOR("enemies/perforator.png"),
-	
-	FONT_AZ("fonts/font-AZ.png"),
+
+	FONT_AZ("fonts/font-AZ.png"), 
 	FONT_09("fonts/font-09.png");
-	
-	
+
 	private Texture texture;
-	
+
 	private TextureLib(String fileName, TextureWrap wrap)
 	{
 		this(fileName);
@@ -40,26 +37,24 @@ public enum TextureLib implements Disposable
 
 	private TextureLib(String fileName)
 	{
-        this.texture = new Texture(fileName);
+		this.texture = new Texture(fileName);
 
 	}
-	
-	public Texture get() {
+
+	public Texture get()
+	{
 		return texture;
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose()
+	{
 		this.texture.dispose();
 	}
-	
-
 
 	public static void disposeAll()
 	{
-		System.out.print("DISPOSE TEXTURES ...");
 		GdxCommons.disposeAll(TextureLib.values());
-		System.out.println("DONE");
 	}
 
 }

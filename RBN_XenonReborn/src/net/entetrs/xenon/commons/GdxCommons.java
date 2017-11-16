@@ -41,7 +41,7 @@ public final class GdxCommons
 
 	public static void setOriginCenter(Sprite... sprites)
 	{
-		Arrays.stream(sprites).forEach(s -> s.setOriginCenter());
+		Arrays.stream(sprites).forEach(Sprite::setOriginCenter);
 	}
 
 	public static float getCenterX(Sprite s)
@@ -56,7 +56,7 @@ public final class GdxCommons
 
 	public static void disposeAll(Disposable... disposables)
 	{
-		Arrays.stream(disposables).forEach(d -> d.dispose());
+		Arrays.stream(disposables).forEach(Disposable::dispose);
 	}
 	
 	public static TextureRegion[] convertToTextureArray(String fileName, int cols, int rows)

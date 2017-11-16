@@ -1,16 +1,19 @@
 package net.entetrs.xenon.entities;
 
-public class ShipControl
+public final class ShipControl
 {
+	private ShipControl()
+	{
+		// protection
+	}
 	
-	public static enum Horizontal
+	public enum Horizontal
 	{
 		LEFT,RIGHT,NONE;
 	}
 	
-	public static enum Vertical
+	public enum Vertical
 	{
 		UP,DOWN,NONE;
 	}
-
 }

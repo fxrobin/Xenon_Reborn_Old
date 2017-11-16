@@ -25,5 +25,11 @@
 	<classpathentry kind="lib" path="libs/lwjgl-platform-2.9.2-natives-linux.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-platform-2.9.2-natives-osx.jar"/>
 	<classpathentry kind="lib" path="libs/lwjgl-platform-2.9.2-natives-windows.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-api-2.9.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-api-2.9.1.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-jcl-2.9.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-jcl-2.9.1.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

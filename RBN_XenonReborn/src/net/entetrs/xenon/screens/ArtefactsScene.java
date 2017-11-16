@@ -6,6 +6,6 @@ import net.entetrs.xenon.entities.Artefact;
 
 public interface ArtefactsScene {
 	
-	public List <? extends Artefact> getArtefacts();
+	public List <Artefact> getArtefacts();
 
 }

@@ -33,7 +33,7 @@ public class BackgroundScrolling
 		Texture rightbg = TextureLib.BACKGROUND_RIGHT.get();	
 		batch.draw(space, 0f, 0f, 0, (int) position, C.WIDTH, C.HEIGHT);
 		batch.draw(leftbg, 0f, 0f, 0, (int) position * 2, leftbg.getWidth(), C.HEIGHT);
-		batch.draw(rightbg, C.WIDTH - rightbg.getWidth(), 0f, 0, (int) position * 2, C.WIDTH, C.HEIGHT);
+		batch.draw(rightbg, (float) C.WIDTH - rightbg.getWidth(), 0f, 0, (int) position * 2, C.WIDTH, C.HEIGHT);
 	}
 	
 	public float getSpeed()

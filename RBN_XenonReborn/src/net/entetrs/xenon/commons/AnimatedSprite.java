@@ -26,7 +26,7 @@ public class AnimatedSprite extends Sprite implements Artefact {
 
 	public AnimatedSprite(AnimationLib anim) {
 		super(anim.getAnimation().getKeyFrames()[0]);
-		radius = anim.getAnimation().getKeyFrames()[0].getRegionWidth() / 2;
+		radius = anim.getAnimation().getKeyFrames()[0].getRegionWidth() / 2.0f;
 		stateTime = 0f;
 		this.animation = anim.getAnimation();
 		boundingCircle = new Circle();

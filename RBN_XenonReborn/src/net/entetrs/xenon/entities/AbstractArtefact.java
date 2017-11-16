@@ -1,7 +1,5 @@
 package net.entetrs.xenon.entities;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-
 public abstract class AbstractArtefact implements Artefact {
 	
 	private int lifePoint;
@@ -30,8 +28,4 @@ public abstract class AbstractArtefact implements Artefact {
 	public boolean isAlive() {
 		return lifePoint > 0;
 	}
-
-	@Override
-	public abstract Sprite getSprite();
-
 }

@@ -6,7 +6,20 @@ import net.entetrs.xenon.entities.Artefact;
 
 public class CollisionManager {
 	
-	public static void checkCollision(List <? extends Artefact> targets, List <? extends Artefact> projectiles)
+	private static CollisionManager instance = new CollisionManager();
+	
+	public static CollisionManager getInstance()
+	{
+		return instance;
+	}
+	
+	private CollisionManager()
+	{
+		// protection
+	}
+	
+	
+	public void checkCollision(List <? extends Artefact> targets, List <? extends Artefact> projectiles)
 	{
 		for(Artefact t : targets)
 		{

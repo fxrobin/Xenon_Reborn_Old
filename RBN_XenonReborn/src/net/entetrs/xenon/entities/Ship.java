@@ -19,10 +19,10 @@ public class Ship implements Renderable
 	private static final float SHIP_SPEED = 400f;
 	private static final float SHIP_ACCELLERATION = 20f;
 
-	public ShipRenderer shipRenderer;
+	private ShipRenderer shipRenderer;
 
-	public ShipControl.Horizontal hControl = ShipControl.Horizontal.NONE;
-	public ShipControl.Vertical vControl = ShipControl.Vertical.NONE;
+	private ShipControl.Horizontal hControl = ShipControl.Horizontal.NONE;
+	private ShipControl.Vertical vControl = ShipControl.Vertical.NONE;
 
 	private boolean shieldActivated = false;
 
@@ -84,11 +84,6 @@ public class Ship implements Renderable
 		{
 			handleInertia();
 		}
-
-		// if (!keyMove && !currentSprite.equals(shipSpriteReactorOff))
-		// {
-		// this.changeCurrentSprite(shipSpriteReactorOff);
-		// }
 
 		shipRenderer.getCurrentSprite().translateX(delta * vX);
 		shipRenderer.getCurrentSprite().translateY(delta * vY);

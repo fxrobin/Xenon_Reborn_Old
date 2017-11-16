@@ -35,7 +35,7 @@ public class ExplosionManager
 	
 	public static void removeFinishedExplosions()
 	{
-		explosions.removeIf( ex -> ex.isFinished());
+		explosions.removeIf(AnimatedSprite::isFinished);
 	}
 	
 	public static void render(Batch batch, float delta)

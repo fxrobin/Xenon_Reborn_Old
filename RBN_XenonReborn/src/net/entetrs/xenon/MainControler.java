@@ -112,14 +112,4 @@ public class MainControler extends Game
 		return batch;
 	}
 
-	@Override
-	public void dispose()
-	{
-		super.dispose();
-	//	GdxCommons.disposeAll(batch, soundManager, textureManager, fontManager);
-	}
-
-
-	
-
 }

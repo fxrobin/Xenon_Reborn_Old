@@ -51,7 +51,7 @@ public class MainControler extends Game
 		batch = new SpriteBatch();
 		fader = Fader.getInstance();
 		shareRenderer = new ShapeRenderer();
-		this.showScreen(XenonScreen.MENU);
+		this.showScreen(XenonScreen.GAME_PLAY);
 	}
 
 	public void showScreen(XenonScreen screen)

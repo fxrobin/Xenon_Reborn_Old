@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Circle;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.commons.Renderable;
-import net.entetrs.xenon.entities.ShipControl.Horizontal;
-import net.entetrs.xenon.entities.ShipControl.Vertical;
+import net.entetrs.xenon.entities.ShipJoystick.Horizontal;
+import net.entetrs.xenon.entities.ShipJoystick.Vertical;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.renderers.ShipRenderer;
 
@@ -21,8 +21,8 @@ public class Ship implements Renderable
 
 	private ShipRenderer shipRenderer;
 
-	private ShipControl.Horizontal hControl = ShipControl.Horizontal.NONE;
-	private ShipControl.Vertical vControl = ShipControl.Vertical.NONE;
+	private ShipJoystick.Horizontal hControl = ShipJoystick.Horizontal.NONE;
+	private ShipJoystick.Vertical vControl = ShipJoystick.Vertical.NONE;
 
 	private boolean shieldActivated = false;
 
@@ -77,18 +77,30 @@ public class Ship implements Renderable
 
 	public void checkShipMoves(float delta)
 	{
-		boolean keyMove = this.checkVerticalMove();
-		keyMove = this.checkHorizontalMove() ? true : keyMove;
+		this.checkVerticalMove();
+		this.checkHorizontalMove();
+		this.handleInertia();
+		this.translateShip(delta);
+	}
 
-		if (!keyMove)
-		{
-			handleInertia();
-		}
-
+	private void translateShip(float delta)
+	{
 		shipRenderer.getCurrentSprite().translateX(delta * vX);
 		shipRenderer.getCurrentSprite().translateY(delta * vY);
+		this.controlPosition();
+	}
 
-		controlPosition();
+	private void handleInertia()
+	{
+		if (this.hControl == Horizontal.NONE)
+		{
+			vX = this.computeInertia(vX);
+		}
+		
+		if (this.vControl == Vertical.NONE)
+		{
+			vY = this.computeInertia(vY);
+		}	
 	}
 
 	private void controlPosition()
@@ -103,76 +115,60 @@ public class Ship implements Renderable
 		boundingCircle.setX(this.getCenterX());
 		boundingCircle.setY(this.getCenterY());
 	}
-
-	private void handleInertia()
+	
+	private float computeInertia(float v)
 	{
-		// inertie sur X
-		if (vX > 0)
+		float result = v;
+		if (v > 0)
 		{
-			vX -= SHIP_ACCELLERATION / 2;
+			 result -= SHIP_ACCELLERATION / 2;
 		}
-		else if (vX < 0)
+		else if (v < 0)
 		{
-			vX += SHIP_ACCELLERATION / 2;
+			result += SHIP_ACCELLERATION / 2;
 		}
-
-		// inertie sur Y
-		if (vY > 0)
-		{
-			vY -= SHIP_ACCELLERATION / 2;
-		}
-		else if (vY < 0)
-		{
-			vY += SHIP_ACCELLERATION / 2;
-		}
+		return result;
 	}
 
-	private boolean checkHorizontalMove()
+	private void checkHorizontalMove()
 	{
-		boolean keyMove = false;
-		this.vControl = Vertical.NONE;
 		this.hControl = Horizontal.NONE;
 
 		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
-		if (GdxCommons.checkConcurrentKeys(Keys.LEFT, Keys.RIGHT)) return false;
+		if (GdxCommons.checkConcurrentKeys(Keys.LEFT, Keys.RIGHT)) return ;
 
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
 		{
 			this.hControl = Horizontal.LEFT;
-			keyMove = true;
 			vX -= SHIP_ACCELLERATION;
 			vX = (vX < -SHIP_SPEED) ? -SHIP_SPEED : vX;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
 			this.hControl = Horizontal.RIGHT;
-			keyMove = true;
 			vX += SHIP_ACCELLERATION;
 			vX = (vX > SHIP_SPEED) ? SHIP_SPEED : vX;
 		}
-		return keyMove;
 	}
 
-	private boolean checkVerticalMove()
+	private void checkVerticalMove()
 	{
-
+		this.vControl = Vertical.NONE;
 		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
-		if (GdxCommons.checkConcurrentKeys(Keys.UP, Keys.DOWN)) return false;
+		if (GdxCommons.checkConcurrentKeys(Keys.UP, Keys.DOWN)) return;
 
-		boolean keyMove = false;
 		if (Gdx.input.isKeyPressed(Keys.UP))
 		{
-			keyMove = true;
+			this.vControl = Vertical.UP;
 			vY += SHIP_ACCELLERATION;
 			vY = (vY > SHIP_SPEED) ? SHIP_SPEED : vY;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))
 		{
-			keyMove = true;
+			this.vControl = Vertical.DOWN;
 			vY -= SHIP_ACCELLERATION;
 			vY = (vY < -SHIP_SPEED) ? -SHIP_SPEED : vY;
 		}
-		return keyMove;
 	}
 
 	public float getWidth()
@@ -190,12 +186,12 @@ public class Ship implements Renderable
 		return shipRenderer.getCurrentSprite().getY();
 	}
 
-	public ShipControl.Horizontal gethControl()
+	public ShipJoystick.Horizontal getHorizontalControl()
 	{
 		return hControl;
 	}
 
-	public ShipControl.Vertical getvControl()
+	public ShipJoystick.Vertical getVerticalControl()
 	{
 		return vControl;
 	}

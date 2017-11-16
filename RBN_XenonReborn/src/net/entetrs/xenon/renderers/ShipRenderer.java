@@ -87,7 +87,7 @@ public class ShipRenderer implements Renderable
 
 	private void updateSpriteForHorizontalMovement()
 	{
-		switch (ship.gethControl())
+		switch (ship.getHorizontalControl())
 		{
 			case LEFT:
 				this.changeCurrentSprite(shipSpriteLeft);
@@ -96,13 +96,13 @@ public class ShipRenderer implements Renderable
 				this.changeCurrentSprite(shipSpriteRight);
 				break;
 			default:
-				this.changeCurrentSprite(shipSpriteReactorOff);
+				// rien à faie
 		}
 	}
 
 	private void updateSpriteForVerticalMovement()
 	{
-		switch (ship.getvControl())
+		switch (ship.getVerticalControl())
 		{
 			case UP:
 				this.changeCurrentSprite(shipSpriteReactorOn);

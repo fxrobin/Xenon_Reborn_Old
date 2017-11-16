@@ -1,8 +1,8 @@
 package net.entetrs.xenon.entities;
 
-public final class ShipControl
+public final class ShipJoystick
 {
-	private ShipControl()
+	private ShipJoystick()
 	{
 		// protection
 	}

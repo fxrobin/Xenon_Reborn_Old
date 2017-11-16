@@ -12,7 +12,7 @@ import net.entetrs.xenon.libs.TextureLib;
 public class ShipRenderer implements Renderable
 {
 	private Ship ship;
-	
+
 	private Sprite shipSpriteReactorOn;
 	private Sprite shipSpriteLeft;
 	private Sprite shipSpriteRight;
@@ -20,7 +20,6 @@ public class ShipRenderer implements Renderable
 	private Sprite shieldSprite;
 
 	private Sprite currentSprite;
-	
 
 	public ShipRenderer(Ship ship)
 	{
@@ -32,7 +31,7 @@ public class ShipRenderer implements Renderable
 		currentSprite = shipSpriteReactorOn;
 		currentSprite.setCenter(C.WIDTH / 2, 80);
 	}
-	
+
 	private void loadSprites()
 	{
 		shipSpriteReactorOn = new Sprite(TextureLib.SHIP.get());
@@ -41,12 +40,12 @@ public class ShipRenderer implements Renderable
 		shipSpriteReactorOff = new Sprite(TextureLib.SHIP_NOREACTOR.get());
 		shieldSprite = new Sprite(TextureLib.SHIELD.get());
 	}
-	
+
 	public Sprite getCurrentSprite()
 	{
 		return currentSprite;
 	}
-	
+
 	public float getCenterX()
 	{
 		return GdxCommons.getCenterX(currentSprite);
@@ -59,34 +58,52 @@ public class ShipRenderer implements Renderable
 
 	@Override
 	public void render(Batch batch, float delta)
-	{	
+	{
 		this.setCorrectSprite();
 		currentSprite.draw(batch);
-		
+
 		if (ship.isShieldActivated())
 		{
 			shieldSprite.setCenter(this.getCenterX(), this.getCenterY());
 			shieldSprite.draw(batch);
 		}
 	}
-	
+
 	private void setCorrectSprite()
 	{
 		switch (ship.getvControl())
 		{
-			case UP : this.changeCurrentSprite(shipSpriteReactorOn); break;
-			case DOWN : this.changeCurrentSprite(shipSpriteReactorOff);break;
-			default : this.changeCurrentSprite(shipSpriteReactorOff);
+			case UP:
+			{
+				this.changeCurrentSprite(shipSpriteReactorOn);
+				break;
+			}
+			case DOWN:
+			{
+				this.changeCurrentSprite(shipSpriteReactorOff);
+				break;
+			}
+			default:
+				this.changeCurrentSprite(shipSpriteReactorOff);
 		}
-		
+
 		switch (ship.gethControl())
 		{
-			case LEFT : this.changeCurrentSprite(shipSpriteLeft); break;
-			case RIGHT : this.changeCurrentSprite(shipSpriteRight);break;
-			default : this.changeCurrentSprite(shipSpriteReactorOff);
+			case LEFT:
+			{
+				this.changeCurrentSprite(shipSpriteLeft);
+				break;
+			}
+			case RIGHT:
+			{
+				this.changeCurrentSprite(shipSpriteRight);
+				break;
+			}
+			default:
+				this.changeCurrentSprite(shipSpriteReactorOff);
 		}
 	}
-	
+
 	private void changeCurrentSprite(Sprite newSprite)
 	{
 		float x = this.getCenterX();
@@ -94,6 +111,5 @@ public class ShipRenderer implements Renderable
 		currentSprite = newSprite;
 		currentSprite.setCenter(x, y);
 	}
-
 
 }

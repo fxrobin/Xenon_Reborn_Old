@@ -1,6 +1,5 @@
 package net.entetrs.xenon.screens;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
-import net.entetrs.xenon.commons.Fader;
 import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.entities.Ship;

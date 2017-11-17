@@ -1,8 +1,10 @@
 package net.entetrs.xenon;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -18,13 +20,20 @@ import net.entetrs.xenon.screens.MenuScreen;
 
 public class MainControler extends Game
 {
+	// pour dessiner des texture et sprites à l'écran
 	private SpriteBatch batch;
-	private ShapeRenderer shareRenderer;
+
+	// pour dessiner des cercles (bounding circles) à l'écran
+	private ShapeRenderer shapeRenderer;
+
+	// écran courant
 	private Screen currentScreen;
+
+	// instance du fader pour "fade-in et fade-out"
 	private Fader fader;
-	
+
 	// DP SINGLETON
-	
+
 	private static MainControler instance = new MainControler();
 
 	private MainControler()
@@ -36,61 +45,68 @@ public class MainControler extends Game
 	{
 		return instance;
 	}
-	
 
 	public enum XenonScreen
 	{
 		MENU, GAME_PLAY;
 	}
 
-	
-
 	@Override
 	public void create()
 	{
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		batch = new SpriteBatch();
+		batch.enableBlending();
 		fader = Fader.getInstance();
-		shareRenderer = new ShapeRenderer();
-		this.showScreen(XenonScreen.GAME_PLAY);
+		shapeRenderer = new ShapeRenderer();
+		this.showScreen(XenonScreen.MENU);
+		this.fade();
 	}
 
 	public void showScreen(XenonScreen screen)
 	{
 		if (currentScreen != null) fader.startFadeOut();
-		
+
 		if (XenonScreen.MENU.equals(screen))
 		{
 			currentScreen = new MenuScreen();
 		}
-		
+
 		if (XenonScreen.GAME_PLAY.equals(screen))
 		{
 			currentScreen = new GamePlayScreen();
 		}
-		
-		this.fade();
 	}
 
 	@Override
 	public void render()
 	{
-		batch.begin();
-		GdxCommons.clearScreen();
-		this.fade();
-		super.render();
-		batch.end();
+		GdxCommons.clearScreen();	
 		
+		if (!fader.getCurrentState().equals(State.BLACK_SCREEN))
+		{
+			batch.begin();
+			super.render();
+			batch.end();
+		}
+		
+        this.fade();
+	}
+
+	public void showBoundingCircles()
+	{
 		if (this.getScreen() instanceof ArtefactsScene)
 		{
-			shareRenderer.begin(ShapeType.Line);
-			shareRenderer.setColor(Color.RED);
+			shapeRenderer.begin(ShapeType.Line);
+			shapeRenderer.setColor(Color.RED);
 			ArtefactsScene as = (ArtefactsScene) this.getScreen();
-			for(Artefact a : as.getArtefacts())
+			for (Artefact a : as.getArtefacts())
 			{
 				Circle c = a.getBoundingCircle();
-				shareRenderer.circle(c.x, c.y, c.radius);
+				shapeRenderer.circle(c.x, c.y, c.radius);
 			}
-			shareRenderer.end();
+			shapeRenderer.end();
 		}
 	}
 
@@ -99,14 +115,14 @@ public class MainControler extends Game
 		if (fader.getCurrentState().equals(State.BLACK_SCREEN))
 		{
 			this.setScreen(currentScreen);
-			fader.startFadeIn();
-		}	
+			fader.startFadeIn();		
+		}
 		else
 		{
-			fader.fade(batch);
+			fader.fade();
 		}
 	}
-	
+
 	public SpriteBatch getBatch()
 	{
 		return batch;

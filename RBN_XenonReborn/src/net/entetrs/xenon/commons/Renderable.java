@@ -1,8 +1,8 @@
 package net.entetrs.xenon.commons;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public interface Renderable
 {
-	void render(Batch batch, float delta);
+	void render(SpriteBatch batch, float delta);
 }

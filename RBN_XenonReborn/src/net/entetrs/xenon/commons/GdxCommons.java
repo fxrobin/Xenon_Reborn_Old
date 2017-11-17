@@ -82,12 +82,6 @@ public final class GdxCommons
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
-	public static void clearScreen(float alpha)
-	{
-		Gdx.gl.glClearColor(0, 0, 0, alpha);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
-
 	public static void applyAlpha(Sprite s, float alpha)
 	{
 		s.setColor(s.getColor().r, s.getColor().g, s.getColor().b, alpha);

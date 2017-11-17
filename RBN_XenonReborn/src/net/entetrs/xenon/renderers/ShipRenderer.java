@@ -2,6 +2,7 @@ package net.entetrs.xenon.renderers;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
@@ -65,7 +66,7 @@ public class ShipRenderer implements Renderable
 	}
 
 	@Override
-	public void render(Batch batch, float delta)
+	public void render(SpriteBatch batch, float delta)
 	{
 		this.setCorrectSprite();
 		currentSprite.draw(batch);

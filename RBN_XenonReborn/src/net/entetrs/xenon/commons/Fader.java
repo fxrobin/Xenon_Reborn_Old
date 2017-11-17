@@ -1,16 +1,25 @@
 package net.entetrs.xenon.commons;
 
-import java.util.stream.Stream;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class Fader
 {
-	private float step = 1.0f / C.FADE_SECONDS; // augmentation par secondes
-	private float currentAlpha = 0;
+	private Log log = LogFactory.getLog(this.getClass());
+
+	private float step = (MAX_ALPHA - MIN_ALPHA) / C.FADE_SECONDS;
+	private float currentAlpha = MIN_ALPHA;
 	private State currentState = State.BLACK_SCREEN;
+
+	private static final float MIN_ALPHA = 0.0f;
+	private static final float MAX_ALPHA = 1.0f;
+
+	private ShapeRenderer fadeRenderer = new ShapeRenderer();
 
 	private static Fader instance = new Fader();
 
@@ -34,26 +43,22 @@ public class Fader
 		return currentState;
 	}
 
-	public float getCurrentAlpha()
-	{
-		return currentAlpha;
-	}
-
 	public void startFadeIn()
 	{
-		currentAlpha = 0;
+		currentAlpha = MAX_ALPHA;
 		currentState = State.FADING_IN;
 	}
 
 	public void startFadeOut()
 	{
-		currentAlpha = 1;
+		currentAlpha = MIN_ALPHA;
 		currentState = State.FADING_OUT;
 	}
 
-	public void fade(Batch batch)
+	public void fade()
 	{
 		float delta = Gdx.graphics.getDeltaTime();
+
 		switch (currentState)
 		{
 			case FADING_IN:
@@ -65,32 +70,38 @@ public class Fader
 			default:
 				break;
 		}
-		batch.setColor(1, 1, 1, currentAlpha);
-	}
 
-	private void fadeIn(float delta)
-	{
-		currentAlpha = currentAlpha + (step * delta);
-		if (currentAlpha > 1.0f)
+		if (currentState != State.DISPLAYING_SCREEN)
 		{
-			currentAlpha = 1.0f;
-			this.currentState = State.DISPLAYING_SCREEN;
+			Gdx.gl.glEnable(GL20.GL_BLEND);
+			Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+			fadeRenderer.begin(ShapeType.Filled);
+			log.info("CurrentAlpha : " + currentAlpha);
+			fadeRenderer.setColor(0, 0, 0, currentAlpha);
+			fadeRenderer.rect(0, 0, C.WIDTH, C.HEIGHT);
+			fadeRenderer.end();
 		}
 	}
 
 	private void fadeOut(float delta)
 	{
-		currentAlpha = currentAlpha - (step * delta);
-		if (currentAlpha < 0.0f)
+		log.info("Fading Out");
+		currentAlpha = currentAlpha + (step * delta);
+		if (currentAlpha > MAX_ALPHA)
 		{
-			currentAlpha = 0.0f;
+			currentAlpha = MAX_ALPHA;
 			this.currentState = State.BLACK_SCREEN;
 		}
 	}
 
-	public void setSpriteAlpha(Stream<? extends Sprite> stream)
+	private void fadeIn(float delta)
 	{
-		stream.forEach(s -> GdxCommons.applyAlpha(s, this.getCurrentAlpha()));
+		log.info("Fading In");
+		currentAlpha = currentAlpha - (step * delta);
+		if (currentAlpha < MIN_ALPHA)
+		{
+			currentAlpha = MIN_ALPHA;
+			this.currentState = State.DISPLAYING_SCREEN;
+		}
 	}
-
 }

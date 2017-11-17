@@ -2,8 +2,8 @@ package net.entetrs.xenon.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.commons.C;
@@ -54,7 +54,7 @@ public class Ship implements Renderable
 	}
 
 	@Override
-	public void render(Batch batch, float delta)
+	public void render(SpriteBatch batch, float delta)
 	{
 		shipRenderer.render(batch, delta);
 	}

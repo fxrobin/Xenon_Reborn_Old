@@ -18,6 +18,7 @@ public class Launcher
 		config.foregroundFPS = 60;
 		config.resizable = false;
 		config.title = "XENON - Reborn - ETRS 2017";
+		config.useGL30=true;
 		new LwjglApplication(MainControler.getInstance(), config);
 	}
 }

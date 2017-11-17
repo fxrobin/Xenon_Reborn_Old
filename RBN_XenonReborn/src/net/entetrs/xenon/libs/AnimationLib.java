@@ -52,9 +52,6 @@ public enum AnimationLib
 		else
 		{
 			return new AnimatedSprite(this);
-		}
-		
-		
+		}	
 	}
-
 }

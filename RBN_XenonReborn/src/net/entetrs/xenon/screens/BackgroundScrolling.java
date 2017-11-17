@@ -12,7 +12,7 @@ import net.entetrs.xenon.libs.TextureLib;
 public class BackgroundScrolling
 {
 	private float position = 0;
-	private float speed = 3f;
+	private float speed = 9f;
 	
 	public void checkInput()
 	{

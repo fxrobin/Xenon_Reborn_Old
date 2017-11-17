@@ -126,7 +126,6 @@ public class MenuScreen implements Screen
 
 	private void checkInput()
 	{
-
 		if (Gdx.input.isKeyJustPressed(Keys.D))
 		{
 			SoundLib.EXPLOSION.play();

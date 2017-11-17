@@ -17,14 +17,16 @@ import net.entetrs.xenon.libs.AnimationLib;
  *
  */
 
-public class AnimatedSprite extends Sprite implements Artefact {
+public class AnimatedSprite extends Sprite implements Artefact
+{
 	private float stateTime;
 	private Animation<TextureRegion> animation;
 	private Circle boundingCircle;
 	private float radius;
 	private int force = 2;
 
-	public AnimatedSprite(AnimationLib anim) {
+	public AnimatedSprite(AnimationLib anim)
+	{
 		super(anim.getAnimation().getKeyFrames()[0]);
 		radius = anim.getAnimation().getKeyFrames()[0].getRegionWidth() / 2.0f;
 		stateTime = 0f;
@@ -32,50 +34,58 @@ public class AnimatedSprite extends Sprite implements Artefact {
 		boundingCircle = new Circle();
 	}
 
-	public AnimatedSprite(AnimationLib anim, float centerX, float centerY) {
+	public AnimatedSprite(AnimationLib anim, float centerX, float centerY)
+	{
 		this(anim);
 		this.setOrigin(centerX, centerY);
 	}
 
-	public void act(float delta) {
+	public void act(float delta)
+	{
 		stateTime += delta;
 		this.setRegion(animation.getKeyFrame(stateTime));
 		boundingCircle.set(GdxCommons.getCenterX(this), GdxCommons.getCenterY(this), radius);
 	}
 
-	public void render(Batch batch, float delta) {
+	public void render(Batch batch, float delta)
+	{
 		this.act(delta);
 		this.draw(batch);
 	}
 
-	public boolean isFinished() {
+	public boolean isFinished()
+	{
 		return animation.isAnimationFinished(stateTime);
 	}
 
-
 	@Override
-	public void decreaseLife(int impactForce) {
+	public void decreaseLife(int impactForce)
+	{
 		force = force - impactForce;
 
 	}
 
 	@Override
-	public boolean isAlive() {
+	public boolean isAlive()
+	{
 		return force > 0;
 	}
 
 	@Override
-	public int getImpactForce() {
+	public int getImpactForce()
+	{
 		return 5;
 	}
 
 	@Override
-	public Circle getBoundingCircle() {
+	public Circle getBoundingCircle()
+	{
 		return boundingCircle;
 	}
 
 	@Override
-	public Sprite getSprite() {
+	public Sprite getSprite()
+	{
 		return this;
 	}
 

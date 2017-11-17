@@ -104,12 +104,12 @@ public class ShipRenderer implements Renderable
 	{
 		if (ship.getVerticalControl() == Vertical.UP)
 		{
-				this.changeCurrentSprite(shipSpriteReactorOn);
+			this.changeCurrentSprite(shipSpriteReactorOn);
 		}
-		else 
+		else
 		{
-			    // dans tous les cas on coupe le réacteur
-				this.changeCurrentSprite(shipSpriteReactorOff);
+			// dans tous les cas on coupe le réacteur
+			this.changeCurrentSprite(shipSpriteReactorOff);
 		}
 	}
 

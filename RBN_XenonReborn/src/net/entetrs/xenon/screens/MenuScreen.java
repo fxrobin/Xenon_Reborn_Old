@@ -137,7 +137,7 @@ public class MenuScreen implements Screen
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
 		{
 			SoundLib.CLIC.play();
-			ctrl.showScreen(MainControler.XenonScreen.GAME_PLAY);
+			ctrl.showScreen(XenonScreen.GAME_PLAY);
 		}
 
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))

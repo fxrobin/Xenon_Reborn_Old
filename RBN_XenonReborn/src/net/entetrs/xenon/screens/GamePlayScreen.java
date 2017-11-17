@@ -128,7 +128,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
 		{
 			SoundLib.CLIC.play();
-			MainControler.getInstance().showScreen(MainControler.XenonScreen.MENU);
+			MainControler.getInstance().showScreen(XenonScreen.MENU);
 		}
 	}
 

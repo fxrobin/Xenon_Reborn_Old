@@ -15,8 +15,7 @@ import net.entetrs.xenon.commons.Fader.State;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.screens.ArtefactsScene;
-import net.entetrs.xenon.screens.GamePlayScreen;
-import net.entetrs.xenon.screens.MenuScreen;
+import net.entetrs.xenon.screens.XenonScreen;
 
 public class MainControler extends Game
 {
@@ -46,11 +45,6 @@ public class MainControler extends Game
 		return instance;
 	}
 
-	public enum XenonScreen
-	{
-		MENU, GAME_PLAY;
-	}
-
 	@Override
 	public void create()
 	{
@@ -64,34 +58,46 @@ public class MainControler extends Game
 		this.fade();
 	}
 
-	public void showScreen(XenonScreen screen)
-	{
-		if (currentScreen != null) fader.startFadeOut();
-
-		if (XenonScreen.MENU.equals(screen))
-		{
-			currentScreen = new MenuScreen();
-		}
-
-		if (XenonScreen.GAME_PLAY.equals(screen))
-		{
-			currentScreen = new GamePlayScreen();
-		}
-	}
-
 	@Override
 	public void render()
 	{
-		GdxCommons.clearScreen();	
-		
+		GdxCommons.clearScreen();
+
 		if (!fader.getCurrentState().equals(State.BLACK_SCREEN))
 		{
 			batch.begin();
 			super.render();
 			batch.end();
 		}
-		
-        this.fade();
+
+		this.fade();
+	}
+
+	public SpriteBatch getBatch()
+	{
+		return batch;
+	}
+
+	public void showScreen(XenonScreen screen)
+	{
+		if (currentScreen != null)
+		{
+			fader.startFadeOut();
+		}
+		currentScreen = screen.createScreen();
+	}
+
+	private void fade()
+	{
+		if (fader.getCurrentState().equals(State.BLACK_SCREEN))
+		{
+			this.setScreen(currentScreen);
+			fader.startFadeIn();
+		}
+		else
+		{
+			fader.fade();
+		}
 	}
 
 	public void showBoundingCircles()
@@ -108,24 +114,6 @@ public class MainControler extends Game
 			}
 			shapeRenderer.end();
 		}
-	}
-
-	private void fade()
-	{
-		if (fader.getCurrentState().equals(State.BLACK_SCREEN))
-		{
-			this.setScreen(currentScreen);
-			fader.startFadeIn();		
-		}
-		else
-		{
-			fader.fade();
-		}
-	}
-
-	public SpriteBatch getBatch()
-	{
-		return batch;
 	}
 
 }

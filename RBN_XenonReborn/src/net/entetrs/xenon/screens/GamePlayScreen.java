@@ -16,6 +16,7 @@ import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.entities.Ship;
+import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.FontLib;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.libs.TextureLib;
@@ -137,6 +138,11 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT) && !ship.isShieldActivated())
 		{
 			ProjectileManager.getInstance().addShoot(ship.getCenterX(), ship.getCenterY());
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT) && !ship.isShieldActivated())
+		{
+			ProjectileManager.getInstance().addShoot(ship.getCenterX(), ship.getCenterY(), AnimationLib.FRIENDLY_BIGSHOOT);
 		}
 	}
 

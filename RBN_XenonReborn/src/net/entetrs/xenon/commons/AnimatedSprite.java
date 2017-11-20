@@ -23,7 +23,8 @@ public class AnimatedSprite extends Sprite implements Artefact
 	private Animation<TextureRegion> animation;
 	private Circle boundingCircle;
 	private float radius;
-	private int force = 2;
+	private int lifePoints = 2;
+	private int impactForce = 5;
 
 	public AnimatedSprite(AnimationLib anim)
 	{
@@ -59,22 +60,27 @@ public class AnimatedSprite extends Sprite implements Artefact
 	}
 
 	@Override
-	public void decreaseLife(int impactForce)
+	public void decreaseLife(int impact)
 	{
-		force = force - impactForce;
+		lifePoints = lifePoints - impact;
 
 	}
 
 	@Override
 	public boolean isAlive()
 	{
-		return force > 0;
+		return lifePoints > 0;
 	}
 
 	@Override
 	public int getImpactForce()
 	{
-		return 5;
+		return impactForce;
+	}
+	
+	public void setImpactForce(int impactForce)
+	{
+		this.impactForce = impactForce;
 	}
 
 	@Override
@@ -87,6 +93,11 @@ public class AnimatedSprite extends Sprite implements Artefact
 	public Sprite getSprite()
 	{
 		return this;
+	}
+	
+	public void setLifePoints(int lifePoints)
+	{
+		this.lifePoints = lifePoints;
 	}
 
 }

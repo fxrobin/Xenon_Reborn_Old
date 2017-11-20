@@ -12,6 +12,7 @@ import net.entetrs.xenon.commons.GdxCommons;
 public enum SoundLib implements Disposable
 {
 	SHOOT("shoot.mp3"), 
+	BIG_SHOOT("big-shoot.wav"),
 	SHIELD_UP("shield_up.wav"), 
 	SHIELD_DOWN("shield_down.wav"), 
 	CLIC("clic.wav"), 

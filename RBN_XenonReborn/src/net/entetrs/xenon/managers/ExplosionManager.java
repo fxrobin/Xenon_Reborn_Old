@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.SoundLib;
+import net.entetrs.xenon.screens.BackgroundScrolling;
 
 public class ExplosionManager
 {
@@ -40,7 +41,10 @@ public class ExplosionManager
 	
 	public static void render(Batch batch, float delta)
 	{
-		explosions.forEach( ex -> ex.render(batch, delta));
+		explosions.forEach( ex -> { 
+			ex.render(batch, delta);
+			ex.translateY(-BackgroundScrolling.getInstance().getSpeed() * 20 * delta); // *2 vitesse du scroll des bords.
+		});
 		removeFinishedExplosions();
 	}
 	

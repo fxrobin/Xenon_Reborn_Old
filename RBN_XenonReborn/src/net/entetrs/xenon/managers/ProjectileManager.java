@@ -31,15 +31,17 @@ public class ProjectileManager
 
 	public void addShoot(float centerX, float centerY)
 	{
-		this.addShoot(centerX, centerY, AnimationLib.FRIENDLY_SHOOT);
+		this.addShoot(centerX, centerY, 2, 5, AnimationLib.FRIENDLY_SHOOT, SoundLib.SHOOT);
 	}
 	
-	public void addShoot(float centerX, float centerY, AnimationLib anim)
+	public void addShoot(float centerX, float centerY, int lifePoints, int impactForce, AnimationLib anim, SoundLib sound)
 	{
 		AnimatedSprite s = anim.createAnimatedSprite();
+		s.setLifePoints(lifePoints);
+		s.setImpactForce(impactForce);
 		s.setCenter(centerX, centerY);
 		shoots.add(s);
-		SoundLib.SHOOT.play();
+		sound.play();
 	}
 
 	public List<AnimatedSprite> getShoots()

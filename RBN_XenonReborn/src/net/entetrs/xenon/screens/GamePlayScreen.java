@@ -41,7 +41,8 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	public GamePlayScreen()
 	{
 		log.info("Instanciation de GamePlay");
-		scrolling = new BackgroundScrolling();
+		scrolling = BackgroundScrolling.getInstance();
+		scrolling.init();
 		em = EnemyManager.getInstance();
 		cm = CollisionManager.getInstance();
 	}
@@ -142,7 +143,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		
 		if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT) && !ship.isShieldActivated())
 		{
-			ProjectileManager.getInstance().addShoot(ship.getCenterX(), ship.getCenterY(), AnimationLib.FRIENDLY_BIGSHOOT);
+			ProjectileManager.getInstance().addShoot(ship.getCenterX(), ship.getCenterY(), 15, 10, AnimationLib.FRIENDLY_BIGSHOOT, SoundLib.BIG_SHOOT);
 		}
 	}
 

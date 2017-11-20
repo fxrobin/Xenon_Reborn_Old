@@ -1,9 +1,9 @@
-package net.entetrs.xenon.commons;
+package net.entetrs.xenon;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import net.entetrs.xenon.MainControler;
+import net.entetrs.xenon.commons.C;
 
 public class Launcher
 {

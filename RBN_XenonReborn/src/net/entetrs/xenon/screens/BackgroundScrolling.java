@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.MainControler;
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.R;
 import net.entetrs.xenon.libs.TextureLib;
 
 public class BackgroundScrolling
@@ -50,9 +50,9 @@ public class BackgroundScrolling
 		Texture space = 	TextureLib.BACKGROUND_SPACE.get();
 		Texture leftbg = TextureLib.BACKGROUND_LEFT.get();
 		Texture rightbg = TextureLib.BACKGROUND_RIGHT.get();	
-		batch.draw(space, 0f, 0f, 0, (int) position, C.WIDTH, C.HEIGHT);
-		batch.draw(leftbg, 0f, 0f, 0, (int) position * 2, leftbg.getWidth(), C.HEIGHT);
-		batch.draw(rightbg, (float) C.WIDTH - rightbg.getWidth(), 0f, 0, (int) position * 2, C.WIDTH, C.HEIGHT);
+		batch.draw(space, 0f, 0f, 0, (int) position, R.WIDTH, R.HEIGHT);
+		batch.draw(leftbg, 0f, 0f, 0, (int) position * 2, leftbg.getWidth(), R.HEIGHT);
+		batch.draw(rightbg, (float) R.WIDTH - rightbg.getWidth(), 0f, 0, (int) position * 2, R.WIDTH, R.HEIGHT);
 	}
 	
 	public float getSpeed()

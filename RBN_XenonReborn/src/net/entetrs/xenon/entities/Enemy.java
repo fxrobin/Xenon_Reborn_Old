@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
+import net.entetrs.xenon.commons.R;
 import net.entetrs.xenon.libs.TextureLib;
 
 public class Enemy extends Sprite implements Artefact
@@ -37,8 +37,8 @@ public class Enemy extends Sprite implements Artefact
 		int choosen = randomGenerator.nextInt(textures.length);
 		Enemy e = new Enemy(textures[choosen]);
 		e.setOriginCenter();
-		e.setX((float) Math.random() * (float) C.WIDTH);
-		e.setY((float) Math.random() * 100 + C.HEIGHT);
+		e.setX((float) Math.random() * (float) R.WIDTH);
+		e.setY((float) Math.random() * 100 + R.HEIGHT);
 		e.vX = (float) Math.random() * 200f - 100;
 		e.vY = -((float) Math.random() * 500f + 100f);
 		return e;

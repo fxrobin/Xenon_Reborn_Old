@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
+import net.entetrs.xenon.commons.R;
 import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.entities.ShipJoystick.Horizontal;
 import net.entetrs.xenon.entities.ShipJoystick.Vertical;
@@ -109,8 +109,8 @@ public class Ship implements Renderable
 
 		if (currentSprite.getX() < 0) currentSprite.setX(0);
 		if (currentSprite.getY() < 80) currentSprite.setY(80);
-		if (currentSprite.getX() > C.WIDTH - currentSprite.getWidth()) currentSprite.setX(C.WIDTH - currentSprite.getWidth());
-		if (currentSprite.getY() > C.HEIGHT - currentSprite.getHeight()) currentSprite.setY(C.HEIGHT - currentSprite.getHeight());
+		if (currentSprite.getX() > R.WIDTH - currentSprite.getWidth()) currentSprite.setX(R.WIDTH - currentSprite.getWidth());
+		if (currentSprite.getY() > R.HEIGHT - currentSprite.getHeight()) currentSprite.setY(R.HEIGHT - currentSprite.getHeight());
 
 		boundingCircle.setX(this.getCenterX());
 		boundingCircle.setY(this.getCenterY());

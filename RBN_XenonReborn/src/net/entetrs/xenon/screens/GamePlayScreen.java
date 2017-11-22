@@ -1,7 +1,10 @@
 package net.entetrs.xenon.screens;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.event.ListSelectionEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,7 +31,7 @@ import net.entetrs.xenon.managers.ScoreManager;
 
 public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 {
-	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f ";
+	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f // life : %d";
 
 	private Log log = LogFactory.getLog(this.getClass());
 	
@@ -53,7 +56,9 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.checkInputKeys(delta);
 		em.generateEnemies(delta);
 		this.translateWorld(delta);
-		cm.checkCollision(em.getEnemies(), ProjectileManager.getInstance().getShoots());
+		List <Artefact> allPlayerObjects = new LinkedList<>(ProjectileManager.getInstance().getShoots());
+		allPlayerObjects.add(ship);
+		cm.checkCollision(em.getEnemies(), allPlayerObjects);
 		this.renderWorld(delta);
 	}
 
@@ -90,7 +95,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		SpriteBatch batch = MainControler.getInstance().getBatch();
 		int fps = Gdx.graphics.getFramesPerSecond();
 		batch.draw(TextureLib.FOOTER.get(), 0, 0);
-		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed());
+		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed(), ship.getLife());
 		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());
 	}
 

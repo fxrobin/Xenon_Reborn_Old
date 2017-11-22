@@ -14,7 +14,7 @@ import net.entetrs.xenon.entities.ShipJoystick.Vertical;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.renderers.ShipRenderer;
 
-public class Ship implements Renderable
+public class Ship implements Renderable, Artefact
 {
 	private static final float SHIP_SPEED = 400f;
 	private static final float SHIP_ACCELLERATION = 20f;
@@ -25,6 +25,8 @@ public class Ship implements Renderable
 	private ShipJoystick.Vertical vControl = ShipJoystick.Vertical.NONE;
 
 	private boolean shieldActivated = false;
+	private int life = 60;
+	private int impactForce = 20;
 
 	private float vX = 0;
 	private float vY = 0;
@@ -194,5 +196,40 @@ public class Ship implements Renderable
 	public ShipJoystick.Vertical getVerticalControl()
 	{
 		return vControl;
+	}
+
+	@Override
+	public Circle getBoundingCircle()
+	{
+		return this.boundingCircle;
+	}
+
+	@Override
+	public void decreaseLife(int force)
+	{
+		this.life = this.life - force;
+	}
+
+	@Override
+	public int getImpactForce()
+	{
+		return this.impactForce;
+	}
+
+	@Override
+	public boolean isAlive()
+	{
+		return (life >= 0);
+	}
+
+	@Override
+	public Sprite getSprite()
+	{
+		return this.shipRenderer.getCurrentSprite();
+	}
+
+	public int getLife()
+	{
+		return this.life;
 	}
 }

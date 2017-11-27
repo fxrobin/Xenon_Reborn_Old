@@ -20,7 +20,7 @@ import net.entetrs.xenon.libs.FontLib;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.libs.TextureLib;
 
-public class MenuScreen implements Screen
+public class MenuScreen extends AbstractScreen
 {
 	private static final String MSG = "PRESS SPACEBAR";
 	private static final int MSG_WIDTH = FontCommons.getWidth(MSG);
@@ -59,6 +59,12 @@ public class MenuScreen implements Screen
 	public void show()
 	{
 		SoundLib.INTRO.loop();
+	}
+	
+	@Override
+	public void hide()
+	{
+		SoundLib.INTRO.stop();
 	}
 
 	@Override
@@ -105,35 +111,4 @@ public class MenuScreen implements Screen
 			Gdx.app.exit();
 		}
 	}
-
-	@Override
-	public void resize(int arg0, int arg1)
-	{
-		// inutile dans la version du jeu.
-	}
-
-	@Override
-	public void resume()
-	{
-		// inutile dans la version du jeu.
-	}
-
-	@Override
-	public void dispose()
-	{
-		// à coder éventuellement.
-	}
-
-	@Override
-	public void hide()
-	{
-		SoundLib.INTRO.stop();
-	}
-
-	@Override
-	public void pause()
-	{
-		// inutile dans la version du jeu.
-	}
-
 }

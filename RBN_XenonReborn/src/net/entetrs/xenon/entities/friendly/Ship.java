@@ -1,4 +1,4 @@
-package net.entetrs.xenon.entities;
+package net.entetrs.xenon.entities.friendly;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -9,8 +9,9 @@ import com.badlogic.gdx.math.Circle;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.commons.R;
 import net.entetrs.xenon.commons.Renderable;
-import net.entetrs.xenon.entities.ShipJoystick.Horizontal;
-import net.entetrs.xenon.entities.ShipJoystick.Vertical;
+import net.entetrs.xenon.entities.Artefact;
+import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
+import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.renderers.ShipRenderer;
 
@@ -21,8 +22,8 @@ public class Ship implements Renderable, Artefact
 
 	private ShipRenderer shipRenderer;
 
-	private ShipJoystick.Horizontal hControl = ShipJoystick.Horizontal.NONE;
-	private ShipJoystick.Vertical vControl = ShipJoystick.Vertical.NONE;
+	private ShipInput.Horizontal hControl = ShipInput.Horizontal.NONE;
+	private ShipInput.Vertical vControl = ShipInput.Vertical.NONE;
 
 	private boolean shieldActivated = false;
 	private int life = 60;
@@ -98,11 +99,11 @@ public class Ship implements Renderable, Artefact
 		{
 			vX = this.computeInertia(vX);
 		}
-		
+
 		if (this.vControl == Vertical.NONE)
 		{
 			vY = this.computeInertia(vY);
-		}	
+		}
 	}
 
 	private void controlPosition()
@@ -111,19 +112,19 @@ public class Ship implements Renderable, Artefact
 
 		if (currentSprite.getX() < 0) currentSprite.setX(0);
 		if (currentSprite.getY() < 80) currentSprite.setY(80);
-		if (currentSprite.getX() > R.WIDTH - currentSprite.getWidth()) currentSprite.setX(R.WIDTH - currentSprite.getWidth());
-		if (currentSprite.getY() > R.HEIGHT - currentSprite.getHeight()) currentSprite.setY(R.HEIGHT - currentSprite.getHeight());
+		if (currentSprite.getX() > R.width - currentSprite.getWidth()) currentSprite.setX(R.width - currentSprite.getWidth());
+		if (currentSprite.getY() > R.height - currentSprite.getHeight()) currentSprite.setY(R.height - currentSprite.getHeight());
 
 		boundingCircle.setX(this.getCenterX());
 		boundingCircle.setY(this.getCenterY());
 	}
-	
+
 	private float computeInertia(float v)
 	{
 		float result = v;
 		if (v > 0)
 		{
-			 result -= SHIP_ACCELLERATION / 2;
+			result -= SHIP_ACCELLERATION / 2;
 		}
 		else if (v < 0)
 		{
@@ -137,7 +138,7 @@ public class Ship implements Renderable, Artefact
 		this.hControl = Horizontal.NONE;
 
 		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
-		if (GdxCommons.checkConcurrentKeys(Keys.LEFT, Keys.RIGHT)) return ;
+		if (GdxCommons.checkConcurrentKeys(Keys.LEFT, Keys.RIGHT)) return;
 
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
 		{
@@ -188,12 +189,12 @@ public class Ship implements Renderable, Artefact
 		return shipRenderer.getCurrentSprite().getY();
 	}
 
-	public ShipJoystick.Horizontal getHorizontalControl()
+	public ShipInput.Horizontal getHorizontalControl()
 	{
 		return hControl;
 	}
 
-	public ShipJoystick.Vertical getVerticalControl()
+	public ShipInput.Vertical getVerticalControl()
 	{
 		return vControl;
 	}

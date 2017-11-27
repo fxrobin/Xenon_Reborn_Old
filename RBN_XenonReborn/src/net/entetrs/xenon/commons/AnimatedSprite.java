@@ -77,7 +77,7 @@ public class AnimatedSprite extends Sprite implements Artefact
 	{
 		return impactForce;
 	}
-	
+
 	public void setImpactForce(int impactForce)
 	{
 		this.impactForce = impactForce;
@@ -94,7 +94,7 @@ public class AnimatedSprite extends Sprite implements Artefact
 	{
 		return this;
 	}
-	
+
 	public void setLifePoints(int lifePoints)
 	{
 		this.lifePoints = lifePoints;

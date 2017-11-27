@@ -11,18 +11,11 @@ import net.entetrs.xenon.commons.GdxCommons;
 
 public enum SoundLib implements Disposable
 {
-	SHOOT("shoot.mp3"), 
-	BIG_SHOOT("big-shoot.wav"),
-	SHIELD_UP("shield_up.wav"), 
-	SHIELD_DOWN("shield_down.wav"), 
-	CLIC("clic.wav"), 
-	EXPLOSION("explosion.wav"), 
-	INTRO("intro.mp3"), 
-	MUSIC("music.mp3");
-	
+	SHOOT("shoot.mp3"), BIG_SHOOT("big-shoot.wav"), SHIELD_UP("shield_up.wav"), SHIELD_DOWN("shield_down.wav"), CLIC("clic.wav"), EXPLOSION("explosion.wav"), INTRO("intro.mp3"), MUSIC("music.mp3");
+
 	private Log log = LogFactory.getLog(this.getClass());
 	private Sound sound;
-	
+
 	private SoundLib(String fileName)
 	{
 		String completeName = String.format("sounds/%s", fileName);
@@ -33,32 +26,31 @@ public enum SoundLib implements Disposable
 	{
 		return this.sound;
 	}
-	
+
 	public void play()
 	{
 		this.sound.play();
 	}
-	
+
 	public void play(float vol)
 	{
 		this.sound.play(vol);
 	}
-	
+
 	public void loop(float vol)
 	{
 		this.sound.loop(vol);
 	}
-	
+
 	public void loop()
 	{
 		this.sound.loop();
 	}
-	
+
 	public void stop()
 	{
 		this.sound.stop();
 	}
-
 
 	@Override
 	public void dispose()
@@ -66,7 +58,5 @@ public enum SoundLib implements Disposable
 		log.info("DISPOSE SOUNDS ...");
 		GdxCommons.disposeAll(SoundLib.values());
 	}
-
-
 
 }

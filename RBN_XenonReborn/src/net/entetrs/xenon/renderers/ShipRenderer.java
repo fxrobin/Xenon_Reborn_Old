@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.commons.R;
 import net.entetrs.xenon.commons.Renderable;
-import net.entetrs.xenon.entities.Ship;
-import net.entetrs.xenon.entities.ShipJoystick.Horizontal;
-import net.entetrs.xenon.entities.ShipJoystick.Vertical;
+import net.entetrs.xenon.entities.friendly.Ship;
+import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
+import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.libs.TextureLib;
 
 /**
@@ -38,7 +38,7 @@ public class ShipRenderer implements Renderable
 		GdxCommons.setOriginCenter(shipSpriteLeft, shipSpriteRight, shipSpriteReactorOff, shipSpriteReactorOn);
 		GdxCommons.setOriginCenter(shieldSprite);
 		currentSprite = shipSpriteReactorOn;
-		currentSprite.setCenter(R.WIDTH / 2f, 80);
+		currentSprite.setCenter(R.width / 2f, 80);
 	}
 
 	private void loadSprites()

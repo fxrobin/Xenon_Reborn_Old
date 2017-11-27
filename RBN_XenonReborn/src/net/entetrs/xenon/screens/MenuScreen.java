@@ -14,15 +14,14 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.MainControler;
-import net.entetrs.xenon.commons.AnimatedSprite;
 import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.commons.R;
-import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.FontLib;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.libs.TextureLib;
 
-public class MenuScreen implements Screen {
+public class MenuScreen implements Screen
+{
 	private static final String MSG = "PRESS SPACEBAR";
 	private static final int MSG_WIDTH = FontCommons.getWidth(MSG);
 
@@ -30,160 +29,110 @@ public class MenuScreen implements Screen {
 
 	private MainControler ctrl = MainControler.getInstance();
 
+	private BackgroundTravelling backgroundTravelling;
+
 	private Texture titleTexture;
-	private Texture spaceTexture;
-
-	private float pX = 0;
-	private float pY = 0;
-
-	private float vX = random() * 10.0f;
-	private float vY = random() * 10.0f;
-
-	private float aX = 0;
-	private float aY = 0;
-
 	private float titleX;
 	private float titleY;
 
-	private AnimatedSprite animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION_BIG);
-
-	private int accumulator = 0;
-
-	private boolean explode = false;
 	private DisplayMode[] displayModes;
 	private DisplayMode currentMode;
 
 	private GlyphLayout layout;
-	private String msgDisplayMode;
 
-	public MenuScreen() {
+	private Monitor monitor;
+
+	public MenuScreen()
+	{
 		log.info("Instanciation de MenuScreen");
+		backgroundTravelling = new BackgroundTravelling();
 		titleTexture = TextureLib.TITLE.get();
-		titleX = (R.WIDTH - titleTexture.getWidth()) / 2f;
-		titleY = (R.HEIGHT - titleTexture.getHeight()) / 2f;
-		spaceTexture = TextureLib.BACKGROUND_SPACE.get();
-
+		titleX = (R.width - titleTexture.getWidth()) / 2f;
+		titleY = (R.height - titleTexture.getHeight()) / 2f;
+		monitor = Gdx.graphics.getMonitor();
+		displayModes = Gdx.graphics.getDisplayModes(monitor);
+		currentMode = Gdx.graphics.getDisplayMode(monitor);
+		layout = new GlyphLayout();
 	}
 
 	@Override
-	public void show() {
+	public void show()
+	{
 		SoundLib.INTRO.loop();
 	}
 
-	private float random() {
-		return (float) (Math.random() * 10.0 - 5.0);
-	}
-
 	@Override
-	public void render(float delta) {
-
+	public void render(float delta)
+	{
 		this.checkInput();
-		this.translateBackGround(delta);
-		this.drawBackGround();
+		this.backgroundTravelling.translateBackGround(delta);
+		this.backgroundTravelling.drawBackGround(this.ctrl.getBatch());
 		this.drawTitle();
-		this.drawExplosionIfAppend(delta);
 		this.drawDisplayMode();
-		this.drawFullScreenMode();
 		this.drawMessage();
 	}
 
-	private void drawFullScreenMode() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private void drawDisplayMode() {
-		Monitor m = Gdx.graphics.getMonitor();
-		displayModes = Gdx.graphics.getDisplayModes(m);
-		currentMode = Gdx.graphics.getDisplayMode(m);
-
-		layout = new GlyphLayout(); // dont do this every frame! Store it as member
-		msgDisplayMode = currentMode.toString() + "/" + m.name;
+	private void drawDisplayMode()
+	{
+		String msgDisplayMode = String.format("%s / %s", currentMode, monitor.name);
 		layout.setText(FontLib.DEFAULT.getFont(), msgDisplayMode);
-		
 		BitmapFont font = FontLib.DEFAULT.getFont();
-		font.draw(ctrl.getBatch(), msgDisplayMode, (R.WIDTH - layout.width) / 2, 150);
-
+		font.draw(ctrl.getBatch(), msgDisplayMode, (R.width - layout.width) / 2, 150);
 	}
 
-	private void drawExplosionIfAppend(float delta) {
-		if (explode) {
-			SpriteBatch batch = ctrl.getBatch();
-			this.animatedSprite.render(batch, delta);
-			explode = !this.animatedSprite.isFinished();
-		}
-
+	private void drawMessage()
+	{
+		FontCommons.print(ctrl.getBatch(), (R.width - MSG_WIDTH) / 2f, 60, MSG);
 	}
 
-	private void drawMessage() {
-		FontCommons.print(ctrl.getBatch(), (R.WIDTH - MSG_WIDTH) / 2f, 60, MSG);
-	}
-
-	private void drawTitle() {
+	private void drawTitle()
+	{
 		SpriteBatch batch = ctrl.getBatch();
 		batch.draw(titleTexture, titleX, titleY);
 	}
 
-	private void drawBackGround() {
-		SpriteBatch batch = ctrl.getBatch();
-		batch.draw(spaceTexture, 0f, 0f, (int) pX, (int) pY, R.WIDTH, R.HEIGHT);
-	}
+	private void checkInput()
+	{
 
-	private void translateBackGround(float delta) {
-		accumulator++;
-		if (accumulator % (4 * (Gdx.graphics.getFramesPerSecond() + 1)) == 0) {
-			accumulator = 0;
-			aX = random();
-			aY = random();
-		}
-
-		vX += aX * delta;
-		vY += aY * delta;
-
-		pX += vX * delta;
-		pY += vY * delta;
-	}
-
-	private void checkInput() {
-		if (Gdx.input.isKeyJustPressed(Keys.D)) {
-			SoundLib.EXPLOSION.play();
-			animatedSprite = new AnimatedSprite(AnimationLib.EXPLOSION_BIG);
-			animatedSprite.setCenter(640, 480);
-			explode = true;
-		}
-
-		if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
+		{
 			SoundLib.CLIC.play();
 			ctrl.showScreen(XenonScreen.GAME_PLAY);
 		}
 
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
+		{
 			Gdx.app.exit();
 		}
 	}
 
 	@Override
-	public void resize(int arg0, int arg1) {
+	public void resize(int arg0, int arg1)
+	{
 		// inutile dans la version du jeu.
 	}
 
 	@Override
-	public void resume() {
+	public void resume()
+	{
 		// inutile dans la version du jeu.
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose()
+	{
 		// à coder éventuellement.
 	}
 
 	@Override
-	public void hide() {
+	public void hide()
+	{
 		SoundLib.INTRO.stop();
 	}
 
 	@Override
-	public void pause() {
+	public void pause()
+	{
 		// inutile dans la version du jeu.
 	}
 

@@ -1,4 +1,4 @@
-package net.entetrs.xenon.entities;
+package net.entetrs.xenon.entities.ennemies;
 
 import java.util.Random;
 
@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.commons.R;
+import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.libs.TextureLib;
 
 public class Enemy extends Sprite implements Artefact
@@ -37,8 +38,8 @@ public class Enemy extends Sprite implements Artefact
 		int choosen = randomGenerator.nextInt(textures.length);
 		Enemy e = new Enemy(textures[choosen]);
 		e.setOriginCenter();
-		e.setX((float) Math.random() * (float) R.WIDTH);
-		e.setY((float) Math.random() * 100 + R.HEIGHT);
+		e.setX((float) Math.random() * R.width);
+		e.setY((float) Math.random() * 100 + R.height);
 		e.vX = (float) Math.random() * 200f - 100;
 		e.vY = -((float) Math.random() * 500f + 100f);
 		return e;

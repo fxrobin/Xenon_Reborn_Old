@@ -10,7 +10,7 @@ package net.entetrs.xenon.commons;
 public final class C
 {
 	public static final float FADE_SECONDS = 1.5f;
-	
+
 	private C()
 	{
 		// protection.

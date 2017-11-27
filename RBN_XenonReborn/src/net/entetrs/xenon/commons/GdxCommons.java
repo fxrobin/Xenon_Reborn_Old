@@ -58,7 +58,7 @@ public final class GdxCommons
 	{
 		Arrays.stream(disposables).forEach(Disposable::dispose);
 	}
-	
+
 	public static TextureRegion[] convertToTextureArray(String fileName, int cols, int rows)
 	{
 		int totalFrames = cols * rows;
@@ -86,6 +86,5 @@ public final class GdxCommons
 	{
 		s.setColor(s.getColor().r, s.getColor().g, s.getColor().b, alpha);
 	}
-	
 
 }

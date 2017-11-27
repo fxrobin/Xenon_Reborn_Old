@@ -22,7 +22,7 @@ public final class FontCommons
 		return txt.length() * FONT_W;
 	}
 
-	public static int getHeight(String txt) //NOSONAR
+	public static int getHeight(String txt) // NOSONAR
 	{
 		return FONT_H;
 	}

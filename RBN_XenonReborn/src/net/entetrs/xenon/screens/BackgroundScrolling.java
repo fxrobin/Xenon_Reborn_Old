@@ -13,48 +13,45 @@ public class BackgroundScrolling
 {
 	private float position;
 	private float speed;
-	
+
 	private static BackgroundScrolling instance = new BackgroundScrolling();
-	
+
 	public static BackgroundScrolling getInstance()
 	{
 		return instance;
 	}
-	
+
 	private BackgroundScrolling()
 	{
 		/* protection */
 	}
-	
+
 	public void init()
 	{
 		this.position = 0;
 		this.speed = 9f;
 	}
-	
-	
+
 	public void checkInput()
 	{
-		if (Gdx.input.isKeyPressed(Keys.PAGE_UP))
-			speed += 0.5f;
+		if (Gdx.input.isKeyPressed(Keys.PAGE_UP)) speed += 0.5f;
 
-		if (Gdx.input.isKeyPressed(Keys.PAGE_DOWN))
-			speed -= 0.5f;
+		if (Gdx.input.isKeyPressed(Keys.PAGE_DOWN)) speed -= 0.5f;
 	}
-	
+
 	public void render(float delta)
 	{
 		position -= 10f * delta * speed;
-		
-		SpriteBatch batch = MainControler.getInstance().getBatch();	
-		Texture space = 	TextureLib.BACKGROUND_SPACE.get();
+
+		SpriteBatch batch = MainControler.getInstance().getBatch();
+		Texture space = TextureLib.BACKGROUND_SPACE.get();
 		Texture leftbg = TextureLib.BACKGROUND_LEFT.get();
-		Texture rightbg = TextureLib.BACKGROUND_RIGHT.get();	
-		batch.draw(space, 0f, 0f, 0, (int) position, R.WIDTH, R.HEIGHT);
-		batch.draw(leftbg, 0f, 0f, 0, (int) position * 2, leftbg.getWidth(), R.HEIGHT);
-		batch.draw(rightbg, (float) R.WIDTH - rightbg.getWidth(), 0f, 0, (int) position * 2, R.WIDTH, R.HEIGHT);
+		Texture rightbg = TextureLib.BACKGROUND_RIGHT.get();
+		batch.draw(space, 0f, 0f, 0, (int) position, R.width, R.height);
+		batch.draw(leftbg, 0f, 0f, 0, (int) position * 2, leftbg.getWidth(), R.height);
+		batch.draw(rightbg, (float) R.width - rightbg.getWidth(), 0f, 0, (int) position * 2, R.width, R.height);
 	}
-	
+
 	public float getSpeed()
 	{
 		return speed;

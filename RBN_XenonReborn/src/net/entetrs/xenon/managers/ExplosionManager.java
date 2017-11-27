@@ -19,12 +19,12 @@ public class ExplosionManager
 	{
 		// protection
 	}
-	
+
 	public static void addExplosion(float centerX, float centerY)
 	{
 		addExplosion(centerX, centerY, AnimationLib.EXPLOSION_BIG);
 	}
-	
+
 	public static void addExplosion(float centerX, float centerY, AnimationLib anim)
 	{
 		AnimatedSprite animatedSprite = anim.createAnimatedSprite();
@@ -33,23 +33,24 @@ public class ExplosionManager
 		explosions.add(animatedSprite);
 		SoundLib.EXPLOSION.play();
 	}
-	
+
 	public static void removeFinishedExplosions()
 	{
 		explosions.removeIf(AnimatedSprite::isFinished);
 	}
-	
+
 	public static void render(Batch batch, float delta)
 	{
-		explosions.forEach( ex -> { 
+		explosions.forEach(ex -> {
 			ex.render(batch, delta);
-			ex.translateY(-BackgroundScrolling.getInstance().getSpeed() * 20 * delta); // *2 vitesse du scroll des bords.
+			ex.translateY(-BackgroundScrolling.getInstance().getSpeed() * 20 * delta); // *2
+																						// vitesse
+																						// du
+																						// scroll
+																						// des
+																						// bords.
 		});
 		removeFinishedExplosions();
 	}
-	
-	
-
-	
 
 }

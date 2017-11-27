@@ -1,9 +1,15 @@
 package net.entetrs.xenon.commons;
 
-public class R {
+public final class R
+{
 
-	/* la résolution peut changer : ce n'est pas une constante */
-	public static int WIDTH = 1024;
-	public static int HEIGHT = 768;
+	private R()
+	{
+		// protection
+	}
+
+	/* la rÃ©solution peut changer : ce n'est pas une constante */
+	public static int width = 1024; // NOSONAR
+	public static int height = 768; // NOSONAR
 
 }

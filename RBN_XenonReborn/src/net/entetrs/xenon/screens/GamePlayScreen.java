@@ -1,10 +1,7 @@
 package net.entetrs.xenon.screens;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.swing.event.ListSelectionEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +15,7 @@ import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.commons.R;
 import net.entetrs.xenon.entities.Artefact;
-import net.entetrs.xenon.entities.Ship;
+import net.entetrs.xenon.entities.friendly.Ship;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.FontLib;
 import net.entetrs.xenon.libs.SoundLib;
@@ -34,13 +31,12 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f // life : %d";
 
 	private Log log = LogFactory.getLog(this.getClass());
-	
+
 	private BackgroundScrolling scrolling;
 	private EnemyManager em;
 	private CollisionManager cm;
 	private Ship ship;
 
-	
 	public GamePlayScreen()
 	{
 		log.info("Instanciation de GamePlay");
@@ -56,7 +52,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.checkInputKeys(delta);
 		em.generateEnemies(delta);
 		this.translateWorld(delta);
-		List <Artefact> allPlayerObjects = new LinkedList<>(ProjectileManager.getInstance().getShoots());
+		List<Artefact> allPlayerObjects = new LinkedList<>(ProjectileManager.getInstance().getShoots());
 		allPlayerObjects.add(ship);
 		cm.checkCollision(em.getEnemies(), allPlayerObjects);
 		this.renderWorld(delta);
@@ -67,19 +63,17 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		SpriteBatch batch = MainControler.getInstance().getBatch();
 		this.scrolling.render(delta);
 		this.renderShoots(batch, delta);
-		em.render(batch,delta);
+		em.render(batch, delta);
 		this.renderShip(delta);
 		ExplosionManager.render(batch, delta);
 		this.renderStatusBar();
 		this.renderScore();
 	}
-	
-	
 
 	private void renderScore()
 	{
 		SpriteBatch batch = MainControler.getInstance().getBatch();
-		FontCommons.print(batch, 5, R.HEIGHT - 43f, String.format("%010d", ScoreManager.getInstance().getScore()));
+		FontCommons.print(batch, 5, R.height - 43f, String.format("%010d", ScoreManager.getInstance().getScore()));
 	}
 
 	private void renderShoots(SpriteBatch batch, float delta)
@@ -124,8 +118,8 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	{
 		if (Gdx.input.isKeyPressed(Keys.D))
 		{
-			float x = (float) Math.random() * R.WIDTH;
-			float y = (float) Math.random() * R.HEIGHT;
+			float x = (float) Math.random() * R.width;
+			float y = (float) Math.random() * R.height;
 			ExplosionManager.addExplosion(x, y);
 		}
 	}
@@ -145,7 +139,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		{
 			ProjectileManager.getInstance().addShoot(ship.getCenterX(), ship.getCenterY());
 		}
-		
+
 		if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT) && !ship.isShieldActivated())
 		{
 			ProjectileManager.getInstance().addShoot(ship.getCenterX(), ship.getCenterY(), 15, 10, AnimationLib.FRIENDLY_BIGSHOOT, SoundLib.BIG_SHOOT);

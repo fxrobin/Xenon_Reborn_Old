@@ -8,24 +8,14 @@ import net.entetrs.xenon.commons.GdxCommons;
 
 public enum TextureLib implements Disposable
 {
-	TITLE("commons/xenon-reborn.png"),
-	BACKGROUND_LEFT("backgrounds/left_bg.png", TextureWrap.Repeat), 
-	BACKGROUND_RIGHT("backgrounds/right_bg.png", TextureWrap.Repeat), 
-	BACKGROUND_SPACE("backgrounds/space.jpg", TextureWrap.Repeat), 
-	FOOTER("backgrounds/footer.png"),
-	
-	SHIELD("ships/shield.png"), 
-	SHIP_LEFT("ships/ship_left.png"), 
-	SHIP_RIGHT("ships/ship_right.png"), 
-	SHIP("ships/ship_normal.png"), 
-	SHIP_NOREACTOR("ships/ship_noreactor.png"),
+	TITLE("commons/xenon-reborn.png"), BACKGROUND_LEFT("backgrounds/left_bg.png", TextureWrap.Repeat), BACKGROUND_RIGHT("backgrounds/right_bg.png", TextureWrap.Repeat), BACKGROUND_SPACE("backgrounds/space.jpg",
+			TextureWrap.Repeat), FOOTER("backgrounds/footer.png"),
 
-	ENEMY("enemies/enemy.png"), 
-	BUG("enemies/bug.png"), 
-	PERFORATOR("enemies/perforator.png"),
+	SHIELD("ships/shield.png"), SHIP_LEFT("ships/ship_left.png"), SHIP_RIGHT("ships/ship_right.png"), SHIP("ships/ship_normal.png"), SHIP_NOREACTOR("ships/ship_noreactor.png"),
 
-	FONT_AZ("fonts/font-AZ.png"), 
-	FONT_09("fonts/font-09.png");
+	ENEMY("enemies/enemy.png"), BUG("enemies/bug.png"), PERFORATOR("enemies/perforator.png"),
+
+	FONT_AZ("fonts/font-AZ.png"), FONT_09("fonts/font-09.png");
 
 	private Texture texture;
 

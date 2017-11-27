@@ -26,14 +26,14 @@ public class ProjectileManager
 			s.translateY(delta * LASER_SPEED);
 			if (!s.isAlive()) ExplosionManager.addExplosion(s.getX(), s.getY(), AnimationLib.EXPLOSION_LITTLE);
 		});
-		shoots.removeIf(s -> (s.getY() > R.HEIGHT || !s.isAlive()));
+		shoots.removeIf(s -> (s.getY() > R.height || !s.isAlive()));
 	}
 
 	public void addShoot(float centerX, float centerY)
 	{
 		this.addShoot(centerX, centerY, 2, 5, AnimationLib.FRIENDLY_SHOOT, SoundLib.SHOOT);
 	}
-	
+
 	public void addShoot(float centerX, float centerY, int lifePoints, int impactForce, AnimationLib anim, SoundLib sound)
 	{
 		AnimatedSprite s = anim.createAnimatedSprite();

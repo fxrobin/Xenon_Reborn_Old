@@ -10,15 +10,15 @@ public class Launcher
 	public static void main(String[] arg)
 	{
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = R.WIDTH;
-		config.height = R.HEIGHT;
+		config.width = R.width;
+		config.height = R.height;
 		config.forceExit = false;
 		config.vSyncEnabled = true;
 		config.fullscreen = false;
 		config.foregroundFPS = 60;
 		config.resizable = false;
 		config.title = "XENON - Reborn - ETRS 2017";
-		config.useGL30=false;
+		config.useGL30 = false;
 		new LwjglApplication(MainControler.getInstance(), config);
 	}
 }

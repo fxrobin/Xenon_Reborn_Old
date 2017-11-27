@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -35,12 +34,9 @@ public class MenuScreen extends AbstractScreen
 	private float titleX;
 	private float titleY;
 
-	private DisplayMode[] displayModes;
-	private DisplayMode currentMode;
-
-	private GlyphLayout layout;
-
 	private Monitor monitor;
+	private DisplayMode currentMode;
+	private GlyphLayout layout;
 
 	public MenuScreen()
 	{
@@ -50,7 +46,6 @@ public class MenuScreen extends AbstractScreen
 		titleX = (R.width - titleTexture.getWidth()) / 2f;
 		titleY = (R.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
-		displayModes = Gdx.graphics.getDisplayModes(monitor);
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
 		layout = new GlyphLayout();
 	}

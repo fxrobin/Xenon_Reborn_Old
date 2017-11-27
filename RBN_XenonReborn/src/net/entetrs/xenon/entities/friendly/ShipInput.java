@@ -1,18 +1,13 @@
 package net.entetrs.xenon.entities.friendly;
 
-public class ShipInput
-{
-	private ShipInput()
-	{
-		// protection
-	}
-	
-	public  enum Horizontal
+public interface ShipInput
+{	
+	public enum Horizontal
 	{
 		LEFT, RIGHT, NONE;
 	}
 
-	public  enum Vertical
+	public enum Vertical
 	{
 		UP, DOWN, NONE;
 	}

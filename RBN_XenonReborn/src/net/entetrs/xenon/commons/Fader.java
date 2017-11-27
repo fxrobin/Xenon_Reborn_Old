@@ -30,7 +30,7 @@ public class Fader
 
 	private Fader()
 	{
-		// protection
+		/* protection */
 	}
 
 	public enum State

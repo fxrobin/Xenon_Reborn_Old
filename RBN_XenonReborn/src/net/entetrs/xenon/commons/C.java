@@ -13,6 +13,6 @@ public final class C
 
 	private C()
 	{
-		// protection.
+		/* protection */
 	}
 }

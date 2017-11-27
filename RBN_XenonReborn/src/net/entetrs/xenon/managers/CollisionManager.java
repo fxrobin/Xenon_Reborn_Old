@@ -16,7 +16,7 @@ public class CollisionManager
 
 	private CollisionManager()
 	{
-		// protection
+		/* protection */
 	}
 
 	public void checkCollision(List<? extends Artefact> targets, List<? extends Artefact> projectiles)
@@ -27,11 +27,11 @@ public class CollisionManager
 			{
 				if (p.getBoundingCircle().overlaps(t.getBoundingCircle()))
 				{
-					// collision !!!
+					/* collision !!! */
 					p.decreaseLife(t.getImpactForce());
 					t.decreaseLife(p.getImpactForce());
 
-					// MAJ du score
+					/* MAJ du score */
 					if (!t.isAlive())
 					{
 						ScoreManager.getInstance().add(10);

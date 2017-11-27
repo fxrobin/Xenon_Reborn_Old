@@ -137,7 +137,7 @@ public class Ship implements Renderable, Artefact
 	{
 		this.hControl = Horizontal.NONE;
 
-		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
+		/* précondition au mouvement : que les 2 touches ne soient pas enfoncées */
 		if (GdxCommons.checkConcurrentKeys(Keys.LEFT, Keys.RIGHT)) return;
 
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
@@ -157,7 +157,7 @@ public class Ship implements Renderable, Artefact
 	private void checkVerticalMove()
 	{
 		this.vControl = Vertical.NONE;
-		// précondition au mouvement : que les 2 touches ne soient pas enfoncées
+		/* précondition au mouvement : que les 2 touches ne soient pas enfoncées */
 		if (GdxCommons.checkConcurrentKeys(Keys.UP, Keys.DOWN)) return;
 
 		if (Gdx.input.isKeyPressed(Keys.UP))

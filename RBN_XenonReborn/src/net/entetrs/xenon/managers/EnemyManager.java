@@ -24,10 +24,10 @@ public class EnemyManager implements Renderable
 	public void generateEnemies(float delta)
 	{
 		accumulator += delta;
-		if (accumulator > 4f) // toutes les 4 secondes
+		if (accumulator > 4f) /* toutes les 4 secondes */
 		{
-			accumulator = 0f; // on réinit.
-			// on génère 5 enemies.
+			accumulator = 0f; 
+			/* on génère 5 enemies */
 			for (int i = 0; i < 4; i++)
 			{
 				Enemy e = Enemy.random();

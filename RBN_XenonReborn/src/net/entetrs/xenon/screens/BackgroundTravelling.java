@@ -55,7 +55,7 @@ public class BackgroundTravelling
 	public void translateBackGround(float delta)
 	{
 		accumulator += delta;
-		if (accumulator % 4000 == 0) // toutes les 4 secondes
+		if (accumulator % 4000 == 0) /* toutes les 4 secondes */
 		{
 			accumulator = 0;
 			aX = random();

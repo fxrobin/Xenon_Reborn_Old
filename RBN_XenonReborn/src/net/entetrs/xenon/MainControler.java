@@ -19,25 +19,24 @@ import net.entetrs.xenon.screens.XenonScreen;
 
 public class MainControler extends Game
 {
-	// pour dessiner des texture et sprites à l'écran
+	/* pour dessiner des texture et sprites à l'écran */
 	private SpriteBatch batch;
 
-	// pour dessiner des cercles (bounding circles) à l'écran
+	/* pour dessiner des cercles (bounding circles) à l'écran */
 	private ShapeRenderer shapeRenderer;
 
-	// écran courant
+	/* écran courant */
 	private Screen currentScreen;
 
-	// instance du fader pour "fade-in et fade-out"
+	/* instance du fader pour "fade-in et fade-out" */
 	private Fader fader;
 
-	// DP SINGLETON
-
+	/* DP SINGLETON */
 	private static MainControler instance = new MainControler();
 
 	private MainControler()
 	{
-		// protection car Singleton.
+		/* protection */
 	}
 
 	public static MainControler getInstance()

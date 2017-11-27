@@ -20,7 +20,7 @@ public final class GdxCommons
 
 	private GdxCommons()
 	{
-		// protection
+		/* protection */
 	}
 
 	/**

@@ -108,7 +108,7 @@ public class ShipRenderer implements Renderable
 		}
 		else
 		{
-			// dans tous les cas on coupe le réacteur
+			/* dans tous les cas on coupe le réacteur */
 			this.changeCurrentSprite(shipSpriteReactorOff);
 		}
 	}

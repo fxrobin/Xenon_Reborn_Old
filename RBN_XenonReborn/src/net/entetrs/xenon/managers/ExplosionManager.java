@@ -17,7 +17,7 @@ public class ExplosionManager
 
 	private ExplosionManager()
 	{
-		// protection
+		/* protection */
 	}
 
 	public static void addExplosion(float centerX, float centerY)
@@ -43,12 +43,8 @@ public class ExplosionManager
 	{
 		explosions.forEach(ex -> {
 			ex.render(batch, delta);
-			ex.translateY(-BackgroundScrolling.getInstance().getSpeed() * 20 * delta); // *2
-																						// vitesse
-																						// du
-																						// scroll
-																						// des
-																						// bords.
+			/* 2 vitesse du scroll des bords.*/
+			ex.translateY(-BackgroundScrolling.getInstance().getSpeed() * 20 * delta); 
 		});
 		removeFinishedExplosions();
 	}

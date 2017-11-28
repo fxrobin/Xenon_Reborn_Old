@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.MainControler;
+import net.entetrs.xenon.commons.DeltaTimeAccumulator;
 import net.entetrs.xenon.commons.FontCommons;
 import net.entetrs.xenon.commons.R;
 import net.entetrs.xenon.libs.FontLib;
@@ -29,6 +30,8 @@ public class MenuScreen extends AbstractScreen
 	private MainControler ctrl = MainControler.getInstance();
 
 	private BackgroundTravelling backgroundTravelling;
+	private DeltaTimeAccumulator accumulator = new DeltaTimeAccumulator(1);
+	private boolean displayTitle = true;
 
 	private Texture titleTexture;
 	private float titleX;
@@ -55,7 +58,7 @@ public class MenuScreen extends AbstractScreen
 	{
 		SoundLib.INTRO.loop();
 	}
-	
+
 	@Override
 	public void hide()
 	{
@@ -70,7 +73,7 @@ public class MenuScreen extends AbstractScreen
 		this.backgroundTravelling.drawBackGround(this.ctrl.getBatch());
 		this.drawTitle();
 		this.drawDisplayMode();
-		this.drawMessage();
+		this.drawMessage(delta);
 	}
 
 	private void drawDisplayMode()
@@ -81,9 +84,14 @@ public class MenuScreen extends AbstractScreen
 		font.draw(ctrl.getBatch(), msgDisplayMode, (R.width - layout.width) / 2, 150);
 	}
 
-	private void drawMessage()
+	private void drawMessage(float delta)
 	{
-		FontCommons.print(ctrl.getBatch(), (R.width - MSG_WIDTH) / 2f, 60, MSG);
+		/* jour / nuit / jour / nuit ! */
+		displayTitle = accumulator.addAndCheck(delta) ? !displayTitle : displayTitle;
+		if (displayTitle)
+		{
+			FontCommons.print(ctrl.getBatch(), (R.width - MSG_WIDTH) / 2f, 60, MSG);
+		}
 	}
 
 	private void drawTitle()

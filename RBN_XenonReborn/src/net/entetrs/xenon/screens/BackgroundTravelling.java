@@ -20,18 +20,18 @@ public class BackgroundTravelling
 
 	private float pX = 0;
 	private float pY = 0;
-	private float vX = random() * 10.0f;
-	private float vY = random() * 10.0f;
+	private float vX = random() * 20f - 10f;
+	private float vY = random() * 20f - 10f;
 
 	private float aX = 0;
 	private float aY = 0;
 
 	/* accumulateur / ticker paramétré sur 4 secondes */
-	private DeltaTimeAccumulator dta = new DeltaTimeAccumulator(4000); 
+	private DeltaTimeAccumulator dta = new DeltaTimeAccumulator(4); 
 
 	private float random()
 	{
-		return (float) (Math.random() * 3.0 - 1.5);
+		return (float) Math.random() * 0.5f - 0.25f;
 	}
 
 	public BackgroundTravelling()

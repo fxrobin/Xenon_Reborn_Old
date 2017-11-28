@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import net.entetrs.xenon.commons.DeltaTimeAccumulator;
 import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.entities.ennemies.Enemy;
 import net.entetrs.xenon.libs.AnimationLib;
 
 public class EnemyManager implements Renderable
 {
-	private double accumulator = 0;
+	private DeltaTimeAccumulator deltaTimeAccumulator = new DeltaTimeAccumulator(4f);
 	private List<Enemy> enemies = new LinkedList<>();
 
 	private static EnemyManager em = new EnemyManager();
@@ -23,11 +24,9 @@ public class EnemyManager implements Renderable
 
 	public void generateEnemies(float delta)
 	{
-		accumulator += delta;
-		if (accumulator > 4f) /* toutes les 4 secondes */
+		if (deltaTimeAccumulator.addAndCheck(delta)) 
 		{
-			accumulator = 0f; 
-			/* on génère 5 enemies */
+			/* on génère 5 enemies toutes les 4 secondes */
 			for (int i = 0; i < 4; i++)
 			{
 				Enemy e = Enemy.random();

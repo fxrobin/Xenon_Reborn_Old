@@ -78,7 +78,7 @@ public class Fader
 			fadeRenderer.begin(ShapeType.Filled);
 			log.info("CurrentAlpha : " + currentAlpha);
 			fadeRenderer.setColor(0, 0, 0, currentAlpha);
-			fadeRenderer.rect(0, 0, R.width, R.height);
+			fadeRenderer.rect(0, 0, C.width, C.height);
 			fadeRenderer.end();
 		}
 	}

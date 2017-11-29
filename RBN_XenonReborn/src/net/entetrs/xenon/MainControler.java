@@ -17,6 +17,14 @@ import net.entetrs.xenon.entities.Artefact;
 import net.entetrs.xenon.screens.ArtefactsScene;
 import net.entetrs.xenon.screens.XenonScreen;
 
+/**
+ * contrôleur principal LibGDX qui gère les changement d'écrans par
+ * Fade-in / Fade-out. Cette classe fournit aussi un SpriteBatch, eventuellement.
+ * Ce contrôleur implémente le design pattern singleton (une seule instance unique en mémoire JVM).
+ * 
+ * @author CDT RBN
+ *
+ */
 public class MainControler extends Game
 {
 	/* pour dessiner des texture et sprites à l'écran */
@@ -57,18 +65,19 @@ public class MainControler extends Game
 		this.fade();
 	}
 
+	/**
+	 * cette méthode est déclenchée par LibGDX à 60 FPS (60 images par secondes !)
+	 */
 	@Override
 	public void render()
 	{
 		GdxCommons.clearScreen();
-
 		if (!fader.getCurrentState().equals(State.BLACK_SCREEN))
 		{
 			batch.begin();
 			super.render();
 			batch.end();
 		}
-
 		this.fade();
 	}
 
@@ -99,6 +108,7 @@ public class MainControler extends Game
 		}
 	}
 
+	
 	public void showBoundingCircles()
 	{
 		if (this.getScreen() instanceof ArtefactsScene)

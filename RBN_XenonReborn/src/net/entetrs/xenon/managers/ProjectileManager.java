@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.entetrs.xenon.commons.AnimatedSprite;
-import net.entetrs.xenon.commons.R;
+import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.SoundLib;
 
@@ -26,7 +26,7 @@ public class ProjectileManager
 			s.translateY(delta * LASER_SPEED);
 			if (!s.isAlive()) ExplosionManager.addExplosion(s.getX(), s.getY(), AnimationLib.EXPLOSION_LITTLE);
 		});
-		shoots.removeIf(s -> (s.getY() > R.height || !s.isAlive()));
+		shoots.removeIf(s -> (s.getY() > C.height || !s.isAlive()));
 	}
 
 	public void addShoot(float centerX, float centerY)

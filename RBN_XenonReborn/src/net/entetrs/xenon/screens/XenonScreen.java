@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import com.badlogic.gdx.Screen;
 
 /**
- * enum complexe avec lambda pour la création des écrans associé à leur
+ * enum complexe avec lambda pour la création des écrans associés à leur
  * constructeur.
  * 
  * @author robin

@@ -25,6 +25,8 @@ public class Enemy extends Sprite implements Artefact
 		super(texture);
 		boundingCircle = new Circle();
 		boundingCircle.setRadius(texture.getWidth() / 2f);
+		this.force = force;
+		this.impactForce = impactForce;
 	}
 
 	

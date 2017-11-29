@@ -100,13 +100,39 @@ public class MenuScreen extends AbstractScreen
 		batch.draw(titleTexture, titleX, titleY);
 	}
 
+	private void switchFullScreen()
+	{
+		Monitor currMonitor = Gdx.graphics.getMonitor();
+		DisplayMode displayMode = Gdx.graphics.getDisplayMode(currMonitor);
+        
+		if (!Gdx.graphics.isFullscreen())
+		{
+			if (!Gdx.graphics.setFullscreenMode(displayMode))
+			{
+				System.err.println("Erreur de passage en plein écran");
+			}
+		}
+		else
+		{
+			if (!Gdx.graphics.setWindowedMode(R.width, R.height))
+			{
+				System.err.println("Erreur de passage mode fenêtré");
+			}
+		}
+	}
+
+	
 	private void checkInput()
 	{
-
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
 		{
 			SoundLib.CLIC.play();
 			ctrl.showScreen(XenonScreen.GAME_PLAY);
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Keys.F1))
+		{
+			this.switchFullScreen();
 		}
 
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))

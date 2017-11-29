@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.commons.DeltaTimeAccumulator;
 import net.entetrs.xenon.commons.Renderable;
 import net.entetrs.xenon.entities.ennemies.Enemy;
+import net.entetrs.xenon.entities.ennemies.EnemyType;
 import net.entetrs.xenon.libs.AnimationLib;
 
 public class EnemyManager implements Renderable
@@ -26,10 +27,10 @@ public class EnemyManager implements Renderable
 	{
 		if (deltaTimeAccumulator.addAndCheck(delta)) 
 		{
-			/* on génère 5 enemies toutes les 4 secondes */
+			/* on génère 5 enemis toutes les 4 secondes */
 			for (int i = 0; i < 4; i++)
 			{
-				Enemy e = Enemy.random();
+				Enemy e = EnemyType.random();
 				enemies.add(e);
 			}
 		}

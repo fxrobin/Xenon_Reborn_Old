@@ -13,42 +13,26 @@ import net.entetrs.xenon.libs.TextureLib;
 
 public class Enemy extends Sprite implements Artefact
 {
-
-	private static Texture enemyTexture = TextureLib.ENEMY.get();
-	private static Texture bugTexture = TextureLib.BUG.get();
-	private static Texture perforatorTexture = TextureLib.PERFORATOR.get();
-
-	private static Texture[] textures = { enemyTexture, bugTexture, perforatorTexture };
-	private static Random randomGenerator = new Random();
-
+	
 	private float vX;
 	private float vY;
 	private Circle boundingCircle;
-	private int force = 10;
+	private int force;
+	private int impactForce; 
 
-	public Enemy(Texture texture)
+	public Enemy(Texture texture, int force, int impactForce)
 	{
 		super(texture);
 		boundingCircle = new Circle();
 		boundingCircle.setRadius(texture.getWidth() / 2f);
 	}
 
-	public static Enemy random()
-	{
-		int choosen = randomGenerator.nextInt(textures.length);
-		Enemy e = new Enemy(textures[choosen]);
-		e.setOriginCenter();
-		e.setX((float) Math.random() * C.width);
-		e.setY((float) Math.random() * 100 + C.height);
-		e.vX = (float) Math.random() * 200f - 100;
-		e.vY = -((float) Math.random() * 500f + 100f);
-		return e;
-	}
+	
 
 	public void move(float delta)
 	{
-		this.setX(this.getX() + (vX * delta));
-		this.setY(this.getY() + (vY * delta));
+		this.setX(this.getX() + (getvX() * delta));
+		this.setY(this.getY() + (getvY() * delta));
 		boundingCircle.setX(GdxCommons.getCenterX(this));
 		boundingCircle.setY(GdxCommons.getCenterY(this));
 	}
@@ -74,13 +58,41 @@ public class Enemy extends Sprite implements Artefact
 	@Override
 	public int getImpactForce()
 	{
-		return 10;
+		return this.impactForce;
 	}
 
 	@Override
 	public Sprite getSprite()
 	{
 		return this;
+	}
+
+
+
+	public float getvX()
+	{
+		return vX;
+	}
+
+
+
+	public void setvX(float vX)
+	{
+		this.vX = vX;
+	}
+
+
+
+	public float getvY()
+	{
+		return vY;
+	}
+
+
+
+	public void setvY(float vY)
+	{
+		this.vY = vY;
 	}
 
 }

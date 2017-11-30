@@ -1,15 +1,11 @@
 package net.entetrs.xenon.entities.ennemies;
 
-import java.util.Random;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.commons.GdxCommons;
 import net.entetrs.xenon.entities.Artefact;
-import net.entetrs.xenon.libs.TextureLib;
 
 public class Enemy extends Sprite implements Artefact
 {

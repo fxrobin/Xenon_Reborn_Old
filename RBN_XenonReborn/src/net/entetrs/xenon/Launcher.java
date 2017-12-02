@@ -3,7 +3,7 @@ package net.entetrs.xenon;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.screens.MainControler;
 
 /**
@@ -25,8 +25,8 @@ public final class Launcher
 	public static void main(final String... arg)
 	{
 		final LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = C.width;
-		config.height = C.height;
+		config.width = Global.width;
+		config.height = Global.height;
 		config.forceExit = false;
 		config.vSyncEnabled = true;
 		config.fullscreen = false;

@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.artefacts.ArtefactsScene;
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.entities.friendly.Ship;
 import net.entetrs.xenon.entities.friendly.ShootType;
 import net.entetrs.xenon.fonts.FontUtils;
@@ -77,7 +77,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void renderScore()
 	{
 		SpriteBatch batch = this.getBatch();
-		FontUtils.print(batch, 5, C.height - 43f, String.format("%010d", ScoreManager.getInstance().getScore()));
+		FontUtils.print(batch, 5, Global.height - 43f, String.format("%010d", ScoreManager.getInstance().getScore()));
 	}
 
 	private void renderShoots(SpriteBatch batch, float delta)
@@ -119,8 +119,8 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	{
 		if (Gdx.input.isKeyPressed(Keys.D))
 		{
-			float x = (float) Math.random() * C.width;
-			float y = (float) Math.random() * C.height;
+			float x = (float) Math.random() * Global.width;
+			float y = (float) Math.random() * Global.height;
 			ExplosionManager.addExplosion(x, y);
 		}
 	}

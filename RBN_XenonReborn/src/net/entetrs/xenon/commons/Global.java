@@ -9,7 +9,7 @@ package net.entetrs.xenon.commons;
  *
  */
 
-public final class C
+public final class Global
 {
 	/**
 	 * durée du fade-in/fade-out.
@@ -26,7 +26,7 @@ public final class C
 	 */
 	public static int height = 768; /* NOSONAR */
 
-	private C()
+	private Global()
 	{
 		/* protection */
 	}

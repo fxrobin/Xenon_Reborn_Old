@@ -5,11 +5,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 
 public final class Fader
 {
-	private float step = (MAX_ALPHA - MIN_ALPHA) / C.FADE_SECONDS;
+	private float step = (MAX_ALPHA - MIN_ALPHA) / Global.FADE_SECONDS;
 	private float currentAlpha = MIN_ALPHA;
 	private State currentState = State.BLACK_SCREEN;
 
@@ -74,7 +74,7 @@ public final class Fader
 			Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 			fadeRenderer.begin(ShapeType.Filled);
 			fadeRenderer.setColor(0, 0, 0, currentAlpha);
-			fadeRenderer.rect(0, 0, C.width, C.height);
+			fadeRenderer.rect(0, 0, Global.width, Global.height);
 			fadeRenderer.end();
 		}
 	}

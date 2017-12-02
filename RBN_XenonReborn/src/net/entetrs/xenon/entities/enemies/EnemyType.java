@@ -1,8 +1,8 @@
-package net.entetrs.xenon.entities.ennemies;
+package net.entetrs.xenon.entities.enemies;
 
 import java.util.Random;
 
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.libs.TextureLib;
 
 public enum EnemyType
@@ -52,8 +52,8 @@ public enum EnemyType
 	private static void randomCoords(Enemy e)
 	{
 		e.setOriginCenter();
-		e.setX((float) Math.random() * C.width);
-		e.setY((float) Math.random() * 100 + C.height);
+		e.setX((float) Math.random() * Global.width);
+		e.setY((float) Math.random() * 100 + Global.height);
 		e.setvX((float) Math.random() * 200f - 100);
 		e.setvY(-((float) Math.random() * 500f + 100f));
 	}

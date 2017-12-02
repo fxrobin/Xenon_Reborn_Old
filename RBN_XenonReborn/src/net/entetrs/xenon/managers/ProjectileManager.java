@@ -6,7 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.Artefact;
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.entities.friendly.Shoot;
 import net.entetrs.xenon.entities.friendly.ShootType;
 import net.entetrs.xenon.libs.AnimationLib;
@@ -28,7 +28,7 @@ public class ProjectileManager
 			s.render(batch, delta);
 			if (!s.isAlive()) ExplosionManager.addExplosion(s.getBoundingCircle().x, s.getBoundingCircle().y, AnimationLib.EXPLOSION_LITTLE);
 		});
-		shoots.removeIf(s -> (s.getSprite().getY() > C.height || !s.isAlive()));
+		shoots.removeIf(s -> (s.getSprite().getY() > Global.height || !s.isAlive()));
 	}
 
 	public void addShoot(ShootType shootType, float centerX, float centerY)

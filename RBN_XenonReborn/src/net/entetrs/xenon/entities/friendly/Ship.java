@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.artefacts.Artefact;
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.displays.Renderable;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
@@ -111,8 +111,8 @@ public class Ship implements Renderable, Artefact
 
 		if (currentSprite.getX() < 0) currentSprite.setX(0);
 		if (currentSprite.getY() < 80) currentSprite.setY(80);
-		if (currentSprite.getX() > C.width - currentSprite.getWidth()) currentSprite.setX(C.width - currentSprite.getWidth());
-		if (currentSprite.getY() > C.height - currentSprite.getHeight()) currentSprite.setY(C.height - currentSprite.getHeight());
+		if (currentSprite.getX() > Global.width - currentSprite.getWidth()) currentSprite.setX(Global.width - currentSprite.getWidth());
+		if (currentSprite.getY() > Global.height - currentSprite.getHeight()) currentSprite.setY(Global.height - currentSprite.getHeight());
 
 		boundingCircle.setX(this.getCenterX());
 		boundingCircle.setY(this.getCenterY());

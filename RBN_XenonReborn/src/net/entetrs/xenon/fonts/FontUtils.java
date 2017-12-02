@@ -1,5 +1,7 @@
 package net.entetrs.xenon.fonts;
 
+import java.util.Locale;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -29,25 +31,24 @@ public final class FontUtils
 
 	public static void print(Batch b, float x, float y, String txt)
 	{
-		String upperTxt = txt.toUpperCase();
+		String upperTxt = txt.toUpperCase(Locale.FRANCE);
 		for (int i = 0; i < upperTxt.length(); i++)
 		{
-			char c = upperTxt.charAt(i);
-			print(b, x + (i * FONT_W), y, c);
+			print(b, x + (i * FONT_W), y, upperTxt.charAt(i));
 		}
 	}
 
-	public static void print(Batch b, float x, float y, char c)
+	public static void print(Batch batch, float positionX, float positionY, char character)
 	{
-		if (c >= 65 && c <= 90)
+		if (character >= 65 && character <= 90)
 		{
-			int offset = (c - 65) * FONT_W;
-			b.draw(fontAZ, x, y, offset, 0, FONT_W, FONT_H);
+			int offset = (character - 65) * FONT_W;
+			batch.draw(fontAZ, positionX, positionY, offset, 0, FONT_W, FONT_H);
 		}
-		if (c >= 48 && c <= 57)
+		if (character >= 48 && character <= 57)
 		{
-			int offset = (c - 48) * FONT_W;
-			b.draw(font09, x, y, offset, 0, FONT_W, FONT_H);
+			final int offset = (character - 48) * FONT_W;
+			batch.draw(font09, positionX, positionY, offset, 0, FONT_W, FONT_H);
 		}
 	}
 

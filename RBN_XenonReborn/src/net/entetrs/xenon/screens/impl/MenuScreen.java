@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.fonts.FontUtils;
 import net.entetrs.xenon.libs.FontLib;
@@ -49,8 +49,8 @@ public class MenuScreen extends AbstractScreen
 		log.info("Instanciation de MenuScreen");
 		backgroundTravelling = new BackgroundTravelling();
 		titleTexture = TextureLib.TITLE.get();
-		titleX = (C.width - titleTexture.getWidth()) / 2f;
-		titleY = (C.height - titleTexture.getHeight()) / 2f;
+		titleX = (Global.width - titleTexture.getWidth()) / 2f;
+		titleY = (Global.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
 		layout = new GlyphLayout();
@@ -84,7 +84,7 @@ public class MenuScreen extends AbstractScreen
 		String msgDisplayMode = String.format("%s / %s", currentMode, monitor.name);
 		layout.setText(FontLib.DEFAULT.getFont(), msgDisplayMode);
 		BitmapFont font = FontLib.DEFAULT.getFont();
-		font.draw(this.getBatch(), msgDisplayMode, (C.width - layout.width) / 2, 150);
+		font.draw(this.getBatch(), msgDisplayMode, (Global.width - layout.width) / 2, 150);
 	}
 
 	private void drawMessage(float delta)
@@ -93,7 +93,7 @@ public class MenuScreen extends AbstractScreen
 		displayTitle = accumulator.addAndCheck(delta) ? !displayTitle : displayTitle;
 		if (displayTitle)
 		{
-			FontUtils.print(this.getBatch(), (C.width - MSG_WIDTH) / 2f, 60, MSG);
+			FontUtils.print(this.getBatch(), (Global.width - MSG_WIDTH) / 2f, 60, MSG);
 		}
 	}
 
@@ -117,7 +117,7 @@ public class MenuScreen extends AbstractScreen
 		}
 		else
 		{
-			if (!Gdx.graphics.setWindowedMode(C.width, C.height))
+			if (!Gdx.graphics.setWindowedMode(Global.width, Global.height))
 			{
 				log.error("Erreur de passage mode fenêtré");
 			}

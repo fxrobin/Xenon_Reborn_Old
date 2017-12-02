@@ -3,7 +3,7 @@ package net.entetrs.xenon.screens.impl;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.libs.TextureLib;
 
@@ -46,7 +46,7 @@ public class BackgroundTravelling
 	 */
 	public void drawBackGround(SpriteBatch batch)
 	{
-		batch.draw(spaceTexture, 0f, 0f, (int) pX, (int) pY, C.width, C.height);
+		batch.draw(spaceTexture, 0f, 0f, (int) pX, (int) pY, Global.width, Global.height);
 	}
 
 	/**

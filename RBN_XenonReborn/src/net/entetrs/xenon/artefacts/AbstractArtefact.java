@@ -1,9 +1,18 @@
-package net.entetrs.xenon.entities;
+package net.entetrs.xenon.artefacts;
 
-public abstract class AbstractArtefact implements Artefact
+import net.entetrs.xenon.commons.displays.Renderable;
+
+public abstract class AbstractArtefact implements Artefact, Renderable
 {
 	private int lifePoints;
-	private int impactForce;
+	private final int impactForce;
+
+	public AbstractArtefact(int lifeForce, int impactForce)
+	{
+		this.lifePoints = lifeForce;
+		this.impactForce = impactForce;
+		
+	}
 
 	public void translateX(float dx)
 	{

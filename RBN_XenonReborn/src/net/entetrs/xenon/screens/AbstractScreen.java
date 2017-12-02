@@ -4,10 +4,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class AbstractScreen implements Screen
 {
 	private Log log = LogFactory.getLog(this.getClass());
+	private SpriteBatch batch;
+	
+	public AbstractScreen(SpriteBatch batch)
+	{
+		this.batch = batch;
+	}
+	
+	public SpriteBatch getBatch()
+	{
+		return batch;
+	}
+	
+	
 
 	@Override
 	public void hide()

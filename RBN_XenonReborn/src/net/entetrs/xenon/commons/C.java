@@ -11,10 +11,19 @@ package net.entetrs.xenon.commons;
 
 public final class C
 {
+	/**
+	 * durée du fade-in/fade-out.
+	 */
 	public static final float FADE_SECONDS = 1.5f;
-	/* la résolution peut changer : ce n'est pas une constante */
 	
+	/**
+	 * largeur de la surface de jeu en pixels.
+	 */
 	public static int width = 1024; /* NOSONAR */
+	
+	/**
+	 * hauteur de la surface de jeu en pixels.
+	 */
 	public static int height = 768; /* NOSONAR */
 
 	private C()

@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
+import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.commons.C;
-import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.commons.Renderable;
-import net.entetrs.xenon.entities.Artefact;
+import net.entetrs.xenon.commons.displays.Renderable;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.libs.SoundLib;
-import net.entetrs.xenon.renderers.ShipRenderer;
 
 public class Ship implements Renderable, Artefact
 {

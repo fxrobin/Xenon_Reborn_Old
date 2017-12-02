@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.entetrs.xenon.commons.GdxCommons;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public enum SoundLib implements Disposable
 {

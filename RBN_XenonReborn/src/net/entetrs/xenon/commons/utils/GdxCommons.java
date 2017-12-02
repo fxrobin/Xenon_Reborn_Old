@@ -1,4 +1,4 @@
-package net.entetrs.xenon.commons;
+package net.entetrs.xenon.commons.utils;
 
 import java.util.Arrays;
 

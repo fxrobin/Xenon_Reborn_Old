@@ -6,12 +6,12 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import net.entetrs.xenon.commons.AnimatedSprite;
+import net.entetrs.xenon.commons.displays.AnimatedSprite;
 import net.entetrs.xenon.libs.AnimationLib;
 import net.entetrs.xenon.libs.SoundLib;
-import net.entetrs.xenon.screens.BackgroundScrolling;
+import net.entetrs.xenon.screens.impl.BackgroundScrolling;
 
-public class ExplosionManager
+public final class ExplosionManager
 {
 	private static List<AnimatedSprite> explosions = Collections.synchronizedList(new LinkedList<>());
 

@@ -1,13 +1,12 @@
-package net.entetrs.xenon.renderers;
+package net.entetrs.xenon.entities.friendly;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.C;
-import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.commons.Renderable;
-import net.entetrs.xenon.entities.friendly.Ship;
+import net.entetrs.xenon.commons.displays.Renderable;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.libs.TextureLib;

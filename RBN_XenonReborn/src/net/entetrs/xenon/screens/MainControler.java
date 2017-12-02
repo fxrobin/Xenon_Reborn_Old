@@ -1,4 +1,4 @@
-package net.entetrs.xenon;
+package net.entetrs.xenon.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -10,12 +10,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.commons.Fader;
-import net.entetrs.xenon.commons.Fader.State;
-import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.entities.Artefact;
-import net.entetrs.xenon.screens.ArtefactsScene;
-import net.entetrs.xenon.screens.XenonScreen;
+import net.entetrs.xenon.artefacts.Artefact;
+import net.entetrs.xenon.artefacts.ArtefactsScene;
+import net.entetrs.xenon.commons.displays.Fader;
+import net.entetrs.xenon.commons.displays.Fader.State;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
  * contrôleur principal LibGDX qui gère les changement d'écrans par
@@ -25,7 +24,7 @@ import net.entetrs.xenon.screens.XenonScreen;
  * @author CDT RBN
  *
  */
-public class MainControler extends Game
+public final class MainControler extends Game
 {
 	/* pour dessiner des texture et sprites à l'écran */
 	private SpriteBatch batch;
@@ -81,10 +80,6 @@ public class MainControler extends Game
 		this.fade();
 	}
 
-	public SpriteBatch getBatch()
-	{
-		return batch;
-	}
 
 	public void showScreen(XenonScreen screen)
 	{
@@ -92,7 +87,7 @@ public class MainControler extends Game
 		{
 			fader.startFadeOut();
 		}
-		currentScreen = screen.createScreen();
+		currentScreen = screen.createScreen(this.batch);
 	}
 
 	private void fade()

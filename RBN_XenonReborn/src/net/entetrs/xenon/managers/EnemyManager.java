@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.commons.DeltaTimeAccumulator;
-import net.entetrs.xenon.commons.Renderable;
+import net.entetrs.xenon.commons.displays.Renderable;
+import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.entities.ennemies.Enemy;
 import net.entetrs.xenon.entities.ennemies.EnemyType;
 import net.entetrs.xenon.libs.AnimationLib;

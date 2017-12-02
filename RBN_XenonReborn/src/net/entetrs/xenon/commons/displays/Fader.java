@@ -1,17 +1,14 @@
-package net.entetrs.xenon.commons;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+package net.entetrs.xenon.commons.displays;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-public class Fader
-{
-	private Log log = LogFactory.getLog(this.getClass());
+import net.entetrs.xenon.commons.C;
 
+public final class Fader
+{
 	private float step = (MAX_ALPHA - MIN_ALPHA) / C.FADE_SECONDS;
 	private float currentAlpha = MIN_ALPHA;
 	private State currentState = State.BLACK_SCREEN;
@@ -76,7 +73,6 @@ public class Fader
 			Gdx.gl.glEnable(GL20.GL_BLEND);
 			Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 			fadeRenderer.begin(ShapeType.Filled);
-			log.info("CurrentAlpha : " + currentAlpha);
 			fadeRenderer.setColor(0, 0, 0, currentAlpha);
 			fadeRenderer.rect(0, 0, C.width, C.height);
 			fadeRenderer.end();
@@ -85,7 +81,6 @@ public class Fader
 
 	private void fadeOut(float delta)
 	{
-		log.info("Fading Out");
 		currentAlpha = currentAlpha + (step * delta);
 		if (currentAlpha > MAX_ALPHA)
 		{
@@ -96,7 +91,6 @@ public class Fader
 
 	private void fadeIn(float delta)
 	{
-		log.info("Fading In");
 		currentAlpha = currentAlpha - (step * delta);
 		if (currentAlpha < MIN_ALPHA)
 		{

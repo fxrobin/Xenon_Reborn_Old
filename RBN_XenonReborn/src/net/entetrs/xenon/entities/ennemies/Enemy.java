@@ -2,10 +2,11 @@ package net.entetrs.xenon.entities.ennemies;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.commons.GdxCommons;
-import net.entetrs.xenon.entities.Artefact;
+import net.entetrs.xenon.artefacts.Artefact;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public class Enemy extends Sprite implements Artefact
 {
@@ -91,6 +92,14 @@ public class Enemy extends Sprite implements Artefact
 	public void setvY(float vY)
 	{
 		this.vY = vY;
+	}
+
+
+
+	@Override
+	public void render(SpriteBatch batch, float delta)
+	{
+		this.draw(batch);
 	}
 
 }

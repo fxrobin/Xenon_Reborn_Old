@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.entetrs.xenon.commons.GdxCommons;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public enum TextureLib implements Disposable
 {

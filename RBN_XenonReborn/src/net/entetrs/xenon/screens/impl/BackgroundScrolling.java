@@ -1,18 +1,18 @@
-package net.entetrs.xenon.screens;
+package net.entetrs.xenon.screens.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.libs.TextureLib;
 
-public class BackgroundScrolling
+public final class BackgroundScrolling
 {
 	private float position;
 	private float speed;
+	private SpriteBatch batch;
 
 	private static BackgroundScrolling instance = new BackgroundScrolling();
 
@@ -26,10 +26,11 @@ public class BackgroundScrolling
 		/* protection */
 	}
 
-	public void init()
+	public void init(SpriteBatch batch)
 	{
 		this.position = 0;
 		this.speed = 9f;
+		this.batch = batch;
 	}
 
 	public void checkInput()
@@ -42,8 +43,6 @@ public class BackgroundScrolling
 	public void render(float delta)
 	{
 		position -= 10f * delta * speed;
-
-		SpriteBatch batch = MainControler.getInstance().getBatch();
 		Texture space = TextureLib.BACKGROUND_SPACE.get();
 		Texture leftbg = TextureLib.BACKGROUND_LEFT.get();
 		Texture rightbg = TextureLib.BACKGROUND_RIGHT.get();

@@ -1,4 +1,4 @@
-package net.entetrs.xenon.screens;
+package net.entetrs.xenon.screens.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,18 +12,20 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.MainControler;
 import net.entetrs.xenon.commons.C;
-import net.entetrs.xenon.commons.DeltaTimeAccumulator;
-import net.entetrs.xenon.commons.FontCommons;
+import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
+import net.entetrs.xenon.fonts.FontUtils;
 import net.entetrs.xenon.libs.FontLib;
 import net.entetrs.xenon.libs.SoundLib;
 import net.entetrs.xenon.libs.TextureLib;
+import net.entetrs.xenon.screens.AbstractScreen;
+import net.entetrs.xenon.screens.MainControler;
+import net.entetrs.xenon.screens.XenonScreen;
 
 public class MenuScreen extends AbstractScreen
 {
 	private static final String MSG = "PRESS SPACEBAR";
-	private static final int MSG_WIDTH = FontCommons.getWidth(MSG);
+	private static final int MSG_WIDTH = FontUtils.getWidth(MSG);
 
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -41,8 +43,9 @@ public class MenuScreen extends AbstractScreen
 	private DisplayMode currentMode;
 	private GlyphLayout layout;
 
-	public MenuScreen()
+	public MenuScreen(SpriteBatch batch)
 	{
+		super(batch);
 		log.info("Instanciation de MenuScreen");
 		backgroundTravelling = new BackgroundTravelling();
 		titleTexture = TextureLib.TITLE.get();
@@ -70,7 +73,7 @@ public class MenuScreen extends AbstractScreen
 	{
 		this.checkInput();
 		this.backgroundTravelling.translateBackGround(delta);
-		this.backgroundTravelling.drawBackGround(this.ctrl.getBatch());
+		this.backgroundTravelling.drawBackGround(this.getBatch());
 		this.drawTitle();
 		this.drawDisplayMode();
 		this.drawMessage(delta);
@@ -81,7 +84,7 @@ public class MenuScreen extends AbstractScreen
 		String msgDisplayMode = String.format("%s / %s", currentMode, monitor.name);
 		layout.setText(FontLib.DEFAULT.getFont(), msgDisplayMode);
 		BitmapFont font = FontLib.DEFAULT.getFont();
-		font.draw(ctrl.getBatch(), msgDisplayMode, (C.width - layout.width) / 2, 150);
+		font.draw(this.getBatch(), msgDisplayMode, (C.width - layout.width) / 2, 150);
 	}
 
 	private void drawMessage(float delta)
@@ -90,13 +93,13 @@ public class MenuScreen extends AbstractScreen
 		displayTitle = accumulator.addAndCheck(delta) ? !displayTitle : displayTitle;
 		if (displayTitle)
 		{
-			FontCommons.print(ctrl.getBatch(), (C.width - MSG_WIDTH) / 2f, 60, MSG);
+			FontUtils.print(this.getBatch(), (C.width - MSG_WIDTH) / 2f, 60, MSG);
 		}
 	}
 
 	private void drawTitle()
 	{
-		SpriteBatch batch = ctrl.getBatch();
+		SpriteBatch batch = this.getBatch();
 		batch.draw(titleTexture, titleX, titleY);
 	}
 
@@ -109,14 +112,14 @@ public class MenuScreen extends AbstractScreen
 		{
 			if (!Gdx.graphics.setFullscreenMode(displayMode))
 			{
-				System.err.println("Erreur de passage en plein écran");
+				log.error("Erreur de passage en plein écran");
 			}
 		}
 		else
 		{
 			if (!Gdx.graphics.setWindowedMode(C.width, C.height))
 			{
-				System.err.println("Erreur de passage mode fenêtré");
+				log.error("Erreur de passage mode fenêtré");
 			}
 		}
 	}

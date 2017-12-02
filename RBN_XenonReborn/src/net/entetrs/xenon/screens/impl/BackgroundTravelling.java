@@ -1,10 +1,10 @@
-package net.entetrs.xenon.screens;
+package net.entetrs.xenon.screens.impl;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.C;
-import net.entetrs.xenon.commons.DeltaTimeAccumulator;
+import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.libs.TextureLib;
 
 /**

@@ -1,4 +1,4 @@
-package net.entetrs.xenon.commons;
+package net.entetrs.xenon.commons.displays;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

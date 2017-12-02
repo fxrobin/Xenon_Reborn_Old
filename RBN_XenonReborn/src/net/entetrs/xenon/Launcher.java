@@ -4,26 +4,27 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 import net.entetrs.xenon.commons.C;
+import net.entetrs.xenon.screens.MainControler;
 
 /**
- * lanceur principal de Xenon_Reborn. Ce lanceur configure Lwjgl et libgdx. 
- * Un singleton (instance unique) de MainControler est obtenue et devient le point d'entrée
- * du jeu vidéo.
+ * lanceur principal de Xenon_Reborn. Ce lanceur configure Lwjgl et libgdx. Un
+ * singleton (instance unique) de MainControler est obtenue et devient le point
+ * d'entrée du jeu vidéo.
  * 
  * @author CDT RBN
  *
  */
 
-public class Launcher
+public final class Launcher
 {
 	/**
 	 * point d'entrée du jeu.
 	 * 
 	 * @param arg
 	 */
-	public static void main(String[] arg)
+	public static void main(final String... arg)
 	{
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		final LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = C.width;
 		config.height = C.height;
 		config.forceExit = false;
@@ -34,5 +35,10 @@ public class Launcher
 		config.title = "XENON - Reborn - ETRS 2017";
 		config.useGL30 = false;
 		new LwjglApplication(MainControler.getInstance(), config);
+	}
+
+	private Launcher()
+	{
+		// protection.
 	}
 }

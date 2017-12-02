@@ -1,4 +1,4 @@
-package net.entetrs.xenon.commons;
+package net.entetrs.xenon.commons.displays;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,8 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.entities.Artefact;
-import net.entetrs.xenon.libs.AnimationLib;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
  * classe pour gérer les animations d'un sprite en fonction des animations du
@@ -17,25 +16,24 @@ import net.entetrs.xenon.libs.AnimationLib;
  *
  */
 
-public class AnimatedSprite extends Sprite implements Artefact
+public class AnimatedSprite extends Sprite
 {
 	private float stateTime;
 	private Animation<TextureRegion> animation;
 	private Circle boundingCircle;
 	private float radius;
-	private int lifePoints = 2;
-	private int impactForce = 5;
+	
 
-	public AnimatedSprite(AnimationLib anim)
+	public AnimatedSprite(Animation<TextureRegion> anim)
 	{
-		super(anim.getAnimation().getKeyFrames()[0]);
-		radius = anim.getAnimation().getKeyFrames()[0].getRegionWidth() / 2.0f;
+		super(anim.getKeyFrames()[0]);
+		radius = anim.getKeyFrames()[0].getRegionWidth() / 2.0f;
 		stateTime = 0f;
-		this.animation = anim.getAnimation();
+		this.animation = anim;
 		boundingCircle = new Circle();
 	}
 
-	public AnimatedSprite(AnimationLib anim, float centerX, float centerY)
+	public AnimatedSprite(Animation<TextureRegion> anim, float centerX, float centerY)
 	{
 		this(anim);
 		this.setOrigin(centerX, centerY);
@@ -58,46 +56,12 @@ public class AnimatedSprite extends Sprite implements Artefact
 	{
 		return animation.isAnimationFinished(stateTime);
 	}
-
-	@Override
-	public void decreaseLife(int impact)
-	{
-		lifePoints = lifePoints - impact;
-
-	}
-
-	@Override
-	public boolean isAlive()
-	{
-		return lifePoints > 0;
-	}
-
-	@Override
-	public int getImpactForce()
-	{
-		return impactForce;
-	}
-
-	public void setImpactForce(int impactForce)
-	{
-		this.impactForce = impactForce;
-	}
-
-	@Override
+	
 	public Circle getBoundingCircle()
 	{
 		return boundingCircle;
 	}
-
-	@Override
-	public Sprite getSprite()
-	{
-		return this;
-	}
-
-	public void setLifePoints(int lifePoints)
-	{
-		this.lifePoints = lifePoints;
-	}
+	
+	
 
 }

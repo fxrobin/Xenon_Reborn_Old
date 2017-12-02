@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <interface id="1" language="java" name="net.entetrs.xenon.entities.Artefact" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/entities/Artefact.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="1" language="java" name="net.entetrs.xenon.artefacts.Artefact" project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/artefacts/Artefact.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="680" y="751"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="net.entetrs.xenon.screens.GamePlayScreen" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/screens/GamePlayScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="net.entetrs.xenon.screens.impl.GamePlayScreen" project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/screens/impl/GamePlayScreen.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="683" y="229"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="net.entetrs.xenon.screens.BackgroundScrolling" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/screens/BackgroundScrolling.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="net.entetrs.xenon.screens.impl.BackgroundScrolling" project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/screens/impl/BackgroundScrolling.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="432" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +65,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="net.entetrs.xenon.MainControler" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/MainControler.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="net.entetrs.xenon.screens.MainControler" project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/screens/MainControler.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="171" y="210"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -74,56 +75,56 @@
     </display>  
   </class>  
   <association id="9">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="10" name="em">        
-        <position height="0" width="0" x="-72" y="-7"/>      
-      </attribute>      
-      <multiplicity id="11" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-72" y="-7"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="12">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="13" name="instance">        
+      <attribute id="10" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
+      <multiplicity id="11" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <association id="16">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="17" name="ship">        
-        <position height="0" width="0" x="527" y="60"/>      
-      </attribute>      
-      <multiplicity id="18" minimum="0" maximum="1">        
-        <position height="0" width="0" x="527" y="60"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="19">    
+  <realization id="12">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <association id="20">    
+  <generalization id="13">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="14">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="15" name="scrolling">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="17">    
     <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="18" name="enemies">        
+        <position height="0" width="0" x="-63" y="388"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-63" y="388"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="20">    
+    <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="21" name="em">        
-        <position height="0" width="0" x="530" y="206"/>      
+        <position height="0" width="0" x="-72" y="-7"/>      
       </attribute>      
       <multiplicity id="22" minimum="0" maximum="1">        
-        <position height="0" width="0" x="530" y="206"/>      
+        <position height="0" width="0" x="-72" y="-7"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
@@ -131,26 +132,26 @@
   </association>  
   <association id="23">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="24" name="enemies">        
-        <position height="0" width="0" x="-63" y="388"/>      
+      <attribute id="24" name="em">        
+        <position height="0" width="0" x="530" y="206"/>      
       </attribute>      
-      <multiplicity id="25" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-63" y="388"/>      
+      <multiplicity id="25" minimum="0" maximum="1">        
+        <position height="0" width="0" x="530" y="206"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="26">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="27" name="scrolling">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="27" name="ship">        
+        <position height="0" width="0" x="527" y="60"/>      
       </attribute>      
       <multiplicity id="28" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="527" y="60"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

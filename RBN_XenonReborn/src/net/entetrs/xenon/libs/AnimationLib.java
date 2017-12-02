@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import net.entetrs.xenon.commons.AnimatedSprite;
-import net.entetrs.xenon.commons.GdxCommons;
+import net.entetrs.xenon.commons.displays.AnimatedSprite;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
  * catalogue d'animations pour l'ensemble du jeu, accessible sous forme d'ENUM
@@ -48,11 +48,11 @@ public enum AnimationLib
 	{
 		if (centerX >= 0 || centerY >= 0)
 		{
-			return new AnimatedSprite(this, centerX, centerY);
+			return new AnimatedSprite(this.getAnimation(), centerX, centerY);
 		}
 		else
 		{
-			return new AnimatedSprite(this);
+			return new AnimatedSprite(this.getAnimation());
 		}
 	}
 }

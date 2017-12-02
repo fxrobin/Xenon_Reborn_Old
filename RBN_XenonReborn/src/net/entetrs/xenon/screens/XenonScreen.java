@@ -1,8 +1,12 @@
 package net.entetrs.xenon.screens;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import net.entetrs.xenon.screens.impl.GamePlayScreen;
+import net.entetrs.xenon.screens.impl.MenuScreen;
 
 /**
  * enum complexe avec lambda pour la création des écrans associés à leur
@@ -15,15 +19,15 @@ public enum XenonScreen
 {
 	MENU(MenuScreen::new), GAME_PLAY(GamePlayScreen::new);
 
-	private Supplier<Screen> supplier;
+	private Function<SpriteBatch,Screen> supplier;
 
-	private XenonScreen(Supplier<Screen> supplier)
+	private XenonScreen(Function<SpriteBatch, Screen> supplier)
 	{
 		this.supplier = supplier;
 	}
 
-	public Screen createScreen()
+	public Screen createScreen(SpriteBatch batch)
 	{
-		return supplier.get();
+		return supplier.apply(batch);
 	}
 }

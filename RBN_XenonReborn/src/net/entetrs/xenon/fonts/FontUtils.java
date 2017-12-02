@@ -1,18 +1,18 @@
-package net.entetrs.xenon.commons;
+package net.entetrs.xenon.fonts;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import net.entetrs.xenon.libs.TextureLib;
 
-public final class FontCommons
+public final class FontUtils
 {
 	private static final int FONT_W = 32;
 	private static final int FONT_H = 38;
 	private static Texture fontAZ = TextureLib.FONT_AZ.get();
 	private static Texture font09 = TextureLib.FONT_09.get();
 
-	private FontCommons()
+	private FontUtils()
 	{
 		/* protection */
 	}

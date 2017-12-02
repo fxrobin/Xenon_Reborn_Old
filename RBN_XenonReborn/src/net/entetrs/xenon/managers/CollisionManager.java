@@ -2,9 +2,9 @@ package net.entetrs.xenon.managers;
 
 import java.util.List;
 
-import net.entetrs.xenon.entities.Artefact;
+import net.entetrs.xenon.artefacts.Artefact;
 
-public class CollisionManager
+public final class CollisionManager
 {
 
 	private static CollisionManager instance = new CollisionManager();

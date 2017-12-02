@@ -8,8 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class AbstractScreen implements Screen
 {
-	private Log log = LogFactory.getLog(this.getClass());
-	private SpriteBatch batch;
+	private final Log log = LogFactory.getLog(AbstractScreen.class);
+	
+	private final SpriteBatch batch;
 	
 	public AbstractScreen(SpriteBatch batch)
 	{

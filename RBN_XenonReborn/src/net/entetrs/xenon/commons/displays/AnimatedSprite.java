@@ -22,7 +22,6 @@ public class AnimatedSprite extends Sprite
 	private Animation<TextureRegion> animation;
 	private Circle boundingCircle;
 	private float radius;
-	
 
 	public AnimatedSprite(Animation<TextureRegion> anim)
 	{

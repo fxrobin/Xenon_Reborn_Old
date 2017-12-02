@@ -55,8 +55,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="net.entetrs.xenon.screens.impl.BackgroundScrolling" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/screens/impl/BackgroundScrolling.java" binary="false" 
+  <class id="7" language="java" name="net.entetrs.xenon.screens.impl.BackgroundParallaxScrolling" 
+    project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/screens/impl/BackgroundParallaxScrolling.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="432" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

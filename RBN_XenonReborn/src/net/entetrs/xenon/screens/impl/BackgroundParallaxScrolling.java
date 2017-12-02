@@ -8,20 +8,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.commons.C;
 import net.entetrs.xenon.libs.TextureLib;
 
-public final class BackgroundScrolling
+public final class BackgroundParallaxScrolling
 {
 	private float position;
 	private float speed;
 	private SpriteBatch batch;
 
-	private static BackgroundScrolling instance = new BackgroundScrolling();
+	private static BackgroundParallaxScrolling instance = new BackgroundParallaxScrolling();
 
-	public static BackgroundScrolling getInstance()
+	public static BackgroundParallaxScrolling getInstance()
 	{
 		return instance;
 	}
 
-	private BackgroundScrolling()
+	private BackgroundParallaxScrolling()
 	{
 		/* protection */
 	}

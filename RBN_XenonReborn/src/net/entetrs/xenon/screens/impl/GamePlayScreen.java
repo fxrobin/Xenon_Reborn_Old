@@ -35,7 +35,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private Log log = LogFactory.getLog(this.getClass());
 
-	private BackgroundScrolling scrolling;
+	private BackgroundParallaxScrolling scrolling;
 	private EnemyManager em;
 	private CollisionManager cm;
 	private Ship ship;
@@ -44,7 +44,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	{
 		super(batch);
 		log.info("Instanciation de GamePlay");
-		scrolling = BackgroundScrolling.getInstance();
+		scrolling = BackgroundParallaxScrolling.getInstance();
 		scrolling.init(batch);
 		em = EnemyManager.getInstance();
 		cm = CollisionManager.getInstance();

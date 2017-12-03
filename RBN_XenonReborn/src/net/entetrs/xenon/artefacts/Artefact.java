@@ -22,6 +22,14 @@ public interface Artefact extends Renderable
 	 * @return
 	 */
 	Circle getBoundingCircle();
+	
+	/**
+	 * retourne le nombre de point de vie de l'artefact.
+	 * 
+	 * @return
+	 * 		le nombre de points de vie.
+	 */
+	int getLifePoints();
 
 	/**
 	 * décrémente les points de vie en fonction de la force d'impact exercée.

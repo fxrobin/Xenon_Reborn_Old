@@ -58,12 +58,21 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	}
 
 	/**
-	 * décrémente la vie d'artefacte.
+	 * décrémente la vie d'artefact.
 	 */
 	@Override
 	public void decreaseLife(final int force)
 	{
 		this.lifePoints -= force;
+	}
+	
+	/**
+	 * retourne le nombre de point de vie restant à l'artefact. 
+	 */
+	@Override
+	public int getLifePoints()
+	{
+		return lifePoints;
 	}
 
 	/**

@@ -91,7 +91,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		SpriteBatch batch = this.getBatch();
 		int fps = Gdx.graphics.getFramesPerSecond();
 		batch.draw(TextureLib.FOOTER.get(), 0, 0);
-		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed(), ship.getLife());
+		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed(), ship.getLifePoints());
 		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());
 	}
 

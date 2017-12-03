@@ -8,6 +8,15 @@ import com.badlogic.gdx.math.Circle;
 import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
+/**
+ * classe à revoir pour qu'elle hérite de AbstractArtefact et qu'elle encapsule "Sprite", voire "Animated Sprite".
+ * Et un EnemyRenderer à terme ...
+ * 
+ * 
+ * @author robin
+ *
+ */
+
 public class Enemy extends Sprite implements Artefact
 {
 	
@@ -100,6 +109,14 @@ public class Enemy extends Sprite implements Artefact
 	public void render(SpriteBatch batch, float delta)
 	{
 		this.draw(batch);
+	}
+
+
+
+	@Override
+	public int getLifePoints()
+	{
+		return this.force;
 	}
 
 }

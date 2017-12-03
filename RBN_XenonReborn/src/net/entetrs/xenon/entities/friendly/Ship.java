@@ -6,15 +6,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.artefacts.Artefact;
+import net.entetrs.xenon.artefacts.AbstractArtefact;
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.displays.Renderable;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.libs.SoundLib;
 
-public class Ship implements Renderable, Artefact
+public class Ship extends AbstractArtefact
 {
 	private static final float SHIP_SPEED = 400f;
 	private static final float SHIP_ACCELLERATION = 20f;
@@ -25,8 +24,6 @@ public class Ship implements Renderable, Artefact
 	private ShipInput.Vertical vControl = ShipInput.Vertical.NONE;
 
 	private boolean shieldActivated = false;
-	private int life = 60;
-	private int impactForce = 20;
 
 	private float vX = 0;
 	private float vY = 0;
@@ -35,6 +32,7 @@ public class Ship implements Renderable, Artefact
 
 	public Ship()
 	{
+		super(60, 20);
 		boundingCircle = new Circle();
 		shipRenderer = new ShipRenderer(this);
 		boundingCircle.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2);
@@ -114,6 +112,11 @@ public class Ship implements Renderable, Artefact
 		if (currentSprite.getX() > Global.width - currentSprite.getWidth()) currentSprite.setX(Global.width - currentSprite.getWidth());
 		if (currentSprite.getY() > Global.height - currentSprite.getHeight()) currentSprite.setY(Global.height - currentSprite.getHeight());
 
+		computeBoundingCircle();
+	}
+
+	private void computeBoundingCircle()
+	{
 		boundingCircle.setX(this.getCenterX());
 		boundingCircle.setY(this.getCenterY());
 	}
@@ -175,17 +178,17 @@ public class Ship implements Renderable, Artefact
 
 	public float getWidth()
 	{
-		return shipRenderer.getCurrentSprite().getWidth();
+		return this.getSprite().getWidth();
 	}
 
 	public float getX()
 	{
-		return shipRenderer.getCurrentSprite().getX();
+		return this.getSprite().getX();
 	}
 
 	public float getY()
 	{
-		return shipRenderer.getCurrentSprite().getY();
+		return this.getSprite().getY();
 	}
 
 	public ShipInput.Horizontal getHorizontalControl()
@@ -199,37 +202,16 @@ public class Ship implements Renderable, Artefact
 	}
 
 	@Override
-	public Circle getBoundingCircle()
-	{
-		return this.boundingCircle;
-	}
-
-	@Override
-	public void decreaseLife(int force)
-	{
-		this.life = this.life - force;
-	}
-
-	@Override
-	public int getImpactForce()
-	{
-		return this.impactForce;
-	}
-
-	@Override
-	public boolean isAlive()
-	{
-		return (life >= 0);
-	}
-
-	@Override
 	public Sprite getSprite()
 	{
 		return this.shipRenderer.getCurrentSprite();
 	}
 
-	public int getLife()
+	@Override
+	public Circle getBoundingCircle()
 	{
-		return this.life;
+		return this.getBoundingCircle();
 	}
+
+
 }

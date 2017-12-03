@@ -168,21 +168,6 @@ public class Ship extends AbstractArtefact
 		}
 	}
 
-	public float getWidth()
-	{
-		return this.getSprite().getWidth();
-	}
-
-	public float getX()
-	{
-		return this.getSprite().getX();
-	}
-
-	public float getY()
-	{
-		return this.getSprite().getY();
-	}
-
 	public ShipInput.Horizontal getHorizontalControl()
 	{
 		return hControl;

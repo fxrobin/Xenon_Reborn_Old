@@ -67,7 +67,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		SpriteBatch batch = this.getBatch();
 		this.scrolling.render(delta);
 		this.renderShoots(batch, delta);
-		em.render(batch, delta);
+		this.em.render(batch, delta);
 		this.renderShip(delta);
 		ExplosionManager.render(batch, delta);
 		this.renderStatusBar();

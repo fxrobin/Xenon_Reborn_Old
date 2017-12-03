@@ -66,9 +66,4 @@ public class Enemy extends AbstractArtefact
 		return sprite.getHeight();
 	}
 
-	public void render(SpriteBatch batch)
-	{
-		sprite.draw(batch);	
-	}
-
 }

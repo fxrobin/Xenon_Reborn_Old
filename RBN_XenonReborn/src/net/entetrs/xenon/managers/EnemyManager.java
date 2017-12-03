@@ -54,7 +54,7 @@ public class EnemyManager implements Renderable
 	public void render(SpriteBatch batch, float delta)
 	{
 		enemies.forEach(e -> {
-			if (e.isAlive()) e.render(batch);
+			if (e.isAlive()) e.render(batch, delta);
 		});
 	}
 

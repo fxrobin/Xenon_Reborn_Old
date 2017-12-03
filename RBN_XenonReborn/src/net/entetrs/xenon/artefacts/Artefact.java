@@ -59,4 +59,65 @@ public interface Artefact extends Renderable
 	 * @return le sprite courant.
 	 */
 	Sprite getSprite();
+
+	/**
+	 * affecte le nombre de points de vie.
+	 * 
+	 * @param lifePoints
+	 */
+	void setLifePoints(int lifePoints);
+
+	/**
+	 * affecte la vitesse sur l'axe Y.
+	 * 
+	 * @param vectorY
+	 */
+	void setVectorY(float vectorY);
+
+	/**
+	 * affecte la vitesse sur l'axe X.
+	 * 
+	 * @param vectorX
+	 */
+	void setVectorX(float vectorX);
+
+	/**
+	 * retourne la vitesse sur l'axe Y.
+	 * 
+	 * @return
+	 */
+	float getVectorY();
+
+	/**
+	 * retourne la vitesse sur l'axe X.
+	 * 
+	 * @return
+	 */
+	float getVectorX();
+
+	/**
+	 * déplace l'artefact en fonction de sa vitesse sur les 2 axes
+	 * et en fonction du temps delta écoulé.
+	 * 
+	 * @param delta
+	 */
+	void act(float delta);
+
+	/**
+	 * affecte la taille du cercle de collision.
+	 * 
+	 * @param radius
+	 */
+	void setRadius(float radius);
+	
+	/**
+	 * retourne vrai si cet artefact entre en collision
+	 * avec celui passé en paramètre.
+	 * 
+	 * @param otherArtefact
+	 * @return
+	 * 	 	"true" si la collision est avérée, "false" sinon.
+	 */
+	boolean isCollision(Artefact otherArtefact);
+	
 }

@@ -11,7 +11,14 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public enum SoundLib implements Disposable
 {
-	SHOOT("shoot.mp3"), BIG_SHOOT("big-shoot.wav"), SHIELD_UP("shield_up.wav"), SHIELD_DOWN("shield_down.wav"), CLIC("clic.wav"), EXPLOSION("explosion.wav"), INTRO("intro.mp3"), MUSIC("music.mp3");
+	SHOOT("shoot.mp3"), 
+	BIG_SHOOT("big-shoot.wav"), 
+	SHIELD_UP("shield_up.wav"), 
+	SHIELD_DOWN("shield_down.wav"), 
+	CLIC("clic.wav"), 
+	EXPLOSION("explosion.wav"), 
+	INTRO("intro.mp3"), 
+	MUSIC("music.mp3");
 
 	private Log log = LogFactory.getLog(this.getClass());
 	private Sound sound;

@@ -18,7 +18,6 @@ public class AnimatedSprite extends Sprite
 	private float stateTime;
 	private Animation<TextureRegion> animation;
 
-
 	public AnimatedSprite(Animation<TextureRegion> anim)
 	{
 		super(anim.getKeyFrames()[0]);

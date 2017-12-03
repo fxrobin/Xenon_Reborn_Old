@@ -79,6 +79,7 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	}
 	
 	
+	@Override
 	public void act(float delta)
 	{
 		this.translateX(delta * vectorX);
@@ -122,26 +123,31 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 		return lifePoints > 0;
 	}
 	
+	@Override
 	public float getVectorX()
 	{
 		return vectorX;
 	}
 	
+	@Override
 	public float getVectorY()
 	{
 		return vectorY;
 	}
 	
+	@Override
 	public void setVectorX(float vectorX)
 	{
 		this.vectorX = vectorX;
 	}
 	
+	@Override
 	public void setVectorY(float vectorY)
 	{
 		this.vectorY = vectorY;
 	}
 	
+	@Override
 	public void setLifePoints(int lifePoints)
 	{
 		this.lifePoints = lifePoints;
@@ -153,9 +159,16 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 		return this.boundingCircle;
 	}
 	
+	@Override
 	public void setRadius(float radius)
 	{
 		this.boundingCircle.setRadius(radius);	
+	}
+	
+	@Override
+	public boolean isCollision(Artefact otherArtefact)
+	{
+		return this.getBoundingCircle().overlaps(otherArtefact.getBoundingCircle());
 	}
 	
 	

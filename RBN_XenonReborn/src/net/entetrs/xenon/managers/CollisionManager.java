@@ -6,7 +6,6 @@ import net.entetrs.xenon.artefacts.Artefact;
 
 public final class CollisionManager
 {
-
 	private static CollisionManager instance = new CollisionManager();
 
 	public static CollisionManager getInstance()
@@ -25,7 +24,7 @@ public final class CollisionManager
 		{
 			for (Artefact p : projectiles)
 			{
-				if (p.getBoundingCircle().overlaps(t.getBoundingCircle()))
+				if (p.isCollision(t))
 				{
 					/* collision !!! */
 					p.decreaseLife(t.getImpactForce());

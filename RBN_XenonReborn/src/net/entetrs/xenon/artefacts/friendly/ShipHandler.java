@@ -1,12 +1,12 @@
-package net.entetrs.xenon.entities.friendly;
+package net.entetrs.xenon.artefacts.friendly;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
+import net.entetrs.xenon.artefacts.friendly.ShipInput.Horizontal;
+import net.entetrs.xenon.artefacts.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.utils.GdxCommons;
-import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
-import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
 
 /**
  * cette classe change l'état du vaisseau en fonction des entrées du clavier.

@@ -1,11 +1,11 @@
-package net.entetrs.xenon.fonts;
+package net.entetrs.xenon.commons.fonts;
 
 import java.util.Locale;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import net.entetrs.xenon.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.TextureLib;
 
 public final class FontUtils
 {

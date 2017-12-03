@@ -1,4 +1,4 @@
-package net.entetrs.xenon.libs;
+package net.entetrs.xenon.commons.libs;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

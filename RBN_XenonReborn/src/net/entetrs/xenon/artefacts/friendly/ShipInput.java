@@ -1,4 +1,4 @@
-package net.entetrs.xenon.entities.friendly;
+package net.entetrs.xenon.artefacts.friendly;
 
 public interface ShipInput
 {	

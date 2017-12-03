@@ -1,4 +1,4 @@
-package net.entetrs.xenon.entities.friendly;
+package net.entetrs.xenon.artefacts.friendly;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

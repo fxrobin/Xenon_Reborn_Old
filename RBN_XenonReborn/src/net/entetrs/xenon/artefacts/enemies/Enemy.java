@@ -1,4 +1,4 @@
-package net.entetrs.xenon.entities.enemies;
+package net.entetrs.xenon.artefacts.enemies;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;

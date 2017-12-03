@@ -1,10 +1,10 @@
-package net.entetrs.xenon.entities.friendly;
+package net.entetrs.xenon.artefacts.friendly;
 
 import com.badlogic.gdx.audio.Sound;
 
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
-import net.entetrs.xenon.libs.AnimationLib;
-import net.entetrs.xenon.libs.SoundLib;
+import net.entetrs.xenon.commons.libs.AnimationLib;
+import net.entetrs.xenon.commons.libs.SoundLib;
 
 public enum ShootType
 {

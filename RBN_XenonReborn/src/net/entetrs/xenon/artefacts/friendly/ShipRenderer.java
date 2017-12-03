@@ -1,15 +1,15 @@
-package net.entetrs.xenon.entities.friendly;
+package net.entetrs.xenon.artefacts.friendly;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import net.entetrs.xenon.artefacts.friendly.ShipInput.Horizontal;
+import net.entetrs.xenon.artefacts.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.displays.Renderable;
+import net.entetrs.xenon.commons.libs.TextureLib;
 import net.entetrs.xenon.commons.utils.GdxCommons;
-import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
-import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
-import net.entetrs.xenon.libs.TextureLib;
 
 /**
  * cette classe assure le rendu du vaisseau en fonction de son état.

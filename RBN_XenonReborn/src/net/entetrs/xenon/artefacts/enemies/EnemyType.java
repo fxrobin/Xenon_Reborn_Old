@@ -1,11 +1,11 @@
-package net.entetrs.xenon.entities.enemies;
+package net.entetrs.xenon.artefacts.enemies;
 
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
 
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.TextureLib;
 
 public enum EnemyType
 {

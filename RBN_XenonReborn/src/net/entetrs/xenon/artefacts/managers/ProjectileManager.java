@@ -1,4 +1,4 @@
-package net.entetrs.xenon.managers;
+package net.entetrs.xenon.artefacts.managers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,11 +8,11 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.Artefact;
+import net.entetrs.xenon.artefacts.friendly.Ship;
+import net.entetrs.xenon.artefacts.friendly.Shoot;
+import net.entetrs.xenon.artefacts.friendly.ShootType;
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.entities.friendly.Ship;
-import net.entetrs.xenon.entities.friendly.Shoot;
-import net.entetrs.xenon.entities.friendly.ShootType;
-import net.entetrs.xenon.libs.AnimationLib;
+import net.entetrs.xenon.commons.libs.AnimationLib;
 
 public class ProjectileManager
 {

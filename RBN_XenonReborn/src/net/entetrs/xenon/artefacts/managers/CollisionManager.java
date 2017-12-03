@@ -1,4 +1,4 @@
-package net.entetrs.xenon.managers;
+package net.entetrs.xenon.artefacts.managers;
 
 import java.util.List;
 

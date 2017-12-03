@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.libs.TextureLib;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
-import net.entetrs.xenon.libs.TextureLib;
 
 /**
  * affiche un travelling aléatoire d'un fond étoilé.

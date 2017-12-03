@@ -1,4 +1,4 @@
-package net.entetrs.xenon.managers;
+package net.entetrs.xenon.artefacts.managers;
 
 public class ScoreManager
 {

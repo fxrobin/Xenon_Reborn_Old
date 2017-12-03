@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="net.entetrs.xenon.entities.enemies.Enemy" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/entities/enemies/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="net.entetrs.xenon.artefacts.enemies.Enemy" project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/artefacts/enemies/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="250" y="610"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="net.entetrs.xenon.entities.friendly.Ship" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/entities/friendly/Ship.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="net.entetrs.xenon.artefacts.friendly.Ship" project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/artefacts/friendly/Ship.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="610" y="615"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="net.entetrs.xenon.entities.friendly.Shoot" project="RBN_XenonReborn" 
-    file="/RBN_XenonReborn/src/net/entetrs/xenon/entities/friendly/Shoot.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="net.entetrs.xenon.artefacts.friendly.Shoot" project="RBN_XenonReborn" 
+    file="/RBN_XenonReborn/src/net/entetrs/xenon/artefacts/friendly/Shoot.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="892" y="558"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,20 +46,20 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="6">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <realization id="7">    
+  <realization id="6">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
+  <generalization id="7">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
   <generalization id="8">    
-    <end type="SOURCE" refId="5"/>    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <generalization id="9">    
-    <end type="SOURCE" refId="4"/>    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

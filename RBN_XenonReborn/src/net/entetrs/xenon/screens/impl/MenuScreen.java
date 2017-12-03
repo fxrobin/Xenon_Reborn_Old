@@ -13,11 +13,11 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.fonts.FontUtils;
+import net.entetrs.xenon.commons.libs.FontLib;
+import net.entetrs.xenon.commons.libs.SoundLib;
+import net.entetrs.xenon.commons.libs.TextureLib;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
-import net.entetrs.xenon.fonts.FontUtils;
-import net.entetrs.xenon.libs.FontLib;
-import net.entetrs.xenon.libs.SoundLib;
-import net.entetrs.xenon.libs.TextureLib;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.MainControler;
 import net.entetrs.xenon.screens.XenonScreen;

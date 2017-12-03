@@ -1,15 +1,15 @@
-package net.entetrs.xenon.managers;
+package net.entetrs.xenon.artefacts.managers;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import net.entetrs.xenon.artefacts.enemies.Enemy;
+import net.entetrs.xenon.artefacts.enemies.EnemyType;
 import net.entetrs.xenon.commons.displays.Renderable;
+import net.entetrs.xenon.commons.libs.AnimationLib;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
-import net.entetrs.xenon.entities.enemies.Enemy;
-import net.entetrs.xenon.entities.enemies.EnemyType;
-import net.entetrs.xenon.libs.AnimationLib;
 
 public class EnemyManager implements Renderable
 {

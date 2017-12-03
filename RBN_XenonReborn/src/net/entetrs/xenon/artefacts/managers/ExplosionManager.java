@@ -1,4 +1,4 @@
-package net.entetrs.xenon.managers;
+package net.entetrs.xenon.artefacts.managers;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -7,8 +7,8 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
-import net.entetrs.xenon.libs.AnimationLib;
-import net.entetrs.xenon.libs.SoundLib;
+import net.entetrs.xenon.commons.libs.AnimationLib;
+import net.entetrs.xenon.commons.libs.SoundLib;
 import net.entetrs.xenon.screens.impl.BackgroundParallaxScrolling;
 
 public final class ExplosionManager

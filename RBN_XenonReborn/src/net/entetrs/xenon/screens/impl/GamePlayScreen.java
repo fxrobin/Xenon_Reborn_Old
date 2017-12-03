@@ -15,7 +15,6 @@ import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.artefacts.ArtefactsScene;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.entities.friendly.Ship;
-import net.entetrs.xenon.entities.friendly.ShootType;
 import net.entetrs.xenon.fonts.FontUtils;
 import net.entetrs.xenon.libs.FontLib;
 import net.entetrs.xenon.libs.SoundLib;
@@ -107,9 +106,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private void checkInputKeys(float delta)
 	{
-		this.checkFire();
-		ship.checkShield();
-		ship.checkShipMoves(delta);
+		ship.checkShipControls(delta);
 		this.checkEscape();
 		this.scrolling.checkInput();
 		this.checkExtraKeys();
@@ -134,21 +131,6 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		}
 	}
 
-	private void checkFire()
-	{
-		if (!ship.isShieldActivated())
-		{
-			if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT))
-			{
-				ProjectileManager.getInstance().addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
-			}
-			
-			if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT))
-			{
-				ProjectileManager.getInstance().addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
-			}		
-		}	
-	}
 
 	@Override
 	public void show()

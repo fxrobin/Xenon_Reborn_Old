@@ -89,11 +89,11 @@ public class ShipRenderer implements Renderable
 
 	private void updateSpriteForHorizontalMovement()
 	{
-		if (ship.getHorizontalControl() == Horizontal.LEFT)
+		if (ShipHandler.getHorizontalControl() == Horizontal.LEFT)
 		{
 			this.changeCurrentSprite(shipSpriteLeft);
 		}
-		else if (ship.getHorizontalControl() == Horizontal.RIGHT)
+		else if (ShipHandler.getHorizontalControl() == Horizontal.RIGHT)
 		{
 			this.changeCurrentSprite(shipSpriteRight);
 		}
@@ -101,7 +101,7 @@ public class ShipRenderer implements Renderable
 
 	private void updateSpriteForVerticalMovement()
 	{
-		if (ship.getVerticalControl() == Vertical.UP)
+		if (ShipHandler.getVerticalControl() == Vertical.UP)
 		{
 			this.changeCurrentSprite(shipSpriteReactorOn);
 		}

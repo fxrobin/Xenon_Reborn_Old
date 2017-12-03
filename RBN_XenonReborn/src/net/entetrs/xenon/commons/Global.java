@@ -26,6 +26,10 @@ public final class Global
 	 */
 	public static int height = 768; /* NOSONAR */
 
+	public static final float SHIP_SPEED = 400f;
+
+	public static final float SHIP_ACCELLERATION = 20f;
+
 	private Global()
 	{
 		/* protection */

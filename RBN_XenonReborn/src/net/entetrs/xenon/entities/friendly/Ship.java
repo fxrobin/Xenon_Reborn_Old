@@ -54,10 +54,10 @@ public class Ship extends AbstractArtefact
 		}
 	}
 
-	public void checkShipControls(float delta)
+	@Override
+	public void act(float delta)
 	{
-		ShipHandler.handle(this);
-		this.act(delta);
+		super.act(delta);
 		this.controlPosition();
 	}
 

@@ -15,6 +15,7 @@ import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.artefacts.ArtefactsScene;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.entities.friendly.Ship;
+import net.entetrs.xenon.entities.friendly.ShipHandler;
 import net.entetrs.xenon.fonts.FontUtils;
 import net.entetrs.xenon.libs.FontLib;
 import net.entetrs.xenon.libs.SoundLib;
@@ -106,7 +107,9 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private void checkInputKeys(float delta)
 	{
-		ship.checkShipControls(delta);
+		ShipHandler.handle(ship);
+		ship.act(delta);
+		ProjectileManager.checkFire(ship);
 		this.checkEscape();
 		this.scrolling.checkInput();
 		this.checkExtraKeys();

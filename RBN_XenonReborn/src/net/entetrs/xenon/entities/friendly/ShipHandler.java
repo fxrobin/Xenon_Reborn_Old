@@ -7,7 +7,6 @@ import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
-import net.entetrs.xenon.managers.ProjectileManager;
 
 /**
  * cette classe change l'état du vaisseau en fonction des entrées du clavier.
@@ -41,7 +40,6 @@ public final class ShipHandler
 		checkVerticalMove(ship);
 		checkHorizontalMove(ship);
 		checkShield(ship);
-		checkFire(ship);
 		handleInertia(ship);
 	}
 	
@@ -127,23 +125,5 @@ public final class ShipHandler
 		{
 			ship.switchShield();
 		}
-	}
-	
-	private static void checkFire(Ship ship)
-	{
-		if (!ship.isShieldActivated())
-		{
-			if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT))
-			{
-				ProjectileManager.getInstance().addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
-			}
-			
-			if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT))
-			{
-				ProjectileManager.getInstance().addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
-			}		
-		}	
-	}
-	
-
+	}	
 }

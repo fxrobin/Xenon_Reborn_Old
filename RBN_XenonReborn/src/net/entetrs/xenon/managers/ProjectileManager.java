@@ -3,10 +3,13 @@ package net.entetrs.xenon.managers;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.entities.friendly.Ship;
 import net.entetrs.xenon.entities.friendly.Shoot;
 import net.entetrs.xenon.entities.friendly.ShootType;
 import net.entetrs.xenon.libs.AnimationLib;
@@ -20,6 +23,22 @@ public class ProjectileManager
 	public static ProjectileManager getInstance()
 	{
 		return pm;
+	}
+	
+	public static void checkFire(Ship ship)
+	{
+		if (!ship.isShieldActivated())
+		{
+			if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT))
+			{
+				pm.addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
+			}
+			
+			if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT))
+			{
+				pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
+			}		
+		}	
 	}
 
 	public void renderShoots(SpriteBatch batch, float delta)

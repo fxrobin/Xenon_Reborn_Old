@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.artefacts.AbstractArtefact;
 import net.entetrs.xenon.commons.Global;
@@ -25,17 +24,12 @@ public class Ship extends AbstractArtefact
 
 	private boolean shieldActivated = false;
 
-	private float vX = 0;
-	private float vY = 0;
-
-	private Circle boundingCircle;
 
 	public Ship()
 	{
-		super(60, 20);
-		boundingCircle = new Circle();
+		super(0,0, 60, 20);
 		shipRenderer = new ShipRenderer(this);
-		boundingCircle.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2);
+		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2);
 	}
 
 	public float getCenterX()
@@ -85,40 +79,34 @@ public class Ship extends AbstractArtefact
 
 	private void translateShip(float delta)
 	{
-		shipRenderer.getCurrentSprite().translateX(delta * vX);
-		shipRenderer.getCurrentSprite().translateY(delta * vY);
+		this.act(delta);
 		this.controlPosition();
 	}
 
 	private void handleInertia()
 	{
+		float vX=this.getVectorX();
+		float vY=this.getVectorY();
+		
 		if (this.hControl == Horizontal.NONE)
 		{
-			vX = this.computeInertia(vX);
+			this.setVectorX(this.computeInertia(vX));
 		}
 
 		if (this.vControl == Vertical.NONE)
 		{
-			vY = this.computeInertia(vY);
+			this.setVectorY(this.computeInertia(vY));
 		}
 	}
 
 	private void controlPosition()
 	{
 		Sprite currentSprite = shipRenderer.getCurrentSprite();
-
 		if (currentSprite.getX() < 0) currentSprite.setX(0);
 		if (currentSprite.getY() < 80) currentSprite.setY(80);
 		if (currentSprite.getX() > Global.width - currentSprite.getWidth()) currentSprite.setX(Global.width - currentSprite.getWidth());
 		if (currentSprite.getY() > Global.height - currentSprite.getHeight()) currentSprite.setY(Global.height - currentSprite.getHeight());
-
-		computeBoundingCircle();
-	}
-
-	private void computeBoundingCircle()
-	{
-		boundingCircle.setX(this.getCenterX());
-		boundingCircle.setY(this.getCenterY());
+		GdxCommons.computeBoundingCircle(currentSprite, getBoundingCircle());
 	}
 
 	private float computeInertia(float v)
@@ -141,18 +129,20 @@ public class Ship extends AbstractArtefact
 
 		/* précondition au mouvement : que les 2 touches ne soient pas enfoncées */
 		if (GdxCommons.checkConcurrentKeys(Keys.LEFT, Keys.RIGHT)) return;
+		
+		float vX=this.getVectorX();
 
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
 		{
 			this.hControl = Horizontal.LEFT;
 			vX -= SHIP_ACCELLERATION;
-			vX = (vX < -SHIP_SPEED) ? -SHIP_SPEED : vX;
+			this.setVectorX(vX < -SHIP_SPEED ? -SHIP_SPEED : vX);
 		}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
 			this.hControl = Horizontal.RIGHT;
 			vX += SHIP_ACCELLERATION;
-			vX = (vX > SHIP_SPEED) ? SHIP_SPEED : vX;
+			this.setVectorX(vX > SHIP_SPEED ? SHIP_SPEED : vX);
 		}
 	}
 
@@ -161,18 +151,20 @@ public class Ship extends AbstractArtefact
 		this.vControl = Vertical.NONE;
 		/* précondition au mouvement : que les 2 touches ne soient pas enfoncées */
 		if (GdxCommons.checkConcurrentKeys(Keys.UP, Keys.DOWN)) return;
+		
+		float vY=this.getVectorY();
 
 		if (Gdx.input.isKeyPressed(Keys.UP))
 		{
 			this.vControl = Vertical.UP;
 			vY += SHIP_ACCELLERATION;
-			vY = (vY > SHIP_SPEED) ? SHIP_SPEED : vY;
+			this.setVectorY(vY > SHIP_SPEED ? SHIP_SPEED : vY);
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))
 		{
 			this.vControl = Vertical.DOWN;
 			vY -= SHIP_ACCELLERATION;
-			vY = (vY < -SHIP_SPEED) ? -SHIP_SPEED : vY;
+			this.setVectorY(vY < -SHIP_SPEED ? -SHIP_SPEED : vY);
 		}
 	}
 
@@ -206,12 +198,5 @@ public class Ship extends AbstractArtefact
 	{
 		return this.shipRenderer.getCurrentSprite();
 	}
-
-	@Override
-	public Circle getBoundingCircle()
-	{
-		return this.getBoundingCircle();
-	}
-
 
 }

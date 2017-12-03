@@ -1,6 +1,9 @@
 package net.entetrs.xenon.artefacts;
 
+import com.badlogic.gdx.math.Circle;
+
 import net.entetrs.xenon.commons.displays.Renderable;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
  * représente un artefact de base doté d'une force de vie (lifeForce) et d'une
@@ -20,6 +23,22 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	 * force d'impact à appliquer lors des collisions.
 	 */
 	private final int impactForce;
+	
+	/**
+	 * vitesse de dépaclement sur l'axe des X.
+	 */
+	private float vectorX;
+	
+	/**
+	 * vitesse de déplacement sur l'axe des Y.
+	 */
+	private float vectorY;
+	
+	/**
+	 * cercle de détection des collisions.
+	 * 
+	 */
+	private Circle boundingCircle;
 
 	/**
 	 * construit un artefact doté d'une force de vie (lifeForce) et d'une force
@@ -28,11 +47,13 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	 * @param lifeForce
 	 * @param impactForce
 	 */
-	public AbstractArtefact(final int lifeForce, final int impactForce)
+	public AbstractArtefact(final float vectorX, final float vectorY, final int lifeForce, final int impactForce)
 	{
 		this.lifePoints = lifeForce;
 		this.impactForce = impactForce;
-
+		this.vectorX = vectorX;
+		this.vectorY = vectorY;
+		boundingCircle = new Circle();
 	}
 
 	/**
@@ -41,7 +62,7 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	 * @param deltaX
 	 *            décallage à appliquer.
 	 */
-	public void translateX(final float deltaX)
+	private void translateX(final float deltaX)
 	{
 		this.getSprite().translateX(deltaX);
 	}
@@ -52,9 +73,17 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	 * @param deltaY
 	 *            décallage à appliquer.
 	 */
-	public void translateY(final float deltaY)
+	private void translateY(final float deltaY)
 	{
 		this.getSprite().translateY(deltaY);
+	}
+	
+	
+	public void act(float delta)
+	{
+		this.translateX(delta * vectorX);
+		this.translateY(delta * vectorY);
+		GdxCommons.computeBoundingCircle(getSprite(), getBoundingCircle());
 	}
 
 	/**
@@ -92,4 +121,42 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	{
 		return lifePoints > 0;
 	}
+	
+	public float getVectorX()
+	{
+		return vectorX;
+	}
+	
+	public float getVectorY()
+	{
+		return vectorY;
+	}
+	
+	public void setVectorX(float vectorX)
+	{
+		this.vectorX = vectorX;
+	}
+	
+	public void setVectorY(float vectorY)
+	{
+		this.vectorY = vectorY;
+	}
+	
+	public void setLifePoints(int lifePoints)
+	{
+		this.lifePoints = lifePoints;
+	}
+	
+	@Override
+	public Circle getBoundingCircle()
+	{
+		return this.boundingCircle;
+	}
+	
+	public void setRadius(float radius)
+	{
+		this.boundingCircle.setRadius(radius);	
+	}
+	
+	
 }

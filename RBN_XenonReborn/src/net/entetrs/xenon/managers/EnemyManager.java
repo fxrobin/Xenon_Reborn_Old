@@ -25,7 +25,7 @@ public class EnemyManager implements Renderable
 
 	public void generateEnemies(float delta)
 	{
-		if (deltaTimeAccumulator.addAndCheck(delta)) 
+		if (deltaTimeAccumulator.addAndCheck(delta))
 		{
 			/* on génère 5 enemis toutes les 4 secondes */
 			for (int i = 0; i < 4; i++)
@@ -36,10 +36,10 @@ public class EnemyManager implements Renderable
 		}
 	}
 
-	public void translateEnemies(float delta)
+	public void act(float delta)
 	{
 		enemies.forEach(e -> {
-			e.move(delta);
+			e.act(delta);
 			if (!e.isAlive()) ExplosionManager.addExplosion(e.getX(), e.getY(), AnimationLib.EXPLOSION_BIG);
 		});
 		enemies.removeIf(e -> e.getY() < -e.getHeight() || !e.isAlive());
@@ -54,7 +54,7 @@ public class EnemyManager implements Renderable
 	public void render(SpriteBatch batch, float delta)
 	{
 		enemies.forEach(e -> {
-			if (e.isAlive()) e.draw(batch);
+			if (e.isAlive()) e.render(batch);
 		});
 	}
 

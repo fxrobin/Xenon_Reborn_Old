@@ -3,120 +3,72 @@ package net.entetrs.xenon.entities.enemies;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.artefacts.Artefact;
-import net.entetrs.xenon.commons.utils.GdxCommons;
+import net.entetrs.xenon.artefacts.AbstractArtefact;
 
 /**
- * classe à revoir pour qu'elle hérite de AbstractArtefact et qu'elle encapsule "Sprite", voire "Animated Sprite".
- * Et un EnemyRenderer à terme ...
- * 
+ * réprésente un ennemie.
  * 
  * @author robin
  *
  */
 
-public class Enemy extends Sprite implements Artefact
+public class Enemy extends AbstractArtefact
 {
-	
-	private float vX;
-	private float vY;
-	private Circle boundingCircle;
-	private int force;
-	private int impactForce; 
+	private Sprite sprite;
 
-	public Enemy(Texture texture, int force, int impactForce)
+	public Enemy(Texture texture, int force, int impactForce, float radius)
 	{
-		super(texture);
-		boundingCircle = new Circle();
-		boundingCircle.setRadius(texture.getWidth() / 2f);
-		this.force = force;
-		this.impactForce = impactForce;
-	}
-
-	
-
-	public void move(float delta)
-	{
-		this.setX(this.getX() + (getvX() * delta));
-		this.setY(this.getY() + (getvY() * delta));
-		boundingCircle.setX(GdxCommons.getCenterX(this));
-		boundingCircle.setY(GdxCommons.getCenterY(this));
-	}
-
-	@Override
-	public Circle getBoundingCircle()
-	{
-		return boundingCircle;
-	}
-
-	@Override
-	public void decreaseLife(int impactForce)
-	{
-		force = force - impactForce;
-	}
-
-	@Override
-	public boolean isAlive()
-	{
-		return force > 0;
-	}
-
-	@Override
-	public int getImpactForce()
-	{
-		return this.impactForce;
+		super(0,0,force, impactForce);
+		sprite = new Sprite(texture);
+		this.setRadius(radius);
 	}
 
 	@Override
 	public Sprite getSprite()
 	{
-		return this;
+		return this.sprite;
 	}
-
-
-
-	public float getvX()
-	{
-		return vX;
-	}
-
-
-
-	public void setvX(float vX)
-	{
-		this.vX = vX;
-	}
-
-
-
-	public float getvY()
-	{
-		return vY;
-	}
-
-
-
-	public void setvY(float vY)
-	{
-		this.vY = vY;
-	}
-
-
 
 	@Override
 	public void render(SpriteBatch batch, float delta)
 	{
-		this.draw(batch);
+		sprite.draw(batch);
 	}
 
-
-
-	@Override
-	public int getLifePoints()
+	public void setOriginCenter()
 	{
-		return this.force;
+		sprite.setOriginCenter();
+	}
+
+	public void setX(float x)
+	{
+		sprite.setX(x);
+	}
+
+	public void setY(float y)
+	{
+		sprite.setY(y);
+	}
+
+	public float getX()
+	{
+		return sprite.getX();
+	}
+
+	public float getY()
+	{
+		return sprite.getY();
+	}
+
+	public float getHeight()
+	{
+		return sprite.getHeight();
+	}
+
+	public void render(SpriteBatch batch)
+	{
+		sprite.draw(batch);	
 	}
 
 }

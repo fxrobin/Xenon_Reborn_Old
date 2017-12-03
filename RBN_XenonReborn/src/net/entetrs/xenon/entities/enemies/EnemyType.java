@@ -2,6 +2,8 @@ package net.entetrs.xenon.entities.enemies;
 
 import java.util.Random;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.libs.TextureLib;
 
@@ -54,8 +56,8 @@ public enum EnemyType
 		e.setOriginCenter();
 		e.setX((float) Math.random() * Global.width);
 		e.setY((float) Math.random() * 100 + Global.height);
-		e.setvX((float) Math.random() * 200f - 100);
-		e.setvY(-((float) Math.random() * 500f + 100f));
+		e.setVectorX((float) Math.random() * 200f - 100);
+		e.setVectorY(-((float) Math.random() * 500f + 100f));
 	}
 
 	private static Enemy selectRandom()
@@ -63,7 +65,8 @@ public enum EnemyType
 		Random randomGenerator = new Random();
 		int choosen = randomGenerator.nextInt(EnemyType.values().length);
 		EnemyType enemyType = EnemyType.values()[choosen];	
-		return new Enemy(enemyType.getTextureRef().get(), enemyType.getLifeForce(), enemyType.getImpactForce());
+		Texture texture = enemyType.getTextureRef().get();
+		return new Enemy(texture, enemyType.getLifeForce(), enemyType.getImpactForce(), texture.getWidth() / 2f);
 	}
 	
 }

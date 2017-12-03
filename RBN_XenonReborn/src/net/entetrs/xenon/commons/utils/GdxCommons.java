@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.utils.Disposable;
 
 /**
@@ -85,6 +86,12 @@ public final class GdxCommons
 	public static void applyAlpha(Sprite s, float alpha)
 	{
 		s.setColor(s.getColor().r, s.getColor().g, s.getColor().b, alpha);
+	}
+	
+	public static void computeBoundingCircle(Sprite sprite, Circle boundingCircle)
+	{
+		boundingCircle.setX(getCenterX(sprite));
+		boundingCircle.setY(getCenterY(sprite));
 	}
 
 }

@@ -102,7 +102,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private void translateWorld(float delta)
 	{
-		em.translateEnemies(delta);
+		em.act(delta);
 	}
 
 	private void checkInputKeys(float delta)

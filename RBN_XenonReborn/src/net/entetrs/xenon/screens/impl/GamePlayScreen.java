@@ -27,6 +27,7 @@ import net.entetrs.xenon.commons.libs.SoundLib;
 import net.entetrs.xenon.commons.libs.TextureLib;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.MainControler;
+import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
 
 public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
@@ -40,9 +41,9 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private CollisionManager cm;
 	private Ship ship;
 
-	public GamePlayScreen(SpriteBatch batch)
+	public GamePlayScreen(XenonControler controler, SpriteBatch batch)
 	{
-		super(batch);
+		super(controler, batch);
 		log.info("Instanciation de GamePlay");
 		scrolling = BackgroundParallaxScrolling.getInstance();
 		scrolling.init(batch);
@@ -130,7 +131,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
 		{
 			SoundLib.CLIC.play();
-			MainControler.getInstance().showScreen(XenonScreen.MENU);
+			this.getControler().showScreen(XenonScreen.MENU);
 		}
 	}
 

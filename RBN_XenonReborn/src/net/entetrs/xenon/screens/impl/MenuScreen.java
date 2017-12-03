@@ -20,6 +20,7 @@ import net.entetrs.xenon.commons.libs.TextureLib;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.MainControler;
+import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
 
 public class MenuScreen extends AbstractScreen
@@ -28,8 +29,6 @@ public class MenuScreen extends AbstractScreen
 	private static final int MSG_WIDTH = FontUtils.getWidth(MSG);
 
 	private Log log = LogFactory.getLog(this.getClass());
-
-	private MainControler ctrl = MainControler.getInstance();
 
 	private BackgroundTravelling backgroundTravelling;
 	private DeltaTimeAccumulator accumulator = new DeltaTimeAccumulator(1);
@@ -43,9 +42,9 @@ public class MenuScreen extends AbstractScreen
 	private DisplayMode currentMode;
 	private GlyphLayout layout;
 
-	public MenuScreen(SpriteBatch batch)
+	public MenuScreen(XenonControler controler, SpriteBatch batch)
 	{
-		super(batch);
+		super(controler, batch);
 		log.info("Instanciation de MenuScreen");
 		backgroundTravelling = new BackgroundTravelling();
 		titleTexture = TextureLib.TITLE.get();
@@ -130,7 +129,7 @@ public class MenuScreen extends AbstractScreen
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
 		{
 			SoundLib.CLIC.play();
-			ctrl.showScreen(XenonScreen.GAME_PLAY);
+			this.getControler().showScreen(XenonScreen.GAME_PLAY);
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Keys.F1))

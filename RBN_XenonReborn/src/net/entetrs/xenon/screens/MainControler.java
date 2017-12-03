@@ -3,15 +3,9 @@ package net.entetrs.xenon.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.artefacts.Artefact;
-import net.entetrs.xenon.artefacts.ArtefactsScene;
 import net.entetrs.xenon.commons.displays.Fader;
 import net.entetrs.xenon.commons.displays.Fader.State;
 import net.entetrs.xenon.commons.utils.GdxCommons;
@@ -24,13 +18,10 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
  * @author CDT RBN
  *
  */
-public final class MainControler extends Game
+public final class MainControler extends Game implements XenonControler
 {
 	/* pour dessiner des texture et sprites à l'écran */
 	private SpriteBatch batch;
-
-	/* pour dessiner des cercles (bounding circles) à l'écran */
-	private ShapeRenderer shapeRenderer;
 
 	/* écran courant */
 	private Screen currentScreen;
@@ -59,7 +50,6 @@ public final class MainControler extends Game
 		batch = new SpriteBatch();
 		batch.enableBlending();
 		fader = Fader.getInstance();
-		shapeRenderer = new ShapeRenderer();
 		this.showScreen(XenonScreen.MENU);
 		this.fade();
 	}
@@ -81,13 +71,14 @@ public final class MainControler extends Game
 	}
 
 
+	@Override
 	public void showScreen(XenonScreen screen)
 	{
 		if (currentScreen != null)
 		{
 			fader.startFadeOut();
 		}
-		currentScreen = screen.createScreen(this.batch);
+		currentScreen = screen.createScreen(this, this.batch);
 	}
 
 	private void fade()
@@ -102,22 +93,4 @@ public final class MainControler extends Game
 			fader.fade();
 		}
 	}
-
-	
-	public void showBoundingCircles()
-	{
-		if (this.getScreen() instanceof ArtefactsScene)
-		{
-			shapeRenderer.begin(ShapeType.Line);
-			shapeRenderer.setColor(Color.RED);
-			ArtefactsScene as = (ArtefactsScene) this.getScreen();
-			for (Artefact a : as.getArtefacts())
-			{
-				Circle c = a.getBoundingCircle();
-				shapeRenderer.circle(c.x, c.y, c.radius);
-			}
-			shapeRenderer.end();
-		}
-	}
-
 }

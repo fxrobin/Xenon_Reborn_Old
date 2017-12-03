@@ -1,6 +1,6 @@
 package net.entetrs.xenon.screens;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,15 +19,15 @@ public enum XenonScreen
 {
 	MENU(MenuScreen::new), GAME_PLAY(GamePlayScreen::new);
 
-	private Function<SpriteBatch,Screen> supplier;
+	private BiFunction<XenonControler,SpriteBatch,Screen> supplier;
 
-	private XenonScreen(Function<SpriteBatch, Screen> supplier)
+	private XenonScreen(BiFunction<XenonControler,SpriteBatch,Screen> supplier)
 	{
 		this.supplier = supplier;
 	}
 
-	public Screen createScreen(SpriteBatch batch)
+	public Screen createScreen(XenonControler controler, SpriteBatch batch)
 	{
-		return supplier.apply(batch);
+		return supplier.apply(controler,batch);
 	}
 }

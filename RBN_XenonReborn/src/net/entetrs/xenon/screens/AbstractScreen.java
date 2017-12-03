@@ -11,9 +11,11 @@ public abstract class AbstractScreen implements Screen
 	private final Log log = LogFactory.getLog(AbstractScreen.class);
 	
 	private final SpriteBatch batch;
+	private XenonControler controler;
 	
-	public AbstractScreen(SpriteBatch batch)
+	public AbstractScreen(XenonControler controler, SpriteBatch batch)
 	{
+		this.controler =  controler;
 		this.batch = batch;
 	}
 	
@@ -22,6 +24,10 @@ public abstract class AbstractScreen implements Screen
 		return batch;
 	}
 	
+	public XenonControler getControler()
+	{
+		return controler;
+	}
 	
 
 	@Override

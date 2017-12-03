@@ -9,10 +9,22 @@ import net.entetrs.xenon.entities.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.entities.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.managers.ProjectileManager;
 
-public class ShipHandler
+/**
+ * cette classe change l'état du vaisseau en fonction des entrées du clavier.
+ * cette classe génère les tirs.
+ * 
+ * @author robin
+ *
+ */
+public final class ShipHandler
 {
 	private static Horizontal hControl;
 	private static Vertical vControl;
+	
+	private ShipHandler()
+	{
+		// protection
+	}
 	
 	public static Horizontal getHorizontalControl()
 	{

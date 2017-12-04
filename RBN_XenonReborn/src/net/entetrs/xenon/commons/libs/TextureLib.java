@@ -23,6 +23,7 @@ public enum TextureLib implements Disposable
 	ENEMY("enemies/enemy.png"), 
 	BUG("enemies/bug.png"), 
 	PERFORATOR("enemies/perforator.png"),
+	BIG_ENEMY("enemies/big-enemy.png"),
 
 	FONT_AZ("fonts/font-AZ.png"), 
 	FONT_09("fonts/font-09.png");

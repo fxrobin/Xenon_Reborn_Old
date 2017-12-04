@@ -15,6 +15,7 @@ import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.artefacts.ArtefactsScene;
 import net.entetrs.xenon.artefacts.friendly.Ship;
 import net.entetrs.xenon.artefacts.friendly.ShipHandler;
+import net.entetrs.xenon.artefacts.managers.BonusManager;
 import net.entetrs.xenon.artefacts.managers.CollisionManager;
 import net.entetrs.xenon.artefacts.managers.EnemyManager;
 import net.entetrs.xenon.artefacts.managers.ExplosionManager;
@@ -68,6 +69,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.scrolling.render(delta);
 		this.renderShoots(batch, delta);
 		this.em.render(batch, delta);
+		BonusManager.getInstance().render(this.getBatch(), delta);
 		this.renderShip(delta);
 		ExplosionManager.render(batch, delta);
 		this.renderStatusBar();

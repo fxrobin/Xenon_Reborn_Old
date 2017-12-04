@@ -1,12 +1,15 @@
 package net.entetrs.xenon.artefacts.managers;
 
 import java.util.List;
+import java.util.Random;
 
 import net.entetrs.xenon.artefacts.Artefact;
+import net.entetrs.xenon.artefacts.extra.BonusType;
 
 public final class CollisionManager
 {
 	private static CollisionManager instance = new CollisionManager();
+	private static Random randomGenerator = new Random();
 
 	public static CollisionManager getInstance()
 	{
@@ -34,6 +37,12 @@ public final class CollisionManager
 					if (!t.isAlive())
 					{
 						ScoreManager.getInstance().add(10);
+						// random bonus.
+						if (randomGenerator.nextBoolean())
+						{
+							BonusManager.getInstance().addBonus(BonusType.NORMAL_BONUS, t.getBoundingCircle().x, t.getBoundingCircle().y);
+						}
+						
 					}
 				}
 			}

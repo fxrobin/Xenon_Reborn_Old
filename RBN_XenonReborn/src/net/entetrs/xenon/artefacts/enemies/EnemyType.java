@@ -11,7 +11,8 @@ public enum EnemyType
 {
 	NORMAL(TextureLib.ENEMY, 10,10),
 	BUG(TextureLib.BUG, 10,10),
-	PERFORATOR(TextureLib.PERFORATOR, 10,10);
+	PERFORATOR(TextureLib.PERFORATOR, 10,10),
+	BIG_ENEMY(TextureLib.BIG_ENEMY, 20, 20);
 	
 	private TextureLib textureRef;
 	private int lifeForce;

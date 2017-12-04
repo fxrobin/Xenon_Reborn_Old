@@ -28,7 +28,7 @@ public class EnemyManager implements Renderable
 		if (deltaTimeAccumulator.addAndCheck(delta))
 		{
 			/* on génère 5 enemis toutes les 4 secondes */
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				Enemy e = EnemyType.random();
 				enemies.add(e);

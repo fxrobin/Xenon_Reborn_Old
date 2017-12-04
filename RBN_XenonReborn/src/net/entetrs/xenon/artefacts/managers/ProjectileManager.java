@@ -52,8 +52,10 @@ public class ProjectileManager
 
 	public void addShoot(ShootType shootType, float centerX, float centerY)
 	{
+		// on va décaller le tir au hasard un peu à droite ou un peu à gauche.
+		float decallage = (float) Math.random() * 8f - 2f; 
 		Shoot s = new Shoot(shootType.createAnimatedSprite(), shootType.getLifeForce(), shootType.getImpactForce(), shootType.getVX(), shootType.getVY());
-		s.getSprite().setCenter(centerX, centerY);
+		s.getSprite().setCenter(centerX + decallage, centerY);
 		shoots.add(s);
 		shootType.getSound().play();
 	}

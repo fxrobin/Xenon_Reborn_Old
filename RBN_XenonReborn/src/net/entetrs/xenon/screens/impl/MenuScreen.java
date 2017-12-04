@@ -19,7 +19,6 @@ import net.entetrs.xenon.commons.libs.SoundLib;
 import net.entetrs.xenon.commons.libs.TextureLib;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.screens.AbstractScreen;
-import net.entetrs.xenon.screens.MainControler;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
 

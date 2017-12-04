@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import net.entetrs.xenon.artefacts.ArtefactData;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.libs.TextureLib;
 
@@ -15,24 +16,24 @@ public enum EnemyType
 	BIG_ENEMY(TextureLib.BIG_ENEMY, 20, 20);
 	
 	private TextureLib textureRef;
-	private int lifeForce;
-	private int impactForce;
+
+	private ArtefactData data;
+	
 	
 	private EnemyType(TextureLib textureRef, int lifeForce, int impactForce)
 	{
 		this.textureRef = textureRef;
-		this.lifeForce = lifeForce;
-		this.impactForce = impactForce;
+		data = new ArtefactData(lifeForce, impactForce, 0, 0);
 	}
 	
 	public int getImpactForce()
 	{
-		return impactForce;
+		return data.getImpactForce();
 	}
 	
 	public int getLifeForce()
 	{
-		return lifeForce;
+		return data.getLifePoints();
 	}
 	
 	public TextureLib getTextureRef()

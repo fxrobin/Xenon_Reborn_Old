@@ -14,25 +14,7 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
  */
 public abstract class AbstractArtefact implements Artefact, Renderable
 {
-	/**
-	 * points de vie de l'artefact.
-	 */
-	private int lifePoints;
-	
-	/**
-	 * force d'impact à appliquer lors des collisions.
-	 */
-	private final int impactForce;
-	
-	/**
-	 * vitesse de dépaclement sur l'axe des X.
-	 */
-	private float vectorX;
-	
-	/**
-	 * vitesse de déplacement sur l'axe des Y.
-	 */
-	private float vectorY;
+	private ArtefactData data;
 	
 	/**
 	 * cercle de détection des collisions.
@@ -44,15 +26,12 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	 * construit un artefact doté d'une force de vie (lifeForce) et d'une force
 	 * d'impact (impactForce).
 	 * 
-	 * @param lifeForce
+	 * @param lifePoints
 	 * @param impactForce
 	 */
-	public AbstractArtefact(final float vectorX, final float vectorY, final int lifeForce, final int impactForce)
+	public AbstractArtefact(final float vectorX, final float vectorY, final int lifePoints, final int impactForce)
 	{
-		this.lifePoints = lifeForce;
-		this.impactForce = impactForce;
-		this.vectorX = vectorX;
-		this.vectorY = vectorY;
+		data = new ArtefactData(lifePoints, impactForce, vectorX, vectorY);
 		boundingCircle = new Circle();
 	}
 
@@ -82,8 +61,8 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	@Override
 	public void act(float delta)
 	{
-		this.translateX(delta * vectorX);
-		this.translateY(delta * vectorY);
+		this.translateX(delta * data.getVectorX());
+		this.translateY(delta * data.getVectorY());
 		GdxCommons.computeBoundingCircle(getSprite(), getBoundingCircle());
 	}
 
@@ -93,7 +72,8 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	@Override
 	public void decreaseLife(final int force)
 	{
-		this.lifePoints -= force;
+		int newLifePoints = data.getLifePoints() - force ;
+		data.setLifePoints(newLifePoints);
 	}
 	
 	/**
@@ -102,7 +82,7 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	@Override
 	public int getLifePoints()
 	{
-		return lifePoints;
+		return data.getLifePoints();
 	}
 
 	/**
@@ -111,7 +91,7 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	@Override
 	public int getImpactForce()
 	{
-		return impactForce;
+		return data.getImpactForce();
 	}
 
 	/**
@@ -120,37 +100,37 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 	@Override
 	public boolean isAlive()
 	{
-		return lifePoints > 0;
+		return data.getLifePoints() > 0;
 	}
 	
 	@Override
 	public float getVectorX()
 	{
-		return vectorX;
+		return data.getVectorX();
 	}
 	
 	@Override
 	public float getVectorY()
 	{
-		return vectorY;
+		return data.getVectorY();
 	}
 	
 	@Override
 	public void setVectorX(float vectorX)
 	{
-		this.vectorX = vectorX;
+		data.setVectorX(vectorX);
 	}
 	
 	@Override
 	public void setVectorY(float vectorY)
 	{
-		this.vectorY = vectorY;
+		data.setVectorY(vectorY);
 	}
 	
 	@Override
 	public void setLifePoints(int lifePoints)
 	{
-		this.lifePoints = lifePoints;
+		data.setLifePoints(lifePoints);
 	}
 	
 	@Override

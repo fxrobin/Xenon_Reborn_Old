@@ -2,29 +2,25 @@ package net.entetrs.xenon.artefacts.extra;
 
 import com.badlogic.gdx.audio.Sound;
 
+import net.entetrs.xenon.artefacts.ArtefactData;
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
 import net.entetrs.xenon.commons.libs.AnimationLib;
 
 public enum BonusType
-{NORMAL_BONUS(AnimationLib.BONUS, 0, -60f, null, 5, 5);
+{
+	NORMAL_BONUS(AnimationLib.BONUS, 0, -60f, null, 5, 5);
 
 	private final AnimationLib anim;
-	private final float vX;
-	private final float vY;
 	private final Sound sound;
-	private final int lifeForce;
-	private final int impactForce;
+	private ArtefactData data;
 
-	private BonusType(AnimationLib anim, float vX, float vY, Sound sound, int lifeForce, int impactForce)
+	private BonusType(AnimationLib anim, float vectorX, float vectorY, Sound sound, int lifePoints, int impactForce)
 	{
 		this.anim = anim;
-		this.vX = vX;
-		this.vY = vY;
 		this.sound = sound;
-		this.lifeForce = lifeForce;
-		this.impactForce = impactForce;
+		this.data = new ArtefactData(lifePoints, impactForce, vectorX, vectorY);
 	}
-	
+
 	public AnimatedSprite createAnimatedSprite()
 	{
 		return anim.createAnimatedSprite();
@@ -32,22 +28,22 @@ public enum BonusType
 
 	public float getVX()
 	{
-		return vX;
+		return data.getVectorX();
 	}
 
 	public float getVY()
 	{
-		return vY;
+		return data.getVectorY();
 	}
 
 	public int getLifeForce()
 	{
-		return lifeForce;
+		return data.getLifePoints();
 	}
 
 	public int getImpactForce()
 	{
-		return impactForce;
+		return data.getImpactForce();
 	}
 
 	public Sound getSound()

@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.artefacts.extra.Bonus;
 import net.entetrs.xenon.artefacts.extra.BonusType;
+import net.entetrs.xenon.artefacts.friendly.Ship;
+import net.entetrs.xenon.commons.libs.SoundLib;
 
 public class BonusManager
 {
@@ -40,8 +42,20 @@ public class BonusManager
 		{
 			bonus.render(batch, delta);
 			System.out.printf("acting .. & affichage %f,%f %n", bonus.getSprite().getX(), bonus.getSprite().getY());
+			
 		}
-		
-		// bonuses.removeIf(e -> e.getBoundingCircle().x < -e.getBoundingCircle().radius || !e.isAlive());
+		bonuses.removeIf(e -> e.getBoundingCircle().x < -e.getBoundingCircle().radius || !e.isAlive());
+	}
+	
+	public void checkBonus(Ship ship)
+	{
+		for(Artefact bonus : bonuses)
+		{
+			if (bonus.isCollision(ship))
+			{
+				bonus.decreaseLife(100); // on tue le bonus...
+				SoundLib.BONUS.play();
+			}
+		}
 	}
 }

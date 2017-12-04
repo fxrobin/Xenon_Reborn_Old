@@ -18,7 +18,8 @@ public enum SoundLib implements Disposable
 	CLIC("clic.wav"), 
 	EXPLOSION("explosion.wav"), 
 	INTRO("intro.mp3"), 
-	MUSIC("music.mp3");
+	MUSIC("music.mp3"),
+	BONUS("bonus.wav");
 
 	private Log log = LogFactory.getLog(this.getClass());
 	private Sound sound;

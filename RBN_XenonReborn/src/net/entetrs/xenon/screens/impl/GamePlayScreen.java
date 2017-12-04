@@ -60,6 +60,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		List<Artefact> allPlayerObjects = new LinkedList<>(ProjectileManager.getInstance().getShoots());
 		allPlayerObjects.add(ship);
 		cm.checkCollision(em.getEnemies(), allPlayerObjects);
+		BonusManager.getInstance().checkBonus(ship);
 		this.renderWorld(delta);
 	}
 

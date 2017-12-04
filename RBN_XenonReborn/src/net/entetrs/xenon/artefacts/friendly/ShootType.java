@@ -2,6 +2,7 @@ package net.entetrs.xenon.artefacts.friendly;
 
 import com.badlogic.gdx.audio.Sound;
 
+import net.entetrs.xenon.artefacts.ArtefactData;
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
 import net.entetrs.xenon.commons.libs.AnimationLib;
 import net.entetrs.xenon.commons.libs.SoundLib;
@@ -12,20 +13,14 @@ public enum ShootType
 	BIG_FLAMES(AnimationLib.FRIENDLY_BIGSHOOT, 0, 300f, SoundLib.BIG_SHOOT.getSound(), 30, 20);
 
 	private final AnimationLib anim;
-	private final float vX;
-	private final float vY;
 	private final Sound sound;
-	private final int lifeForce;
-	private final int impactForce;
-
+	private ArtefactData data;
+	
 	private ShootType(AnimationLib anim, float vX, float vY, Sound sound, int lifeForce, int impactForce)
 	{
 		this.anim = anim;
-		this.vX = vX;
-		this.vY = vY;
 		this.sound = sound;
-		this.lifeForce = lifeForce;
-		this.impactForce = impactForce;
+		data = new ArtefactData(lifeForce, impactForce, vX, vY);	
 	}
 
 	public AnimatedSprite createAnimatedSprite()
@@ -35,22 +30,22 @@ public enum ShootType
 
 	public float getVX()
 	{
-		return vX;
+		return data.getVectorX();
 	}
 
 	public float getVY()
 	{
-		return vY;
+		return data.getVectorY();
 	}
 
 	public int getLifeForce()
 	{
-		return lifeForce;
+		return data.getLifePoints();
 	}
 
 	public int getImpactForce()
 	{
-		return impactForce;
+		return data.getLifePoints();
 	}
 
 	public Sound getSound()

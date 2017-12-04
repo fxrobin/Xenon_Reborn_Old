@@ -11,6 +11,12 @@ import net.entetrs.xenon.artefacts.extra.BonusType;
 import net.entetrs.xenon.artefacts.friendly.Ship;
 import net.entetrs.xenon.commons.libs.SoundLib;
 
+/**
+ * gestionnaire des bonus.
+ * 
+ * @author robin
+ *
+ */
 public class BonusManager
 {
 	private List<Artefact> bonuses = new LinkedList<>();
@@ -32,18 +38,11 @@ public class BonusManager
 		Bonus bonus = new Bonus(bonusType.createAnimatedSprite(), bonusType.getLifeForce(), bonusType.getLifeForce(), bonusType.getVX(), bonusType.getVY());
 		bonus.getSprite().setCenter(x, y);
 		bonuses.add(bonus);
-		System.out.printf("Ajout d'un bonus %f,%f %n", bonus.getSprite().getX(), bonus.getSprite().getY());
 	}
 	
 	public void render(SpriteBatch batch, float delta)
 	{
-		System.out.println("-------------------");
-		for(Artefact bonus : bonuses)
-		{
-			bonus.render(batch, delta);
-			System.out.printf("acting .. & affichage %f,%f %n", bonus.getSprite().getX(), bonus.getSprite().getY());
-			
-		}
+		bonuses.forEach(bonus -> bonus.render(batch, delta));
 		bonuses.removeIf(e -> e.getBoundingCircle().x < -e.getBoundingCircle().radius || !e.isAlive());
 	}
 	

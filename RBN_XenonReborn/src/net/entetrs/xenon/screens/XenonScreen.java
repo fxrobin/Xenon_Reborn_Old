@@ -17,7 +17,8 @@ import net.entetrs.xenon.screens.impl.MenuScreen;
  */
 public enum XenonScreen
 {
-	MENU(MenuScreen::new), GAME_PLAY(GamePlayScreen::new);
+	MENU(MenuScreen::new), 
+	GAME_PLAY(GamePlayScreen::new);
 
 	private BiFunction<XenonControler,SpriteBatch,Screen> supplier;
 

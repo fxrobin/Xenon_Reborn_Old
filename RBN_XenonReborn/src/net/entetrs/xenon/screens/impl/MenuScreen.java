@@ -18,6 +18,7 @@ import net.entetrs.xenon.commons.libs.FontLib;
 import net.entetrs.xenon.commons.libs.SoundLib;
 import net.entetrs.xenon.commons.libs.TextureLib;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
@@ -101,28 +102,6 @@ public class MenuScreen extends AbstractScreen
 		batch.draw(titleTexture, titleX, titleY);
 	}
 
-	private void switchFullScreen()
-	{
-		Monitor currMonitor = Gdx.graphics.getMonitor();
-		DisplayMode displayMode = Gdx.graphics.getDisplayMode(currMonitor);
-        
-		if (!Gdx.graphics.isFullscreen())
-		{
-			if (!Gdx.graphics.setFullscreenMode(displayMode))
-			{
-				log.error("Erreur de passage en plein écran");
-			}
-		}
-		else
-		{
-			if (!Gdx.graphics.setWindowedMode(Global.width, Global.height))
-			{
-				log.error("Erreur de passage mode fenêtré");
-			}
-		}
-	}
-
-	
 	private void checkInput()
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
@@ -133,7 +112,7 @@ public class MenuScreen extends AbstractScreen
 		
 		if (Gdx.input.isKeyJustPressed(Keys.F1))
 		{
-			this.switchFullScreen();
+			GdxCommons.switchFullScreen();
 		}
 
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))

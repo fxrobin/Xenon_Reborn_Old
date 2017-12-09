@@ -3,12 +3,16 @@ package net.entetrs.xenon.commons.utils;
 import java.util.Arrays;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics.DisplayMode;
+import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.utils.Disposable;
+
+import net.entetrs.xenon.commons.Global;
 
 /**
  * classe utilitaire.
@@ -92,6 +96,27 @@ public final class GdxCommons
 	{
 		boundingCircle.setX(getCenterX(sprite));
 		boundingCircle.setY(getCenterY(sprite));
+	}
+
+	public static void switchFullScreen()
+	{
+		Monitor currMonitor = Gdx.graphics.getMonitor();
+		DisplayMode displayMode = Gdx.graphics.getDisplayMode(currMonitor);
+	    
+		if (!Gdx.graphics.isFullscreen())
+		{
+			if (!Gdx.graphics.setFullscreenMode(displayMode))
+			{
+				System.err.println("Erreur de passage en plein écran"); //NOSONAR
+			}
+		}
+		else
+		{
+			if (!Gdx.graphics.setWindowedMode(Global.width, Global.height))
+			{
+				System.err.println("Erreur de passage mode fenêtré"); //NOSONAR
+			}
+		}
 	}
 
 }

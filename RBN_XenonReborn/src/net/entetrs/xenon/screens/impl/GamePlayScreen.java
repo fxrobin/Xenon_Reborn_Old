@@ -115,17 +115,6 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		ProjectileManager.checkFire(ship);
 		this.checkEscape();
 		this.scrolling.checkInput();
-		this.checkExtraKeys();
-	}
-
-	private void checkExtraKeys()
-	{
-		if (Gdx.input.isKeyPressed(Keys.D))
-		{
-			float x = (float) Math.random() * Global.width;
-			float y = (float) Math.random() * Global.height;
-			ExplosionManager.addExplosion(x, y);
-		}
 	}
 
 	private void checkEscape()

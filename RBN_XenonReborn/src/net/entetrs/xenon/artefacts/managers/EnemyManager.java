@@ -40,7 +40,7 @@ public class EnemyManager implements Renderable
 	{
 		enemies.forEach(e -> {
 			e.act(delta);
-			if (!e.isAlive()) ExplosionManager.addExplosion(e.getX(), e.getY(), AnimationLib.EXPLOSION_BIG);
+			if (!e.isAlive()) ExplosionManager.addExplosion(e, AnimationLib.EXPLOSION_BIG);
 		});
 		enemies.removeIf(e -> e.getY() < -e.getHeight() || !e.isAlive());
 	}

@@ -45,7 +45,7 @@ public class ProjectileManager
 	{
 		shoots.forEach(s -> {
 			s.render(batch, delta);
-			if (!s.isAlive()) ExplosionManager.addExplosion(s.getBoundingCircle().x, s.getBoundingCircle().y, AnimationLib.EXPLOSION_LITTLE);
+			if (!s.isAlive()) ExplosionManager.addExplosion(s, AnimationLib.EXPLOSION_LITTLE);
 		});
 		shoots.removeIf(s -> (s.getSprite().getY() > Global.height || !s.isAlive()));
 	}

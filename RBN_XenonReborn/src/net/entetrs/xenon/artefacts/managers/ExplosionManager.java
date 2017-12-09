@@ -5,10 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
 import net.entetrs.xenon.commons.libs.AnimationLib;
 import net.entetrs.xenon.commons.libs.SoundLib;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.impl.BackgroundParallaxScrolling;
 
 public final class ExplosionManager
@@ -19,11 +22,20 @@ public final class ExplosionManager
 	{
 		/* protection */
 	}
-
-	public static void addExplosion(float centerX, float centerY)
+	
+	public static void addExplosion(Sprite sprite,  AnimationLib anim)
 	{
-		addExplosion(centerX, centerY, AnimationLib.EXPLOSION_BIG);
+		float x = GdxCommons.getCenterX(sprite);
+		float y = GdxCommons.getCenterY(sprite);
+		addExplosion(x, y, anim);
 	}
+	
+	public static void addExplosion(Artefact artefact,  AnimationLib anim)
+	{
+		addExplosion(artefact.getBoundingCircle().x, artefact.getBoundingCircle().y, anim);
+	}
+	
+	
 
 	public static void addExplosion(float centerX, float centerY, AnimationLib anim)
 	{

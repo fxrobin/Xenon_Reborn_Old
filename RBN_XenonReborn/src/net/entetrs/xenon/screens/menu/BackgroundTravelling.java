@@ -1,4 +1,4 @@
-package net.entetrs.xenon.screens.impl;
+package net.entetrs.xenon.screens.menu;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

@@ -5,9 +5,9 @@ import java.util.function.BiFunction;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.screens.impl.GamePlayScreen;
-import net.entetrs.xenon.screens.impl.LoadingScreen;
-import net.entetrs.xenon.screens.impl.MenuScreen;
+import net.entetrs.xenon.screens.game.GamePlayScreen;
+import net.entetrs.xenon.screens.loading.LoadingScreen;
+import net.entetrs.xenon.screens.menu.MenuScreen;
 
 /**
  * enum complexe avec lambda pour la création des écrans associés à leur

@@ -1,4 +1,4 @@
-package net.entetrs.xenon.screens.impl;
+package net.entetrs.xenon.screens.game;
 
 import java.util.LinkedList;
 import java.util.List;

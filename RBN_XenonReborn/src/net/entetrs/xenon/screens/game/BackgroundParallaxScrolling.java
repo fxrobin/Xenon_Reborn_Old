@@ -1,4 +1,4 @@
-package net.entetrs.xenon.screens.impl;
+package net.entetrs.xenon.screens.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

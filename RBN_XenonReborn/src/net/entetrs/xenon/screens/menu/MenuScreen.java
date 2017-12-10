@@ -1,4 +1,4 @@
-package net.entetrs.xenon.screens.impl;
+package net.entetrs.xenon.screens.menu;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -12,7 +12,7 @@ import net.entetrs.xenon.commons.displays.AnimatedSprite;
 import net.entetrs.xenon.commons.libs.AnimationAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
-import net.entetrs.xenon.screens.impl.BackgroundParallaxScrolling;
+import net.entetrs.xenon.screens.game.BackgroundParallaxScrolling;
 
 public final class ExplosionManager
 {

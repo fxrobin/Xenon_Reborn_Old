@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.fonts.FontUtils;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
-import net.entetrs.xenon.commons.libs.AssetLib;
 import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
@@ -71,29 +70,12 @@ public class MenuScreen extends AbstractScreen
 	@Override
 	public void render(float delta)
 	{
-		if (AssetLib.getInstance().isLoadingFinished())
-		{
 			this.checkInput();
 			this.backgroundTravelling.translateBackGround(delta);
 			this.backgroundTravelling.drawBackGround(this.getBatch());
 			this.drawTitle();
 			this.drawDisplayMode();
 			this.drawMessage(delta);
-		}
-		else
-		{
-			this.drawLoading();
-		}
-	}
-
-	private void drawLoading()
-	{
-		int percent = (int) (AssetLib.getInstance().getProgress() * 100);
-		String msgDisplayMode = String.format("LOADING ... %d %%", percent);
-		layout.setText(TrueTypeFont.DEFAULT.getFont(), msgDisplayMode);
-		BitmapFont font = TrueTypeFont.DEFAULT.getFont();
-		font.draw(this.getBatch(), msgDisplayMode, (Global.width - layout.width) / 2, 150);
-
 	}
 
 	private void drawDisplayMode()

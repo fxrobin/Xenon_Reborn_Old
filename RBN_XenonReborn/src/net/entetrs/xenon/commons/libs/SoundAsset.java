@@ -23,22 +23,26 @@ public enum SoundAsset
 		this.fileName = "sounds/" + fileName;
 	}	
 	
-	public void play()
-	{
-		this.getSound().play();
-	}
-	
 	@Override
 	public String toString()
 	{
 		return this.fileName;
 	}
-
-	public void loop(float f)
+	
+	public Sound getSound()
 	{
-		this.getSound().loop(f);
+		if (sound == null)
+		{
+			sound = AssetLib.assetLib.get(this, Sound.class);
+		}
+		return sound;
 	}
-
+	
+	public void play()
+	{
+		this.getSound().play();
+	}
+	
 	public void stop()
 	{
 		this.getSound().stop();
@@ -48,13 +52,10 @@ public enum SoundAsset
 	{
 		this.getSound().loop();	
 	}
-
-	public Sound getSound()
+	
+	public void loop(float f)
 	{
-		if (sound == null)
-		{
-			sound = AssetLib.assetLib.get(this, Sound.class);
-		}
-		return sound;
+		this.getSound().loop(f);
 	}
+
 }

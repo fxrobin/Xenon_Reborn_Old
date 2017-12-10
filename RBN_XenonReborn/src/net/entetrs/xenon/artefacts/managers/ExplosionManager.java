@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
-import net.entetrs.xenon.commons.libs.AnimationLib;
-import net.entetrs.xenon.commons.libs.SoundLib;
+import net.entetrs.xenon.commons.libs.AnimationAsset;
+import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.impl.BackgroundParallaxScrolling;
 
@@ -23,27 +23,27 @@ public final class ExplosionManager
 		/* protection */
 	}
 	
-	public static void addExplosion(Sprite sprite,  AnimationLib anim)
+	public static void addExplosion(Sprite sprite,  AnimationAsset anim)
 	{
 		float x = GdxCommons.getCenterX(sprite);
 		float y = GdxCommons.getCenterY(sprite);
 		addExplosion(x, y, anim);
 	}
 	
-	public static void addExplosion(Artefact artefact,  AnimationLib anim)
+	public static void addExplosion(Artefact artefact,  AnimationAsset anim)
 	{
 		addExplosion(artefact.getBoundingCircle().x, artefact.getBoundingCircle().y, anim);
 	}
 	
 	
 
-	public static void addExplosion(float centerX, float centerY, AnimationLib anim)
+	public static void addExplosion(float centerX, float centerY, AnimationAsset anim)
 	{
 		AnimatedSprite animatedSprite = anim.createAnimatedSprite();
 		animatedSprite.setOriginCenter();
 		animatedSprite.setCenter(centerX, centerY);
 		explosions.add(animatedSprite);
-		SoundLib.EXPLOSION.play();
+		SoundAsset.EXPLOSION.play();
 	}
 
 	public static void removeFinishedExplosions()

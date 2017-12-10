@@ -22,10 +22,10 @@ import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.artefacts.managers.ProjectileManager;
 import net.entetrs.xenon.artefacts.managers.ScoreManager;
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.fonts.FontUtils;
-import net.entetrs.xenon.commons.libs.FontLib;
-import net.entetrs.xenon.commons.libs.SoundLib;
-import net.entetrs.xenon.commons.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.SoundAsset;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
@@ -90,10 +90,10 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private void renderStatusBar()
 	{
-		BitmapFont font = FontLib.DEFAULT.getFont();
+		BitmapFont font = TrueTypeFont.DEFAULT.getFont();
 		SpriteBatch batch = this.getBatch();
 		int fps = Gdx.graphics.getFramesPerSecond();
-		batch.draw(TextureLib.FOOTER.get(), 0, 0);
+		batch.draw(TextureAsset.FOOTER.get(), 0, 0);
 		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed(), ship.getLifePoints());
 		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());
 	}
@@ -121,7 +121,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
 		{
-			SoundLib.CLIC.play();
+			SoundAsset.CLIC.play();
 			this.getControler().showScreen(XenonScreen.MENU);
 		}
 	}
@@ -130,14 +130,14 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	@Override
 	public void show()
 	{
-		SoundLib.MUSIC.loop(0.6f);
+		SoundAsset.MUSIC.loop(0.6f);
 		ship = new Ship();
 	}
 
 	@Override
 	public void hide()
 	{
-		SoundLib.MUSIC.stop();
+		SoundAsset.MUSIC.stop();
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 
 public final class BackgroundParallaxScrolling
 {
@@ -43,9 +43,9 @@ public final class BackgroundParallaxScrolling
 	public void render(float delta)
 	{
 		position -= 10f * delta * speed;
-		Texture space = TextureLib.BACKGROUND_SPACE.get();
-		Texture leftbg = TextureLib.BACKGROUND_LEFT.get();
-		Texture rightbg = TextureLib.BACKGROUND_RIGHT.get();
+		Texture space = TextureAsset.BACKGROUND_SPACE.get();
+		Texture leftbg = TextureAsset.BACKGROUND_LEFT.get();
+		Texture rightbg = TextureAsset.BACKGROUND_RIGHT.get();
 		batch.draw(space, 0f, 0f, 0, (int) position, Global.width, Global.height);
 		batch.draw(leftbg, 0f, 0f, 0, (int) position * 2, leftbg.getWidth(), Global.height);
 		batch.draw(rightbg, (float) Global.width - rightbg.getWidth(), 0f, 0, (int) position * 2, Global.width, Global.height);

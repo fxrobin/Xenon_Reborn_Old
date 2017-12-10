@@ -2,11 +2,8 @@ package net.entetrs.xenon.commons.libs;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
-import com.badlogic.gdx.utils.Disposable;
 
-import net.entetrs.xenon.commons.utils.GdxCommons;
-
-public enum TextureLib implements Disposable
+public enum TextureAsset
 {
 	TITLE("commons/xenon-reborn.png"), 
 	BACKGROUND_LEFT("backgrounds/left_bg.png", TextureWrap.Repeat), 
@@ -27,35 +24,42 @@ public enum TextureLib implements Disposable
 
 	FONT_AZ("fonts/font-AZ.png"), 
 	FONT_09("fonts/font-09.png");
-
+	
+	private final String fileName;
+	private final TextureWrap wrap;
+	
 	private Texture texture;
 
-	private TextureLib(String fileName, TextureWrap wrap)
+
+	private TextureAsset(String fileName)
 	{
-		this(fileName);
-		this.texture.setWrap(wrap, wrap);
+		this(fileName, null);
+	}
+	
+	private TextureAsset(String fileName, TextureWrap wrap)
+	{
+		this.fileName = fileName;
+		this.wrap = wrap;
 	}
 
-	private TextureLib(String fileName)
+	@Override
+	public String toString()
 	{
-		this.texture = new Texture(fileName);
-
+		return this.fileName;
 	}
 
 	public Texture get()
 	{
+		if (texture == null)
+		{
+			Texture tmpTexture = AssetLib.getInstance().get(this, Texture.class);
+			if (wrap != null)
+			{
+				tmpTexture.setWrap(wrap, wrap);
+			}
+			this.texture = tmpTexture;
+		}
 		return texture;
-	}
-
-	@Override
-	public void dispose()
-	{
-		this.texture.dispose();
-	}
-
-	public static void disposeAll()
-	{
-		GdxCommons.disposeAll(TextureLib.values());
 	}
 
 }

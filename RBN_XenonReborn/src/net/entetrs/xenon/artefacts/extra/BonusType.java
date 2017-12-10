@@ -4,17 +4,17 @@ import com.badlogic.gdx.audio.Sound;
 
 import net.entetrs.xenon.artefacts.ArtefactData;
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
-import net.entetrs.xenon.commons.libs.AnimationLib;
+import net.entetrs.xenon.commons.libs.AnimationAsset;
 
 public enum BonusType
 {
-	NORMAL_BONUS(AnimationLib.BONUS, 0, -60f, null, 5, 5);
+	NORMAL_BONUS(AnimationAsset.BONUS, 0, -60f, null, 5, 5);
 
-	private final AnimationLib anim;
+	private final AnimationAsset anim;
 	private final Sound sound;
 	private ArtefactData data;
 
-	private BonusType(AnimationLib anim, float vectorX, float vectorY, Sound sound, int lifePoints, int impactForce)
+	private BonusType(AnimationAsset anim, float vectorX, float vectorY, Sound sound, int lifePoints, int impactForce)
 	{
 		this.anim = anim;
 		this.sound = sound;

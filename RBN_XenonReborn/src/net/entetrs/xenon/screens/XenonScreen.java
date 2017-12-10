@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.screens.impl.GamePlayScreen;
+import net.entetrs.xenon.screens.impl.LoadingScreen;
 import net.entetrs.xenon.screens.impl.MenuScreen;
 
 /**
@@ -17,6 +18,7 @@ import net.entetrs.xenon.screens.impl.MenuScreen;
  */
 public enum XenonScreen
 {
+	LOADING(LoadingScreen::new),
 	MENU(MenuScreen::new), 
 	GAME_PLAY(GamePlayScreen::new);
 

@@ -8,7 +8,7 @@ import net.entetrs.xenon.artefacts.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.artefacts.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.displays.Renderable;
-import net.entetrs.xenon.commons.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
@@ -42,11 +42,11 @@ public class ShipRenderer implements Renderable
 
 	private void loadSprites()
 	{
-		shipSpriteReactorOn = new Sprite(TextureLib.SHIP.get());
-		shipSpriteLeft = new Sprite(TextureLib.SHIP_LEFT.get());
-		shipSpriteRight = new Sprite(TextureLib.SHIP_RIGHT.get());
-		shipSpriteReactorOff = new Sprite(TextureLib.SHIP_NOREACTOR.get());
-		shieldSprite = new Sprite(TextureLib.SHIELD.get());
+		shipSpriteReactorOn = new Sprite(TextureAsset.SHIP.get());
+		shipSpriteLeft = new Sprite(TextureAsset.SHIP_LEFT.get());
+		shipSpriteRight = new Sprite(TextureAsset.SHIP_RIGHT.get());
+		shipSpriteReactorOff = new Sprite(TextureAsset.SHIP_NOREACTOR.get());
+		shieldSprite = new Sprite(TextureAsset.SHIELD.get());
 	}
 
 	public Sprite getCurrentSprite()

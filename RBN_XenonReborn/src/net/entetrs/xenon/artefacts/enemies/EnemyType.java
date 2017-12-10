@@ -6,21 +6,21 @@ import com.badlogic.gdx.graphics.Texture;
 
 import net.entetrs.xenon.artefacts.ArtefactData;
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 
 public enum EnemyType
 {
-	NORMAL(TextureLib.ENEMY, 10,10),
-	BUG(TextureLib.BUG, 10,10),
-	PERFORATOR(TextureLib.PERFORATOR, 10,10),
-	BIG_ENEMY(TextureLib.BIG_ENEMY, 20, 20);
+	NORMAL(TextureAsset.ENEMY, 10,10),
+	BUG(TextureAsset.BUG, 10,10),
+	PERFORATOR(TextureAsset.PERFORATOR, 10,10),
+	BIG_ENEMY(TextureAsset.BIG_ENEMY, 20, 20);
 	
-	private TextureLib textureRef;
+	private TextureAsset textureRef;
 
 	private ArtefactData data;
 	
 	
-	private EnemyType(TextureLib textureRef, int lifeForce, int impactForce)
+	private EnemyType(TextureAsset textureRef, int lifeForce, int impactForce)
 	{
 		this.textureRef = textureRef;
 		data = new ArtefactData(lifeForce, impactForce, 0, 0);
@@ -36,7 +36,7 @@ public enum EnemyType
 		return data.getLifePoints();
 	}
 	
-	public TextureLib getTextureRef()
+	public TextureAsset getTextureRef()
 	{
 		return textureRef;
 	}

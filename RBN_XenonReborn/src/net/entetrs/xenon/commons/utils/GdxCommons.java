@@ -64,11 +64,10 @@ public final class GdxCommons
 		Arrays.stream(disposables).forEach(Disposable::dispose);
 	}
 
-	public static TextureRegion[] convertToTextureArray(String fileName, int cols, int rows)
+	public static TextureRegion[] convertToTextureArray(Texture texture, int cols, int rows)
 	{
 		int totalFrames = cols * rows;
-		Texture tmp = new Texture(fileName);
-		TextureRegion[][] tmpRegion = TextureRegion.split(tmp, tmp.getWidth() / cols, tmp.getHeight() / rows);
+		TextureRegion[][] tmpRegion = TextureRegion.split(texture, texture.getWidth() / cols, texture.getHeight() / rows);
 		TextureRegion[] result = new TextureRegion[totalFrames];
 		int index = 0;
 		for (int i = 0; i < rows; i++)

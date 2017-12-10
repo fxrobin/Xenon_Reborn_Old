@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 
 /**
@@ -27,7 +27,7 @@ public class BackgroundTravelling
 	private float aY = 0;
 
 	/* accumulateur / ticker paramétré sur 4 secondes */
-	private DeltaTimeAccumulator dta = new DeltaTimeAccumulator(4); 
+	private DeltaTimeAccumulator dta = new DeltaTimeAccumulator(4);
 
 	private float random()
 	{
@@ -36,7 +36,7 @@ public class BackgroundTravelling
 
 	public BackgroundTravelling()
 	{
-		spaceTexture = TextureLib.BACKGROUND_SPACE.get();
+		spaceTexture = TextureAsset.BACKGROUND_SPACE.get();
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class BackgroundTravelling
 	 */
 	public void translateBackGround(float delta)
 	{
-		if (dta.addAndCheck(delta)) 
+		if (dta.addAndCheck(delta))
 		{
 			aX = random();
 			aY = random();

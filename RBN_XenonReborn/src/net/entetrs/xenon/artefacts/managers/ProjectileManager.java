@@ -12,7 +12,7 @@ import net.entetrs.xenon.artefacts.friendly.Ship;
 import net.entetrs.xenon.artefacts.friendly.Shoot;
 import net.entetrs.xenon.artefacts.friendly.ShootType;
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.libs.AnimationLib;
+import net.entetrs.xenon.commons.libs.AnimationAsset;
 
 public class ProjectileManager
 {
@@ -45,7 +45,7 @@ public class ProjectileManager
 	{
 		shoots.forEach(s -> {
 			s.render(batch, delta);
-			if (!s.isAlive()) ExplosionManager.addExplosion(s, AnimationLib.EXPLOSION_LITTLE);
+			if (!s.isAlive()) ExplosionManager.addExplosion(s, AnimationAsset.EXPLOSION_LITTLE);
 		});
 		shoots.removeIf(s -> (s.getSprite().getY() > Global.height || !s.isAlive()));
 	}

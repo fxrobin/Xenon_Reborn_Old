@@ -9,7 +9,7 @@ import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.artefacts.extra.Bonus;
 import net.entetrs.xenon.artefacts.extra.BonusType;
 import net.entetrs.xenon.artefacts.friendly.Ship;
-import net.entetrs.xenon.commons.libs.SoundLib;
+import net.entetrs.xenon.commons.libs.SoundAsset;
 
 /**
  * gestionnaire des bonus.
@@ -53,7 +53,7 @@ public class BonusManager
 			if (bonus.isCollision(ship))
 			{
 				bonus.decreaseLife(100); // on tue le bonus...
-				SoundLib.BONUS.play();
+				SoundAsset.BONUS.play();
 			}
 		}
 	}

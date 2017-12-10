@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.AbstractArtefact;
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.libs.SoundLib;
+import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public class Ship extends AbstractArtefact
@@ -46,11 +46,11 @@ public class Ship extends AbstractArtefact
 		shieldActivated = !shieldActivated;
 		if (shieldActivated)
 		{
-			SoundLib.SHIELD_UP.play();
+			SoundAsset.SHIELD_UP.play();
 		}
 		else
 		{
-			SoundLib.SHIELD_DOWN.play();
+			SoundAsset.SHIELD_DOWN.play();
 		}
 	}
 

@@ -5,14 +5,14 @@ import java.util.Locale;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import net.entetrs.xenon.commons.libs.TextureLib;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 
 public final class FontUtils
 {
 	private static final int FONT_W = 32;
 	private static final int FONT_H = 38;
-	private static Texture fontAZ = TextureLib.FONT_AZ.get();
-	private static Texture font09 = TextureLib.FONT_09.get();
+	private static Texture fontAZ = TextureAsset.FONT_AZ.get();
+	private static Texture font09 = TextureAsset.FONT_09.get();
 
 	private FontUtils()
 	{

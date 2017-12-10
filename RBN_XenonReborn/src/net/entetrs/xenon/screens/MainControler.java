@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.displays.Fader;
 import net.entetrs.xenon.commons.displays.Fader.State;
-import net.entetrs.xenon.commons.libs.IntroLib;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
@@ -50,9 +49,8 @@ public final class MainControler extends Game implements XenonControler
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		batch = new SpriteBatch();
 		batch.enableBlending();
-		fader = Fader.getInstance();
-		IntroLib.playIntroSound();
-		this.showScreen(XenonScreen.MENU);
+		fader = Fader.getInstance();	
+		this.showScreen(XenonScreen.LOADING);
 		this.fade();
 	}
 

@@ -14,9 +14,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.fonts.FontUtils;
-import net.entetrs.xenon.commons.libs.FontLib;
-import net.entetrs.xenon.commons.libs.SoundLib;
-import net.entetrs.xenon.commons.libs.TextureLib;
+import net.entetrs.xenon.commons.fonts.TrueTypeFont;
+import net.entetrs.xenon.commons.libs.AssetLib;
+import net.entetrs.xenon.commons.libs.SoundAsset;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.AbstractScreen;
@@ -47,7 +48,7 @@ public class MenuScreen extends AbstractScreen
 		super(controler, batch);
 		log.info("Instanciation de MenuScreen");
 		backgroundTravelling = new BackgroundTravelling();
-		titleTexture = TextureLib.TITLE.get();
+		titleTexture = TextureAsset.TITLE.get();
 		titleX = (Global.width - titleTexture.getWidth()) / 2f;
 		titleY = (Global.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
@@ -58,31 +59,48 @@ public class MenuScreen extends AbstractScreen
 	@Override
 	public void show()
 	{
-		SoundLib.INTRO.loop();
+		SoundAsset.INTRO.loop();
 	}
 
 	@Override
 	public void hide()
 	{
-		SoundLib.INTRO.stop();
+		SoundAsset.INTRO.stop();
 	}
 
 	@Override
 	public void render(float delta)
 	{
-		this.checkInput();
-		this.backgroundTravelling.translateBackGround(delta);
-		this.backgroundTravelling.drawBackGround(this.getBatch());
-		this.drawTitle();
-		this.drawDisplayMode();
-		this.drawMessage(delta);
+		if (AssetLib.getInstance().isLoadingFinished())
+		{
+			this.checkInput();
+			this.backgroundTravelling.translateBackGround(delta);
+			this.backgroundTravelling.drawBackGround(this.getBatch());
+			this.drawTitle();
+			this.drawDisplayMode();
+			this.drawMessage(delta);
+		}
+		else
+		{
+			this.drawLoading();
+		}
+	}
+
+	private void drawLoading()
+	{
+		int percent = (int) (AssetLib.getInstance().getProgress() * 100);
+		String msgDisplayMode = String.format("LOADING ... %d %%", percent);
+		layout.setText(TrueTypeFont.DEFAULT.getFont(), msgDisplayMode);
+		BitmapFont font = TrueTypeFont.DEFAULT.getFont();
+		font.draw(this.getBatch(), msgDisplayMode, (Global.width - layout.width) / 2, 150);
+
 	}
 
 	private void drawDisplayMode()
 	{
 		String msgDisplayMode = String.format("%s / %s", currentMode, monitor.name);
-		layout.setText(FontLib.DEFAULT.getFont(), msgDisplayMode);
-		BitmapFont font = FontLib.DEFAULT.getFont();
+		layout.setText(TrueTypeFont.DEFAULT.getFont(), msgDisplayMode);
+		BitmapFont font = TrueTypeFont.DEFAULT.getFont();
 		font.draw(this.getBatch(), msgDisplayMode, (Global.width - layout.width) / 2, 150);
 	}
 
@@ -106,10 +124,10 @@ public class MenuScreen extends AbstractScreen
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
 		{
-			SoundLib.CLIC.play();
+			SoundAsset.CLIC.play();
 			this.getControler().showScreen(XenonScreen.GAME_PLAY);
 		}
-		
+
 		if (Gdx.input.isKeyJustPressed(Keys.F1))
 		{
 			GdxCommons.switchFullScreen();

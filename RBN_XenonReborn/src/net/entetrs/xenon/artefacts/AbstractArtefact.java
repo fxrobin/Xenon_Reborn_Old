@@ -13,6 +13,9 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
  */
 public abstract class AbstractArtefact implements Artefact
 {
+	/**
+	 * encapsule les données communes d'un artefact : maxLifePoints, lifePoints, impactForce, vectorX et vectorY.
+	 */
 	private ArtefactData data;
 	
 	/**
@@ -75,6 +78,7 @@ public abstract class AbstractArtefact implements Artefact
 		data.setLifePoints(newLifePoints);
 	}
 	
+	@Override
 	public void increaseLife(final int force)
 	{
 		int newLifePoints = data.getLifePoints() + force ;

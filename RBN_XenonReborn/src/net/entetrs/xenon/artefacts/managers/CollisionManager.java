@@ -102,10 +102,10 @@ public final class CollisionManager
 	 */
 	public void processBonus(Artefact target)
 	{
-		// une destruction sur deux génère un bonus.
+		/* une destruction sur deux génère un bonus.*/
 		if (randomGenerator.nextBoolean())
 		{
-			// puis on choisi au hasard, encore l'un ou l'autres des bonus potentiels.
+			/* puis on choisi au hasard, encore l'un ou l'autres des bonus potentiels.*/
 			BonusType bonusType = randomGenerator.nextBoolean() ? BonusType.NORMAL_BONUS : BonusType.POWER_UP_BONUS;
 			BonusManager.getInstance().addBonus(bonusType, target.getBoundingCircle().x, target.getBoundingCircle().y);
 		}

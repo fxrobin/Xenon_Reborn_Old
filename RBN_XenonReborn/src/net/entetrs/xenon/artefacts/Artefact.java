@@ -119,5 +119,13 @@ public interface Artefact extends Renderable
 	 * 	 	"true" si la collision est avérée, "false" sinon.
 	 */
 	boolean isCollision(Artefact otherArtefact);
+
+	/**
+	 * augmente la vie de l'arteface (dans la limite de son maximum).
+	 * 
+	 * @param points
+	 * 		points de vie à ajouter.
+	 */
+	void increaseLife(final int points);
 	
 }

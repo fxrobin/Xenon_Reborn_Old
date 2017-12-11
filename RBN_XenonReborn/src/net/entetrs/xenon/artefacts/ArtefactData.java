@@ -2,7 +2,11 @@ package net.entetrs.xenon.artefacts;
 
 public class ArtefactData
 {
-
+	/**
+	 * points de vie de l'artefact.
+	 */
+	private final int maxLifePoints;
+	
 	/**
 	 * points de vie de l'artefact.
 	 */
@@ -24,12 +28,17 @@ public class ArtefactData
 	public ArtefactData(int lifePoints, int impactForce, float vectorX, float vectorY)
 	{
 		super();
+		this.maxLifePoints = lifePoints;
 		this.lifePoints = lifePoints;
 		this.impactForce = impactForce;
 		this.vectorX = vectorX;
 		this.vectorY = vectorY;
 	}
 
+	public int getMaxLifePoints()
+	{
+		return maxLifePoints;
+	}
 
 	public int getLifePoints()
 	{
@@ -39,7 +48,7 @@ public class ArtefactData
 
 	public void setLifePoints(int lifePoints)
 	{
-		this.lifePoints = lifePoints;
+		this.lifePoints = (lifePoints > maxLifePoints) ? maxLifePoints : lifePoints;
 	}
 
 

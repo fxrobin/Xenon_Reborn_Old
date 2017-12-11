@@ -2,7 +2,6 @@ package net.entetrs.xenon.artefacts;
 
 import com.badlogic.gdx.math.Circle;
 
-import net.entetrs.xenon.commons.displays.Renderable;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
@@ -12,7 +11,7 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
  * @author robin
  *
  */
-public abstract class AbstractArtefact implements Artefact, Renderable
+public abstract class AbstractArtefact implements Artefact
 {
 	private ArtefactData data;
 	
@@ -75,6 +74,13 @@ public abstract class AbstractArtefact implements Artefact, Renderable
 		int newLifePoints = data.getLifePoints() - force ;
 		data.setLifePoints(newLifePoints);
 	}
+	
+	public void increaseLife(final int force)
+	{
+		int newLifePoints = data.getLifePoints() + force ;
+		data.setLifePoints(newLifePoints);
+	}
+	
 	
 	/**
 	 * retourne le nombre de point de vie restant à l'artefact. 

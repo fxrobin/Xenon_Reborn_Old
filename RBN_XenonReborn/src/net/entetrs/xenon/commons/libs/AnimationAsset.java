@@ -21,7 +21,8 @@ public enum AnimationAsset
 	EXPLOSION_LITTLE("shoots/little-explosion.png", 6, 1, 1f, PlayMode.NORMAL), 
 	FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, 10, 50), 
 	FRIENDLY_BIGSHOOT("shoots/big-shoot.png", 5, 1, 1f, PlayMode.LOOP, 26, 80), 
-	BONUS("commons/bonus.png", 8, 1, 1f, PlayMode.LOOP);
+	BONUS("commons/bonus.png", 8, 1, 1f, PlayMode.LOOP),
+	POWER_UP("commons/power-up.png", 1, 1, 1f, PlayMode.LOOP);
 
 	private final String fileName;
 	private final int cols;

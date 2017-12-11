@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import net.entetrs.xenon.artefacts.Artefact;
 import net.entetrs.xenon.artefacts.extra.Bonus;
 import net.entetrs.xenon.artefacts.extra.BonusType;
 import net.entetrs.xenon.artefacts.friendly.Ship;
@@ -19,7 +18,7 @@ import net.entetrs.xenon.commons.libs.SoundAsset;
  */
 public class BonusManager
 {
-	private List<Artefact> bonuses = new LinkedList<>();
+	private List<Bonus> bonuses = new LinkedList<>();
 	
 	private static BonusManager instance = new BonusManager();
 	
@@ -35,7 +34,7 @@ public class BonusManager
 	
 	public void addBonus(BonusType bonusType, float x, float y)
 	{
-		Bonus bonus = new Bonus(bonusType.createAnimatedSprite(), bonusType.getLifeForce(), bonusType.getLifeForce(), bonusType.getVX(), bonusType.getVY());
+		Bonus bonus = new Bonus(bonusType, bonusType.getLifeForce(), bonusType.getLifeForce(), bonusType.getVX(), bonusType.getVY());
 		bonus.getSprite().setCenter(x, y);
 		bonuses.add(bonus);
 	}
@@ -46,15 +45,43 @@ public class BonusManager
 		bonuses.removeIf(e -> e.getBoundingCircle().x < -e.getBoundingCircle().radius || !e.isAlive());
 	}
 	
+	/**
+	 * vérifie les collisions des bonus avec le vaisseau.
+	 * Si tel est le cas, le bonus est "capturer" par le vaisseau, 
+	 * et le bonus est traité, en fonction de son type.
+	 * 
+	 * @param ship
+	 */
 	public void checkBonus(Ship ship)
 	{
-		for(Artefact bonus : bonuses)
+		for(Bonus bonus : bonuses)
 		{
 			if (bonus.isCollision(ship))
 			{
-				bonus.decreaseLife(100); // on tue le bonus...
-				SoundAsset.BONUS.play();
+				processBonus(ship, bonus);			
 			}
 		}
+	}
+	
+	/**
+	 * traite le bonus en fonction de son type.
+	 * modifie l'état du vaisseau en fonction du bonus.
+	 * 
+	 * @param ship
+	 * 		
+	 * @param bonus
+	 */
+	public void processBonus(Ship ship, Bonus bonus)
+	{
+		switch (bonus.getType())
+		{
+			case NORMAL_BONUS : break;
+			case POWER_UP_BONUS :
+				ship.increaseLife(10); // oula c'est moche, mais ça marche.
+				break;
+			default :
+		}
+		bonus.decreaseLife(100); // on tue le bonus...
+		SoundAsset.BONUS.play();
 	}
 }

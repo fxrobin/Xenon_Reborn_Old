@@ -15,11 +15,18 @@ import net.entetrs.xenon.commons.displays.AnimatedSprite;
 public class Bonus extends AbstractArtefact
 {
 	private AnimatedSprite animatedSprite;
+	private BonusType type;
 
-	public Bonus(AnimatedSprite animatedSprite, int lifeForce, int impactForce, float vX, float vY)
+	public Bonus(BonusType type, int lifeForce, int impactForce, float vX, float vY)
 	{
 		super(vX, vY, lifeForce, impactForce);
-		this.animatedSprite = animatedSprite;
+		this.type = type;
+		this.animatedSprite = type.createAnimatedSprite();
+	}
+	
+	public BonusType getType()
+	{
+		return type;
 	}
 
 	@Override

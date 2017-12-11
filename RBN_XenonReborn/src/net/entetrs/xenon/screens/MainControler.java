@@ -64,7 +64,7 @@ public final class MainControler extends Game implements XenonControler
 		if (!fader.getCurrentState().equals(State.BLACK_SCREEN))
 		{
 			batch.begin();
-			super.render();
+			super.render(); /* affiche le screen associé à cette classe. Ce comportement est codé dans libgdx */
 			batch.end();
 		}
 		this.fade();

@@ -5,19 +5,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.AbstractArtefact;
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public class Ship extends AbstractArtefact
 {
 	private ShipRenderer shipRenderer;
-	private boolean shieldActivated = false;
+	private Shield shield;
 
 	public Ship()
 	{
 		super(0,0, 60, 20);
 		shipRenderer = new ShipRenderer(this);
-		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2);
+		shield = new Shield();
+		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2); 
 	}
 
 	public float getCenterX()
@@ -32,7 +32,31 @@ public class Ship extends AbstractArtefact
 
 	public boolean isShieldActivated()
 	{
-		return shieldActivated;
+		return shield.isActivated();
+	}
+	
+	
+	/* redéfinition de "decreaseLife" et "increaseLife" 
+	 * pour que les méthodes n'aient aucune conséquence
+	 * en cas de bouclier activé.
+	 */
+	
+	@Override
+	public void decreaseLife(int force)
+	{
+		if (!isShieldActivated())
+		{
+			super.decreaseLife(force);
+		}
+	}
+	
+	@Override
+	public void increaseLife(int force)
+	{
+		if (!isShieldActivated())
+		{
+			super.increaseLife(force);
+		}
 	}
 
 	@Override
@@ -43,21 +67,14 @@ public class Ship extends AbstractArtefact
 	
 	public void switchShield()
 	{
-		shieldActivated = !shieldActivated;
-		if (shieldActivated)
-		{
-			SoundAsset.SHIELD_UP.play();
-		}
-		else
-		{
-			SoundAsset.SHIELD_DOWN.play();
-		}
+		shield.switchShield();
 	}
 
 	@Override
 	public void act(float delta)
 	{
 		super.act(delta);
+		shield.update(delta);
 		this.controlPosition();
 	}
 
@@ -75,5 +92,10 @@ public class Ship extends AbstractArtefact
 	public Sprite getSprite()
 	{
 		return this.shipRenderer.getCurrentSprite();
+	}
+	
+	public float getShieldEnergy()
+	{
+		return this.shield.getEnergy();
 	}
 }

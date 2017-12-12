@@ -32,7 +32,7 @@ import net.entetrs.xenon.screens.XenonScreen;
 
 public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 {
-	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLaser : %d // CurrentSpeed : %f // life : %d";
+	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLasers : %d // CurrentSpeed : %f // lifePoints : %d // Shield : %f";
 
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -94,7 +94,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		SpriteBatch batch = this.getBatch();
 		int fps = Gdx.graphics.getFramesPerSecond();
 		batch.draw(TextureAsset.FOOTER.get(), 0, 0);
-		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed(), ship.getLifePoints());
+		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed(), ship.getLifePoints(), ship.getShieldEnergy());
 		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());
 	}
 

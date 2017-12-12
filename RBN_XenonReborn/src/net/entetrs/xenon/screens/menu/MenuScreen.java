@@ -8,17 +8,18 @@ import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.fonts.FontUtils;
+import net.entetrs.xenon.commons.fonts.GdxString;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
+import net.entetrs.xenon.commons.libs.ModAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.commons.utils.GdxCommons;
+import net.entetrs.xenon.commons.utils.ModPlayer;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
@@ -31,7 +32,10 @@ public class MenuScreen extends AbstractScreen
 	private Log log = LogFactory.getLog(this.getClass());
 
 	private BackgroundTravelling backgroundTravelling;
-	private DeltaTimeAccumulator accumulator = new DeltaTimeAccumulator(1);
+	
+	/* toutes les secondes, la méthode "switchDisplayTitle" sera lancée */
+	private DeltaTimeAccumulator accumulator = new DeltaTimeAccumulator(1, this::switchDisplayTitle);
+	
 	private boolean displayTitle = true;
 
 	private Texture titleTexture;
@@ -40,7 +44,10 @@ public class MenuScreen extends AbstractScreen
 
 	private Monitor monitor;
 	private DisplayMode currentMode;
-	private GlyphLayout layout;
+	
+	private GdxString message;
+	
+	private int currentMusic = 0;
 
 	public MenuScreen(XenonControler controler, SpriteBatch batch)
 	{
@@ -52,47 +59,54 @@ public class MenuScreen extends AbstractScreen
 		titleY = (Global.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
-		layout = new GlyphLayout();
+		message = new GdxString(TrueTypeFont.SHARETECH_30.getFont(), "");
+		ModPlayer.load(ModAsset.values()[currentMusic].toString());
 	}
 
 	@Override
 	public void show()
 	{
-		SoundAsset.INTRO.loop();
+		ModPlayer.playNormal();
 	}
 
 	@Override
 	public void hide()
 	{
-		SoundAsset.INTRO.stop();
+		ModPlayer.stopFadeOut();
 	}
 
 	@Override
-	public void render(float delta)
+	public void render(float deltaTime)
 	{
 			this.checkInput();
-			this.backgroundTravelling.translateBackGround(delta);
+			this.backgroundTravelling.translateBackGround(deltaTime);
 			this.backgroundTravelling.drawBackGround(this.getBatch());
 			this.drawTitle();
 			this.drawDisplayMode();
-			this.drawMessage(delta);
+			this.drawMessage(deltaTime);
 	}
 
 	private void drawDisplayMode()
 	{
-		String msgDisplayMode = String.format("%s / %s", currentMode, monitor.name);
-		layout.setText(TrueTypeFont.DEFAULT.getFont(), msgDisplayMode);
-		BitmapFont font = TrueTypeFont.DEFAULT.getFont();
-		font.draw(this.getBatch(), msgDisplayMode, (Global.width - layout.width) / 2, 150);
+		String msgDisplayMode = String.format("%s / %s / %d FPS", currentMode, monitor.name, Gdx.graphics.getFramesPerSecond());
+		message.setText(msgDisplayMode);
+		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 60);
+		
+		message.setText("< " + ModPlayer.getMusicName() + " >");
+		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 100);
 	}
 
-	private void drawMessage(float delta)
+	private void switchDisplayTitle()
 	{
-		/* jour / nuit / jour / nuit ! */
-		displayTitle = accumulator.addAndCheck(delta) ? !displayTitle : displayTitle;
+		displayTitle = !displayTitle;
+	}
+	
+	private void drawMessage(float deltaTime)
+	{
+		accumulator.addAndCheck(deltaTime);
 		if (displayTitle)
 		{
-			FontUtils.print(this.getBatch(), (Global.width - MSG_WIDTH) / 2f, 60, MSG);
+			FontUtils.print(this.getBatch(), (Global.width - MSG_WIDTH) / 2f, 200, MSG);
 		}
 	}
 
@@ -119,5 +133,27 @@ public class MenuScreen extends AbstractScreen
 		{
 			Gdx.app.exit();
 		}
+		
+		if (Gdx.input.isKeyJustPressed(Keys.LEFT) && currentMusic > 0)
+		{
+			currentMusic--;
+			updateMusic();
+		}
+		
+
+		if (Gdx.input.isKeyJustPressed(Keys.RIGHT) && currentMusic < ModAsset.values().length-1)
+		{
+			currentMusic++;
+			updateMusic();
+		}
+		
+		
+	}
+
+	private void updateMusic()
+	{
+		ModPlayer.stopNormal();
+		ModPlayer.load(ModAsset.values()[currentMusic].toString());
+		ModPlayer.playNormal();
 	}
 }

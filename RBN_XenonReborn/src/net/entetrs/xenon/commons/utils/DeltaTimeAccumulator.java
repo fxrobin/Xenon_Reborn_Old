@@ -13,6 +13,12 @@ public class DeltaTimeAccumulator
 	 * accumulateur de temps
 	 */
 	private float accumulator = 0;
+	
+	/**
+	 * fonction à lancer quand l'accumulateur aura atteint le tick.
+	 * permet de déclencher une méthode à interval régulier.
+	 */
+	private Runnable runnable = null;
 
 	/**
 	 * paramétrage du générateur de tick à une certaine fréquence, exprimée en
@@ -24,6 +30,12 @@ public class DeltaTimeAccumulator
 	{
 		super();
 		this.tickFrequency = tickFrequency;
+	}
+	
+	public DeltaTimeAccumulator(float tickFrequency, Runnable runnable)
+	{
+		this(tickFrequency);
+		this.runnable = runnable;
 	}
 
 	/**
@@ -41,6 +53,10 @@ public class DeltaTimeAccumulator
 		if (accumulator > tickFrequency)
 		{
 			accumulator = 0;
+			if (runnable!=null)
+			{
+				runnable.run();
+			}
 			return true;
 		}
 		else

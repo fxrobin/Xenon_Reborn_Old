@@ -20,6 +20,7 @@ import net.entetrs.xenon.artefacts.managers.EnemyManager;
 import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.artefacts.managers.ProjectileManager;
 import net.entetrs.xenon.commons.libs.SoundAsset;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
@@ -96,17 +97,21 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		ShipHandler.handle(ship);
 		ship.act(delta);
 		ProjectileManager.checkFire(ship);
-		this.checkEscape();
+		this.checkEscapeAndFullScreen();
 		this.scrolling.checkInput();
 	}
 
-	private void checkEscape()
+	private void checkEscapeAndFullScreen()
 	{
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
-		{
+		/* test avec un if classique */
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			SoundAsset.CLIC.play();
 			this.getControler().showScreen(XenonScreen.MENU);
-		}
+		};
+		
+		/* test avec une référence de méthode : c'est plus joli ... */
+		GdxCommons.runIfKeyJustPressed(Keys.F1, GdxCommons::switchFullScreen);
+
 	}
 
 	@Override

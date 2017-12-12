@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.Disposable;
 import net.entetrs.xenon.commons.Global;
 
 /**
- * classe utilitaire.
+ * classe utilitaire au profit de LIBGDX.
  * 
  * @author CDT RBN
  *
@@ -44,26 +44,57 @@ public final class GdxCommons
 		return true;
 	}
 
+	/**
+	 * définit le centre des sprites en leur milieu.
+	 * 
+	 * @param sprites
+	 */
 	public static void setOriginCenter(Sprite... sprites)
 	{
 		Arrays.stream(sprites).forEach(Sprite::setOriginCenter);
 	}
 
+	/**
+	 * retourne la coordonnée X du centre du sprite à l'écran.
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public static float getCenterX(Sprite s)
 	{
 		return s.getX() + s.getOriginX();
 	}
 
+	/**
+	 * retourne la coordonnée Y du centre du sprite à l'écran.
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public static float getCenterY(Sprite s)
 	{
 		return s.getY() + s.getOriginY();
 	}
 
+	/**
+	 * lance la méthode "dipose" sur tous les disposables passés en paramètre.
+	 * 
+	 * @param disposables
+	 */
 	public static void disposeAll(Disposable... disposables)
 	{
 		Arrays.stream(disposables).forEach(Disposable::dispose);
 	}
 
+	/**
+	 * découpe une texture en un tableau de TextureRegion.
+	 * utile pour obtenir les images d'une animation.
+	 * 
+	 * @param texture
+	 * @param cols
+	 * @param rows
+	 * @return
+	 */
 	public static TextureRegion[] convertToTextureArray(Texture texture, int cols, int rows)
 	{
 		int totalFrames = cols * rows;
@@ -80,42 +111,70 @@ public final class GdxCommons
 		return result;
 	}
 
+	/**
+	 * efface l'écran.
+	 */
 	public static void clearScreen()
 	{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
-	public static void applyAlpha(Sprite s, float alpha)
-	{
-		s.setColor(s.getColor().r, s.getColor().g, s.getColor().b, alpha);
-	}
-	
+
+	/**
+	 * détermine le "boundingCircle" d'un sprite en prenant son centre comme origine
+	 * du cercle et la taille du sprite en largeur / 2.
+	 * 
+	 * @param sprite
+	 * @param boundingCircle
+	 */
 	public static void computeBoundingCircle(Sprite sprite, Circle boundingCircle)
 	{
 		boundingCircle.setX(getCenterX(sprite));
 		boundingCircle.setY(getCenterY(sprite));
-		boundingCircle.setRadius(sprite.getWidth() /2);
+		boundingCircle.setRadius(sprite.getWidth() / 2);
 	}
 
+	/**
+	 * bascule en plein écran.
+	 * 
+	 */
 	public static void switchFullScreen()
 	{
 		Monitor currMonitor = Gdx.graphics.getMonitor();
 		DisplayMode displayMode = Gdx.graphics.getDisplayMode(currMonitor);
-	    
+
 		if (!Gdx.graphics.isFullscreen())
 		{
 			if (!Gdx.graphics.setFullscreenMode(displayMode))
 			{
-				System.err.println("Erreur de passage en plein écran"); //NOSONAR
+				System.err.println("Erreur de passage en plein écran"); // NOSONAR
 			}
 		}
 		else
 		{
 			if (!Gdx.graphics.setWindowedMode(Global.width, Global.height))
 			{
-				System.err.println("Erreur de passage mode fenêtré"); //NOSONAR
+				System.err.println("Erreur de passage mode fenêtré"); // NOSONAR
 			}
+		}
+	}
+
+	/**
+	 * exécute le runnable si la touche est "just pressed" (appuyé sans
+	 * répétition).
+	 * 
+	 * @param keyCode
+	 *            code clavier (voir la classe de constantes Keys de libgdx)
+	 * @param runnable
+	 *            instance de runnable lançable (référence à une fonction ou une
+	 *            lambda ou classe anonyme, ou référence ves une classe)
+	 */
+	public static void runIfKeyJustPressed(int keyCode, Runnable runnable)
+	{
+		if (Gdx.input.isKeyJustPressed(keyCode))
+		{
+			runnable.run();
 		}
 	}
 

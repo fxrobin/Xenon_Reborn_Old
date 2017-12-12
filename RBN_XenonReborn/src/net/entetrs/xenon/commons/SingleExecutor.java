@@ -17,6 +17,10 @@ public class SingleExecutor
 		this.runnable = runnable;
 	}
 	
+	/**
+	 * lance le runnable fournit à la construit, une seule fois.
+	 * Cette méthode garantit que le runnable n'est pas relancé. 
+	 */
 	public void execute()
 	{
 		if (!ran && runnable != null)

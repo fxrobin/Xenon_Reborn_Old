@@ -28,15 +28,14 @@ import com.vwp.sound.mod.sound.output.SoundDataFormat;
  */
 public final class ModPlayer
 {
+	private static ThreadedPlayer player = new ThreadedPlayer();
+	private static double volume;
+	private static String musicName;
 
 	private ModPlayer()
 	{
 		// protection.
 	}
-
-	private static ThreadedPlayer player = new ThreadedPlayer();
-	private static double volume;
-	private static String musicName;
 
 	/**
 	 * permet de savoir si un module est en cours de lecture.

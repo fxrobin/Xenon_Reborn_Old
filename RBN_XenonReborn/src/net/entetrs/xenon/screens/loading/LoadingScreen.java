@@ -3,6 +3,7 @@ package net.entetrs.xenon.screens.loading;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +13,7 @@ import net.entetrs.xenon.commons.SingleExecutor;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.libs.AssetLib;
 import net.entetrs.xenon.commons.libs.SoundAsset;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
@@ -26,7 +28,8 @@ public class LoadingScreen extends AbstractScreen
 {
 	private Log log = LogFactory.getLog(this.getClass());
 	private GlyphLayout layout;
-	private BitmapFont font = TrueTypeFont.DEFAULT.getFont();
+	private BitmapFont font = TrueTypeFont.SHARETECH_30.getFont();
+	private Texture background = TextureAsset.BACKGROUND_SPACE_DOCK.get();
 	private SingleExecutor singleExecutor;
 
 	public LoadingScreen(XenonControler controler, SpriteBatch batch)
@@ -46,6 +49,8 @@ public class LoadingScreen extends AbstractScreen
 	@Override
 	public void render(float delta)
 	{
+		this.getBatch().draw(background, 0, 0, 0 ,0, Global.width, Global.height);
+		
 		String message;
 
 		// quand le loader n'a pas fini, on affiche une progression à l'écran.

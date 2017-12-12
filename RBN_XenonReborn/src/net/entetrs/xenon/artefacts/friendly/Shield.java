@@ -88,7 +88,8 @@ public class Shield
 		if (energy > Global.SHIELD_ACTIVATION_THRESHOLD)
 		{
 			activated = true;
-			SoundAsset.SHIELD_UP.play();
+			SoundAsset.SHIELD_ACTIVATED.play();
+			//SoundAsset.SHIELD_UP.play();
 		}
 	}
 

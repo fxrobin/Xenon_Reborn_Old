@@ -9,6 +9,7 @@ public enum SoundAsset
 	BIG_SHOOT("big-shoot.wav"), 
 	SHIELD_UP("shield_up.wav"), 
 	SHIELD_DOWN("shield_down.wav"), 
+	SHIELD_ACTIVATED("shield-activated.mp3"),
 	CLIC("clic.wav"), 
 	EXPLOSION("explosion.wav"), 
 	INTRO("intro.mp3"), 

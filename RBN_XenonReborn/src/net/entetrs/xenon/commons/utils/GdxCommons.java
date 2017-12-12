@@ -95,6 +95,7 @@ public final class GdxCommons
 	{
 		boundingCircle.setX(getCenterX(sprite));
 		boundingCircle.setY(getCenterY(sprite));
+		boundingCircle.setRadius(sprite.getWidth() /2);
 	}
 
 	public static void switchFullScreen()

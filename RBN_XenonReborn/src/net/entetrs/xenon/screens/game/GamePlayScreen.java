@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.Artefact;
@@ -20,23 +19,19 @@ import net.entetrs.xenon.artefacts.managers.CollisionManager;
 import net.entetrs.xenon.artefacts.managers.EnemyManager;
 import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.artefacts.managers.ProjectileManager;
-import net.entetrs.xenon.artefacts.managers.ScoreManager;
-import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.fonts.TrueTypeFont;
-import net.entetrs.xenon.commons.fonts.FontUtils;
 import net.entetrs.xenon.commons.libs.SoundAsset;
-import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
 
 public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 {
-	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // nbLasers : %d // CurrentSpeed : %f // lifePoints : %d // Shield : %f";
 
 	private Log log = LogFactory.getLog(this.getClass());
 
 	private BackgroundParallaxScrolling scrolling;
+	private DashBoard dashBoard;
+	
 	private EnemyManager em;
 	private CollisionManager cm;
 	private Ship ship;
@@ -49,6 +44,8 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		scrolling.init(batch);
 		em = EnemyManager.getInstance();
 		cm = CollisionManager.getInstance();
+		dashBoard = new DashBoard(this);
+		ship = new Ship();
 	}
 
 	@Override
@@ -73,31 +70,17 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		BonusManager.getInstance().render(this.getBatch(), delta);
 		this.renderShip(delta);
 		ExplosionManager.render(batch, delta);
-		this.renderStatusBar();
-		this.renderScore();
+		dashBoard.render();
 	}
 
-	private void renderScore()
-	{
-		SpriteBatch batch = this.getBatch();
-		FontUtils.print(batch, 5, Global.height - 43f, String.format("%010d", ScoreManager.getInstance().getScore()));
-	}
+	
 
 	private void renderShoots(SpriteBatch batch, float delta)
 	{
 		ProjectileManager.getInstance().renderShoots(batch, delta);
 	}
 
-	private void renderStatusBar()
-	{
-		BitmapFont font = TrueTypeFont.DEFAULT.getFont();
-		SpriteBatch batch = this.getBatch();
-		int fps = Gdx.graphics.getFramesPerSecond();
-		batch.draw(TextureAsset.FOOTER.get(), 0, 0);
-		String titleBar = String.format(FMT_MSG_BAR, fps, ProjectileManager.getInstance().getShoots().size(), scrolling.getSpeed(), ship.getLifePoints(), ship.getShieldEnergy());
-		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());
-	}
-
+	
 	private void renderShip(float delta)
 	{
 		ship.render(this.getBatch(), delta);
@@ -126,12 +109,10 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		}
 	}
 
-
 	@Override
 	public void show()
 	{
 		SoundAsset.MUSIC.loop(0.6f);
-		ship = new Ship();
 	}
 
 	@Override
@@ -146,6 +127,11 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		List<Artefact> world = new LinkedList<>(em.getEnemies());
 		world.addAll(ProjectileManager.getInstance().getShoots());
 		return world;
+	}
+	
+	public Ship getShip()
+	{
+		return ship;
 	}
 
 }

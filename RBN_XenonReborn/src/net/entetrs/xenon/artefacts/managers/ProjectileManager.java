@@ -29,16 +29,25 @@ public class ProjectileManager
 	{
 		if (!ship.isShieldActivated())
 		{
-			if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT))
-			{
-				pm.addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
-			}
-			
-			if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT))
-			{
-				pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
-			}		
+			checkNormalFire(ship);	
+			checkBigFire(ship);		
 		}	
+	}
+
+	private static void checkBigFire(Ship ship)
+	{
+		if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT))
+		{
+			pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
+		}
+	}
+
+	private static void checkNormalFire(Ship ship)
+	{
+		if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT))
+		{
+			pm.addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
+		}
 	}
 
 	public void renderShoots(SpriteBatch batch, float delta)

@@ -14,7 +14,7 @@ public class GdxTrueTypeString
 	{
 		super();
 		this.font = font;
-		this.layout = new GlyphLayout();;
+		this.layout = new GlyphLayout();
 		this.text = text;	
 	}
 	

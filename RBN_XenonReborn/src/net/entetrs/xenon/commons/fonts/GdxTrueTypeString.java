@@ -4,13 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
-public class GdxString
+public class GdxTrueTypeString
 {
 	private BitmapFont font;
 	private GlyphLayout layout;
 	private String text;
 	
-	public GdxString(BitmapFont font, String text)
+	public GdxTrueTypeString(BitmapFont font, String text)
 	{
 		super();
 		this.font = font;

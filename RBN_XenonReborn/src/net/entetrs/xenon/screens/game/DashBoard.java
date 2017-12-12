@@ -1,6 +1,7 @@
 package net.entetrs.xenon.screens.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -23,6 +24,7 @@ public class DashBoard
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // lifePoints : %d // Shield : %02.2f %%";
 	
 	private GamePlayScreen gamePlayScreen;
+	private Texture footer = TextureAsset.FOOTER.get();
 
 	public DashBoard(GamePlayScreen gamePlayScreen)
 	{
@@ -47,7 +49,7 @@ public class DashBoard
 		BitmapFont font = TrueTypeFont.SHARETECH_12.getFont();
 		SpriteBatch batch = gamePlayScreen.getBatch();
 		int fps = Gdx.graphics.getFramesPerSecond();
-		batch.draw(TextureAsset.FOOTER.get(), 0, 0);
+		batch.draw(footer, 0, 0, Global.width, footer.getHeight());
 		Ship ship = gamePlayScreen.getShip();
 		String titleBar = String.format(FMT_MSG_BAR, fps, ship.getLifePoints(), ship.getShieldEnergy());
 		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());

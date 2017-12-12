@@ -49,7 +49,7 @@ public class LoadingScreen extends AbstractScreen
 	@Override
 	public void render(float delta)
 	{
-		this.getBatch().draw(background, 0, 0, 0 ,0, Global.width, Global.height);
+		this.getBatch().draw(background, 0, 0, Global.width, Global.height);
 		
 		String message;
 

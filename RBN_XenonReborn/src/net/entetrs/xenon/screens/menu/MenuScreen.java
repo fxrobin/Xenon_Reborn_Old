@@ -11,8 +11,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
-import net.entetrs.xenon.commons.fonts.FontUtils;
-import net.entetrs.xenon.commons.fonts.GdxString;
+import net.entetrs.xenon.commons.fonts.GdxBitmapString;
+import net.entetrs.xenon.commons.fonts.GdxTrueTypeString;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.libs.ModAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
@@ -27,7 +27,6 @@ import net.entetrs.xenon.screens.XenonScreen;
 public class MenuScreen extends AbstractScreen
 {
 	private static final String MSG = "PRESS SPACEBAR";
-	private static final int MSG_WIDTH = FontUtils.getWidth(MSG);
 
 	private Log log = LogFactory.getLog(this.getClass());
 
@@ -45,7 +44,8 @@ public class MenuScreen extends AbstractScreen
 	private Monitor monitor;
 	private DisplayMode currentMode;
 	
-	private GdxString message;
+	private GdxTrueTypeString message;
+	private GdxBitmapString pressSpaceBarMessage;
 	
 	private int currentMusic = 0;
 
@@ -59,7 +59,9 @@ public class MenuScreen extends AbstractScreen
 		titleY = (Global.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
-		message = new GdxString(TrueTypeFont.SHARETECH_30.getFont(), "");
+		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");
+		pressSpaceBarMessage = new GdxBitmapString(MSG);
+		pressSpaceBarMessage.setPosition((Global.width - pressSpaceBarMessage.getWidth()) / 2f, 200);
 		ModPlayer.load(ModAsset.values()[currentMusic].toString());
 	}
 
@@ -106,7 +108,7 @@ public class MenuScreen extends AbstractScreen
 		accumulator.addAndCheck(deltaTime);
 		if (displayTitle)
 		{
-			FontUtils.print(this.getBatch(), (Global.width - MSG_WIDTH) / 2f, 200, MSG);
+			pressSpaceBarMessage.render(this.getBatch(), deltaTime);
 		}
 	}
 
@@ -118,12 +120,22 @@ public class MenuScreen extends AbstractScreen
 
 	private void checkInput()
 	{
+		checkNextScreen();
+		checkMetaKeys();
+		checkMusicSwitcher();		
+	}
+
+	private void checkNextScreen()
+	{
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE))
 		{
 			SoundAsset.CLIC.play();
 			this.getControler().showScreen(XenonScreen.GAME_PLAY);
 		}
+	}
 
+	private void checkMetaKeys()
+	{
 		if (Gdx.input.isKeyJustPressed(Keys.F1))
 		{
 			GdxCommons.switchFullScreen();
@@ -133,21 +145,21 @@ public class MenuScreen extends AbstractScreen
 		{
 			Gdx.app.exit();
 		}
-		
+	}
+
+	private void checkMusicSwitcher()
+	{
 		if (Gdx.input.isKeyJustPressed(Keys.LEFT) && currentMusic > 0)
 		{
 			currentMusic--;
 			updateMusic();
 		}
 		
-
 		if (Gdx.input.isKeyJustPressed(Keys.RIGHT) && currentMusic < ModAsset.values().length-1)
 		{
 			currentMusic++;
 			updateMusic();
 		}
-		
-		
 	}
 
 	private void updateMusic()

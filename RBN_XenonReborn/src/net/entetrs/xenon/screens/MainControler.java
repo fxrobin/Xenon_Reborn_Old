@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import net.entetrs.xenon.commons.displays.Fader;
 import net.entetrs.xenon.commons.displays.Fader.State;
@@ -28,6 +29,8 @@ public final class MainControler extends Game implements XenonControler
 
 	/* instance du fader pour "fade-in et fade-out" */
 	private Fader fader;
+	
+	private ShapeRenderer shapeRenderer;
 
 	/* DP SINGLETON */
 	private static MainControler instance = new MainControler();
@@ -50,6 +53,7 @@ public final class MainControler extends Game implements XenonControler
 		batch = new SpriteBatch();
 		batch.enableBlending();
 		fader = Fader.getInstance();	
+		shapeRenderer = new ShapeRenderer();
 		this.showScreen(XenonScreen.LOADING);
 		this.fade();
 	}
@@ -92,5 +96,11 @@ public final class MainControler extends Game implements XenonControler
 		{
 			fader.fade();
 		}
+	}
+	
+	@Override
+	public ShapeRenderer getShapeRenderer()
+	{
+		return shapeRenderer;
 	}
 }

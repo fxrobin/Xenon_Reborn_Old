@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class AbstractScreen implements Screen
 {
@@ -27,6 +28,11 @@ public abstract class AbstractScreen implements Screen
 	public XenonControler getControler()
 	{
 		return controler;
+	}
+	
+	public ShapeRenderer getShapeRenderer()
+	{
+		return controler.getShapeRenderer();
 	}
 	
 

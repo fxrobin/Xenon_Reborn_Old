@@ -19,12 +19,12 @@ public final class Global
 	/**
 	 * largeur de la surface de jeu en pixels.
 	 */
-	public static int width = 1280; /* NOSONAR */
+	public static int width = 1024; /* NOSONAR */
 	
 	/**
 	 * hauteur de la surface de jeu en pixels.
 	 */
-	public static int height = 720; /* NOSONAR */
+	public static int height = 576; /* NOSONAR */
 
 	/**
 	 * vitesse max de déplacement du vaisseau.

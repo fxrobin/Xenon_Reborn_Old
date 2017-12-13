@@ -30,8 +30,8 @@ public class DashBoard
 	private static final int MARGE = 10;
 	
 	private int hauteurBarre;
-	private Color transparentGreen = new Color(0, 1f ,0 ,0.5f);; ;
-	private Color transparentRed = new Color(1f, 0 ,0 ,0.5f);;
+	private Color transparentGreen = new Color(0, 1f ,0 ,0.5f);
+	private Color transparentRed = new Color(1f, 0 ,0 ,0.5f);
 	
 	private GamePlayScreen gamePlayScreen;
 	private Texture footer;

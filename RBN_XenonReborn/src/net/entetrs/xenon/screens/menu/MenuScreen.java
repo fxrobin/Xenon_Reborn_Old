@@ -61,7 +61,7 @@ public class MenuScreen extends AbstractScreen
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
 		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");
 		pressSpaceBarMessage = new GdxBitmapString(MSG);
-		pressSpaceBarMessage.setPosition((Global.width - pressSpaceBarMessage.getWidth()) / 2f, 200);
+		pressSpaceBarMessage.setPosition((Global.width - pressSpaceBarMessage.getWidth()) / 2f, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
 		ModPlayer.load(ModAsset.values()[currentMusic].toString());
 	}
 

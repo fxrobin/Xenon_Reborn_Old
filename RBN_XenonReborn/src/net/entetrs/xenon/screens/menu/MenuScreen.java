@@ -40,10 +40,7 @@ public class MenuScreen extends AbstractScreen
 
 	private Monitor monitor;
 	private DisplayMode currentMode;
-	
 	private GdxTrueTypeString message;
-	private GdxBitmapString pressSpaceBarMessage;
-	
 	private int currentMusic = 0;
 
 	public MenuScreen(XenonControler controler, SpriteBatch batch)
@@ -56,13 +53,17 @@ public class MenuScreen extends AbstractScreen
 		titleY = (Global.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
-		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");
-		
-		pressSpaceBarMessage = new GdxBitmapString(MSG);
-		pressSpaceBarMessage.setPosition((Global.width - pressSpaceBarMessage.getWidth()) / 2f, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
-		msgBlinker = new Blinker(1f, pressSpaceBarMessage);
+		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");	
+		this.createBlinkingMessage();
 		
 		ModPlayer.load(ModAsset.values()[currentMusic].toString());
+	}
+
+	private void createBlinkingMessage()
+	{
+		GdxBitmapString pressSpaceBarMessage = new GdxBitmapString(MSG);
+		pressSpaceBarMessage.setPosition((Global.width - pressSpaceBarMessage.getWidth()) / 2f, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
+		msgBlinker = new Blinker(1f, pressSpaceBarMessage);
 	}
 
 	@Override

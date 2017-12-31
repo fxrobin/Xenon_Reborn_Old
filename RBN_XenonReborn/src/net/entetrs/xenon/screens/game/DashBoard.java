@@ -44,25 +44,26 @@ public class DashBoard
 	
 	public void render()
 	{
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		/* ouverture d'un batch spécifique pour le shaperenderer sous-jacent */
+		this.gamePlayScreen.getBatch().begin();
 		this.renderShieldBar();
+		this.gamePlayScreen.getBatch().end();
+		/* fermeture du batch */
+		
+		this.gamePlayScreen.getBatch().begin();
 		this.renderScore();
 		this.renderStatusBar();
+		this.gamePlayScreen.getBatch().end();
 	}
 
 	/**
 	 * affiche le niveau d'énergie du bouclier.
 	 */
 	public void renderShieldBar()
-	{
-		/* on ferme le spriteBatch, cf doc libgdx */
-		this.gamePlayScreen.getBatch().end();	
-		Gdx.gl.glEnable(GL20.GL_BLEND);
-
+	{	
 		Ship ship = gamePlayScreen.getShip();	
 		renderShieldBarOfShip(ship);
-		
-		/* on crée un nouveau spriteBatch, cf doc libgdx */
-		this.gamePlayScreen.getBatch().begin();
 	}
 
 	/**

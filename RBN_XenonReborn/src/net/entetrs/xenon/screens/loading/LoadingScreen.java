@@ -53,8 +53,10 @@ public class LoadingScreen extends AbstractScreen
 	public void render(float delta)
 	{
 		checkInput();
+		this.getBatch().begin();
 		renderBackground();
 		renderProgress();
+		this.getBatch().end();
 	}
 
 	private void renderProgress()

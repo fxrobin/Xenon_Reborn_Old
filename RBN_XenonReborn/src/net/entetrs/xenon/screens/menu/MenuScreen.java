@@ -83,10 +83,13 @@ public class MenuScreen extends AbstractScreen
 	{
 			this.checkInput();
 			this.backgroundTravelling.translateBackGround(deltaTime);
+			
+			this.getBatch().begin();
 			this.backgroundTravelling.drawBackGround(this.getBatch());
 			this.drawTitle();
 			this.drawDisplayMode();
 			this.msgBlinker.render(this.getBatch(), deltaTime);
+			this.getBatch().end();
 	}
 
 	private void drawDisplayMode()

@@ -11,13 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.displays.Blinker;
 import net.entetrs.xenon.commons.fonts.GdxBitmapString;
 import net.entetrs.xenon.commons.fonts.GdxTrueTypeString;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.libs.ModAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
-import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.commons.utils.ModPlayer;
 import net.entetrs.xenon.screens.AbstractScreen;
@@ -32,10 +32,7 @@ public class MenuScreen extends AbstractScreen
 
 	private BackgroundTravelling backgroundTravelling;
 	
-	/* toutes les secondes, la méthode "switchDisplayTitle" sera lancée */
-	private DeltaTimeAccumulator accumulator = new DeltaTimeAccumulator(1, this::switchDisplayTitle);
-	
-	private boolean displayTitle = true;
+	private Blinker msgBlinker;
 
 	private Texture titleTexture;
 	private float titleX;
@@ -60,8 +57,11 @@ public class MenuScreen extends AbstractScreen
 		monitor = Gdx.graphics.getMonitor();
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
 		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");
+		
 		pressSpaceBarMessage = new GdxBitmapString(MSG);
 		pressSpaceBarMessage.setPosition((Global.width - pressSpaceBarMessage.getWidth()) / 2f, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
+		msgBlinker = new Blinker(1f, pressSpaceBarMessage);
+		
 		ModPlayer.load(ModAsset.values()[currentMusic].toString());
 	}
 
@@ -85,32 +85,20 @@ public class MenuScreen extends AbstractScreen
 			this.backgroundTravelling.drawBackGround(this.getBatch());
 			this.drawTitle();
 			this.drawDisplayMode();
-			this.drawMessage(deltaTime);
+			this.msgBlinker.render(this.getBatch(), deltaTime);
 	}
 
 	private void drawDisplayMode()
 	{
 		String msgDisplayMode = String.format("%s / %s / %d FPS", currentMode, monitor.name, Gdx.graphics.getFramesPerSecond());
 		message.setText(msgDisplayMode);
-		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 60);
-		
+		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 60);	
 		message.setText("< " + ModPlayer.getMusicName() + " >");
-		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 100);
+		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 120);
+		message.setText(String.format("Virtual Width : %d px / Virtual Height : %d px", Global.width, Global.height));
+		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 30);
 	}
 
-	private void switchDisplayTitle()
-	{
-		displayTitle = !displayTitle;
-	}
-	
-	private void drawMessage(float deltaTime)
-	{
-		accumulator.addAndCheck(deltaTime);
-		if (displayTitle)
-		{
-			pressSpaceBarMessage.render(this.getBatch(), deltaTime);
-		}
-	}
 
 	private void drawTitle()
 	{

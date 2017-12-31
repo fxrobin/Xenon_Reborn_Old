@@ -47,13 +47,13 @@ public class Shield
 
 	private void recharger(float delta)
 	{
-		energy += (delta * 20f);
+		energy += (delta * Global.SHIELD_CHARGING_SPEED);
 		energy = (energy > Global.SHIELD_MAX_ENERGY) ? Global.SHIELD_MAX_ENERGY : energy;
 	}
 
 	private void decharger(float delta)
 	{
-		energy -= (delta * 10f);
+		energy -= (delta * Global.SHIELD_DISCHARGING_SPEED);
 		if (energy < 0f)
 		{
 			SoundAsset.SHIELD_DOWN.play();
@@ -89,7 +89,6 @@ public class Shield
 		{
 			activated = true;
 			SoundAsset.SHIELD_ACTIVATED.play();
-			//SoundAsset.SHIELD_UP.play();
 		}
 	}
 

@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.vwp.sound.mod.modplay.ThreadedPlayer;
 import com.vwp.sound.mod.modplay.loader.InvalidFormatException;
@@ -28,6 +31,8 @@ import com.vwp.sound.mod.sound.output.SoundDataFormat;
  */
 public final class ModPlayer
 {
+	private static Log log = LogFactory.getLog(ModPlayer.class);
+	
 	private static ThreadedPlayer player = new ThreadedPlayer();
 	private static double volume;
 	private static String musicName;
@@ -78,8 +83,10 @@ public final class ModPlayer
 		}
 		catch (IOException | InvalidFormatException | PlayerException ex)
 		{
-			System.err.println("Impossible de lire la ressource : " + musicNameResource);
-			System.err.println(ex);
+			if (log.isErrorEnabled())
+			{
+				log.error("Impossible de lire la ressource : " + musicNameResource, ex);
+			}
 		}
 
 	}
@@ -121,7 +128,10 @@ public final class ModPlayer
 		}
 		catch (IOException | InvalidFormatException | PlayerException ex)
 		{
-			System.err.println("Impossible de lire le fichier : " + file);
+			if (log.isErrorEnabled())
+			{
+				log.error("Impossible de lire la ressource : " + file, ex);
+			}
 		}
 	}
 

@@ -27,11 +27,8 @@ public class DashBoard
 {
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // lifePoints : %d // Shield : %02.2f %%";
 
-	private static final int MARGE = 10;
-	
+	private static final int MARGE = 10;	
 	private int hauteurBarre;
-	private Color transparentGreen = new Color(0, 1f ,0 ,0.5f);
-	private Color transparentRed = new Color(1f, 0 ,0 ,0.5f);
 	
 	private GamePlayScreen gamePlayScreen;
 	private Texture footer;
@@ -89,7 +86,10 @@ public class DashBoard
 	 */
 	public Color computeShieldBarColor(Ship ship)
 	{
-		return ship.getShieldEnergy() >= Global.SHIELD_ACTIVATION_THRESHOLD ? transparentGreen : transparentRed;
+		/* une jolie couleur dégradée du vert au rouge en fonction de la valeur du bouclier.
+		 * la teinte rouge est inversée par rapport à la teinte verte et transparence à 50 % */
+		float currentValue = ship.getShieldEnergy() / 100f;
+		return new Color(1f - currentValue, currentValue, 0f, 0.5f);	
 	}
 		
 	private void renderScore()

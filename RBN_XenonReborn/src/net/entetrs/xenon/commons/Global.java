@@ -24,7 +24,7 @@ public final class Global
 	/**
 	 * hauteur de la surface de jeu en pixels.
 	 */
-	public static int height = 576; /* NOSONAR */
+	public static int height = 768; /* NOSONAR */
 
 	/**
 	 * vitesse max de déplacement du vaisseau.
@@ -45,12 +45,12 @@ public final class Global
 	/**
 	 * bouclier : vitesse de chargement du bouclier. (20f = 5 secondes)
 	 */
-	public static final float SHIELD_CHARGING_SPEED = 20f;
+	public static final float SHIELD_CHARGING_SPEED = 5f;
 
 	/**
 	 * bouclier :  vitesse de décharge du bouclier (10f = 10 secondes)
 	 */
-	public static final float SHIELD_DISCHARGING_SPEED = 10f;
+	public static final float SHIELD_DISCHARGING_SPEED = 20f;
 
 	/**
 	 * bouclier : seuil d'activation potentiel du bouclier. (90%)

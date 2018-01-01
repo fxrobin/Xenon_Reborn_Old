@@ -44,13 +44,8 @@ public class DashBoard
 	
 	public void render()
 	{
-		Gdx.gl.glEnable(GL20.GL_BLEND);
-		/* ouverture d'un batch spécifique pour le shaperenderer sous-jacent */
-		this.gamePlayScreen.getBatch().begin();
-		this.renderShieldBar();
-		this.gamePlayScreen.getBatch().end();
-		/* fermeture du batch */
 		
+		this.renderShieldBar();		
 		this.gamePlayScreen.getBatch().begin();
 		this.renderScore();
 		this.renderStatusBar();
@@ -72,6 +67,7 @@ public class DashBoard
 	 */
 	public void renderShieldBarOfShip(Ship ship)
 	{
+		Gdx.gl.glEnable(GL20.GL_BLEND);
 		ShapeRenderer shapeRenderer = gamePlayScreen.getShapeRenderer();
 		Color color = computeShieldBarColor(ship);
 		shapeRenderer.begin(ShapeType.Filled);

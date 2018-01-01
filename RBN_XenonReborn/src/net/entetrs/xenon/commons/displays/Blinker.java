@@ -16,6 +16,7 @@ public class Blinker implements Renderable
 	private Renderable renderable;
 	private DeltaTimeAccumulator accumulator;
 	private boolean displayed;
+	private float totalBlinkingTime;
 	
 	private void switchDiplay()
 	{
@@ -24,18 +25,40 @@ public class Blinker implements Renderable
 	
 	public Blinker(float blinkTime, Renderable renderable)
 	{
-		this.accumulator = new DeltaTimeAccumulator(blinkTime, this::switchDiplay);
+		this(blinkTime, renderable, Float.MAX_VALUE);
+	}
+	
+	public Blinker(float blinkRate, Renderable renderable, float totalBlinkingTime)
+	{
+		this.accumulator = new DeltaTimeAccumulator(blinkRate, this::switchDiplay);
 		this.renderable = renderable;
+		this.totalBlinkingTime = totalBlinkingTime;
 	}
 
 	@Override
 	public void render(SpriteBatch batch, float delta)
 	{
 		accumulator.addAndCheck(delta);
-		if (displayed)
+		// si c'est activé pour l'affichage ou si le temps de blinking est dépassé, alors on affiche
+		if (displayed || this.isBlinkingFinished())
 		{
 			renderable.render(batch, delta);
 		}
+	}
+	
+	public boolean isBlinkingFinished()
+	{
+		return accumulator.getAccumulatedTime() > totalBlinkingTime ;
+	}
+	
+	public void restart()
+	{
+		this.accumulator.restart();
+	}
+	
+	public void setRenderable(Renderable r)
+	{
+		this.renderable = r;
 	}
 
 }

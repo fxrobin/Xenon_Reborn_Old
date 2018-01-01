@@ -12,7 +12,8 @@ public class DeltaTimeAccumulator
 	/**
 	 * accumulateur de temps
 	 */
-	private float accumulator = 0;
+	private float accumulator = 0f;
+	private float totalAccumulatedTime = 0f;
 	
 	/**
 	 * fonction à lancer quand l'accumulateur aura atteint le tick.
@@ -50,6 +51,7 @@ public class DeltaTimeAccumulator
 	public boolean addAndCheck(float deltaTime)
 	{
 		this.accumulator += deltaTime;
+		this.totalAccumulatedTime += deltaTime;
 		if (accumulator > tickFrequency)
 		{
 			accumulator = 0;
@@ -63,5 +65,23 @@ public class DeltaTimeAccumulator
 		{
 			return false;
 		}
+	}
+	
+	/**
+	 * @return le temps total accumlé en secondes.
+	 */
+	public float getAccumulatedTime()
+	{
+		return this.totalAccumulatedTime;
+	}
+	
+	
+	/**
+	 * relance à partir de zéro l'accumulateur de temps.
+	 */
+	public void restart()
+	{
+		this.accumulator = 0f;
+		this.totalAccumulatedTime = 0f;
 	}
 }

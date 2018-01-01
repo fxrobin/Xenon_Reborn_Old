@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.artefacts.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.artefacts.friendly.ShipInput.Vertical;
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.displays.Blinker;
 import net.entetrs.xenon.commons.displays.Renderable;
+import net.entetrs.xenon.commons.displays.RenderableAdapter;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
@@ -28,6 +30,8 @@ public class ShipRenderer implements Renderable
 	private Sprite shieldSprite;
 
 	private Sprite currentSprite;
+	private RenderableAdapter renderableAdapter = new RenderableAdapter();
+	private Blinker blinker;
 
 	public ShipRenderer(Ship ship)
 	{
@@ -38,6 +42,8 @@ public class ShipRenderer implements Renderable
 		GdxCommons.setOriginCenter(shieldSprite);
 		currentSprite = shipSpriteReactorOn;
 		currentSprite.setCenter(Global.width / 2f, 80);
+		renderableAdapter.setSprite(currentSprite);
+		blinker = new Blinker(0.125f, renderableAdapter, 6f);
 	}
 
 	private void loadSprites()
@@ -68,7 +74,17 @@ public class ShipRenderer implements Renderable
 	public void render(SpriteBatch batch, float delta)
 	{
 		this.setCorrectSprite();
-		currentSprite.draw(batch);
+		
+		if (blinker.isBlinkingFinished())
+		{
+			currentSprite.draw(batch);
+		}
+		else
+		{
+			renderableAdapter.setSprite(currentSprite);
+			blinker.render(batch, delta);
+		}
+	
 		this.drawShieldIfActivated(batch);
 	}
 
@@ -118,6 +134,16 @@ public class ShipRenderer implements Renderable
 		float y = this.getCenterY();
 		currentSprite = newSprite;
 		currentSprite.setCenter(x, y);
+	}
+	
+	public void blink()
+	{
+		this.blinker.restart();
+	}
+	
+	public boolean isBlinking()
+	{
+		return !blinker.isBlinkingFinished();
 	}
 
 }

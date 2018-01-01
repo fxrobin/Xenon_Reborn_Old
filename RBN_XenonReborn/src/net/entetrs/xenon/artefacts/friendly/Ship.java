@@ -11,6 +11,7 @@ public class Ship extends AbstractArtefact
 {
 	private ShipRenderer shipRenderer;
 	private Shield shield;
+	private boolean vulnerable;
 
 	public Ship()
 	{
@@ -18,6 +19,7 @@ public class Ship extends AbstractArtefact
 		shipRenderer = new ShipRenderer(this);
 		shield = new Shield();
 		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2); 
+		vulnerable = false;
 	}
 
 	public float getCenterX()
@@ -44,9 +46,16 @@ public class Ship extends AbstractArtefact
 	@Override
 	public void decreaseLife(int force)
 	{
-		if (!isShieldActivated())
+		if (!isShieldActivated() && vulnerable)
 		{
 			super.decreaseLife(force);
+			if (!super.isAlive())
+			{
+				this.shipRenderer.blink();
+				// TODO : décrémenter les vies au niveau du GamePlayScreen
+				// temporaire :
+				this.setLifePoints(60);
+			}
 		}
 	}
 	
@@ -62,6 +71,7 @@ public class Ship extends AbstractArtefact
 	@Override
 	public void render(SpriteBatch batch, float delta)
 	{
+		vulnerable = !shipRenderer.isBlinking();
 		shipRenderer.render(batch, delta);
 	}
 	

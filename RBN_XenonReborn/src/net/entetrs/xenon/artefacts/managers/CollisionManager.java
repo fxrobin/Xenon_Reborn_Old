@@ -56,7 +56,7 @@ public final class CollisionManager
 	 */
 	public void checkCollision(Artefact target, Artefact projectile)
 	{
-		if (projectile.isCollision(target))
+		if (target.isCollision(projectile))
 		{
 			/* collision !!! */
 			processCollision(target, projectile);

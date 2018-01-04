@@ -6,7 +6,6 @@ import net.entetrs.xenon.commons.libs.TextureAsset;
 
 public class Bullet extends Enemy
 {
-
 	public Bullet()
 	{
 		super(TextureAsset.BULLET.get(), 5, 5, 8);
@@ -18,5 +17,4 @@ public class Bullet extends Enemy
         /* collision uniquement avec le vaisseau */
 		return otherArtefact instanceof Ship ? super.isCollision(otherArtefact) : false;
 	}
-
 }

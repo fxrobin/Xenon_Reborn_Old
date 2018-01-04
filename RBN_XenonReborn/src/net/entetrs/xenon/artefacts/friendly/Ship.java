@@ -52,8 +52,7 @@ public class Ship extends AbstractArtefact
 			if (!super.isAlive())
 			{
 				this.shipRenderer.blink();
-				// TODO : décrémenter les vies au niveau du GamePlayScreen
-				// temporaire :
+				/* temporaire : décrémenter les vies au niveau du GamePlayScreen */
 				this.setLifePoints(60);
 			}
 		}

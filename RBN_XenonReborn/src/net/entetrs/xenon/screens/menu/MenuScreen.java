@@ -56,7 +56,7 @@ public class MenuScreen extends AbstractScreen
 		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");	
 		this.createBlinkingMessage();
 		
-		ModPlayer.load(ModAsset.values()[currentMusic].toString());
+		
 	}
 
 	private void createBlinkingMessage()
@@ -69,7 +69,7 @@ public class MenuScreen extends AbstractScreen
 	@Override
 	public void show()
 	{
-		ModPlayer.play();
+		ModPlayer.play(ModAsset.values()[currentMusic].toString());
 	}
 
 	@Override
@@ -157,7 +157,6 @@ public class MenuScreen extends AbstractScreen
 	private void updateMusic()
 	{
 		ModPlayer.stop();
-		ModPlayer.load(ModAsset.values()[currentMusic].toString());
-		ModPlayer.play();
+		ModPlayer.play(ModAsset.values()[currentMusic].toString());
 	}
 }

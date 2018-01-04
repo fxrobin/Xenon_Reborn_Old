@@ -52,5 +52,10 @@ public enum MusicAsset
 		this.getMusic().setVolume(f);
     	this.loop();		
 	}
+	
+	public boolean isPlaying()
+	{
+		return this.getMusic().isPlaying();
+	}
 
 }

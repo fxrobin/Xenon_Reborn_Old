@@ -25,7 +25,7 @@ import net.entetrs.xenon.commons.libs.TextureAsset;
 
 public class DashBoard
 {
-	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // lifePoints : %d // Shield : %02.2f %%";
+	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // lifePoints : %d // Shield : %02.2f %% // lifeCount : %d";
 
 	private static final int MARGE = 10;	
 	private int hauteurBarre;
@@ -101,7 +101,7 @@ public class DashBoard
 		int fps = Gdx.graphics.getFramesPerSecond();
 		batch.draw(footer, 0, 0, Global.width, footer.getHeight());
 		Ship ship = gamePlayScreen.getShip();
-		String titleBar = String.format(FMT_MSG_BAR, fps, ship.getLifePoints(), ship.getShieldEnergy());
+		String titleBar = String.format(FMT_MSG_BAR, fps, ship.getLifePoints(), ship.getShieldEnergy(), ship.getLifeCount());
 		font.draw(batch, titleBar, 6, 6 + font.getCapHeight());
 	}
 

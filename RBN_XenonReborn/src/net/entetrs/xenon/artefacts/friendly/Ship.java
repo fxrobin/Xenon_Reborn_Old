@@ -12,14 +12,16 @@ public class Ship extends AbstractArtefact
 	private ShipRenderer shipRenderer;
 	private Shield shield;
 	private boolean vulnerable;
+	private int lifeCount;
 
 	public Ship()
 	{
-		super(0,0, 60, 20);
+		super(0,0, Global.SHIP_LIFE_POINTS, 20);
 		shipRenderer = new ShipRenderer(this);
 		shield = new Shield();
 		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2); 
 		vulnerable = false;
+		lifeCount = 3;
 	}
 
 	public float getCenterX()
@@ -52,8 +54,8 @@ public class Ship extends AbstractArtefact
 			if (!super.isAlive())
 			{
 				this.shipRenderer.blink();
-				/* temporaire : décrémenter les vies au niveau du GamePlayScreen */
-				this.setLifePoints(60);
+				lifeCount--;
+				this.setLifePoints(Global.SHIP_LIFE_POINTS);
 			}
 		}
 	}
@@ -106,5 +108,15 @@ public class Ship extends AbstractArtefact
 	public float getShieldEnergy()
 	{
 		return this.shield.getEnergy();
+	}
+	
+	public int getLifeCount()
+	{
+		return lifeCount;
+	}
+	
+	public boolean isFullyDestroyed()
+	{
+		return lifeCount <= 0;
 	}
 }

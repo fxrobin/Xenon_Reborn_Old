@@ -19,8 +19,12 @@ import net.entetrs.xenon.artefacts.managers.CollisionManager;
 import net.entetrs.xenon.artefacts.managers.EnemyManager;
 import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.artefacts.managers.ProjectileManager;
+import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.displays.Blinker;
+import net.entetrs.xenon.commons.fonts.GdxBitmapString;
 import net.entetrs.xenon.commons.libs.MusicAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
+import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
@@ -37,6 +41,8 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private EnemyManager em;
 	private CollisionManager cm;
 	private Ship ship;
+	
+	private Blinker msgBlinker;
 
 	public GamePlayScreen(XenonControler controler, SpriteBatch batch)
 	{
@@ -48,7 +54,22 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		cm = CollisionManager.getInstance();
 		dashBoard = new DashBoard(this);
 		ship = new Ship();
+		this.createBlinkingMessage();
+		msgBlinker.hide();
 	}
+	
+	private void createBlinkingMessage()
+	{
+		GdxBitmapString gameOverMessage = new GdxBitmapString("GAME OVER");
+		gameOverMessage.setPosition((Global.width - gameOverMessage.getWidth()) / 2f, (float)(Global.height - TextureAsset.TITLE.get().getHeight() /2) / 2 );
+		msgBlinker = new Blinker(1f, gameOverMessage, 5, this::closeGame);
+	}
+	
+	private void closeGame()
+	{
+		this.getControler().showScreen(XenonScreen.MENU);
+	}
+	
 
 	@Override
 	public void render(float delta)
@@ -71,7 +92,23 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.renderShoots(batch, delta);
 		this.em.render(batch, delta);
 		BonusManager.getInstance().render(this.getBatch(), delta);
-		this.renderShip(delta);
+		
+		if (ship.isFullyDestroyed())
+		{
+			if (msgBlinker.isHidden())
+			{
+				msgBlinker.show();
+			}
+			else
+			{
+				msgBlinker.render(batch, delta);
+			}
+		}
+		else
+		{
+			this.renderShip(delta);
+		}
+		
 		ExplosionManager.render(batch, delta);
 		batch.end();
 		
@@ -111,7 +148,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		/* test avec un if classique */
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			SoundAsset.CLIC.play();
-			this.getControler().showScreen(XenonScreen.MENU);
+			this.closeGame();
 		}
 		
 		/* test avec une référence de méthode : c'est plus joli ... */

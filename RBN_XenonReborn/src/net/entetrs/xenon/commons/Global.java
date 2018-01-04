@@ -56,6 +56,11 @@ public final class Global
 	 * bouclier : seuil d'activation potentiel du bouclier. (90%)
 	 */
 	public static final float SHIELD_ACTIVATION_THRESHOLD = 90f;
+	
+	/**
+	 * points de vie max du vaisseau.
+	 */
+	public static final int  SHIP_LIFE_POINTS = 20;
 
 	private Global()
 	{

@@ -19,6 +19,7 @@ import net.entetrs.xenon.artefacts.managers.CollisionManager;
 import net.entetrs.xenon.artefacts.managers.EnemyManager;
 import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.artefacts.managers.ProjectileManager;
+import net.entetrs.xenon.commons.libs.MusicAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.AbstractScreen;
@@ -121,13 +122,13 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	@Override
 	public void show()
 	{
-		SoundAsset.MUSIC.loop(0.6f);
+		MusicAsset.MUSIC.loop(0.6f);
 	}
 
 	@Override
 	public void hide()
 	{
-		SoundAsset.MUSIC.stop();
+		MusicAsset.MUSIC.stop();
 	}
 
 	@Override

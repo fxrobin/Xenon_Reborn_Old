@@ -4,7 +4,6 @@ import com.badlogic.gdx.audio.Sound;
 
 public enum SoundAsset
 {
-	INTRO_SOUND("intro-sound.mp3"),
 	SHOOT("shoot.mp3"), 
 	BIG_SHOOT("big-shoot.wav"), 
 	SHIELD_UP("shield_up.wav"), 
@@ -12,8 +11,6 @@ public enum SoundAsset
 	SHIELD_ACTIVATED("shield-activated.mp3"),
 	CLIC("clic.wav"), 
 	EXPLOSION("explosion.wav"), 
-	INTRO("intro.mp3"), 
-	MUSIC("music.mp3"),
 	BONUS("bonus.wav");
 	
 	private final String fileName;

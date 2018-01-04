@@ -14,7 +14,7 @@ import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.SingleExecutor;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.libs.AssetLib;
-import net.entetrs.xenon.commons.libs.SoundAsset;
+import net.entetrs.xenon.commons.libs.MusicAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.screens.AbstractScreen;
@@ -46,7 +46,7 @@ public class LoadingScreen extends AbstractScreen
 	@Override
 	public void show()
 	{
-		SoundAsset.INTRO_SOUND.play();
+		MusicAsset.INTRO_SOUND.play();
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -30,7 +31,7 @@ public final class AssetLib
 	public AssetLib()
 	{
 		// on force d'emblée la lecture bloquante du son d'intro.
-		loadAndWait(Sound.class, SoundAsset.INTRO_SOUND);
+		loadAndWait(Music.class, MusicAsset.INTRO_SOUND);
 		loadAndWait(Texture.class, TextureAsset.BACKGROUND_SPACE_DOCK);
 		loadAllAsync();
 	}
@@ -41,6 +42,7 @@ public final class AssetLib
 	public void loadAllAsync()
 	{
 			register(Sound.class, (Object[]) SoundAsset.values());
+			register(Music.class, (Object[]) MusicAsset.values());
 			register(Texture.class, (Object[]) TextureAsset.values());
 			register(Texture.class, (Object[]) AnimationAsset.values());
 	}
@@ -76,6 +78,7 @@ public final class AssetLib
 	{
 		return (int) (manager.getProgress() * 100);
 	}
+	
 	
 	public void loadAndWait(Class<?> clazz, Object fileName)
 	{

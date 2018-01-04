@@ -69,13 +69,13 @@ public class MenuScreen extends AbstractScreen
 	@Override
 	public void show()
 	{
-		ModPlayer.playNormal();
+		ModPlayer.play();
 	}
 
 	@Override
 	public void hide()
 	{
-		ModPlayer.stopFadeOut();
+		ModPlayer.stop();
 	}
 
 	@Override
@@ -156,8 +156,8 @@ public class MenuScreen extends AbstractScreen
 
 	private void updateMusic()
 	{
-		ModPlayer.stopNormal();
+		ModPlayer.stop();
 		ModPlayer.load(ModAsset.values()[currentMusic].toString());
-		ModPlayer.playNormal();
+		ModPlayer.play();
 	}
 }

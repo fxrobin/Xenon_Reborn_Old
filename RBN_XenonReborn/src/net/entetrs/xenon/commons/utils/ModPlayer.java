@@ -74,7 +74,9 @@ public final class ModPlayer
 			if (log.isInfoEnabled()) log.info("Chargement de " + modUrl);
 			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
 			mixer = multimediaContainer.createNewMixer();
+			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());
 			mixer.startPlayback();
+			
 		}
 		catch (UnsupportedAudioFileException e)
 		{
@@ -91,12 +93,9 @@ public final class ModPlayer
 	 */
 	public static void play(String musicNameResource)
 	{
-
 		Thread t = new Thread(() -> ModPlayer.loadAndPlay(musicNameResource));
 		t.setDaemon(true);
 		t.start();
-		if (log.isInfoEnabled()) log.info("Playing " + getMusicName());
-
 	}
 
 	/**
@@ -106,7 +105,7 @@ public final class ModPlayer
 	{
 		if (mixer != null)
 		{
-			mixer.stopPlayback();
+			new Thread(mixer::stopPlayback).start();
 		}
 
 	}

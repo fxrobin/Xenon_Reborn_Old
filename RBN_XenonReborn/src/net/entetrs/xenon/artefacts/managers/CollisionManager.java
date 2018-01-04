@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.entetrs.xenon.artefacts.Artefact;
+import net.entetrs.xenon.artefacts.enemies.Bullet;
 import net.entetrs.xenon.artefacts.extra.BonusType;
 
 /**
@@ -102,8 +103,8 @@ public final class CollisionManager
 	 */
 	public void processBonus(Artefact target)
 	{
-		/* une destruction sur deux génère un bonus.*/
-		if (randomGenerator.nextBoolean())
+		/* une destruction sur deux génère un bonus et les bullets sont ignorées*/
+		if (randomGenerator.nextBoolean() && !(target instanceof Bullet))
 		{
 			/* puis on choisi au hasard, encore l'un ou l'autres des bonus potentiels.*/
 			BonusType bonusType = randomGenerator.nextBoolean() ? BonusType.NORMAL_BONUS : BonusType.POWER_UP_BONUS;

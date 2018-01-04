@@ -90,5 +90,10 @@ public final class AssetLib
 	{
 		return manager.get(fileName.toString(), clazz);
 	}
+	
+	public void disposeAll()
+	{
+		manager.clear();
+	}
 
 }

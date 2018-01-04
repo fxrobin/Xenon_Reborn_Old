@@ -15,7 +15,9 @@ import net.entetrs.xenon.commons.displays.Blinker;
 import net.entetrs.xenon.commons.fonts.GdxBitmapString;
 import net.entetrs.xenon.commons.fonts.GdxTrueTypeString;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
+import net.entetrs.xenon.commons.libs.AnimationAsset;
 import net.entetrs.xenon.commons.libs.ModAsset;
+import net.entetrs.xenon.commons.libs.MusicAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
@@ -135,6 +137,11 @@ public class MenuScreen extends AbstractScreen
 
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
 		{
+			log.info("DisposeAll");
+			AnimationAsset.disposeAll();
+			MusicAsset.disposeAll();
+			SoundAsset.disposeAll();
+			TextureAsset.disposeAll();
 			Gdx.app.exit();
 		}
 	}

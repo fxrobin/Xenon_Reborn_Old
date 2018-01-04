@@ -1,9 +1,12 @@
 package net.entetrs.xenon.commons.libs;
 
+import java.util.stream.Stream;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Disposable;
 
 import net.entetrs.xenon.commons.displays.AnimatedSprite;
 import net.entetrs.xenon.commons.utils.GdxCommons;
@@ -15,14 +18,10 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
  *
  */
 
-public enum AnimationAsset
+public enum AnimationAsset implements Disposable
 {
-	EXPLOSION_BIG("shoots/explosion-sheet.png", 8, 6, 2f, PlayMode.NORMAL), 
-	EXPLOSION_LITTLE("shoots/little-explosion.png", 6, 1, 1f, PlayMode.NORMAL), 
-	FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, 10, 50), 
-	FRIENDLY_BIGSHOOT("shoots/big-shoot.png", 5, 1, 1f, PlayMode.LOOP, 26, 80), 
-	BONUS("commons/bonus.png", 8, 1, 1f, PlayMode.LOOP),
-	POWER_UP("commons/bonus-power-up-anim.png", 7, 1, 1f, PlayMode.LOOP);
+	EXPLOSION_BIG("shoots/explosion-sheet.png", 8, 6, 2f, PlayMode.NORMAL), EXPLOSION_LITTLE("shoots/little-explosion.png", 6, 1, 1f, PlayMode.NORMAL), FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, 10,
+			50), FRIENDLY_BIGSHOOT("shoots/big-shoot.png", 5, 1, 1f, PlayMode.LOOP, 26, 80), BONUS("commons/bonus.png", 8, 1, 1f, PlayMode.LOOP), POWER_UP("commons/bonus-power-up-anim.png", 7, 1, 1f, PlayMode.LOOP);
 
 	private final String fileName;
 	private final int cols;
@@ -34,6 +33,7 @@ public enum AnimationAsset
 	private float centerY;
 	private float radius;
 
+	private Texture texture;
 	private Animation<TextureRegion> animation;
 
 	private AnimationAsset(String fileName, int cols, int rows, float duration, Animation.PlayMode mode, float centerX, float centerY)
@@ -51,7 +51,7 @@ public enum AnimationAsset
 		this.rows = rows;
 		this.duration = duration;
 	}
-	
+
 	private AnimationAsset(String fileName, int cols, int rows, float duration, Animation.PlayMode playMode, float radius)
 	{
 		this(fileName, cols, rows, duration, playMode);
@@ -62,7 +62,7 @@ public enum AnimationAsset
 	{
 		if (animation == null)
 		{
-			Texture texture = AssetLib.getInstance().get(fileName, Texture.class);
+			this.texture = AssetLib.getInstance().get(fileName, Texture.class);
 			TextureRegion[] result = GdxCommons.convertToTextureArray(texture, cols, rows);
 			animation = new Animation<>(duration / result.length, result);
 			animation.setPlayMode(playMode);
@@ -81,7 +81,7 @@ public enum AnimationAsset
 			return new AnimatedSprite(this.getAnimation());
 		}
 	}
-	
+
 	public float getRadius()
 	{
 		return radius;
@@ -91,5 +91,18 @@ public enum AnimationAsset
 	public String toString()
 	{
 		return this.fileName;
+	}
+
+	public void dispose()
+	{
+		if (texture != null)
+		{
+			texture.dispose();
+		}
+	}
+
+	public static void disposeAll()
+	{
+		GdxCommons.disposeAll(AnimationAsset.values());
 	}
 }

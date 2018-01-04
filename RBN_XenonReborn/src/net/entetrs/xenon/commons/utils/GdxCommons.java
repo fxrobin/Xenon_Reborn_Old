@@ -2,6 +2,9 @@ package net.entetrs.xenon.commons.utils;
 
 import java.util.Arrays;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Graphics.Monitor;
@@ -23,6 +26,8 @@ import net.entetrs.xenon.commons.Global;
  */
 public final class GdxCommons
 {
+
+	private static Log log = LogFactory.getLog(GdxCommons.class);
 
 	private GdxCommons()
 	{
@@ -84,12 +89,18 @@ public final class GdxCommons
 	 */
 	public static void disposeAll(Disposable... disposables)
 	{
-		Arrays.stream(disposables).forEach(Disposable::dispose);
+		Arrays.stream(disposables).forEach(d -> {
+			if (log.isInfoEnabled())
+			{
+				log.info("Dispose : " + d);
+			}
+			d.dispose();
+		});
 	}
 
 	/**
-	 * découpe une texture en un tableau de TextureRegion.
-	 * utile pour obtenir les images d'une animation.
+	 * découpe une texture en un tableau de TextureRegion. utile pour obtenir
+	 * les images d'une animation.
 	 * 
 	 * @param texture
 	 * @param cols
@@ -121,10 +132,9 @@ public final class GdxCommons
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
-
 	/**
-	 * détermine le "boundingCircle" d'un sprite en prenant son centre comme origine
-	 * du cercle et la taille du sprite en largeur / 2.
+	 * détermine le "boundingCircle" d'un sprite en prenant son centre comme
+	 * origine du cercle et la taille du sprite en largeur / 2.
 	 * 
 	 * @param sprite
 	 * @param boundingCircle

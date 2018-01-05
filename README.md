@@ -9,4 +9,4 @@ This framework is based on LibGDX and runs only on a desktop computer (Java SE 8
 
 Here is how the v0.1.8 looks like :
 
-[capture v0.1.8](https://youtu.be/ki39sbk4VKc)
+[![Xenon_Reborn_Capture v0.1.8](http://img.youtube.com/vi/ki39sbk4VKc/0.jpg)](https://youtu.be/ki39sbk4VKc)

@@ -51,12 +51,25 @@ public class Ship extends AbstractArtefact
 		if (!isShieldActivated() && vulnerable)
 		{
 			super.decreaseLife(force);
-			if (!super.isAlive())
-			{
-				this.shipRenderer.blink();
-				lifeCount--;
-				this.setLifePoints(Global.SHIP_LIFE_POINTS);
-			}
+			checkShipIsAliveAndBlink();
+		}
+	}
+
+	private void checkShipIsAliveAndBlink()
+	{
+		if (!super.isAlive())
+		{
+			this.shipRenderer.blink();
+			decreaseLifeCount();
+		}
+	}
+
+	private void decreaseLifeCount()
+	{
+		lifeCount--;
+		if (lifeCount > 0)
+		{
+		 this.setLifePoints(Global.SHIP_LIFE_POINTS);
 		}
 	}
 	

@@ -27,7 +27,7 @@ public class ProjectileManager
 	
 	public static void checkFire(Ship ship)
 	{
-		if (!ship.isShieldActivated())
+		if (!ship.isShieldActivated() && !ship.isFullyDestroyed())
 		{
 			checkNormalFire(ship);	
 			checkBigFire(ship);		

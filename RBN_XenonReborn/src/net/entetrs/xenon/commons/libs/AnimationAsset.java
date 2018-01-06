@@ -1,7 +1,5 @@
 package net.entetrs.xenon.commons.libs;
 
-import java.util.stream.Stream;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
@@ -12,7 +10,7 @@ import net.entetrs.xenon.commons.displays.AnimatedSprite;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
 /**
- * catalogue d'animations pour l'ensemble du jeu, accessible sous forme d'ENUM
+ * catalogue d'animations pour l'ensemble du jeu, accessible sous forme d'ENUM.
  * 
  * @author CDT RBN
  *
@@ -20,8 +18,12 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public enum AnimationAsset implements Disposable
 {
-	EXPLOSION_BIG("shoots/explosion-sheet.png", 8, 6, 2f, PlayMode.NORMAL), EXPLOSION_LITTLE("shoots/little-explosion.png", 6, 1, 1f, PlayMode.NORMAL), FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, 10,
-			50), FRIENDLY_BIGSHOOT("shoots/big-shoot.png", 5, 1, 1f, PlayMode.LOOP, 26, 80), BONUS("commons/bonus.png", 8, 1, 1f, PlayMode.LOOP), POWER_UP("commons/bonus-power-up-anim.png", 7, 1, 1f, PlayMode.LOOP);
+	EXPLOSION_BIG("shoots/explosion-sheet.png", 8, 6, 2f, PlayMode.NORMAL), 
+	EXPLOSION_LITTLE("shoots/little-explosion.png", 6, 1, 1f, PlayMode.NORMAL), 
+	FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, 10, 50, 10), 
+	FRIENDLY_BIGSHOOT("shoots/big-shoot.png", 5, 1, 1f, PlayMode.LOOP, 26, 80, 26), 
+	BONUS("commons/bonus.png", 8, 1, 1f, PlayMode.LOOP), 
+	POWER_UP("commons/bonus-power-up-anim.png", 7, 1, 1f, PlayMode.LOOP);
 
 	private final String fileName;
 	private final int cols;
@@ -36,11 +38,12 @@ public enum AnimationAsset implements Disposable
 	private Texture texture;
 	private Animation<TextureRegion> animation;
 
-	private AnimationAsset(String fileName, int cols, int rows, float duration, Animation.PlayMode mode, float centerX, float centerY)
+	private AnimationAsset(String fileName, int cols, int rows, float duration, Animation.PlayMode mode, float centerX, float centerY, float radius)
 	{
 		this(fileName, cols, rows, duration, mode);
 		this.centerX = centerX;
 		this.centerY = centerY;
+		this.radius = radius;
 	}
 
 	private AnimationAsset(String fileName, int cols, int rows, float duration, Animation.PlayMode playMode)
@@ -52,11 +55,7 @@ public enum AnimationAsset implements Disposable
 		this.duration = duration;
 	}
 
-	private AnimationAsset(String fileName, int cols, int rows, float duration, Animation.PlayMode playMode, float radius)
-	{
-		this(fileName, cols, rows, duration, playMode);
-		this.radius = radius;
-	}
+	
 
 	private Animation<TextureRegion> getAnimation()
 	{

@@ -16,7 +16,7 @@ public class ScoreManager
 		score += points;
 	}
 
-	public int getScore()
+	public Integer getScore()
 	{
 		return score;
 	}

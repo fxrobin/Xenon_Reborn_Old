@@ -19,6 +19,7 @@ import net.entetrs.xenon.artefacts.managers.CollisionManager;
 import net.entetrs.xenon.artefacts.managers.EnemyManager;
 import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.artefacts.managers.ProjectileManager;
+import net.entetrs.xenon.artefacts.managers.ScoreManager;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.displays.Blinker;
 import net.entetrs.xenon.commons.fonts.GdxBitmapString;
@@ -78,7 +79,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		em.generateEnemies(delta);
 		this.translateWorld(delta);
 		List<Artefact> allPlayerObjects = new LinkedList<>(ProjectileManager.getInstance().getShoots());
-		allPlayerObjects.add(ship);
+		if (!ship.isFullyDestroyed()) allPlayerObjects.add(ship);
 		cm.checkCollision(em.getEnemies(), allPlayerObjects);
 		BonusManager.getInstance().checkBonus(ship);
 		this.renderWorld(delta);
@@ -87,36 +88,48 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void renderWorld(float delta)
 	{
 		SpriteBatch batch = this.getBatch();
+		
 		batch.begin();
 		this.scrolling.render(delta);
 		this.renderShoots(batch, delta);
 		this.em.render(batch, delta);
 		BonusManager.getInstance().render(this.getBatch(), delta);
+		this.renderShipOrGameOver(delta, batch);
+		ExplosionManager.render(batch, delta);
+		batch.end();
 		
+		/* le dashboard doit s'afficher en dehors du spritebatch précédent */
+		dashBoard.render();
+		
+	}
+
+	private void renderShipOrGameOver(float delta, SpriteBatch batch)
+	{
 		if (ship.isFullyDestroyed())
 		{
-			if (msgBlinker.isHidden())
-			{
-				msgBlinker.show();
-			}
-			else
-			{
-				msgBlinker.render(batch, delta);
-			}
+			renderGameOverBlinker(delta, batch);
+			GdxBitmapString yourScore = new GdxBitmapString("SCORE " + ScoreManager.getInstance().getScore());
+			yourScore.setPosition((Global.width - yourScore.getWidth()) / 2f, (float)(Global.height - TextureAsset.TITLE.get().getHeight() /2) / 2 - 50f );
+			yourScore.render(batch, delta);
 		}
 		else
 		{
 			this.renderShip(delta);
 		}
-		
-		ExplosionManager.render(batch, delta);
-		batch.end();
-		
-		dashBoard.render();
-		
 	}
 
-	
+	private void renderGameOverBlinker(float delta, SpriteBatch batch)
+	{
+		if (msgBlinker.isHidden())
+		{
+			msgBlinker.show();
+		}
+		else
+		{
+			msgBlinker.render(batch, delta);
+		}
+	}
+
 
 	private void renderShoots(SpriteBatch batch, float delta)
 	{

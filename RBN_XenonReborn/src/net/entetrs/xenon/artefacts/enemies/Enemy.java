@@ -17,13 +17,13 @@ import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
 
 public class Enemy extends AbstractArtefact
 {
-	DeltaTimeAccumulator accumulator;
+	private DeltaTimeAccumulator accumulator;
 	private Sprite sprite;
 
 	public Enemy(Texture texture, int force, int impactForce, float radius)
 	{
-		super(0,0,force, impactForce);
-		accumulator = new DeltaTimeAccumulator(1f + (float)Math.random() * 2f, () -> {EnemyManager.getInstance().generateBullet(this);});
+		super(0, 0, force, impactForce);
+		accumulator = new DeltaTimeAccumulator(1f + (float) Math.random() * 2f, () -> EnemyManager.getInstance().generateBullet(this));
 		sprite = new Sprite(texture);
 		this.setRadius(radius);
 	}
@@ -33,7 +33,6 @@ public class Enemy extends AbstractArtefact
 	{
 		return this.sprite;
 	}
-
 
 	@Override
 	public void render(SpriteBatch batch, float delta)
@@ -71,5 +70,5 @@ public class Enemy extends AbstractArtefact
 	{
 		return sprite.getHeight();
 	}
-	
+
 }

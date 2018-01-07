@@ -9,19 +9,25 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import net.entetrs.xenon.commons.Global;
 
+
+/**
+ * répresente une tileMap scrollable avec sa propre caméra.
+ * 
+ * @author robin
+ *
+ */
+
 public class TiledMapScrolling
 {
 	private OrthographicCamera cam;
-	private TiledMap tiledMap;
 	private TiledMapRenderer tiledMapRenderer;
 	private float speed;
-	private SpriteBatch batch;
 
 	public TiledMapScrolling(float speed)
 	{
 		this.speed = speed;
-		batch = new SpriteBatch();
-		tiledMap = new TmxMapLoader().load("maps/map.tmx");
+		SpriteBatch batch = new SpriteBatch();
+		TiledMap tiledMap = new TmxMapLoader().load("maps/map.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap, batch);
 
 		cam = new OrthographicCamera(Global.width, Global.height);

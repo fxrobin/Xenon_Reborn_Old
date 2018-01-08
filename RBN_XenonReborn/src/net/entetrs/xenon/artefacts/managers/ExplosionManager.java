@@ -56,7 +56,7 @@ public final class ExplosionManager
 		explosions.forEach(ex -> {
 			ex.render(batch, delta);
 			/* 2 vitesse du scroll des bords.*/
-			ex.translateY(-BackgroundParallaxScrolling.getInstance().getSpeed() * 20 * delta); 
+			ex.translateY(-BackgroundParallaxScrolling.getInstance().getSpeed() * 2 * delta); 
 		});
 		removeFinishedExplosions();
 	}

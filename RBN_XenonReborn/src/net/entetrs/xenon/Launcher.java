@@ -32,8 +32,8 @@ public final class Launcher
 		config.fullscreen = false;
 		config.foregroundFPS = 60;
 		config.resizable = false;
-		config.title = "XENON - Reborn - ETRS 2017";
-		config.useGL30 = true;
+		config.title = "XENON - Reborn - ETRS 2017-2018";
+		config.useGL30 = false;
 		new LwjglApplication(MainControler.getInstance(), config);
 	}
 

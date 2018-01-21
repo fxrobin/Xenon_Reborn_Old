@@ -62,6 +62,8 @@ public final class Global
 	 */
 	public static final int  SHIP_LIFE_POINTS = 20;
 
+	public static final float SCROLLING_SPEED = 60f;
+
 	private Global()
 	{
 		/* protection, empèche l'instaciation depuis l'extérieur */

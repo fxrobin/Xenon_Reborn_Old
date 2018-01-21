@@ -22,6 +22,7 @@ public class Ship extends AbstractArtefact
 		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2); 
 		vulnerable = false;
 		lifeCount = 3;
+		this.setVectorY(Global.SCROLLING_SPEED);
 	}
 
 	public float getCenterX()

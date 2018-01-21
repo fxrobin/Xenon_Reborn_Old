@@ -40,7 +40,7 @@ public class LoadingScreen extends AbstractScreen
 		super(controler, batch);
 		log.info("Instanciation de LoadingScreen");
 		layout = new GlyphLayout();
-		singleExecutor = new SingleExecutor(() -> this.getControler().showScreen(XenonScreen.MENU));
+		singleExecutor = new SingleExecutor(() -> this.getControler().showScreen(XenonScreen.GAME_PLAY));
 	}
 
 	@Override

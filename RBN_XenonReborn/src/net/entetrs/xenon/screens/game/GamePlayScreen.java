@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.Artefact;
@@ -33,7 +34,6 @@ import net.entetrs.xenon.screens.XenonScreen;
 
 public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 {
-
 	private Log log = LogFactory.getLog(this.getClass());
 
 	private BackgroundParallaxScrolling scrolling;
@@ -43,12 +43,19 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private CollisionManager cm;
 	private Ship ship;
 	
+	private OrthographicCamera cam = new OrthographicCamera(Global.width, Global.height);
+	
+	
 	private Blinker msgBlinker;
 
 	public GamePlayScreen(XenonControler controler, SpriteBatch batch)
 	{
 		super(controler, batch);
 		log.info("Instanciation de GamePlay");
+
+		
+		cam.position.set(Global.width / 2f, Global.height / 2f, 0);
+		
 		scrolling = BackgroundParallaxScrolling.getInstance();
 		scrolling.init(batch);
 		em = EnemyManager.getInstance();
@@ -71,10 +78,18 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.getControler().showScreen(XenonScreen.MENU);
 	}
 	
+	
+	/**
+	 * boucle principale ici 
+	 */
+	
 
 	@Override
 	public void render(float delta)
 	{
+		cam.translate(0, Global.SCROLLING_SPEED * delta );
+		cam.update();
+		this.getBatch().setProjectionMatrix(cam.combined);		
 		this.checkInputKeys(delta);
 		em.generateEnemies(delta);
 		this.translateWorld(delta);
@@ -83,6 +98,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		cm.checkCollision(em.getEnemies(), allPlayerObjects);
 		BonusManager.getInstance().checkBonus(ship);
 		this.renderWorld(delta);
+	
 	}
 
 	private void renderWorld(float delta)

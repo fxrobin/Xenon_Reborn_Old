@@ -56,7 +56,7 @@ public final class BackgroundParallaxScrolling
 
 	public void render(float delta)
 	{
-		position -= delta * speed;
+		// position -= delta * speed;
 		Texture space = TextureAsset.BACKGROUND_SPACE.get();
 		Texture leftbg = TextureAsset.BACKGROUND_LEFT.get();
 		Texture rightbg = TextureAsset.BACKGROUND_RIGHT.get();

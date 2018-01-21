@@ -55,7 +55,7 @@ public final class ShipHandler
 		{
 			vControl = Vertical.UP;
 			vY += Global.SHIP_ACCELLERATION;
-			ship.setVectorY(vY > Global.SHIP_SPEED ? Global.SHIP_SPEED : vY);
+			ship.setVectorY(vY > Global.SHIP_SPEED + 60f ? Global.SHIP_SPEED + 60f : vY);
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))
 		{
@@ -101,7 +101,7 @@ public final class ShipHandler
 
 		if (vControl == Vertical.NONE)
 		{
-			ship.setVectorY(computeInertia(vY));
+			ship.setVectorY(60f + computeInertia(vY - 60f));
 		}
 	}
 

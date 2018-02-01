@@ -14,8 +14,8 @@ Here is how the v0.1.8 looks like (Youtube) (just click on the image to launch t
 What's technicaly inside ?
 - MVC paradigm
 - Screen management and fade-in / fade-out transition (coded from scratch)
-- Central assets management en loading, through enum
-- Smooth Random background scrolling on the first screen
+- Central assets management and loading, through enum
+- Smooth random background scrolling on the first screen
 - Object states and polymorphism on every stage of the software design
 - Sprite Collision (coded from scracth based on circles)
 - Music playing an old format (Amiga and Atari-ST Mod format) which is very tiny compared to MP3

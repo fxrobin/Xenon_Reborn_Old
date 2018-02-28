@@ -4,7 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.entetrs.xenon.artefacts.AbstractArtefact;
+import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.libs.AnimationAsset;
+import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public class Ship extends AbstractArtefact
@@ -50,6 +53,7 @@ public class Ship extends AbstractArtefact
 	{
 		if (!isShieldActivated() && vulnerable)
 		{
+			
 			super.decreaseLife(force);
 			checkShipIsAliveAndBlink();
 		}
@@ -69,7 +73,9 @@ public class Ship extends AbstractArtefact
 		lifeCount--;
 		if (lifeCount > 0)
 		{
-		 this.setLifePoints(Global.SHIP_LIFE_POINTS);
+			ExplosionManager.addExplosion(this, AnimationAsset.EXPLOSION_BIG);
+			SoundAsset.SHIP_EXPLOSION.play();
+		    this.setLifePoints(Global.SHIP_LIFE_POINTS);
 		}
 	}
 	

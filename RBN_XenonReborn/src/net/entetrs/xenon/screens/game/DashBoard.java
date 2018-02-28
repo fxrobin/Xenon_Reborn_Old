@@ -26,7 +26,7 @@ import net.entetrs.xenon.commons.libs.TextureAsset;
 public class DashBoard
 {
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // lifePoints : %d // Shield : %02.2f %% // lifeCount : %d";
-
+	private static final int PADDING = 20;
 	private static final int MARGE = 10;	
 	private int hauteurBarre;
 	
@@ -49,6 +49,7 @@ public class DashBoard
 		this.gamePlayScreen.getBatch().begin();
 		this.renderScore();
 		this.renderStatusBar();
+		this.renderLifeCount();
 		this.gamePlayScreen.getBatch().end();
 	}
 
@@ -92,7 +93,20 @@ public class DashBoard
 	private void renderScore()
 	{
 		SpriteBatch batch = gamePlayScreen.getBatch();
-		FontUtils.print(batch, 5, Global.height - 43f, String.format("%010d", ScoreManager.getInstance().getScore()));
+		FontUtils.print(batch, 5, Global.height - 43f, String.format("%06d", ScoreManager.getInstance().getScore()));
+	}
+	
+	private void renderLifeCount()
+	{
+		SpriteBatch batch = gamePlayScreen.getBatch();
+		Texture life = TextureAsset.LIFE.get();
+		
+		int offset = Global.width - (gamePlayScreen.getShip().getLifeCount() * ( life.getWidth() + PADDING));
+		
+		for(int i = 0 ; i < gamePlayScreen.getShip().getLifeCount() ; i++)
+		{
+			batch.draw(TextureAsset.LIFE.get(), offset + (i * (life.getWidth() + PADDING)), Global.height - (life.getHeight() + PADDING));
+		}
 	}
 	
 	private void renderStatusBar()

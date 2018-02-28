@@ -21,6 +21,7 @@ import net.entetrs.xenon.artefacts.managers.ExplosionManager;
 import net.entetrs.xenon.artefacts.managers.ProjectileManager;
 import net.entetrs.xenon.artefacts.managers.ScoreManager;
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.SingleExecutor;
 import net.entetrs.xenon.commons.displays.Blinker;
 import net.entetrs.xenon.commons.fonts.GdxBitmapString;
 import net.entetrs.xenon.commons.libs.MusicAsset;
@@ -44,6 +45,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private Ship ship;
 	
 	private Blinker msgBlinker;
+	private SingleExecutor gameOverSoundExecutor;
 
 	public GamePlayScreen(XenonControler controler, SpriteBatch batch)
 	{
@@ -57,6 +59,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		ship = new Ship();
 		this.createBlinkingMessage();
 		msgBlinker.hide();
+		gameOverSoundExecutor = new SingleExecutor(() -> SoundAsset.GAME_OVER.play());
 	}
 	
 	private void createBlinkingMessage()
@@ -107,6 +110,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	{
 		if (ship.isFullyDestroyed())
 		{
+			gameOverSoundExecutor.execute();
 			renderGameOverBlinker(delta, batch);
 			GdxBitmapString yourScore = new GdxBitmapString("SCORE " + ScoreManager.getInstance().getScore());
 			yourScore.setPosition((Global.width - yourScore.getWidth()) / 2f, (float)(Global.height - TextureAsset.TITLE.get().getHeight() /2) / 2 - 50f );

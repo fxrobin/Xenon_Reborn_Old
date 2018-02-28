@@ -16,6 +16,7 @@ public enum TextureAsset implements Disposable
 	BACKGROUND_RIGHT("backgrounds/right_bg.png", TextureWrap.Repeat), 
 	BACKGROUND_SPACE("backgrounds/space.jpg", TextureWrap.Repeat), 
 	FOOTER("backgrounds/footer.png"),
+	LIFE("commons/life.png"),
 
 	SHIELD("ships/shield.png"), 
 	SHIP_LEFT("ships/ship_left.png"), 

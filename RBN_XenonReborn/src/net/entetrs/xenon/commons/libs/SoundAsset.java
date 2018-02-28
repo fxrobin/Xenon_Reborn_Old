@@ -7,7 +7,16 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public enum SoundAsset implements Disposable
 {
-	SHOOT("shoot.mp3"), BIG_SHOOT("big-shoot.wav"), SHIELD_UP("shield_up.wav"), SHIELD_DOWN("shield_down.wav"), SHIELD_ACTIVATED("shield-activated.mp3"), CLIC("clic.wav"), EXPLOSION("explosion.wav"), BONUS("bonus.wav");
+	SHOOT("shoot.mp3"), 
+	BIG_SHOOT("big-shoot.wav"), 
+	SHIELD_UP("shield_up.wav"), 
+	SHIELD_DOWN("shield_down.wav"), 
+	SHIELD_ACTIVATED("shield-activated.mp3"), 
+	CLIC("clic.wav"), 
+	EXPLOSION("explosion.wav"), 
+	SHIP_EXPLOSION("ship_explosion.wav"),
+	GAME_OVER("game-over.wav"),
+	BONUS("bonus.wav");
 
 	private final String fileName;
 	private Sound sound;

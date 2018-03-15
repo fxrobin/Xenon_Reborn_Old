@@ -30,7 +30,7 @@ public enum TextureAsset implements Disposable
 	BIG_ENEMY("enemies/big-enemy.png"),
 	BULLET("shoots/bullet.png"),
 
-	FONT_AZ("fonts/font-AZ.png"), FONT_09("fonts/font-09.png");
+	FONT("fonts/font-blue.png");
 
 	private final String fileName;
 	private final TextureWrap wrap;

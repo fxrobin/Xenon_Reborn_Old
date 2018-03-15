@@ -1,6 +1,11 @@
 package net.entetrs.xenon.commons.fonts;
 
+import java.io.IOException;
 import java.util.Locale;
+import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,10 +14,31 @@ import net.entetrs.xenon.commons.libs.TextureAsset;
 
 public final class FontUtils
 {
-	private static final int FONT_W = 32;
-	private static final int FONT_H = 38;
-	private static Texture fontAZ = TextureAsset.FONT_AZ.get();
-	private static Texture font09 = TextureAsset.FONT_09.get();
+	private static final Log log = LogFactory.getLog(FontUtils.class);
+	
+	static 
+	{
+		Properties config = new Properties();
+		try
+		{
+			config.load(FontUtils.class.getResourceAsStream("/fonts/font-blue.properties"));
+			fontWidth = Integer.parseInt(config.getProperty("letter-width"));
+			fontHeight = Integer.parseInt(config.getProperty("letter-height"));
+		    stringMap = config.getProperty("string-map");		
+			log.info("Font loaded");
+		}
+		catch (IOException e)
+		{
+		  log.error("Impossible de lire le fichier de ressource de font.");
+		}
+		
+	}
+	
+	private static int fontWidth ;
+	private static int fontHeight;
+	private static String stringMap;
+	
+	private static Texture font = TextureAsset.FONT.get();
 
 	private FontUtils()
 	{
@@ -21,34 +47,29 @@ public final class FontUtils
 
 	public static int getWidth(String txt)
 	{
-		return txt.length() * FONT_W;
+		return txt.length() * fontWidth;
 	}
 
 	public static int getHeight(String txt) /* NOSONAR */
 	{
-		return FONT_H;
+		return fontHeight;
 	}
 
 	public static void print(Batch b, float x, float y, String txt)
 	{
-		String upperTxt = txt.toUpperCase(Locale.FRANCE);
-		for (int i = 0; i < upperTxt.length(); i++)
+		for (int i = 0; i < txt.length(); i++)
 		{
-			print(b, x + (i * FONT_W), y, upperTxt.charAt(i));
+			print(b, x + (i * fontWidth), y, txt.charAt(i));
 		}
 	}
 
 	public static void print(Batch batch, float positionX, float positionY, char character)
 	{
-		if (character >= 65 && character <= 90)
+		int charIndex = stringMap.indexOf(character);
+		if (charIndex >= 0)
 		{
-			int offset = (character - 65) * FONT_W;
-			batch.draw(fontAZ, positionX, positionY, offset, 0, FONT_W, FONT_H);
-		}
-		if (character >= 48 && character <= 57)
-		{
-			final int offset = (character - 48) * FONT_W;
-			batch.draw(font09, positionX, positionY, offset, 0, FONT_W, FONT_H);
+			int offset = charIndex * fontWidth;
+			batch.draw(font, positionX, positionY, offset, 0, fontWidth, fontHeight);
 		}
 	}
 

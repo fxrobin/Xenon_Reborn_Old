@@ -1,7 +1,6 @@
 package net.entetrs.xenon.commons.fonts;
 
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;

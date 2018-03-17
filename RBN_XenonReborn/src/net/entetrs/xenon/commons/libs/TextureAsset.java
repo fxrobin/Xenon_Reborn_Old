@@ -29,6 +29,8 @@ public enum TextureAsset implements Disposable
 	BUG("enemies/bug.png"), 
 	PERFORATOR("enemies/perforator.png"), 
 	BIG_ENEMY("enemies/big-enemy.png"),
+	RAFALE("enemies/rafale.png"),
+	BLACK_BIRD("enemies/black-bird.png"),
 	BULLET("shoots/bullet.png"),
 
 	FONT("fonts/font-blue.png");

@@ -36,9 +36,10 @@ public class ProjectileManager
 
 	private static void checkBigFire(Ship ship)
 	{
+		// quand l'arme est chargée et qu'on relache la touche SHIFT.
 		if (ship.getSecondaryWeapon().isReady() && !Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
 		{
-			ship.getSecondaryWeapon().fire();
+			ship.getSecondaryWeapon().disable();
 			pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
 		}
 	}
@@ -62,8 +63,8 @@ public class ProjectileManager
 
 	public void addShoot(ShootType shootType, float centerX, float centerY)
 	{
-		// on va décaller le tir au hasard un peu à droite ou un peu à gauche.
-		float decallage = (float) Math.random() * 8f - 2f; 
+		// on va décaller le tir au hasard un peu à droite ou un peu à gauche pour faire joli.
+		float decallage = (float) Math.random() * 8f - 4f; 
 		Shoot s = new Shoot(shootType.createAnimatedSprite(), shootType.getLifeForce(), shootType.getImpactForce(), shootType.getVX(), shootType.getVY());
 		s.getSprite().setCenter(centerX + decallage, centerY);
 		shoots.add(s);

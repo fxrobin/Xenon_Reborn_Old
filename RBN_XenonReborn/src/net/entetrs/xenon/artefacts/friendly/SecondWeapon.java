@@ -4,14 +4,10 @@ import net.entetrs.xenon.commons.Global;
 
 /**
  * <p>
- * représente bouclier et son énergie. L'energie va de 100f : chargé au max, 0f déchargé. 
- * En dessous de 90f il n'est pas activable A 0.f il se désactive automatiquement.
+ * représente l'arme puissante et son énergie. L'energie va de 100f : chargée au max, 0f déchargée. 
+ * la décharge est immédiate. 
  * </p>
  * 
- * <p>
- * Toutes les secondes le bouclier prend 20% en recharge. Toutes les secondes le
- * bouclier prend 10% en décharge.
- * </p>
  */
 
 public class SecondWeapon
@@ -25,8 +21,11 @@ public class SecondWeapon
 	 * bouclier activé ou non.
 	 * 
 	 */
-	private boolean activated;
+	private boolean charging;
 	
+    /**
+     * arme prête ou non
+     */
 	private boolean ready;
 
 	/**
@@ -36,55 +35,46 @@ public class SecondWeapon
 	 */
 	public void update(float delta)
 	{
-		if (!activated)
-		{
-			this.decharger(delta);
-		}
-		else
+		if (charging)
 		{
 			this.recharger(delta);
 		}
 		
-		activated = false;
+		// remise à false car on doit maintenir la touche appuyée
+		charging = false;
 	}
 
 	private void recharger(float delta)
 	{
 		energy += (delta * Global.WEAPON_CHARGING_SPEED);
-		energy = (energy > 100) ? 100 : energy;
-		if (!ready)
+		energy = (energy > 100f) ? 100f : energy;
+		if (!ready && energy >= 100f)
 		{
-		 ready = (energy >= 100);
+		  ready = true;
 		}
 	}
 	
-	public void fire()
+	/**
+	 * décharge toute l'énergie accumulée.
+	 */
+	public void fullDischarge()
+	{
+		energy = 0f;
+	}
+	
+	public void disable()
 	{
 		ready = false;
 	}
 
-	private void decharger(float delta)
-	{
-		energy = 0f;
-	}
 
 	/**
-	 * active ou désactive le bouclier en fonction de son état. si le niveau
-	 * d'énergie est inférieur à 90%, il ne peut pas être activé.
+	 * active le chargement de l'arme secondaire.
 	 * 
 	 */
 	public void charge()
 	{
-		activated = true;
-	}
-
-
-	/**
-	 * @return état du bouclier activé ou non (true or false).
-	 */
-	public boolean isActivated()
-	{
-		return activated;
+		charging = true;
 	}
 	
 	public boolean isReady()
@@ -93,7 +83,7 @@ public class SecondWeapon
 	}
 
 	/**
-	 * @return le niveau d'énergie du bouclier (max 100f à min 0f)
+	 * @return le niveau d'énergie de l'arme (max 100f à min 0f)
 	 */
 	public float getEnergy()
 	{

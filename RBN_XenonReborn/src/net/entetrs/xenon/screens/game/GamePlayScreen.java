@@ -59,7 +59,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		ship = new Ship();
 		this.createBlinkingMessage();
 		msgBlinker.hide();
-		gameOverSoundExecutor = new SingleExecutor(() -> SoundAsset.GAME_OVER.play());
+		gameOverSoundExecutor = new SingleExecutor(SoundAsset.GAME_OVER::play);
 	}
 	
 	private void createBlinkingMessage()
@@ -182,7 +182,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	@Override
 	public void hide()
 	{
-		MusicAsset.MUSIC.stop();
+		MusicAsset.MUSIC.fadeOut();
 	}
 
 	@Override

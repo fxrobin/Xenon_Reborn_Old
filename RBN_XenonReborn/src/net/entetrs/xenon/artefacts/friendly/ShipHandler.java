@@ -134,6 +134,10 @@ public final class ShipHandler
 		{
 			ship.weaponCharge();
 		}
+		else
+		{
+			ship.getSecondaryWeapon().fullDischarge();
+		}
 		
 	}
 }

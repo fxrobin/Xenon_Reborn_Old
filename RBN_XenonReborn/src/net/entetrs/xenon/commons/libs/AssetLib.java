@@ -32,7 +32,7 @@ public final class AssetLib
 	{
 		// on force d'emblée la lecture bloquante du son d'intro.
 		loadAndWait(Music.class, MusicAsset.INTRO_SOUND);
-		loadAndWait(Texture.class, TextureAsset.BACKGROUND_SPACE_DOCK);
+		loadAndWait(Texture.class, TextureAsset.BACKGROUND_BOMBING_PIXELS);
 		loadAllAsync();
 	}
 	

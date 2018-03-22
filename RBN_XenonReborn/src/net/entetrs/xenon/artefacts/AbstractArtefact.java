@@ -23,6 +23,11 @@ public abstract class AbstractArtefact implements Artefact
 	 * 
 	 */
 	private Circle boundingCircle;
+	
+	public AbstractArtefact(AbstractArtefact other)
+	{
+		this(other.getVectorX(), other.getVectorY(), other.getLifePoints(), other.getImpactForce());
+	}
 
 	/**
 	 * construit un artefact doté d'une force de vie (lifeForce) et d'une force
@@ -58,6 +63,7 @@ public abstract class AbstractArtefact implements Artefact
 	{
 		this.getSprite().translateY(deltaY);
 	}
+	
 	
 	
 	@Override

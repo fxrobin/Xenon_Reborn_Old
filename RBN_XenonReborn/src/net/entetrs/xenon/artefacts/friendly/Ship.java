@@ -14,6 +14,7 @@ public class Ship extends AbstractArtefact
 {
 	private ShipRenderer shipRenderer;
 	private Shield shield;
+	private SecondWeapon secondWeapon;
 	private boolean vulnerable;
 	private int lifeCount;
 
@@ -22,6 +23,7 @@ public class Ship extends AbstractArtefact
 		super(0,0, Global.SHIP_LIFE_POINTS, 20);
 		shipRenderer = new ShipRenderer(this);
 		shield = new Shield();
+		secondWeapon = new SecondWeapon();
 		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2); 
 		vulnerable = false;
 		lifeCount = 3;
@@ -105,6 +107,7 @@ public class Ship extends AbstractArtefact
 	{
 		super.act(delta);
 		shield.update(delta);
+		secondWeapon.update(delta);
 		this.controlPosition();
 	}
 
@@ -129,6 +132,11 @@ public class Ship extends AbstractArtefact
 		return this.shield.getEnergy();
 	}
 	
+	public float getSecondWeaponEnergy()
+	{
+		return this.secondWeapon.getEnergy();
+	}
+	
 	public int getLifeCount()
 	{
 		return lifeCount;
@@ -137,5 +145,15 @@ public class Ship extends AbstractArtefact
 	public boolean isFullyDestroyed()
 	{
 		return lifeCount <= 0;
+	}
+
+	public void weaponCharge()
+	{
+		this.secondWeapon.charge();
+	}
+
+	public SecondWeapon getSecondaryWeapon()
+	{
+		return this.secondWeapon;
 	}
 }

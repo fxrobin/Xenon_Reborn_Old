@@ -31,8 +31,8 @@ public class LoadingScreen extends AbstractScreen
 {
 	private Log log = LogFactory.getLog(this.getClass());
 	private GlyphLayout layout;
-	private BitmapFont font = TrueTypeFont.SHARETECH_30.getFont();
-	private Texture background = TextureAsset.BACKGROUND_SPACE_DOCK.get();
+	private BitmapFont font = TrueTypeFont.SHARETECH_30_BLACK.getFont();
+	private Texture background = TextureAsset.BACKGROUND_BOMBING_PIXELS.get();
 	private SingleExecutor singleExecutor;
 
 	public LoadingScreen(XenonControler controler, SpriteBatch batch)
@@ -40,7 +40,10 @@ public class LoadingScreen extends AbstractScreen
 		super(controler, batch);
 		log.info("Instanciation de LoadingScreen");
 		layout = new GlyphLayout();
-		singleExecutor = new SingleExecutor(() -> this.getControler().showScreen(XenonScreen.MENU));
+		singleExecutor = new SingleExecutor(() -> {
+			this.getControler().showScreen(XenonScreen.MENU);
+			MusicAsset.INTRO_SOUND.fadeOut();
+		});
 	}
 
 	@Override
@@ -61,9 +64,9 @@ public class LoadingScreen extends AbstractScreen
 
 	private void renderProgress()
 	{
-		String message = getProgressString();	
+		String message = getProgressString();
 		layout.setText(font, message);
-		font.draw(this.getBatch(), message, (Global.width - layout.width) / 2, (Global.height - layout.height) / 2);
+		font.draw(this.getBatch(), message, (Global.width - layout.width) / 2, 50);
 	}
 
 	private String getProgressString()
@@ -76,8 +79,8 @@ public class LoadingScreen extends AbstractScreen
 		}
 		else
 		{
-			message = "All resources are loaded ...";
-			singleExecutor.execute(); // n'execute la méthode qu'une seule fois.
+			message = "All resources are loaded ... PRESS SpaceBar";
+
 		}
 		return message;
 	}
@@ -92,6 +95,12 @@ public class LoadingScreen extends AbstractScreen
 		if (Gdx.input.isKeyJustPressed(Keys.F1))
 		{
 			GdxCommons.switchFullScreen();
+		}
+
+		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && AssetLib.getInstance().isLoadingFinished())
+		{
+			singleExecutor.execute(); // n'execute la méthode qu'une seule fois.
+
 		}
 	}
 

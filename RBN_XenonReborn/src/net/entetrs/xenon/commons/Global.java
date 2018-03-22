@@ -46,6 +46,11 @@ public final class Global
 	 * bouclier : vitesse de chargement du bouclier. (20f = 5 secondes)
 	 */
 	public static final float SHIELD_CHARGING_SPEED = 5f;
+	
+	/**
+	 * bouclier : vitesse de chargement de l'arme secondaire. (20f = 5 secondes)
+	 */
+	public static final float WEAPON_CHARGING_SPEED = 30f;
 
 	/**
 	 * bouclier :  vitesse de décharge du bouclier (10f = 10 secondes)

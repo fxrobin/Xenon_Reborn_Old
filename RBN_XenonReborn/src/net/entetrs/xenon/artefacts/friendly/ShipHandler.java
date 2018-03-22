@@ -35,11 +35,12 @@ public final class ShipHandler
 		return vControl;
 	}
 	
-	public static void handle(Ship ship)
+	public static void handle(Ship ship,float delta)
 	{
 		checkVerticalMove(ship);
 		checkHorizontalMove(ship);
 		checkShield(ship);
+		checkSecondWeapon(ship);
 		handleInertia(ship);
 	}
 	
@@ -126,4 +127,13 @@ public final class ShipHandler
 			ship.switchShield();
 		}
 	}	
+	
+	private static void checkSecondWeapon(Ship ship)
+	{
+		if (Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
+		{
+			ship.weaponCharge();
+		}
+		
+	}
 }

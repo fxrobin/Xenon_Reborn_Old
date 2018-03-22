@@ -36,8 +36,9 @@ public class ProjectileManager
 
 	private static void checkBigFire(Ship ship)
 	{
-		if (Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT))
+		if (ship.getSecondaryWeapon().isReady() && !Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
 		{
+			ship.getSecondaryWeapon().fire();
 			pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
 		}
 	}

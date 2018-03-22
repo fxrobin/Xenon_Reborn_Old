@@ -19,6 +19,14 @@ public class Enemy extends AbstractArtefact
 {
 	private DeltaTimeAccumulator accumulator;
 	private Sprite sprite;
+	
+	public Enemy(Enemy other)
+	{
+		super(other);
+		accumulator = new DeltaTimeAccumulator(1f + (float) Math.random() * 2f, () -> EnemyManager.getInstance().generateBullet(this));
+		sprite = new Sprite(other.getSprite().getTexture());
+		this.setRadius(other.getBoundingCircle().radius);
+	}
 
 	public Enemy(Texture texture, int force, int impactForce, float radius)
 	{

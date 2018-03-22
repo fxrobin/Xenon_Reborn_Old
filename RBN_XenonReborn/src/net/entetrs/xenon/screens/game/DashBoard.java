@@ -30,6 +30,7 @@ public class DashBoard
 	private static final int MARGE = 10;	
 	private int hauteurBarre;
 	
+	private Color weaponColor = new Color(0f,1f,0f,0.5f);
 	private GamePlayScreen gamePlayScreen;
 	private Texture footer;
 	private BitmapFont font = TrueTypeFont.SHARETECH_12.getFont();
@@ -46,11 +47,29 @@ public class DashBoard
 	{
 		
 		this.renderShieldBar();		
+		this.renderSecondWeaponBar();
 		this.gamePlayScreen.getBatch().begin();
 		this.renderScore();
 		this.renderStatusBar();
 		this.renderLifeCount();
 		this.gamePlayScreen.getBatch().end();
+	}
+
+	private void renderSecondWeaponBar()
+	{
+		Ship ship = gamePlayScreen.getShip();	
+		renderSecondWeaponBarOfShip(ship);
+	}
+
+	private void renderSecondWeaponBarOfShip(Ship ship)
+	{
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		ShapeRenderer shapeRenderer = gamePlayScreen.getShapeRenderer();
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(weaponColor); 
+		float currentSize = gamePlayScreen.getShip().getSecondWeaponEnergy() * hauteurBarre / 100f;
+		shapeRenderer.rect(Global.width - 50 - MARGE, (float) footer.getHeight() , 50, currentSize);
+		shapeRenderer.end();
 	}
 
 	/**

@@ -42,10 +42,10 @@ public class MenuScreen extends AbstractScreen
 	private Monitor monitor;
 	private DisplayMode currentMode;
 	private GdxTrueTypeString message;
+	
+	private ModPlayer modPlayer;
 	private int currentMusic = 0;
 	
-	
-
 	public MenuScreen(XenonControler controler, SpriteBatch batch)
 	{
 		super(controler, batch);
@@ -58,8 +58,8 @@ public class MenuScreen extends AbstractScreen
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
 		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");	
 		this.createBlinkingMessage();
-		log.info("Instanciation de MenuScreen OK");
-		
+		modPlayer = ModPlayer.getInstance();
+		log.info("Instanciation de MenuScreen OK");	
 	}
 
 	private void createBlinkingMessage()
@@ -72,13 +72,13 @@ public class MenuScreen extends AbstractScreen
 	@Override
 	public void show()
 	{
-		ModPlayer.play(ModAsset.values()[currentMusic].toString());
+		modPlayer.play(ModAsset.values()[currentMusic].toString());
 	}
 
 	@Override
 	public void hide()
 	{
-		ModPlayer.stop();
+		modPlayer.stop();
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class MenuScreen extends AbstractScreen
 		String msgDisplayMode = String.format("%s / %s / %d FPS", currentMode, monitor.name, Gdx.graphics.getFramesPerSecond());
 		message.setText(msgDisplayMode);
 		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 60);	
-		message.setText("< " + ModPlayer.getMusicName() + " >");
+		message.setText("< " + modPlayer.getMusicName() + " >");
 		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 120);
 		message.setText(String.format("Virtual Width : %d px / Virtual Height : %d px", Global.width, Global.height));
 		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 30);
@@ -164,7 +164,7 @@ public class MenuScreen extends AbstractScreen
 
 	private void updateMusic()
 	{
-		ModPlayer.stop();
-		ModPlayer.play(ModAsset.values()[currentMusic].toString());
+		modPlayer.stop();
+		modPlayer.play(ModAsset.values()[currentMusic].toString());
 	}
 }

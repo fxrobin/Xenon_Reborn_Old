@@ -27,14 +27,23 @@ public final class ModPlayer
 {
 	private static Log log = LogFactory.getLog(ModPlayer.class);
 
-	private static Mixer mixer;
-	private static String resourceName;
+	private Mixer mixer;
+	private String resourceName;
+	
+	private static ModPlayer instance = new ModPlayer();
+	
+	public static ModPlayer getInstance()
+	{
+		return instance;
+	}
 
 	static
 	{
 		try
 		{
+			log.info("Init ModPLayer");
 			Helpers.registerAllClasses();
+			log.info("Init ModPLayer : classes registered");
 			Properties props = new Properties();
 			props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
@@ -44,7 +53,9 @@ public final class ModPlayer
 			props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "1");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
+			log.info("Init ModPLayer : configuring container ...");
 			MultimediaContainerManager.configureContainer(props);
+			log.info("Init ModPLayer : configuring container configured");
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -65,7 +76,7 @@ public final class ModPlayer
 	 * 
 	 * @param musicNameResource
 	 */
-	private static void loadAndPlay(String musicNameResource)
+	private void loadAndPlay(String musicNameResource)
 	{
 		try
 		{
@@ -91,9 +102,9 @@ public final class ModPlayer
 	/**
 	 * lance la lecture du module sous forme de Thread daemon.
 	 */
-	public static void play(String musicNameResource)
+	public void play(String musicNameResource)
 	{
-		Thread t = new Thread(() -> ModPlayer.loadAndPlay(musicNameResource));
+		Thread t = new Thread(() -> this.loadAndPlay(musicNameResource));
 		t.setDaemon(true);
 		t.start();
 	}
@@ -101,7 +112,7 @@ public final class ModPlayer
 	/**
 	 * arrête la lecture du module.
 	 */
-	public static void stop()
+	public void stop()
 	{
 		if (mixer != null)
 		{
@@ -113,7 +124,7 @@ public final class ModPlayer
 	/**
 	 * @return le nom du module courant chargé.
 	 */
-	public static String getMusicName()
+	public String getMusicName()
 	{
 		return (mixer == null) ? "NO MODULE" : resourceName;
 	}

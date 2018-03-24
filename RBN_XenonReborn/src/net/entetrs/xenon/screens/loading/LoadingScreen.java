@@ -17,6 +17,7 @@ import net.entetrs.xenon.commons.libs.AssetLib;
 import net.entetrs.xenon.commons.libs.MusicAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
+import net.entetrs.xenon.commons.utils.ModPlayer;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
@@ -38,6 +39,7 @@ public class LoadingScreen extends AbstractScreen
 	public LoadingScreen(XenonControler controler, SpriteBatch batch)
 	{
 		super(controler, batch);
+		ModPlayer.getInstance();
 		log.info("Instanciation de LoadingScreen");
 		layout = new GlyphLayout();
 		singleExecutor = new SingleExecutor(() -> {
@@ -55,10 +57,10 @@ public class LoadingScreen extends AbstractScreen
 	@Override
 	public void render(float delta)
 	{
-		checkInput();
+		this.checkInput();
 		this.getBatch().begin();
-		renderBackground();
-		renderProgress();
+		this.renderBackground();
+		this.renderProgress();
 		this.getBatch().end();
 	}
 
@@ -80,7 +82,6 @@ public class LoadingScreen extends AbstractScreen
 		else
 		{
 			message = "All resources are loaded ... PRESS SpaceBar";
-
 		}
 		return message;
 	}
@@ -100,7 +101,6 @@ public class LoadingScreen extends AbstractScreen
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && AssetLib.getInstance().isLoadingFinished())
 		{
 			singleExecutor.execute(); // n'execute la méthode qu'une seule fois.
-
 		}
 	}
 

@@ -29,8 +29,8 @@ public enum XenonScreen
 		this.supplier = supplier;
 	}
 
-	public Screen createScreen(XenonControler controler, SpriteBatch batch)
+	public Screen createScreen(XenonControler controler)
 	{
-		return supplier.apply(controler,batch);
+		return supplier.apply(controler, controler.getBatch());
 	}
 }

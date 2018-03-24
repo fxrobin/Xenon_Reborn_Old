@@ -29,8 +29,7 @@ import net.entetrs.xenon.screens.XenonScreen;
 public class MenuScreen extends AbstractScreen
 {
 	private static final String MSG = "PRESS SPACEBAR";
-
-	private Log log = LogFactory.getLog(this.getClass());
+	private static Log log = LogFactory.getLog(MenuScreen.class);
 
 	private BackgroundTravelling backgroundTravelling;
 	
@@ -44,6 +43,8 @@ public class MenuScreen extends AbstractScreen
 	private DisplayMode currentMode;
 	private GdxTrueTypeString message;
 	private int currentMusic = 0;
+	
+	
 
 	public MenuScreen(XenonControler controler, SpriteBatch batch)
 	{
@@ -57,7 +58,7 @@ public class MenuScreen extends AbstractScreen
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
 		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");	
 		this.createBlinkingMessage();
-		
+		log.info("Instanciation de MenuScreen OK");
 		
 	}
 

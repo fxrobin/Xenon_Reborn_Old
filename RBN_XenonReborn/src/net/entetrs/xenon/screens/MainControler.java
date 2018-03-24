@@ -30,9 +30,6 @@ public final class MainControler extends Game implements XenonControler
 	/* pour dessiner des texture et sprites à l'écran */
 	private SpriteBatch batch;
 
-	/* écran courant */
-	private Screen currentScreen;
-
 	/* instance du fader pour "fade-in et fade-out" */
 	private Fader fader;
 
@@ -60,18 +57,15 @@ public final class MainControler extends Game implements XenonControler
 	{
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		batch = new SpriteBatch();
-		batch.enableBlending();
-		fader = Fader.getInstance();
-		shapeRenderer = new ShapeRenderer();
-
-		camera = new OrthographicCamera();
-		viewPort = new FitViewport(Global.width, Global.height, camera);
-		viewPort.apply();
+		this.batch = new SpriteBatch();
+		this.batch.enableBlending();
+		this.fader = Fader.getInstance();
+		this.shapeRenderer = new ShapeRenderer();
+		this.camera = new OrthographicCamera();
+		this.viewPort = new FitViewport(Global.width, Global.height, camera);
+		this.viewPort.apply();
 		GdxCommons.adaptCameraToViewPort(camera);
-
-		this.showScreen(XenonScreen.LOADING);
-		this.fade();
+		this.setScreen(XenonScreen.LOADING.createScreen(this));
 	}
 
 	/**
@@ -87,36 +81,26 @@ public final class MainControler extends Game implements XenonControler
 			batch.setProjectionMatrix(camera.combined);
 			super.render();
 		}
-		this.fade();
+		fader.render();
 	}
 
 	@Override
 	public void showScreen(XenonScreen screen)
 	{
-		if (currentScreen != null)
-		{
-			fader.startFadeOut();
-		}
-		currentScreen = screen.createScreen(this, this.batch);
-	}
-
-	private void fade()
-	{
-		if (fader.getCurrentState().equals(State.BLACK_SCREEN))
-		{
-			this.setScreen(currentScreen);
-			fader.startFadeIn();
-		}
-		else
-		{
-			fader.fade();
-		}
+		Screen nextScreen = screen.createScreen(this);
+		fader.startFadeOut(() -> this.setScreen(nextScreen));
 	}
 
 	@Override
 	public ShapeRenderer getShapeRenderer()
 	{
 		return shapeRenderer;
+	}
+
+	@Override
+	public SpriteBatch getBatch()
+	{
+		return this.batch;
 	}
 
 	@Override

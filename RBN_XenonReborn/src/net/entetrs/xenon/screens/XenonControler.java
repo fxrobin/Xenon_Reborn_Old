@@ -1,5 +1,6 @@
 package net.entetrs.xenon.screens;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
@@ -21,4 +22,9 @@ public interface XenonControler
 	 *  @return instance d'un shapeRender pour afficher des formes.
 	 */
 	ShapeRenderer getShapeRenderer();
+	
+	/**
+	 * @return le spritebatch courant.
+	 */
+	SpriteBatch getBatch();
 }

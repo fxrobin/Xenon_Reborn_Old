@@ -20,6 +20,13 @@ public final class Fader
 
 	private static Fader instance = new Fader();
 
+	private Runnable action;
+
+	public void setActionOnFadeOut(Runnable action)
+	{
+		this.action = action;
+	}
+
 	public static Fader getInstance()
 	{
 		return instance;
@@ -52,10 +59,29 @@ public final class Fader
 		currentState = State.FADING_OUT;
 	}
 
+	public void startFadeOut(Runnable action)
+	{
+		this.startFadeOut();
+		this.action = action;
+	}
+
+	public void render()
+	{
+		if (currentState == State.BLACK_SCREEN)
+		{
+			// dès qu'on a atteint le niveau "BlackScreen", on fadeIn
+			// automatiquement
+			startFadeIn();
+		}
+		else
+		{
+			fade();
+		}
+	}
+
 	public void fade()
 	{
 		float delta = Gdx.graphics.getDeltaTime();
-
 		switch (currentState)
 		{
 			case FADING_IN:
@@ -82,17 +108,21 @@ public final class Fader
 	private void fadeOut(float delta)
 	{
 		currentAlpha = currentAlpha + (step * delta);
-		if (currentAlpha > MAX_ALPHA)
+		if (currentAlpha >= MAX_ALPHA)
 		{
 			currentAlpha = MAX_ALPHA;
 			this.currentState = State.BLACK_SCREEN;
+			if (action != null)
+			{
+				action.run();
+			}
 		}
 	}
 
 	private void fadeIn(float delta)
 	{
 		currentAlpha = currentAlpha - (step * delta);
-		if (currentAlpha < MIN_ALPHA)
+		if (currentAlpha <= MIN_ALPHA)
 		{
 			currentAlpha = MIN_ALPHA;
 			this.currentState = State.DISPLAYING_SCREEN;

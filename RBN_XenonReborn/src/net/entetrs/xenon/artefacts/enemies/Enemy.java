@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.entetrs.xenon.artefacts.AbstractArtefact;
 import net.entetrs.xenon.artefacts.managers.EnemyManager;
 import net.entetrs.xenon.commons.utils.DeltaTimeAccumulator;
+import net.entetrs.xenon.commons.utils.RandomUtils;
 
 /**
  * réprésente un ennemie.
@@ -22,18 +23,26 @@ public class Enemy extends AbstractArtefact
 	
 	public Enemy(Enemy other)
 	{
-		super(other);
-		accumulator = new DeltaTimeAccumulator(1f + (float) Math.random() * 2f, () -> EnemyManager.getInstance().generateBullet(this));
-		sprite = new Sprite(other.getSprite().getTexture());
-		this.setRadius(other.getBoundingCircle().radius);
+		this(other.getSprite().getTexture(), 
+			 other.getLifePoints(), 
+			 other.getImpactForce(), 
+			 other.getBoundingCircle().radius,
+			 other.getVectorX(),
+			 other.getVectorY());
 	}
 
-	public Enemy(Texture texture, int force, int impactForce, float radius)
+	
+	public Enemy(Texture texture, int force, int impactForce, float radius, float vX, float vY)
 	{
-		super(0, 0, force, impactForce);
-		accumulator = new DeltaTimeAccumulator(1f + (float) Math.random() * 2f, () -> EnemyManager.getInstance().generateBullet(this));
+		super(vX, vY, force, impactForce);
+		accumulator = new DeltaTimeAccumulator(RandomUtils.randomRange(1, 3), () -> EnemyManager.getInstance().generateBullet(this));
 		sprite = new Sprite(texture);
 		this.setRadius(radius);
+	}
+	
+	public Enemy(Texture texture, int force, int impactForce, float radius)
+	{
+		this(texture, force, impactForce, radius,0,0);
 	}
 
 	@Override

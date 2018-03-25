@@ -13,7 +13,6 @@ import net.entetrs.xenon.artefacts.friendly.Shoot;
 import net.entetrs.xenon.artefacts.friendly.ShootType;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.libs.AnimationAsset;
-import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.commons.utils.RandomUtils;
 
 public class ProjectileManager

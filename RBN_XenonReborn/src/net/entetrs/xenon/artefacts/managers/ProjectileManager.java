@@ -13,6 +13,7 @@ import net.entetrs.xenon.artefacts.friendly.Shoot;
 import net.entetrs.xenon.artefacts.friendly.ShootType;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.libs.AnimationAsset;
+import net.entetrs.xenon.commons.utils.GdxCommons;
 
 public class ProjectileManager
 {
@@ -49,6 +50,7 @@ public class ProjectileManager
 		if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT))
 		{
 			pm.addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
+			System.out.printf("ship position : %f / %f %n", ship.getCenterX(), ship.getCenterY());
 		}
 	}
 
@@ -65,8 +67,14 @@ public class ProjectileManager
 	{
 		// on va décaller le tir au hasard un peu à droite ou un peu à gauche pour faire joli.
 		float decallage = (float) Math.random() * 8f - 4f; 
-		Shoot s = new Shoot(shootType.createAnimatedSprite(), shootType.getLifeForce(), shootType.getImpactForce(), shootType.getVX(), shootType.getVY());
-		s.getSprite().setCenter(centerX + decallage, centerY);
+		Shoot s = new Shoot(shootType.createAnimatedSprite(), 
+							shootType.getLifeForce(), 
+							shootType.getImpactForce(), 
+							centerX + decallage, 
+							centerY, 
+							shootType.getVX(), 
+							shootType.getVY());
+		System.out.printf("shoot position : %f / %f %n", GdxCommons.getCenterX(s.getSprite()), GdxCommons.getCenterX(s.getSprite()));
 		shoots.add(s);
 		shootType.getSound().play();
 	}

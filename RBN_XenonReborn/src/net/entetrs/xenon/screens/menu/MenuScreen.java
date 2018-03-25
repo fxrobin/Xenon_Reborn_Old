@@ -9,9 +9,11 @@ import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.displays.Blinker;
+import net.entetrs.xenon.commons.displays.Interpolator;
 import net.entetrs.xenon.commons.fonts.GdxBitmapString;
 import net.entetrs.xenon.commons.fonts.GdxTrueTypeString;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
@@ -34,6 +36,8 @@ public class MenuScreen extends AbstractScreen
 	private BackgroundTravelling backgroundTravelling;
 	
 	private Blinker msgBlinker;
+	private Interpolator interpolatorX;
+	private Interpolator interpolatorY;
 
 	private Texture titleTexture;
 	private float titleX;
@@ -45,6 +49,7 @@ public class MenuScreen extends AbstractScreen
 	
 	private ModPlayer modPlayer;
 	private int currentMusic = 0;
+	private GdxBitmapString pressSpaceBarMessage;
 	
 	public MenuScreen(XenonControler controler, SpriteBatch batch)
 	{
@@ -64,9 +69,11 @@ public class MenuScreen extends AbstractScreen
 
 	private void createBlinkingMessage()
 	{
-		GdxBitmapString pressSpaceBarMessage = new GdxBitmapString(MSG);
-		pressSpaceBarMessage.setPosition((Global.width - pressSpaceBarMessage.getWidth()) / 2f, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
-		msgBlinker = new Blinker(1f, pressSpaceBarMessage);
+		pressSpaceBarMessage = new GdxBitmapString(MSG);
+		interpolatorX = new Interpolator(Interpolation.sine, 1f, 5, (Global.width - pressSpaceBarMessage.getWidth()) / 2f);
+		interpolatorY = new Interpolator(Interpolation.pow2, 0.5f, 10, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
+		pressSpaceBarMessage.setPosition(interpolatorX.getOriginalValue() , interpolatorY.getOriginalValue());
+		msgBlinker = new Blinker(0.15f, pressSpaceBarMessage);
 	}
 
 	@Override
@@ -91,6 +98,7 @@ public class MenuScreen extends AbstractScreen
 			this.backgroundTravelling.drawBackGround(this.getBatch());
 			this.drawTitle();
 			this.drawDisplayMode();
+			pressSpaceBarMessage.setPosition(interpolatorX.calculate(deltaTime), interpolatorY.calculate(deltaTime));
 			this.msgBlinker.render(this.getBatch(), deltaTime);
 			this.getBatch().end();
 	}

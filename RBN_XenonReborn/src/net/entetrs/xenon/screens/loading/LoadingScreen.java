@@ -5,13 +5,16 @@ import org.apache.commons.logging.LogFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.SingleExecutor;
+import net.entetrs.xenon.commons.displays.Interpolator;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.libs.AssetLib;
 import net.entetrs.xenon.commons.libs.MusicAsset;
@@ -35,6 +38,8 @@ public class LoadingScreen extends AbstractScreen
 	private BitmapFont font = TrueTypeFont.SHARETECH_30_BLACK.getFont();
 	private Texture background = TextureAsset.BACKGROUND_BOMBING_PIXELS.get();
 	private SingleExecutor singleExecutor;
+	private Interpolator interpolatorX = new Interpolator(Interpolation.sine, 2f, 20, 0);
+	private Interpolator interpolatorY = new Interpolator(Interpolation.pow2, 1f, 20, 0);
 
 	public LoadingScreen(XenonControler controler, SpriteBatch batch)
 	{
@@ -57,9 +62,10 @@ public class LoadingScreen extends AbstractScreen
 	@Override
 	public void render(float delta)
 	{
+		GdxCommons.clearScreen(Color.WHITE);
 		this.checkInput();
 		this.getBatch().begin();
-		this.renderBackground();
+		this.renderBackground(delta);
 		this.renderProgress();
 		this.getBatch().end();
 	}
@@ -86,9 +92,11 @@ public class LoadingScreen extends AbstractScreen
 		return message;
 	}
 
-	private void renderBackground()
+	private void renderBackground(float delta)
 	{
-		this.getBatch().draw(background, 0, 0, Global.width, Global.height);
+		float positionX = interpolatorX.calculate(delta);
+		float positionY = interpolatorY.calculate(delta);
+		this.getBatch().draw(background, positionX, positionY, Global.width, Global.height);
 	}
 
 	private void checkInput()

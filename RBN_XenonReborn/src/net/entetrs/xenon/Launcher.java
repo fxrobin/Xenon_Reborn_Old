@@ -2,6 +2,7 @@ package net.entetrs.xenon;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Color;
 
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.screens.MainControler;
@@ -34,6 +35,7 @@ public final class Launcher
 		config.resizable = false;
 		config.title = "XENON - Reborn - ETRS 2017-2018";
 		config.useGL30 = false;
+		config.initialBackgroundColor = Color.BLACK;
 		new LwjglApplication(MainControler.getInstance(), config);
 	}
 

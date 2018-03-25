@@ -34,15 +34,14 @@ public class BonusManager
 	
 	public void addBonus(BonusType bonusType, float x, float y)
 	{
-		Bonus bonus = new Bonus(bonusType, bonusType.getLifeForce(), bonusType.getLifeForce(), bonusType.getVX(), bonusType.getVY());
-		bonus.getSprite().setCenter(x, y);
+		Bonus bonus = new Bonus(bonusType, bonusType.getLifeForce(), bonusType.getLifeForce(), x, y, bonusType.getVX(), bonusType.getVY());
 		bonuses.add(bonus);
 	}
 	
 	public void render(SpriteBatch batch, float delta)
 	{
 		bonuses.forEach(bonus -> bonus.render(batch, delta));
-		bonuses.removeIf(e -> e.getBoundingCircle().x < -e.getBoundingCircle().radius || !e.isAlive());
+		bonuses.removeIf(e -> e.getBoundingCircle().y < -e.getBoundingCircle().radius || !e.isAlive());
 	}
 	
 	/**

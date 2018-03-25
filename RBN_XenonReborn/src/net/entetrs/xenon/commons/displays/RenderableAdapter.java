@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class RenderableAdapter implements Renderable
 {
-
 	private Sprite sprite;
 	
 	public RenderableAdapter()

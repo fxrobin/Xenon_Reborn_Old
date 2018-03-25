@@ -43,5 +43,21 @@ public class RandomUtils
 	{
 		return random.nextInt(values.length);
 	}
+	
+	
+	/**
+	 * retourne un float dans l'intervalle donné.
+	 * 
+	 * @param min
+	 * 		borne min de l'intervalle
+	 * @param max
+	 * 		borne max de l'intervalle
+	 * @return
+	 *    float pris au hasard dans l'intervalle.
+	 */
+	public static float randomRange(float min, float max)
+	{
+		return random.nextFloat() * (max-min) + min;
+	}
 
 }

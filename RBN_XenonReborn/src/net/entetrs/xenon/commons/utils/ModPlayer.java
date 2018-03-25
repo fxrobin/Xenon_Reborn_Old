@@ -24,12 +24,8 @@ import de.quippy.javamod.system.Helpers;
  *
  */
 public final class ModPlayer
-{
+{	
 	private static Log log = LogFactory.getLog(ModPlayer.class);
-
-	private Mixer mixer;
-	private String resourceName;
-	
 	private static ModPlayer instance = new ModPlayer();
 	
 	public static ModPlayer getInstance()
@@ -65,6 +61,9 @@ public final class ModPlayer
 			}
 		}
 	}
+		
+	private Mixer mixer;
+	private String resourceName;
 
 	private ModPlayer()
 	{
@@ -96,13 +95,12 @@ public final class ModPlayer
 				log.error("Impossible d'instancier JavaMod", e);
 			}
 		}
-
 	}
 
 	/**
 	 * lance la lecture du module sous forme de Thread daemon.
 	 */
-	public void play(String musicNameResource)
+	public synchronized void play(String musicNameResource)
 	{
 		Thread t = new Thread(() -> this.loadAndPlay(musicNameResource));
 		t.setDaemon(true);
@@ -112,13 +110,12 @@ public final class ModPlayer
 	/**
 	 * arrête la lecture du module.
 	 */
-	public void stop()
+	public synchronized void stop()
 	{
 		if (mixer != null)
 		{
 			new Thread(mixer::stopPlayback).start();
 		}
-
 	}
 
 	/**

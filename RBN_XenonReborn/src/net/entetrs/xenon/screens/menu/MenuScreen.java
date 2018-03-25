@@ -24,6 +24,7 @@ import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.commons.utils.ModPlayer;
+import net.entetrs.xenon.commons.utils.RandomUtils;
 import net.entetrs.xenon.screens.AbstractScreen;
 import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
@@ -48,7 +49,7 @@ public class MenuScreen extends AbstractScreen
 	private GdxTrueTypeString message;
 	
 	private ModPlayer modPlayer;
-	private int currentMusic = 0;
+	private int currentMusic;
 	private GdxBitmapString pressSpaceBarMessage;
 	
 	public MenuScreen(XenonControler controler, SpriteBatch batch)
@@ -64,6 +65,7 @@ public class MenuScreen extends AbstractScreen
 		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");	
 		this.createBlinkingMessage();
 		modPlayer = ModPlayer.getInstance();
+		currentMusic = RandomUtils.pickIndex(ModAsset.values());
 		log.info("Instanciation de MenuScreen OK");	
 	}
 

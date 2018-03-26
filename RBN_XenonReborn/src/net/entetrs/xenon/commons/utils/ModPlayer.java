@@ -1,19 +1,18 @@
 package net.entetrs.xenon.commons.utils;
 
-import java.net.URL;
+import java.io.InputStream;
 import java.util.Properties;
-
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.quippy.javamod.io.ModfileInputStream;
 import de.quippy.javamod.mixer.dsp.AudioProcessor;
 import de.quippy.javamod.mixer.dsp.DspProcessorCallBack;
-import de.quippy.javamod.multimedia.MultimediaContainer;
-import de.quippy.javamod.multimedia.MultimediaContainerManager;
 import de.quippy.javamod.multimedia.mod.ModContainer;
 import de.quippy.javamod.multimedia.mod.ModMixer;
+import de.quippy.javamod.multimedia.mod.loader.Module;
+import de.quippy.javamod.multimedia.mod.loader.ModuleFactory;
 import de.quippy.javamod.system.Helpers;
 
 /**
@@ -29,6 +28,7 @@ public final class ModPlayer implements DspProcessorCallBack
 {
 	private static Log log = LogFactory.getLog(ModPlayer.class);
 	private static ModPlayer instance = new ModPlayer();
+	private static Properties props = new Properties();
 
 	private ModMixer mixer;
 	private String resourceName;
@@ -47,7 +47,7 @@ public final class ModPlayer implements DspProcessorCallBack
 			log.info("Init ModPLayer");
 			Helpers.registerAllClasses();
 			log.info("Init ModPLayer : classes registered");
-			Properties props = new Properties();
+			
 			props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "0");
@@ -56,9 +56,6 @@ public final class ModPlayer implements DspProcessorCallBack
 			props.setProperty(ModContainer.PROPERTY_PLAYER_MEGABASS, "1");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_BITSPERSAMPLE, "16");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_FREQUENCY, "48000");
-			log.info("Init ModPLayer : configuring container ...");
-			MultimediaContainerManager.configureContainer(props);
-			log.info("Init ModPLayer : configuring container configured");
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -94,13 +91,18 @@ public final class ModPlayer implements DspProcessorCallBack
 		try
 		{
 			resourceName = musicNameResource;
-			URL modUrl = ModPlayer.class.getClassLoader().getResource(musicNameResource);
-			if (log.isInfoEnabled()) log.info("Chargement de " + modUrl);
-			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
-			mixer = (ModMixer) multimediaContainer.createNewMixer();
+			InputStream in = ModPlayer.class.getClassLoader().getResourceAsStream(musicNameResource);
+			ModfileInputStream mis = new ModfileInputStream(in, musicNameResource);
+			Module module = ModuleFactory.getInstance(mis);
+			if (log.isInfoEnabled()) log.info("Chargement de " + musicNameResource);
+			ModContainer modContainer = new ModContainer();
+			if (log.isInfoEnabled()) log.info("Module " + module.getFileName());
+			
+			mixer = modContainer.createNewMixer(module, props);
+			//mixer = (ModMixer) multimediaContainer.createNewMixer();
 			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());		
 		}
-		catch (UnsupportedAudioFileException e)
+		catch (Exception e)
 		{
 			if (log.isErrorEnabled())
 			{

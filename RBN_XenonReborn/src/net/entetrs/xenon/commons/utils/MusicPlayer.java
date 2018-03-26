@@ -6,13 +6,12 @@ import com.badlogic.gdx.utils.Timer;
 public class MusicPlayer
 {
 	private static MusicPlayer player = new MusicPlayer();
+	private Music music;
 	
 	public static MusicPlayer getPlayer()
 	{
 		return player;
 	}
-	
-	private Music music;
 	
 	public void play(Music music)
 	{

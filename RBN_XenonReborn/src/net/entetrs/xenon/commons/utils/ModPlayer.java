@@ -30,6 +30,12 @@ public final class ModPlayer implements DspProcessorCallBack
 	private static Log log = LogFactory.getLog(ModPlayer.class);
 	private static ModPlayer instance = new ModPlayer();
 
+	private ModMixer mixer;
+	private String resourceName;
+	private AudioProcessor audioProcessor;
+	private float leftLevel;
+	private float rightLevel;
+
 	public static ModPlayer getInstance()
 	{
 		return instance;
@@ -64,16 +70,19 @@ public final class ModPlayer implements DspProcessorCallBack
 		}
 	}
 
-	private ModMixer mixer;
-	private String resourceName;
-	private AudioProcessor audioProcessor;
-
-	public float leftLevel;
-	public float rightLevel;
-
 	private ModPlayer()
 	{
-		
+
+	}
+
+	public float getLeftLevel()
+	{
+		return leftLevel;
+	}
+
+	public float getRightLevel()
+	{
+		return rightLevel;
 	}
 
 	/**
@@ -90,7 +99,7 @@ public final class ModPlayer implements DspProcessorCallBack
 			if (log.isInfoEnabled()) log.info("Chargement de " + modUrl);
 			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
 			mixer = (ModMixer) multimediaContainer.createNewMixer();
-			audioProcessor = new AudioProcessor(1024,60);
+			audioProcessor = new AudioProcessor(1024, 60);
 			audioProcessor.addListener(this);
 			mixer.setAudioProcessor(audioProcessor);
 			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());
@@ -150,9 +159,9 @@ public final class ModPlayer implements DspProcessorCallBack
 		{
 			for (float v : samples)
 			{
-				 if (v < 0) v *= -1f;
-//				 if (v > currentLevel) currentLevel = v;
-				 currentLevel += v;
+				if (v < 0) v *= -1f;
+				// if (v > currentLevel) currentLevel = v;
+				currentLevel += v;
 			}
 		}
 		return currentLevel;

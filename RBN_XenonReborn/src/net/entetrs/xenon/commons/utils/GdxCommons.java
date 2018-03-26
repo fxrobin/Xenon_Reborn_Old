@@ -111,14 +111,21 @@ public final class GdxCommons
 	public static TextureRegion[] convertToTextureArray(Texture texture, int cols, int rows)
 	{
 		int totalFrames = cols * rows;
+		return convertToTextureArray(texture, totalFrames, cols, rows, 0, 0, texture.getWidth() / cols, texture.getHeight() / rows);
+	}
+	
+	public static TextureRegion[] convertToTextureArray(Texture texture, int totalSprites, int cols, int rows, int cropX, int cropY, int cropWith, int cropHeight)
+	{
 		TextureRegion[][] tmpRegion = TextureRegion.split(texture, texture.getWidth() / cols, texture.getHeight() / rows);
-		TextureRegion[] result = new TextureRegion[totalFrames];
+		TextureRegion[] result = new TextureRegion[totalSprites];
 		int index = 0;
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				result[index++] = tmpRegion[i][j];
+				TextureRegion tr = tmpRegion[i][j];
+				tr.setRegion(tr.getRegionX() + cropX, tr.getRegionY() + cropY, cropWith, cropHeight);
+				result[index++] = tr;
 			}
 		}
 		return result;

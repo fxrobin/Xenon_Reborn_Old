@@ -32,6 +32,7 @@ public enum TextureAsset implements Disposable
 	BIG_ENEMY("enemies/big-enemy.png"),
 	RAFALE("enemies/rafale.png"),
 	BLACK_BIRD("enemies/black-bird.png"),
+	XENON_SHIP("enemies/xenon-ship.png"),
 	BULLET("shoots/bullet.png"),
 
 	FONT("fonts/font-blue.png");

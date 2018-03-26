@@ -8,11 +8,13 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.quippy.javamod.mixer.Mixer;
 import de.quippy.javamod.multimedia.MultimediaContainer;
 import de.quippy.javamod.multimedia.MultimediaContainerManager;
 import de.quippy.javamod.multimedia.mod.ModContainer;
+import de.quippy.javamod.multimedia.mod.ModMixer;
 import de.quippy.javamod.system.Helpers;
+import de.quippy.javamod.mixer.dsp.AudioProcessor;
+import de.quippy.javamod.mixer.dsp.DspProcessorCallBack;
 
 /**
  * ModPlayer (music AMIGA / ATARI-ST). Refonte basée sur JavaMod (MOD, XM, S3M,
@@ -23,11 +25,11 @@ import de.quippy.javamod.system.Helpers;
  * @author robin
  *
  */
-public final class ModPlayer
-{	
+public final class ModPlayer implements DspProcessorCallBack
+{
 	private static Log log = LogFactory.getLog(ModPlayer.class);
 	private static ModPlayer instance = new ModPlayer();
-	
+
 	public static ModPlayer getInstance()
 	{
 		return instance;
@@ -61,13 +63,17 @@ public final class ModPlayer
 			}
 		}
 	}
-		
-	private Mixer mixer;
+
+	private ModMixer mixer;
 	private String resourceName;
+	private AudioProcessor audioProcessor = new AudioProcessor(64,60);
+
+	public float leftLevel;
+	public float rightLevel;
 
 	private ModPlayer()
 	{
-
+		audioProcessor.addListener(this);
 	}
 
 	/**
@@ -83,10 +89,10 @@ public final class ModPlayer
 			URL modUrl = ModPlayer.class.getClassLoader().getResource(musicNameResource);
 			if (log.isInfoEnabled()) log.info("Chargement de " + modUrl);
 			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
-			mixer = multimediaContainer.createNewMixer();
+			mixer = (ModMixer) multimediaContainer.createNewMixer();
+			mixer.setAudioProcessor(audioProcessor);
 			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());
 			mixer.startPlayback();
-			
 		}
 		catch (UnsupportedAudioFileException e)
 		{
@@ -114,7 +120,9 @@ public final class ModPlayer
 	{
 		if (mixer != null)
 		{
-			new Thread(mixer::stopPlayback).start();
+			Thread t = new Thread(mixer::stopPlayback);
+			t.setDaemon(true);
+			t.start();
 		}
 	}
 
@@ -124,6 +132,28 @@ public final class ModPlayer
 	public String getMusicName()
 	{
 		return (mixer == null) ? "NO MODULE" : resourceName;
+	}
+
+	@Override
+	public void currentSampleChanged(float[] left, float[] right)
+	{
+		leftLevel = calculateLevel(left);
+		rightLevel = calculateLevel(right);
+	}
+
+	public float calculateLevel(float[] samples)
+	{
+		float currentLevel = 0;
+		if (samples != null)
+		{
+			for (float v : samples)
+			{
+				 if (v < 0) v *= -1f;
+//				 if (v > currentLevel) currentLevel = v;
+				 currentLevel += v;
+			}
+		}
+		return currentLevel;
 	}
 
 }

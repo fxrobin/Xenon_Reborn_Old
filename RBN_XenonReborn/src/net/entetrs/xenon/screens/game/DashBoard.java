@@ -26,7 +26,7 @@ import net.entetrs.xenon.commons.libs.TextureAsset;
 public class DashBoard
 {
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // lifePoints : %d // Shield : %02.2f %% // lifeCount : %d";
-	private static final int PADDING = 20;
+	private static final int PADDING = 10;
 	private static final int MARGE = 10;	
 	private int hauteurBarre;
 	
@@ -40,7 +40,7 @@ public class DashBoard
 		super();
 		this.gamePlayScreen = gamePlayScreen;
 		this.footer = TextureAsset.FOOTER.get();
-		this.hauteurBarre = (Global.height - footer.getHeight() - (MARGE * 2) - 48 ); // 48 à cause du score.
+		this.hauteurBarre = (Global.height - footer.getHeight() - (MARGE * 2) - 60 );
 	}
 	
 	public void render()
@@ -68,7 +68,7 @@ public class DashBoard
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(weaponColor); 
 		float currentSize = gamePlayScreen.getShip().getSecondWeaponEnergy() * hauteurBarre / 100f;
-		shapeRenderer.rect(Global.width - 50 - MARGE, (float) footer.getHeight() , 50, currentSize);
+		shapeRenderer.rect(Global.width - 50 - MARGE, (float) footer.getHeight() + (float) MARGE , 50, currentSize);
 		shapeRenderer.end();
 	}
 

@@ -25,7 +25,6 @@ import net.entetrs.xenon.commons.SingleExecutor;
 import net.entetrs.xenon.commons.displays.Blinker;
 import net.entetrs.xenon.commons.fonts.GdxBitmapString;
 import net.entetrs.xenon.commons.libs.ModAsset;
-import net.entetrs.xenon.commons.libs.MusicAsset;
 import net.entetrs.xenon.commons.libs.SoundAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
@@ -179,13 +178,13 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	public void show()
 	{
 		ModPlayer.getInstance().play(ModAsset.XENON_REMIX.toString());
-		// MusicAsset.MUSIC.loop(0.6f);
 	}
 
 	@Override
 	public void hide()
 	{
-		MusicAsset.MUSIC.fadeOut();
+		ModPlayer.getInstance().stop();
+		//MusicAsset.MUSIC.fadeOut();
 	}
 
 	@Override

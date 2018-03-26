@@ -15,7 +15,9 @@ public enum EnemyType
 	PERFORATOR(TextureAsset.PERFORATOR, 10,10),
 	BIG_ENEMY(TextureAsset.BIG_ENEMY, 20, 20),
 	RAFALE(TextureAsset.RAFALE, 15, 15),
-	BLACK_BIRD(TextureAsset.BLACK_BIRD, 15, 15);
+	BLACK_BIRD(TextureAsset.BLACK_BIRD, 15, 15),
+	XENON_SHIP(TextureAsset.XENON_SHIP,15,15);
+	
 	
 	private TextureAsset textureRef;
 

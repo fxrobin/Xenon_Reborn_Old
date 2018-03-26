@@ -8,7 +8,10 @@ public enum ModAsset
 	TRANCE_124("mods/trance-124.mod"),
 	BREATH_TAKER("mods/breathtaker.mod"),
 	XENON_ORIGINAL("mods/xenon2.mod"),
-	XENON_200("mods/xenon220.xm");
+	XENON_200("mods/xenon220.xm"),
+	SPACE_MEGAMIX("mods/space-megamix.mod"),
+	INTRO("mods/intro.mod"),
+	;
 
 	final String modName;
 

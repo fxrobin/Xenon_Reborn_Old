@@ -6,10 +6,13 @@ import org.apache.commons.logging.LogFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Interpolation;
 
 import net.entetrs.xenon.commons.Global;
@@ -17,7 +20,7 @@ import net.entetrs.xenon.commons.SingleExecutor;
 import net.entetrs.xenon.commons.displays.Interpolator;
 import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.libs.AssetLib;
-import net.entetrs.xenon.commons.libs.MusicAsset;
+import net.entetrs.xenon.commons.libs.ModAsset;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 import net.entetrs.xenon.commons.utils.GdxCommons;
 import net.entetrs.xenon.commons.utils.ModPlayer;
@@ -49,14 +52,14 @@ public class LoadingScreen extends AbstractScreen
 		layout = new GlyphLayout();
 		singleExecutor = new SingleExecutor(() -> {
 			this.getControler().showScreen(XenonScreen.MENU);
-			MusicAsset.INTRO_SOUND.fadeOut();
+			ModPlayer.getInstance().stop();
 		});
 	}
 
 	@Override
 	public void show()
 	{
-		MusicAsset.INTRO_SOUND.play();
+		ModPlayer.getInstance().play(ModAsset.INTRO.toString());
 	}
 
 	@Override
@@ -64,17 +67,33 @@ public class LoadingScreen extends AbstractScreen
 	{
 		GdxCommons.clearScreen(Color.WHITE);
 		this.checkInput();
+		
+		
 		this.getBatch().begin();
 		this.renderBackground(delta);
 		this.renderProgress();
 		this.getBatch().end();
+		this.renderMusicBars();
+	}
+
+	private void renderMusicBars()
+	{
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+		ShapeRenderer shapeRenderer = this.getShapeRenderer();
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(Color.RED); 
+		shapeRenderer.rect(10 , 10 , 50, ModPlayer.getInstance().leftLevel);
+		shapeRenderer.setColor(Color.GREEN); 
+		shapeRenderer.rect(Global.width - 50 - 10 , 10 , 50, ModPlayer.getInstance().rightLevel);
+		shapeRenderer.end();
+		
 	}
 
 	private void renderProgress()
 	{
 		String message = getProgressString();
 		layout.setText(font, message);
-		font.draw(this.getBatch(), message, (Global.width - layout.width) / 2, 50);
+		font.draw(this.getBatch(), message, (Global.width - layout.width) / 2, 80);
 	}
 
 	private String getProgressString()

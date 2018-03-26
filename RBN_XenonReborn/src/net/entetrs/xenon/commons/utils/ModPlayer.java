@@ -121,7 +121,7 @@ public final class ModPlayer implements DspProcessorCallBack
 	/**
 	 * lance la lecture du module sous forme de Thread daemon.
 	 */
-	public void play(String musicNameResource, boolean loop)
+	public synchronized void play(String musicNameResource, boolean loop)
 	{
 		if (mixer!=null && mixer.isPlaying())
 		{
@@ -129,15 +129,13 @@ public final class ModPlayer implements DspProcessorCallBack
 			mixer.stopPlayback();
 		}
 		
-		Thread t = new Thread(() -> {
-			
+		Thread t = new Thread(() -> {		
 			boolean mustLoop = false;
 			do
 			{	
 				this.load(musicNameResource);
 				long mixLength = mixer.getLengthInMilliseconds();
 				log.info("Starting playback");
-				mixer.setMillisecondPosition(0L);
 				AudioProcessor audioProcessor = new AudioProcessor(1024, 60);
 				audioProcessor.addListener(this);
 				mixer.setAudioProcessor(audioProcessor);

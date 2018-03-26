@@ -1,7 +1,6 @@
 package net.entetrs.xenon.commons.utils;
 
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Properties;
 
 import javax.sound.sampled.UnsupportedAudioFileException;

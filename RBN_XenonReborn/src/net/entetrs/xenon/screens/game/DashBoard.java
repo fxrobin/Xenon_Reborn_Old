@@ -57,12 +57,6 @@ public class DashBoard
 
 	private void renderSecondWeaponBar()
 	{
-		Ship ship = gamePlayScreen.getShip();	
-		renderSecondWeaponBarOfShip(ship);
-	}
-
-	private void renderSecondWeaponBarOfShip(Ship ship)
-	{
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 		ShapeRenderer shapeRenderer = gamePlayScreen.getShapeRenderer();
 		shapeRenderer.begin(ShapeType.Filled);
@@ -72,21 +66,13 @@ public class DashBoard
 		shapeRenderer.end();
 	}
 
+
 	/**
 	 * affiche le niveau d'énergie du bouclier.
 	 */
 	public void renderShieldBar()
-	{	
-		Ship ship = gamePlayScreen.getShip();	
-		renderShieldBarOfShip(ship);
-	}
-
-	/**
-	 * @param shapeRenderer
-	 * @param ship
-	 */
-	public void renderShieldBarOfShip(Ship ship)
 	{
+		Ship ship = gamePlayScreen.getShip();	
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 		ShapeRenderer shapeRenderer = gamePlayScreen.getShapeRenderer();
 		Color color = computeShieldBarColor(ship);

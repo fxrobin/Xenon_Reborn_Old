@@ -121,39 +121,35 @@ public final class ModPlayer implements DspProcessorCallBack
 	 * lance la lecture du module sous forme de Thread daemon.
 	 */
 	public synchronized void play(String musicNameResource, boolean loop)
-	{
-		if (mixer!=null && mixer.isPlaying())
-		{
-			log.info("Stopping Music ..");
-			mixer.stopPlayback();
-		}
-		
+	{		
 		Thread t = new Thread(() -> {		
 			boolean mustLoop = false;
 			do
 			{	
 				this.load(musicNameResource);
-				long mixLength = mixer.getLengthInMilliseconds();
+				ModMixer localMixer = mixer;
+				long mixLength = localMixer.getLengthInMilliseconds();
+				attachAudioProcessor(localMixer);
 				log.info("Starting playback");
-				AudioProcessor audioProcessor = new AudioProcessor(1024, 60);
-				audioProcessor.addListener(this);
-				mixer.setAudioProcessor(audioProcessor);
-				mixer.startPlayback();
-				long position = mixer.getMillisecondPosition();
+				localMixer.startPlayback();
+				long position = localMixer.getMillisecondPosition();
 				log.info(String.format("loop : %b, mixLength : %d, mixPosition %d", loop, mixLength, position));
-				mustLoop = (position >= mixLength && loop);
-				if (mustLoop && log.isInfoEnabled())
-				{
-					log.info("Loop MOD !");
-				}
-				else
-				{
-					log.info("No Loop ");
-				}
+				mustLoop = (position >= mixLength && loop);		
+				log.info(mustLoop && log.isInfoEnabled() ? "Loop MOD !" : "No loop");
+	
 			} while (mustLoop);
+			log.info("End ModPlayer Thread");
 		});	
 		t.setDaemon(true);
 		t.start();
+	}
+
+	private void attachAudioProcessor(ModMixer mixer)
+	{
+		AudioProcessor audioProcessor = new AudioProcessor(1024, 60);
+		audioProcessor.addListener(this);
+		mixer.setAudioProcessor(audioProcessor);
+		log.info("AudioProcessor attached");
 	}
 
 	/**

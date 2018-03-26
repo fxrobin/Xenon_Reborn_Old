@@ -8,13 +8,13 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.quippy.javamod.mixer.dsp.AudioProcessor;
+import de.quippy.javamod.mixer.dsp.DspProcessorCallBack;
 import de.quippy.javamod.multimedia.MultimediaContainer;
 import de.quippy.javamod.multimedia.MultimediaContainerManager;
 import de.quippy.javamod.multimedia.mod.ModContainer;
 import de.quippy.javamod.multimedia.mod.ModMixer;
 import de.quippy.javamod.system.Helpers;
-import de.quippy.javamod.mixer.dsp.AudioProcessor;
-import de.quippy.javamod.mixer.dsp.DspProcessorCallBack;
 
 /**
  * ModPlayer (music AMIGA / ATARI-ST). Refonte basée sur JavaMod (MOD, XM, S3M,
@@ -66,14 +66,14 @@ public final class ModPlayer implements DspProcessorCallBack
 
 	private ModMixer mixer;
 	private String resourceName;
-	private AudioProcessor audioProcessor = new AudioProcessor(64,60);
+	private AudioProcessor audioProcessor;
 
 	public float leftLevel;
 	public float rightLevel;
 
 	private ModPlayer()
 	{
-		audioProcessor.addListener(this);
+		
 	}
 
 	/**
@@ -90,6 +90,8 @@ public final class ModPlayer implements DspProcessorCallBack
 			if (log.isInfoEnabled()) log.info("Chargement de " + modUrl);
 			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
 			mixer = (ModMixer) multimediaContainer.createNewMixer();
+			audioProcessor = new AudioProcessor(1024,60);
+			audioProcessor.addListener(this);
 			mixer.setAudioProcessor(audioProcessor);
 			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());
 			mixer.startPlayback();

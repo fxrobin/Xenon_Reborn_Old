@@ -10,9 +10,6 @@ public enum TextureAsset implements Disposable
 {
 	TITLE("commons/xenon-reborn.png"), 
 	BACKGROUND_BOMBING_PIXELS("backgrounds/bombing-pixels-white.jpg"),
-	BACKGROUND_SPACE_DOCK("backgrounds/space-dock.png", TextureWrap.Repeat), 
-	BACKGROUND_WALL("backgrounds/wall.png", TextureWrap.Repeat), 
-	BACKGROUND_STATIC("backgrounds/static-background.png"), 
 	BACKGROUND_LEFT("backgrounds/left_bg.png", TextureWrap.Repeat), 
 	BACKGROUND_RIGHT("backgrounds/right_bg.png", TextureWrap.Repeat), 
 	BACKGROUND_SPACE("backgrounds/space.jpg", TextureWrap.Repeat), 

@@ -81,7 +81,7 @@ public class MenuScreen extends AbstractScreen
 	@Override
 	public void show()
 	{
-		modPlayer.play(ModAsset.values()[currentMusic].toString());
+		modPlayer.playLoop(ModAsset.values()[currentMusic].toString());
 	}
 
 	@Override
@@ -175,6 +175,6 @@ public class MenuScreen extends AbstractScreen
 	private void updateMusic()
 	{
 		modPlayer.stop();
-		modPlayer.play(ModAsset.values()[currentMusic].toString());
+		modPlayer.playLoop(ModAsset.values()[currentMusic].toString());
 	}
 }

@@ -1,6 +1,7 @@
 package net.entetrs.xenon.commons.utils;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -32,7 +33,6 @@ public final class ModPlayer implements DspProcessorCallBack
 
 	private ModMixer mixer;
 	private String resourceName;
-	private AudioProcessor audioProcessor;
 	private float leftLevel;
 	private float rightLevel;
 
@@ -90,7 +90,7 @@ public final class ModPlayer implements DspProcessorCallBack
 	 * 
 	 * @param musicNameResource
 	 */
-	private void loadAndPlay(String musicNameResource)
+	private void load(String musicNameResource)
 	{
 		try
 		{
@@ -99,11 +99,7 @@ public final class ModPlayer implements DspProcessorCallBack
 			if (log.isInfoEnabled()) log.info("Chargement de " + modUrl);
 			MultimediaContainer multimediaContainer = MultimediaContainerManager.getMultimediaContainer(modUrl);
 			mixer = (ModMixer) multimediaContainer.createNewMixer();
-			audioProcessor = new AudioProcessor(1024, 60);
-			audioProcessor.addListener(this);
-			mixer.setAudioProcessor(audioProcessor);
-			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());
-			mixer.startPlayback();
+			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());		
 		}
 		catch (UnsupportedAudioFileException e)
 		{
@@ -113,13 +109,52 @@ public final class ModPlayer implements DspProcessorCallBack
 			}
 		}
 	}
+	
+	/**
+	 * lance la lecture du module sous forme de Thread daemon, en boucle
+	 */
+	public void playLoop(String musicNameResource)
+	{
+		play(musicNameResource, true);
+	}
 
 	/**
 	 * lance la lecture du module sous forme de Thread daemon.
 	 */
-	public synchronized void play(String musicNameResource)
+	public void play(String musicNameResource, boolean loop)
 	{
-		Thread t = new Thread(() -> this.loadAndPlay(musicNameResource));
+		if (mixer!=null && mixer.isPlaying())
+		{
+			log.info("Stopping Music ..");
+			mixer.stopPlayback();
+		}
+		
+		Thread t = new Thread(() -> {
+			
+			boolean mustLoop = false;
+			do
+			{	
+				this.load(musicNameResource);
+				long mixLength = mixer.getLengthInMilliseconds();
+				log.info("Starting playback");
+				mixer.setMillisecondPosition(0L);
+				AudioProcessor audioProcessor = new AudioProcessor(1024, 60);
+				audioProcessor.addListener(this);
+				mixer.setAudioProcessor(audioProcessor);
+				mixer.startPlayback();
+				long position = mixer.getMillisecondPosition();
+				log.info(String.format("loop : %b, mixLength : %d, mixPosition %d", loop, mixLength, position));
+				mustLoop = (position >= mixLength && loop);
+				if (mustLoop && log.isInfoEnabled())
+				{
+					log.info("Loop MOD !");
+				}
+				else
+				{
+					log.info("No Loop ");
+				}
+			} while (mustLoop);
+		});	
 		t.setDaemon(true);
 		t.start();
 	}

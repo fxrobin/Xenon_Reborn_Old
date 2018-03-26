@@ -177,7 +177,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	@Override
 	public void show()
 	{
-		ModPlayer.getInstance().play(ModAsset.XENON_REMIX.toString());
+		ModPlayer.getInstance().playLoop(ModAsset.XENON_REMIX.toString());
 	}
 
 	@Override

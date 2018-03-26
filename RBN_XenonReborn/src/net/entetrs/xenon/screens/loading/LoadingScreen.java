@@ -59,7 +59,7 @@ public class LoadingScreen extends AbstractScreen
 	@Override
 	public void show()
 	{
-		ModPlayer.getInstance().play(ModAsset.INTRO.toString());
+		ModPlayer.getInstance().playLoop(ModAsset.INTRO.toString());
 	}
 
 	@Override

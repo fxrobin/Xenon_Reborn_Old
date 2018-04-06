@@ -65,8 +65,8 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	
 	private void createBlinkingMessage()
 	{
-		GdxBitmapString gameOverMessage = new GdxBitmapString("GAME OVER");
-		gameOverMessage.setPosition((Global.width - gameOverMessage.getWidth()) / 2f, (float)(Global.height - TextureAsset.TITLE.get().getHeight() /2) / 2 );
+		GdxBitmapString gameOverMessage = new GdxBitmapString("GAME OVER", 2f);
+		gameOverMessage.setPosition((Global.width - gameOverMessage.getWidth()) / 2f, 400);
 		msgBlinker = new Blinker(1f, gameOverMessage, 5, this::closeGame);
 	}
 	

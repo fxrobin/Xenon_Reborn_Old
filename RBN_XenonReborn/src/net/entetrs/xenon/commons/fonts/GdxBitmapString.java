@@ -16,13 +16,21 @@ public class GdxBitmapString extends Displayable
 	
 	// hauteur de la font
 	private int letterWidth;
+	
+	private float scale;
 
-	public GdxBitmapString(String text)
+	public GdxBitmapString(String text, float scale)
 	{
-		super();		
+		super();
+		this.scale = scale;
 		this.width = FontUtils.getWidth(text);
 		this.letterWidth = FontUtils.getFontWidth();
 		this.populateSprites(text);
+	}
+	
+	public GdxBitmapString(String text)
+	{
+		this(text, 1.0f);
 	}
 	
 	/* initialisation du tableau de sprites en fonction du TextureRegion calculés */
@@ -33,8 +41,14 @@ public class GdxBitmapString extends Displayable
 		for (char c : text.toCharArray())
 		{
 			TextureRegion tr = FontUtils.getTextureRegionOfChar(c);
-			sprites[index++] = (tr!=null) ? new Sprite(tr) : null;
-		}
+			Sprite s = (tr!=null) ? new Sprite(tr) : null;
+			if (s!= null) 
+			{
+				s.setScale(scale);
+			}
+			sprites[index++] = s; 
+		}	
+		this.width = (int) (text.length() * (int) (letterWidth * scale));
 	}
 
 	public int getWidth()
@@ -45,8 +59,7 @@ public class GdxBitmapString extends Displayable
 	@Override
 	public void setPosition(float x, float y)
 	{
-		super.setPosition(x, y);
-		
+		super.setPosition(x, y);	
 		// calcul de la position X de chacun des sprites.
 		float offsetX = this.getPositionX();
 		for (Sprite s : sprites)
@@ -55,8 +68,8 @@ public class GdxBitmapString extends Displayable
 			{
 				s.setX(offsetX);	
 				s.setY(y);	
-			}
-			offsetX += letterWidth;
+			}	
+			offsetX += letterWidth * scale;	
 		}	
 	}
 

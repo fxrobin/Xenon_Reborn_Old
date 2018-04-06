@@ -71,7 +71,7 @@ public class MenuScreen extends AbstractScreen
 
 	private void createBlinkingMessage()
 	{
-		pressSpaceBarMessage = new GdxBitmapString(MSG);
+		pressSpaceBarMessage = new GdxBitmapString(MSG, 1.5f);
 		interpolatorX = new Interpolator(Interpolation.sine, 1f, 5, (Global.width - pressSpaceBarMessage.getWidth()) / 2f);
 		interpolatorY = new Interpolator(Interpolation.pow2, 0.5f, 10, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
 		pressSpaceBarMessage.setPosition(interpolatorX.getOriginalValue() , interpolatorY.getOriginalValue());

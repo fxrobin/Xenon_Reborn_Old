@@ -22,7 +22,6 @@ public enum TextureAsset implements Disposable
 	SHIP("ships/ship_normal.png"), 
 	SHIP_NOREACTOR("ships/ship_noreactor.png"),
 	
-
 	ENEMY("enemies/enemy.png"), 
 	BUG("enemies/bug.png"), 
 	PERFORATOR("enemies/perforator.png"), 

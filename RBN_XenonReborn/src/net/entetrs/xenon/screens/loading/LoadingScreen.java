@@ -38,7 +38,7 @@ public class LoadingScreen extends AbstractScreen
 {
 	private Log log = LogFactory.getLog(this.getClass());
 	private GlyphLayout layout;
-	private BitmapFont font = TrueTypeFont.SHARETECH_30_BLACK.getFont();
+	private BitmapFont font = TrueTypeFont.COMPUTER_30_BLACK.getFont();
 	private Texture background = TextureAsset.BACKGROUND_BOMBING_PIXELS.get();
 	private SingleExecutor singleExecutor;
 	private Interpolator interpolatorX = new Interpolator(Interpolation.sine, 2f, 20, 0);

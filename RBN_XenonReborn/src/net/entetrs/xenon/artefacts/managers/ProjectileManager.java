@@ -12,6 +12,8 @@ import net.entetrs.xenon.artefacts.friendly.Ship;
 import net.entetrs.xenon.artefacts.friendly.Shoot;
 import net.entetrs.xenon.artefacts.friendly.ShootType;
 import net.entetrs.xenon.commons.Global;
+import net.entetrs.xenon.commons.UserControls;
+import net.entetrs.xenon.commons.UserControls.Control;
 import net.entetrs.xenon.commons.libs.AnimationAsset;
 import net.entetrs.xenon.commons.utils.RandomUtils;
 
@@ -38,7 +40,7 @@ public class ProjectileManager
 	private static void checkBigFire(Ship ship)
 	{
 		// quand l'arme est chargée et qu'on relache la touche SHIFT.
-		if (ship.getSecondaryWeapon().isReady() && !Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
+		if (ship.getSecondaryWeapon().isReady() && !Gdx.input.isKeyPressed(UserControls.get(Control.CHARGE_WEAPON)))
 		{
 			ship.getSecondaryWeapon().disable();
 			pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
@@ -47,7 +49,7 @@ public class ProjectileManager
 
 	private static void checkNormalFire(Ship ship)
 	{
-		if (Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT))
+		if (Gdx.input.isKeyJustPressed(UserControls.get(Control.NORMAL_FIRE)))
 		{
 			pm.addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
 		}

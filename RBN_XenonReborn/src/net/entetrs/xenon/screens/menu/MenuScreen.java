@@ -62,7 +62,7 @@ public class MenuScreen extends AbstractScreen
 		titleY = (Global.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
-		message = new GdxTrueTypeString(TrueTypeFont.SHARETECH_30.getFont(), "");	
+		message = new GdxTrueTypeString(TrueTypeFont.COMPUTER_30_WHITE.getFont(), "");	
 		this.createBlinkingMessage();
 		modPlayer = ModPlayer.getInstance();
 		currentMusic = RandomUtils.pickIndex(ModAsset.values());

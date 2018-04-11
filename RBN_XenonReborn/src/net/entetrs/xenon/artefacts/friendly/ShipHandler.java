@@ -1,7 +1,6 @@
 package net.entetrs.xenon.artefacts.friendly;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 
 import net.entetrs.xenon.artefacts.friendly.ShipInput.Horizontal;
 import net.entetrs.xenon.artefacts.friendly.ShipInput.Vertical;

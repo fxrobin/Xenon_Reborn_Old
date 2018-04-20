@@ -6,7 +6,7 @@ public class ArtefactData
 	 * points de vie de l'artefact.
 	 */
 	private final int maxLifePoints;
-	
+
 	/**
 	 * points de vie de l'artefact.
 	 */
@@ -23,8 +23,8 @@ public class ArtefactData
 	 * vitesse de déplacement sur l'axe des Y.
 	 */
 	private float vectorY;
-	
-	
+
+
 	public ArtefactData(int lifePoints, int impactForce, float vectorX, float vectorY)
 	{
 		super();
@@ -80,9 +80,9 @@ public class ArtefactData
 	{
 		return impactForce;
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

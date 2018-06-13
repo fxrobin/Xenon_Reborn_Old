@@ -36,7 +36,7 @@ public final class ShipHandler
 		return vControl;
 	}
 	
-	public static void handle(Ship ship,float delta)
+	public static void handle(Ship ship)
 	{
 		checkVerticalMove(ship);
 		checkHorizontalMove(ship);

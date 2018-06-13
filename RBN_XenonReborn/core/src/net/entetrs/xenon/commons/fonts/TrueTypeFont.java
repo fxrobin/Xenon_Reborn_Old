@@ -13,14 +13,13 @@ import com.badlogic.gdx.utils.Disposable;
 public enum TrueTypeFont implements Disposable
 {
 	DEFAULT,
-	SHARETECH_12("fonts/ShareTech-Regular.ttf",12),
-	SHARETECH_30("fonts/ShareTech-Regular.ttf",30),
-	SHARETECH_30_BLACK("fonts/ShareTech-Regular.ttf",30, Color.BLACK),
-	PIXEL_30_BLACK("fonts/PixelOperatorHB.ttf",30, Color.BLACK),
-	COMPUTER_30_WHITE("fonts/computer_pixel-7.ttf", 40 , Color.WHITE),
-	COMPUTER_30_BLACK("fonts/computer_pixel-7.ttf", 40 , Color.BLACK)
-	;
-
+	SHARETECH_12(Font.SHARETECH.resource(),12),
+	SHARETECH_30(Font.SHARETECH.resource(),30),
+	SHARETECH_30_BLACK(Font.SHARETECH.resource(),30, Color.BLACK),
+	PIXEL_30_BLACK(Font.PIXEL.resource(),30, Color.BLACK),
+	COMPUTER_30_WHITE(Font.COMPUTER.resource(), 40 , Color.WHITE),
+	COMPUTER_30_BLACK(Font.COMPUTER.resource(), 40 , Color.BLACK);
+	
 	private Log log = LogFactory.getLog(this.getClass());
 	private BitmapFont font;
 

@@ -84,7 +84,7 @@ public class LoadingScreen extends AbstractScreen
 		shapeRenderer.setColor(Color.RED); 
 		shapeRenderer.rect(10 , 10 , 50, ModPlayer.getInstance().getLeftLevel());
 		shapeRenderer.setColor(Color.GREEN); 
-		shapeRenderer.rect(Global.width - 50 - 10 , 10 , 50, ModPlayer.getInstance().getRightLevel());
+		shapeRenderer.rect(Global.width - 50f - 10 , 10 , 50, ModPlayer.getInstance().getRightLevel());
 		shapeRenderer.end();
 		
 	}

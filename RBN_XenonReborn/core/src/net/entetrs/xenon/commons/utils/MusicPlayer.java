@@ -5,6 +5,8 @@ import com.badlogic.gdx.utils.Timer;
 
 public class MusicPlayer
 {
+	public static final float VOLUME_MAX = 1.0f;
+	public static final float MUSIC_FADE_STEP = 0.01f;
 	private static MusicPlayer player = new MusicPlayer();
 	private Music music;
 	
@@ -28,21 +30,23 @@ public class MusicPlayer
 	{
 		Timer.schedule(new Timer.Task()
 		{
-
-			private float MUSIC_FADE_STEP = 0.01f;
-
 			@Override
 			public void run()
 			{
-				if (music!=null && music.getVolume() >= MUSIC_FADE_STEP)
+			  if (music != null)
+			  {
+				if (music.getVolume() >= MUSIC_FADE_STEP)
+				{
 					music.setVolume(music.getVolume() - MUSIC_FADE_STEP);
+				}
 				else
 				{
 					music.stop();
 					this.cancel();
 				}
+			  }
 			}
-		}, 0f, 0.01f);
+		}, 0f, MUSIC_FADE_STEP);
 	}
 
 	public void fadeIn()
@@ -52,13 +56,10 @@ public class MusicPlayer
 
 		Timer.schedule(new Timer.Task()
 		{
-
-			private float MUSIC_FADE_STEP = 0.01f;
-
 			@Override
 			public void run()
 			{
-				if (music.getVolume() < 1.0)
+				if (music.getVolume() < VOLUME_MAX)
 					music.setVolume(music.getVolume() + MUSIC_FADE_STEP);
 				else
 				{
@@ -66,7 +67,7 @@ public class MusicPlayer
 					this.cancel();
 				}
 			}
-		}, 0f, 0.01f);
+		}, 0f, MUSIC_FADE_STEP);
 	}
 
 	public void loop(Music music)

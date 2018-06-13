@@ -11,9 +11,14 @@ import java.util.Random;
  * @author fxrobin
  *
  */
-public class RandomUtils 
+public final class RandomUtils 
 {
 	private static Random random = new Random();
+	
+	private RandomUtils() 
+	{
+		// protection 
+	}
 	
 	/**
 	 * retourne une valeur au hasard prise dans le tableau.

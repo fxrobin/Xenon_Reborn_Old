@@ -97,9 +97,7 @@ public final class ModPlayer implements DspProcessorCallBack
 			if (log.isInfoEnabled()) log.info("Chargement de " + musicNameResource);
 			ModContainer modContainer = new ModContainer();
 			if (log.isInfoEnabled()) log.info("Module " + module.getFileName());
-			
 			mixer = modContainer.createNewMixer(module, props);
-			//mixer = (ModMixer) multimediaContainer.createNewMixer();
 			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());		
 		}
 		catch (Exception e)
@@ -190,7 +188,6 @@ public final class ModPlayer implements DspProcessorCallBack
 			for (float v : samples)
 			{
 				if (v < 0) v *= -1f;
-				// if (v > currentLevel) currentLevel = v;
 				currentLevel += v;
 			}
 		}

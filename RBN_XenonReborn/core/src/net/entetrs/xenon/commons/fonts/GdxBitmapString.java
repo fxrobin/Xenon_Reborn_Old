@@ -48,7 +48,7 @@ public class GdxBitmapString extends Displayable
 			}
 			sprites[index++] = s; 
 		}	
-		this.width = (int) (text.length() * (int) (letterWidth * scale));
+		this.width = (text.length() * (int) (letterWidth * scale));
 	}
 
 	public int getWidth()

@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.entetrs.xenon.commons.Global;
@@ -111,11 +112,19 @@ public final class GdxCommons
 	public static TextureRegion[] convertToTextureArray(Texture texture, int cols, int rows)
 	{
 		int totalFrames = cols * rows;
-		return convertToTextureArray(texture, totalFrames, cols, rows, 0, 0, texture.getWidth() / cols, texture.getHeight() / rows);
+		Rectangle cropStart = new Rectangle(0, 0, texture.getWidth() / cols, texture.getHeight() / rows);
+		return convertToTextureArray(texture, totalFrames, cols, rows, cropStart);
 	}
 	
-	public static TextureRegion[] convertToTextureArray(Texture texture, int totalSprites, int cols, int rows, int cropX, int cropY, int cropWith, int cropHeight)
+	
+	
+	public static TextureRegion[] convertToTextureArray(Texture texture, int totalSprites, int cols, int rows, Rectangle cropRectangle)
 	{
+		int cropX = (int) cropRectangle.x;
+		int cropY = (int) cropRectangle.y;
+		int cropWith = (int) cropRectangle.width;
+		int cropHeight = (int) cropRectangle.height;
+		
 		TextureRegion[][] tmpRegion = TextureRegion.split(texture, texture.getWidth() / cols, texture.getHeight() / rows);
 		TextureRegion[] result = new TextureRegion[totalSprites];
 		int index = 0;

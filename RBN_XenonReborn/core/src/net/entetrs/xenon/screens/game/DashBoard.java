@@ -62,7 +62,7 @@ public class DashBoard
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(weaponColor); 
 		float currentSize = gamePlayScreen.getShip().getSecondWeaponEnergy() * hauteurBarre / 100f;
-		shapeRenderer.rect(Global.width - 50 - MARGE, (float) footer.getHeight() + (float) MARGE , 50, currentSize);
+		shapeRenderer.rect(Global.width - 50f - MARGE, (float) footer.getHeight() + (float) MARGE , 50, currentSize);
 		shapeRenderer.end();
 	}
 
@@ -110,7 +110,7 @@ public class DashBoard
 		
 		for(int i = 0 ; i < gamePlayScreen.getShip().getLifeCount() ; i++)
 		{
-			batch.draw(TextureAsset.LIFE.get(), offset + (i * (life.getWidth() + PADDING)), Global.height - (life.getHeight() + PADDING));
+			batch.draw(TextureAsset.LIFE.get(), (float)offset + (i * (life.getWidth() + PADDING)), (float)Global.height - (life.getHeight() + PADDING));
 		}
 	}
 	

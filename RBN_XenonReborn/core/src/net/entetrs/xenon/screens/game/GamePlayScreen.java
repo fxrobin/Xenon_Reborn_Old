@@ -114,7 +114,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 			gameOverSoundExecutor.execute();
 			renderGameOverBlinker(delta, batch);
 			GdxBitmapString yourScore = new GdxBitmapString("SCORE " + ScoreManager.getInstance().getScore());
-			yourScore.setPosition((Global.width - yourScore.getWidth()) / 2f, (float)(Global.height - TextureAsset.TITLE.get().getHeight() /2) / 2 - 50f );
+			yourScore.setPosition((Global.width - yourScore.getWidth()) / 2f, (float)(Global.height - (double)TextureAsset.TITLE.get().getHeight() /2) / 2 - 50f );
 			yourScore.render(batch, delta);
 		}
 		else
@@ -154,7 +154,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private void checkInputKeys(float delta)
 	{
-		ShipHandler.handle(ship,delta);
+		ShipHandler.handle(ship);
 		ship.act(delta);
 		ProjectileManager.checkFire(ship);
 		this.checkEscapeAndFullScreen();
@@ -184,7 +184,6 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	public void hide()
 	{
 		ModPlayer.getInstance().stop();
-		//MusicAsset.MUSIC.fadeOut();
 	}
 
 	@Override

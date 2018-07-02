@@ -58,6 +58,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		cm = CollisionManager.getInstance();
 		dashBoard = new DashBoard(this);
 		ship = new Ship();
+		ship.addObserver(ShipStateObserver::shipExplosion);
 		this.createBlinkingMessage();
 		msgBlinker.hide();
 		gameOverSoundExecutor = new SingleExecutor(SoundAsset.GAME_OVER::play);

@@ -1,5 +1,7 @@
 package net.entetrs.xenon.artefacts;
 
+import java.util.Observable;
+
 import com.badlogic.gdx.math.Circle;
 
 import net.entetrs.xenon.commons.utils.GdxCommons;
@@ -11,7 +13,7 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
  * @author robin
  *
  */
-public abstract class AbstractArtefact implements Artefact
+public abstract class AbstractArtefact extends Observable implements Artefact
 {
 	/**
 	 * encapsule les données communes d'un artefact : maxLifePoints, lifePoints, impactForce, vectorX et vectorY.
@@ -82,6 +84,8 @@ public abstract class AbstractArtefact implements Artefact
 	{
 		int newLifePoints = data.getLifePoints() - force ;
 		data.setLifePoints(newLifePoints);
+		this.setChanged();
+	    this.notifyObservers();
 	}
 	
 	@Override
@@ -89,6 +93,8 @@ public abstract class AbstractArtefact implements Artefact
 	{
 		int newLifePoints = data.getLifePoints() + force ;
 		data.setLifePoints(newLifePoints);
+		this.setChanged();
+	    this.notifyObservers();
 	}
 	
 	

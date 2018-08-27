@@ -22,20 +22,18 @@ public final class ExplosionManager
 	{
 		/* protection */
 	}
-	
-	public static void addExplosion(Sprite sprite,  AnimationAsset anim)
+
+	public static void addExplosion(Sprite sprite, AnimationAsset anim)
 	{
 		float x = GdxCommons.getCenterX(sprite);
 		float y = GdxCommons.getCenterY(sprite);
 		addExplosion(x, y, anim);
 	}
-	
-	public static void addExplosion(Artefact artefact,  AnimationAsset anim)
+
+	public static void addExplosion(Artefact artefact, AnimationAsset anim)
 	{
 		addExplosion(artefact.getBoundingCircle().x, artefact.getBoundingCircle().y, anim);
 	}
-	
-	
 
 	public static void addExplosion(float centerX, float centerY, AnimationAsset anim)
 	{
@@ -55,8 +53,8 @@ public final class ExplosionManager
 	{
 		explosions.forEach(ex -> {
 			ex.render(batch, delta);
-			/* 2 vitesse du scroll des bords.*/
-			ex.translateY(-BackgroundParallaxScrolling.getInstance().getSpeed() * 2 * delta); 
+			/* 2 vitesse du scroll des bords. */
+			ex.translateY(-BackgroundParallaxScrolling.getInstance().getSpeed() * 2 * delta);
 		});
 		removeFinishedExplosions();
 	}

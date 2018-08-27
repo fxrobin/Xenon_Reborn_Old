@@ -20,22 +20,22 @@ public final class ShipHandler
 {
 	private static Horizontal hControl;
 	private static Vertical vControl;
-	
+
 	private ShipHandler()
 	{
 		// protection
 	}
-	
+
 	public static Horizontal getHorizontalControl()
 	{
 		return hControl;
 	}
-	
+
 	public static Vertical getVerticalControl()
 	{
 		return vControl;
 	}
-	
+
 	public static void handle(Ship ship)
 	{
 		checkVerticalMove(ship);
@@ -44,17 +44,17 @@ public final class ShipHandler
 		checkSecondWeapon(ship);
 		handleInertia(ship);
 	}
-	
+
 	private static void checkVerticalMove(Ship ship)
 	{
 		vControl = Vertical.NONE;
 		/* précondition au mouvement : que les 2 touches ne soient pas enfoncées */
 		int keyUp = UserControls.get(Control.UP);
 		int keyDown = UserControls.get(Control.DOWN);
-		
+
 		if (GdxCommons.checkConcurrentKeys(keyUp, keyDown)) return;
-		
-		float vY=ship.getVectorY();
+
+		float vY = ship.getVectorY();
 
 		if (Gdx.input.isKeyPressed(keyUp))
 		{
@@ -69,18 +69,18 @@ public final class ShipHandler
 			ship.setVectorY(vY < -Global.SHIP_SPEED ? -Global.SHIP_SPEED : vY);
 		}
 	}
-	
+
 	private static void checkHorizontalMove(Ship ship)
 	{
 		hControl = Horizontal.NONE;
-		
+
 		int keyLeft = UserControls.get(Control.LEFT);
 		int keyRight = UserControls.get(Control.RIGHT);
 
 		/* précondition au mouvement : que les 2 touches ne soient pas enfoncées */
 		if (GdxCommons.checkConcurrentKeys(keyLeft, keyRight)) return;
-		
-		float vX=ship.getVectorX();
+
+		float vX = ship.getVectorX();
 
 		if (Gdx.input.isKeyPressed(keyLeft))
 		{
@@ -96,12 +96,11 @@ public final class ShipHandler
 		}
 	}
 
-
 	private static void handleInertia(Ship ship)
 	{
-		float vX=ship.getVectorX();
-		float vY=ship.getVectorY();
-		
+		float vX = ship.getVectorX();
+		float vY = ship.getVectorY();
+
 		if (hControl == Horizontal.NONE)
 		{
 			ship.setVectorX(computeInertia(vX));
@@ -126,15 +125,15 @@ public final class ShipHandler
 		}
 		return result;
 	}
-	
+
 	private static void checkShield(Ship ship)
 	{
 		if (Gdx.input.isKeyJustPressed(UserControls.get(Control.SHIELD)))
 		{
 			ship.switchShield();
 		}
-	}	
-	
+	}
+
 	private static void checkSecondWeapon(Ship ship)
 	{
 		if (Gdx.input.isKeyPressed(UserControls.get(Control.CHARGE_WEAPON)))
@@ -145,6 +144,5 @@ public final class ShipHandler
 		{
 			ship.getSecondaryWeapon().fullDischarge();
 		}
-		
 	}
 }

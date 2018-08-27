@@ -27,7 +27,6 @@ public class Bullet extends Enemy
 	@Override
 	public boolean isCollision(Artefact otherArtefact)
 	{
-		/* une petite ternaire pour la route ... */
-		return otherArtefact instanceof Ship ? super.isCollision(otherArtefact) : false;
+		return (otherArtefact instanceof Ship && super.isCollision(otherArtefact));
 	}
 }

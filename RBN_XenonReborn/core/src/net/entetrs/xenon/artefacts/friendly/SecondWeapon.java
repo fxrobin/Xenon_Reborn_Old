@@ -4,8 +4,8 @@ import net.entetrs.xenon.commons.Global;
 
 /**
  * <p>
- * représente l'arme puissante et son énergie. L'energie va de 100f : chargée au max, 0f déchargée. 
- * la décharge est immédiate. 
+ * représente l'arme puissante et son énergie. L'energie va de 100f : chargée au
+ * max, 0f déchargée. la décharge est immédiate.
  * </p>
  * 
  */
@@ -22,10 +22,10 @@ public class SecondWeapon
 	 * 
 	 */
 	private boolean charging;
-	
-    /**
-     * arme prête ou non
-     */
+
+	/**
+	 * arme prête ou non
+	 */
 	private boolean ready;
 
 	/**
@@ -39,7 +39,7 @@ public class SecondWeapon
 		{
 			this.recharger(delta);
 		}
-		
+
 		// remise à false car on doit maintenir la touche appuyée
 		charging = false;
 	}
@@ -50,10 +50,10 @@ public class SecondWeapon
 		energy = (energy > 100f) ? 100f : energy;
 		if (!ready && energy >= 100f)
 		{
-		  ready = true;
+			ready = true;
 		}
 	}
-	
+
 	/**
 	 * décharge toute l'énergie accumulée.
 	 */
@@ -61,12 +61,11 @@ public class SecondWeapon
 	{
 		energy = 0f;
 	}
-	
+
 	public void disable()
 	{
 		ready = false;
 	}
-
 
 	/**
 	 * active le chargement de l'arme secondaire.
@@ -76,7 +75,7 @@ public class SecondWeapon
 	{
 		charging = true;
 	}
-	
+
 	public boolean isReady()
 	{
 		return ready;

@@ -27,11 +27,10 @@ public enum MusicAsset implements Disposable
 	{
 		if (music == null)
 		{
-			music = AssetLib.assetLib.get(this, Music.class);
+			music = AssetLib.getInstance().get(this, Music.class);
 		}
 		return music;
 	}
-
 
 	@Override
 	public void dispose()

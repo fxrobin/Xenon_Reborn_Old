@@ -18,13 +18,13 @@ import net.entetrs.xenon.screens.menu.MenuScreen;
  */
 public enum XenonScreen
 {
-	LOADING(LoadingScreen::new),
+	LOADING(LoadingScreen::new), 
 	MENU(MenuScreen::new), 
 	GAME_PLAY(GamePlayScreen::new);
 
-	private BiFunction<XenonControler,SpriteBatch,Screen> supplier;
+	private BiFunction<XenonControler, SpriteBatch, Screen> supplier;
 
-	private XenonScreen(BiFunction<XenonControler,SpriteBatch,Screen> supplier)
+	private XenonScreen(BiFunction<XenonControler, SpriteBatch, Screen> supplier)
 	{
 		this.supplier = supplier;
 	}

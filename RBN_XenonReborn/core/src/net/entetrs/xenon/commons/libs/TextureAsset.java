@@ -9,33 +9,27 @@ import net.entetrs.xenon.commons.utils.GdxCommons;
 public enum TextureAsset implements Disposable
 {
 	TITLE("commons/xenon-reborn.png"), 
-	BACKGROUND_BOMBING_PIXELS("backgrounds/bombing-pixels-white.jpg"),
+	BACKGROUND_BOMBING_PIXELS("backgrounds/bombing-pixels-white.jpg"), 
 	BACKGROUND_LEFT("backgrounds/left_bg.png", TextureWrap.Repeat), 
 	BACKGROUND_RIGHT("backgrounds/right_bg.png", TextureWrap.Repeat), 
 	BACKGROUND_SPACE("backgrounds/space.jpg", TextureWrap.Repeat), 
-	FOOTER("backgrounds/footer.png"),
-	LIFE("commons/life.png"),
-
-	SHIELD("ships/shield.png"), 
-	SHIP_LEFT("ships/ship_left.png"), 
-	SHIP_RIGHT("ships/ship_right.png"), 
-	SHIP("ships/ship_normal.png"), 
+	FOOTER("backgrounds/footer.png"), LIFE("commons/life.png"),
+	SHIELD("ships/shield.png"), SHIP_LEFT("ships/ship_left.png"), 
+	SHIP_RIGHT("ships/ship_right.png"), SHIP("ships/ship_normal.png"), 
 	SHIP_NOREACTOR("ships/ship_noreactor.png"),
-	
+
 	ENEMY("enemies/enemy.png"), 
 	BUG("enemies/bug.png"), 
 	PERFORATOR("enemies/perforator.png"), 
-	BIG_ENEMY("enemies/big-enemy.png"),
-	RAFALE("enemies/rafale.png"),
-	BLACK_BIRD("enemies/black-bird.png"),
-	XENON_SHIP("enemies/xenon-ship.png"),
+	BIG_ENEMY("enemies/big-enemy.png"), 
+	RAFALE("enemies/rafale.png"), 
+	BLACK_BIRD("enemies/black-bird.png"), 
+	XENON_SHIP("enemies/xenon-ship.png"), 
 	BULLET("shoots/bullet.png"),
-
 	FONT("fonts/font-blue.png");
 
 	private final String fileName;
 	private final TextureWrap wrap;
-
 	private Texture texture;
 
 	private TextureAsset(String fileName)
@@ -82,5 +76,4 @@ public enum TextureAsset implements Disposable
 	{
 		GdxCommons.disposeAll(TextureAsset.values());
 	}
-
 }

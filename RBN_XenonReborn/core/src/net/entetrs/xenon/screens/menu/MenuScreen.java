@@ -35,7 +35,7 @@ public class MenuScreen extends AbstractScreen
 	private static Log log = LogFactory.getLog(MenuScreen.class);
 
 	private BackgroundTravelling backgroundTravelling;
-	
+
 	private Blinker msgBlinker;
 	private Interpolator interpolatorX;
 	private Interpolator interpolatorY;
@@ -47,11 +47,11 @@ public class MenuScreen extends AbstractScreen
 	private Monitor monitor;
 	private DisplayMode currentMode;
 	private GdxTrueTypeString message;
-	
+
 	private ModPlayer modPlayer;
 	private int currentMusic;
 	private GdxBitmapString pressSpaceBarMessage;
-	
+
 	public MenuScreen(XenonControler controler, SpriteBatch batch)
 	{
 		super(controler, batch);
@@ -62,19 +62,19 @@ public class MenuScreen extends AbstractScreen
 		titleY = (Global.height - titleTexture.getHeight()) / 2f;
 		monitor = Gdx.graphics.getMonitor();
 		currentMode = Gdx.graphics.getDisplayMode(monitor);
-		message = new GdxTrueTypeString(TrueTypeFont.COMPUTER_30_WHITE.getFont(), "");	
+		message = new GdxTrueTypeString(TrueTypeFont.COMPUTER_30_WHITE.getFont(), "");
 		this.createBlinkingMessage();
 		modPlayer = ModPlayer.getInstance();
 		currentMusic = RandomUtils.pickIndex(ModAsset.values());
-		log.info("Instanciation de MenuScreen OK");	
+		log.info("Instanciation de MenuScreen OK");
 	}
 
 	private void createBlinkingMessage()
 	{
 		pressSpaceBarMessage = new GdxBitmapString(MSG, 1.5f);
 		interpolatorX = new Interpolator(Interpolation.sine, 1f, 5, (Global.width - pressSpaceBarMessage.getWidth()) / 2f);
-		interpolatorY = new Interpolator(Interpolation.pow2, 0.5f, 10, (float)(Global.height - titleTexture.getHeight()) / 2 - 50);
-		pressSpaceBarMessage.setPosition(interpolatorX.getOriginalValue() , interpolatorY.getOriginalValue());
+		interpolatorY = new Interpolator(Interpolation.pow2, 0.5f, 10, (float) (Global.height - titleTexture.getHeight()) / 2 - 50);
+		pressSpaceBarMessage.setPosition(interpolatorX.getOriginalValue(), interpolatorY.getOriginalValue());
 		msgBlinker = new Blinker(0.15f, pressSpaceBarMessage);
 	}
 
@@ -93,29 +93,32 @@ public class MenuScreen extends AbstractScreen
 	@Override
 	public void render(float deltaTime)
 	{
-			this.checkInput();
-			this.backgroundTravelling.translateBackGround(deltaTime);
-			
-			this.getBatch().begin();
-			this.backgroundTravelling.drawBackGround(this.getBatch());
-			this.drawTitle();
-			this.drawDisplayMode();
-			pressSpaceBarMessage.setPosition(interpolatorX.calculate(deltaTime), interpolatorY.calculate(deltaTime));
-			this.msgBlinker.render(this.getBatch(), deltaTime);
-			this.getBatch().end();
+		this.checkInput();
+		this.getBatch().begin();
+		this.backgroundTravelling.translateBackGround(deltaTime);
+		this.backgroundTravelling.drawBackGround(this.getBatch());
+		this.drawTitle();
+		this.drawDisplayMode();
+		this.drawBlinkingMessage(deltaTime);
+		this.getBatch().end();
+	}
+
+	private void drawBlinkingMessage(float deltaTime)
+	{
+		pressSpaceBarMessage.setPosition(interpolatorX.calculate(deltaTime), interpolatorY.calculate(deltaTime));
+		this.msgBlinker.render(this.getBatch(), deltaTime);
 	}
 
 	private void drawDisplayMode()
 	{
 		String msgDisplayMode = String.format("%s / %s / %d FPS", currentMode, monitor.name, Gdx.graphics.getFramesPerSecond());
 		message.setText(msgDisplayMode);
-		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 60);	
+		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 60);
 		message.setText("< " + modPlayer.getMusicName() + " >");
 		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 120);
 		message.setText(String.format("Virtual Width : %d px / Virtual Height : %d px", Global.width, Global.height));
 		message.draw(this.getBatch(), (Global.width - message.getWidth()) / 2f, 30);
 	}
-
 
 	private void drawTitle()
 	{
@@ -127,7 +130,7 @@ public class MenuScreen extends AbstractScreen
 	{
 		checkNextScreen();
 		checkMetaKeys();
-		checkMusicSwitcher();		
+		checkMusicSwitcher();
 	}
 
 	private void checkNextScreen()
@@ -164,8 +167,8 @@ public class MenuScreen extends AbstractScreen
 			currentMusic--;
 			updateMusic();
 		}
-		
-		if (Gdx.input.isKeyJustPressed(Keys.RIGHT) && currentMusic < ModAsset.values().length-1)
+
+		if (Gdx.input.isKeyJustPressed(Keys.RIGHT) && currentMusic < ModAsset.values().length - 1)
 		{
 			currentMusic++;
 			updateMusic();

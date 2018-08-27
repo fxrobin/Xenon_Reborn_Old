@@ -15,12 +15,12 @@ public enum ShootType
 	private final AnimationAsset anim;
 	private final Sound sound;
 	private ArtefactData data;
-	
+
 	private ShootType(AnimationAsset anim, float vX, float vY, Sound sound, int lifeForce, int impactForce)
 	{
 		this.anim = anim;
 		this.sound = sound;
-		data = new ArtefactData(lifeForce, impactForce, vX, vY);	
+		data = new ArtefactData(lifeForce, impactForce, vX, vY);
 	}
 
 	public AnimatedSprite createAnimatedSprite()

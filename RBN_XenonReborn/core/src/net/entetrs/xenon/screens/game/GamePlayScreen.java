@@ -40,11 +40,11 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 
 	private BackgroundParallaxScrolling scrolling;
 	private DashBoard dashBoard;
-	
+
 	private EnemyManager em;
 	private CollisionManager cm;
 	private Ship ship;
-	
+
 	private Blinker msgBlinker;
 	private SingleExecutor gameOverSoundExecutor;
 
@@ -63,19 +63,18 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		msgBlinker.hide();
 		gameOverSoundExecutor = new SingleExecutor(SoundAsset.GAME_OVER::play);
 	}
-	
+
 	private void createBlinkingMessage()
 	{
 		GdxBitmapString gameOverMessage = new GdxBitmapString("GAME OVER", 2f);
 		gameOverMessage.setPosition((Global.width - gameOverMessage.getWidth()) / 2f, 400);
 		msgBlinker = new Blinker(1f, gameOverMessage, 5, this::closeGame);
 	}
-	
+
 	private void closeGame()
 	{
 		this.getControler().showScreen(XenonScreen.MENU);
 	}
-	
 
 	@Override
 	public void render(float delta)
@@ -93,7 +92,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void renderWorld(float delta)
 	{
 		SpriteBatch batch = this.getBatch();
-		
+
 		batch.begin();
 		this.scrolling.render(delta);
 		this.renderShoots(batch, delta);
@@ -102,10 +101,10 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		this.renderShipOrGameOver(delta, batch);
 		ExplosionManager.render(batch, delta);
 		batch.end();
-		
+
 		/* le dashboard doit s'afficher en dehors du spritebatch précédent */
 		dashBoard.render();
-		
+
 	}
 
 	private void renderShipOrGameOver(float delta, SpriteBatch batch)
@@ -115,7 +114,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 			gameOverSoundExecutor.execute();
 			renderGameOverBlinker(delta, batch);
 			GdxBitmapString yourScore = new GdxBitmapString("SCORE " + ScoreManager.getInstance().getScore());
-			yourScore.setPosition((Global.width - yourScore.getWidth()) / 2f, (float)(Global.height - (double)TextureAsset.TITLE.get().getHeight() /2) / 2 - 50f );
+			yourScore.setPosition((Global.width - yourScore.getWidth()) / 2f, (float) (Global.height - (double) TextureAsset.TITLE.get().getHeight() / 2) / 2 - 50f);
 			yourScore.render(batch, delta);
 		}
 		else
@@ -136,13 +135,11 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		}
 	}
 
-
 	private void renderShoots(SpriteBatch batch, float delta)
 	{
 		ProjectileManager.getInstance().renderShoots(batch, delta);
 	}
 
-	
 	private void renderShip(float delta)
 	{
 		ship.render(this.getBatch(), delta);
@@ -165,11 +162,12 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void checkEscapeAndFullScreen()
 	{
 		/* test avec un if classique */
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE))
+		{
 			SoundAsset.CLIC.play();
 			this.closeGame();
 		}
-		
+
 		/* test avec une référence de méthode : c'est plus joli ... */
 		GdxCommons.runIfKeyJustPressed(Keys.F1, GdxCommons::switchFullScreen);
 
@@ -194,7 +192,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 		world.addAll(ProjectileManager.getInstance().getShoots());
 		return world;
 	}
-	
+
 	public Ship getShip()
 	{
 		return ship;

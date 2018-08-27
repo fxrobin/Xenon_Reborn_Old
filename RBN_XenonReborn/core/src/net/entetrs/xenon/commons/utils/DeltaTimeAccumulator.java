@@ -14,10 +14,10 @@ public class DeltaTimeAccumulator
 	 */
 	private float accumulator = 0f;
 	private float totalAccumulatedTime = 0f;
-	
+
 	/**
-	 * fonction à lancer quand l'accumulateur aura atteint le tick.
-	 * permet de déclencher une méthode à interval régulier.
+	 * fonction à lancer quand l'accumulateur aura atteint le tick. permet de
+	 * déclencher une méthode à interval régulier.
 	 */
 	private Runnable runnable = null;
 
@@ -32,7 +32,7 @@ public class DeltaTimeAccumulator
 		super();
 		this.tickFrequency = tickFrequency;
 	}
-	
+
 	public DeltaTimeAccumulator(float tickFrequency, Runnable runnable)
 	{
 		this(tickFrequency);
@@ -44,9 +44,9 @@ public class DeltaTimeAccumulator
 	 * est dépassée.
 	 * 
 	 * @param deltaTime
-	 * 		écart temporelle (exprimé en secondes).
-	 * @return
-	 * 		true si la limite est dépassée et relance l'accumulateur à partir de zéro.
+	 *          écart temporelle (exprimé en secondes).
+	 * @return true si la limite est dépassée et relance l'accumulateur à partir
+	 *         de zéro.
 	 */
 	public boolean addAndCheck(float deltaTime)
 	{
@@ -55,7 +55,7 @@ public class DeltaTimeAccumulator
 		if (accumulator > tickFrequency)
 		{
 			accumulator = 0;
-			if (runnable!=null)
+			if (runnable != null)
 			{
 				runnable.run();
 			}
@@ -66,7 +66,7 @@ public class DeltaTimeAccumulator
 			return false;
 		}
 	}
-	
+
 	/**
 	 * @return le temps total accumlé en secondes.
 	 */
@@ -74,8 +74,7 @@ public class DeltaTimeAccumulator
 	{
 		return this.totalAccumulatedTime;
 	}
-	
-	
+
 	/**
 	 * relance à partir de zéro l'accumulateur de temps.
 	 */

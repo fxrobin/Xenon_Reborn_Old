@@ -28,7 +28,6 @@ import net.entetrs.xenon.commons.Global;
  */
 public final class GdxCommons
 {
-
 	private static Log log = LogFactory.getLog(GdxCommons.class);
 
 	private GdxCommons()
@@ -37,8 +36,8 @@ public final class GdxCommons
 	}
 
 	/**
-	 * retourne "true" si les codes des touches en paramètres sont toutes
-	 * activées au clavier.
+	 * retourne "true" si les codes des touches en paramètres sont toutes activées
+	 * au clavier.
 	 * 
 	 * @param keys
 	 * @return
@@ -101,8 +100,8 @@ public final class GdxCommons
 	}
 
 	/**
-	 * découpe une texture en un tableau de TextureRegion. utile pour obtenir
-	 * les images d'une animation.
+	 * découpe une texture en un tableau de TextureRegion. utile pour obtenir les
+	 * images d'une animation.
 	 * 
 	 * @param texture
 	 * @param cols
@@ -115,16 +114,14 @@ public final class GdxCommons
 		Rectangle cropStart = new Rectangle(0, 0, texture.getWidth() / cols, texture.getHeight() / rows);
 		return convertToTextureArray(texture, totalFrames, cols, rows, cropStart);
 	}
-	
-	
-	
+
 	public static TextureRegion[] convertToTextureArray(Texture texture, int totalSprites, int cols, int rows, Rectangle cropRectangle)
 	{
 		int cropX = (int) cropRectangle.x;
 		int cropY = (int) cropRectangle.y;
 		int cropWith = (int) cropRectangle.width;
 		int cropHeight = (int) cropRectangle.height;
-		
+
 		TextureRegion[][] tmpRegion = TextureRegion.split(texture, texture.getWidth() / cols, texture.getHeight() / rows);
 		TextureRegion[] result = new TextureRegion[totalSprites];
 		int index = 0;
@@ -148,7 +145,7 @@ public final class GdxCommons
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
-	
+
 	/**
 	 * efface l'écran.
 	 */
@@ -202,10 +199,10 @@ public final class GdxCommons
 	 * répétition).
 	 * 
 	 * @param keyCode
-	 *            code clavier (voir la classe de constantes Keys de libgdx)
+	 *          code clavier (voir la classe de constantes Keys de libgdx)
 	 * @param runnable
-	 *            instance de runnable lançable (référence à une fonction ou une
-	 *            lambda ou classe anonyme, ou référence ves une classe)
+	 *          instance de runnable lançable (référence à une fonction ou une
+	 *          lambda ou classe anonyme, ou référence ves une classe)
 	 */
 	public static void runIfKeyJustPressed(int keyCode, Runnable runnable)
 	{

@@ -9,7 +9,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import net.entetrs.xenon.commons.Global;
 
-
 /**
  * répresente une tileMap scrollable avec sa propre caméra.
  * 
@@ -34,12 +33,12 @@ public class TiledMapScrolling
 		cam.position.set(Global.width / 2f - 112f, Global.height / 2f, 0);
 		batch.setProjectionMatrix(cam.combined);
 	}
-	
+
 	public void setSpeed(float speed)
 	{
 		this.speed = speed;
 	}
-	
+
 	public void update(float delta)
 	{
 		cam.translate(0, speed * delta);

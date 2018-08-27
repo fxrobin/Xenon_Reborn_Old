@@ -21,8 +21,8 @@ public enum AnimationAsset implements Disposable
 {
 	EXPLOSION_BIG("shoots/explosion-sheet.png", 8, 6, 2f, PlayMode.NORMAL), 
 	EXPLOSION_LITTLE("shoots/little-explosion.png", 6, 1, 1f, PlayMode.NORMAL), 
-	FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, circleOf(10, 50, 10)), 
-	FRIENDLY_BIGSHOOT("shoots/big-shoot.png", 5, 1, 1f, PlayMode.LOOP, circleOf(26, 80, 26)), 
+	FRIENDLY_SHOOT("shoots/shoot-anim.png", 5, 1, 0.5f, PlayMode.LOOP, circleOf(10, 50, 10)),
+	FRIENDLY_BIGSHOOT("shoots/big-shoot.png", 5, 1, 1f, PlayMode.LOOP, circleOf(26, 80, 26)),
 	BONUS("commons/bonus.png", 8, 1, 1f, PlayMode.LOOP), 
 	POWER_UP("commons/bonus-power-up-anim.png", 7, 1, 1f, PlayMode.LOOP);
 
@@ -38,7 +38,7 @@ public enum AnimationAsset implements Disposable
 
 	private Texture texture;
 	private Animation<TextureRegion> animation;
-	
+
 	private static Circle circleOf(float x, float y, float radius)
 	{
 		return new Circle(x, y, radius);
@@ -60,8 +60,6 @@ public enum AnimationAsset implements Disposable
 		this.rows = rows;
 		this.duration = duration;
 	}
-
-	
 
 	private Animation<TextureRegion> getAnimation()
 	{
@@ -98,6 +96,7 @@ public enum AnimationAsset implements Disposable
 		return this.fileName;
 	}
 
+	@Override
 	public void dispose()
 	{
 		if (texture != null)

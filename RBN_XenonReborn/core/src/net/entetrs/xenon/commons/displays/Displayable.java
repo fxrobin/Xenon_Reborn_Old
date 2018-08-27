@@ -24,7 +24,7 @@ public abstract class Displayable implements Renderable
 	{
 		this.positionY = positionY;
 	}
-	
+
 	public void setPosition(float x, float y)
 	{
 		this.positionX = x;

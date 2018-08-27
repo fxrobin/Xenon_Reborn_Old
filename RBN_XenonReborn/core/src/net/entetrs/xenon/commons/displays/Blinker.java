@@ -19,8 +19,7 @@ public class Blinker implements Renderable
 	private float totalBlinkingTime;
 	private boolean hidden;
 	private SingleExecutor singleExecutor;
-	
-	
+
 	public boolean isHidden()
 	{
 		return hidden;
@@ -51,7 +50,7 @@ public class Blinker implements Renderable
 	{
 		this(blinkTime, renderable, totalBlinkingTime, null);
 	}
-	
+
 	public Blinker(float blinkRate, Renderable renderable, float totalBlinkingTime, Runnable action)
 	{
 		this.accumulator = new DeltaTimeAccumulator(blinkRate, this::switchDiplay);
@@ -79,8 +78,8 @@ public class Blinker implements Renderable
 			{
 				renderable.render(batch, delta);
 			}
-			
-			if (this.isBlinkingFinished() && singleExecutor!=null)
+
+			if (this.isBlinkingFinished() && singleExecutor != null)
 			{
 				singleExecutor.execute();
 			}

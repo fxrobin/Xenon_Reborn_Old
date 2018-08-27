@@ -9,12 +9,12 @@ public class MusicPlayer
 	public static final float MUSIC_FADE_STEP = 0.01f;
 	private static MusicPlayer player = new MusicPlayer();
 	private Music music;
-	
+
 	public static MusicPlayer getPlayer()
 	{
 		return player;
 	}
-	
+
 	public void play(Music music)
 	{
 		this.music = music;
@@ -33,18 +33,18 @@ public class MusicPlayer
 			@Override
 			public void run()
 			{
-			  if (music != null)
-			  {
-				if (music.getVolume() >= MUSIC_FADE_STEP)
+				if (music != null)
 				{
-					music.setVolume(music.getVolume() - MUSIC_FADE_STEP);
+					if (music.getVolume() >= MUSIC_FADE_STEP)
+					{
+						music.setVolume(music.getVolume() - MUSIC_FADE_STEP);
+					}
+					else
+					{
+						music.stop();
+						this.cancel();
+					}
 				}
-				else
-				{
-					music.stop();
-					this.cancel();
-				}
-			  }
 			}
 		}, 0f, MUSIC_FADE_STEP);
 	}
@@ -86,5 +86,4 @@ public class MusicPlayer
 	{
 		return music.isPlaying();
 	}
-
 }

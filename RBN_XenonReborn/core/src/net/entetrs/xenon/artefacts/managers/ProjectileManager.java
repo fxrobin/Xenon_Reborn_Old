@@ -26,14 +26,14 @@ public class ProjectileManager
 	{
 		return pm;
 	}
-	
+
 	public static void checkFire(Ship ship)
 	{
 		if (!ship.isShieldActivated() && !ship.isFullyDestroyed())
 		{
-			checkNormalFire(ship);	
-			checkBigFire(ship);		
-		}	
+			checkNormalFire(ship);
+			checkBigFire(ship);
+		}
 	}
 
 	private static void checkBigFire(Ship ship)
@@ -65,19 +65,13 @@ public class ProjectileManager
 
 	public void addShoot(ShootType shootType, float centerX, float centerY)
 	{
-		// on va décaller le tir au hasard un peu à droite ou un peu à gauche pour faire joli.
+		// on va décaller le tir au hasard un peu à droite ou un peu à gauche pour
+		// faire joli.
 		float decallage = RandomUtils.randomRange(-4, 4);
-		Shoot s = new Shoot(shootType.createAnimatedSprite(), 
-							shootType.getLifeForce(), 
-							shootType.getImpactForce(), 
-							centerX + decallage, 
-							centerY, 
-							shootType.getVX(), 
-							shootType.getVY());
+		Shoot s = new Shoot(shootType.createAnimatedSprite(), shootType.getLifeForce(), shootType.getImpactForce(), centerX + decallage, centerY, shootType.getVX(), shootType.getVY());
 		shoots.add(s);
 		shootType.getSound().play();
 	}
-
 
 	public List<Artefact> getShoots()
 	{

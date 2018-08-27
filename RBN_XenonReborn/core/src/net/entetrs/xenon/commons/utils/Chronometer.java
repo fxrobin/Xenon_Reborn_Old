@@ -1,10 +1,10 @@
 package net.entetrs.xenon.commons.utils;
 
 /**
- * classe de chrométrage qui permet de définir une limite.
- * Quand la limite est atteinte un booléen est renvoyé.
- * Si un "Runnable" a été fournit à la construction, alors
- * ce runnable est lancé et le chronomètre est ré-initialisé.
+ * classe de chrométrage qui permet de définir une limite. Quand la limite est
+ * atteinte un booléen est renvoyé. Si un "Runnable" a été fournit à la
+ * construction, alors ce runnable est lancé et le chronomètre est
+ * ré-initialisé.
  * 
  * @author francois.robin
  *
@@ -44,8 +44,8 @@ public class Chronometer
 	}
 
 	/**
-	 * lance le runnable s'il est définit et si la limite est atteinte.
-	 * Dans ce cas le chrono est réinitialisé (reset).
+	 * lance le runnable s'il est définit et si la limite est atteinte. Dans ce
+	 * cas le chrono est réinitialisé (reset).
 	 */
 	private void executeIfLimitIsReached()
 	{

@@ -17,7 +17,8 @@ import net.entetrs.xenon.commons.fonts.TrueTypeFont;
 import net.entetrs.xenon.commons.libs.TextureAsset;
 
 /**
- * classe responsable des affichages "tableau" de bord : le score et la status bar.
+ * classe responsable des affichages "tableau" de bord : le score et la status
+ * bar.
  * 
  * @author francois.robin
  *
@@ -27,10 +28,10 @@ public class DashBoard
 {
 	private static final String FMT_MSG_BAR = "XENON Reborn // FPS : %d // lifePoints : %d // Shield : %02.2f %% // lifeCount : %d";
 	private static final int PADDING = 10;
-	private static final int MARGE = 10;	
+	private static final int MARGE = 10;
 	private int hauteurBarre;
-	
-	private Color weaponColor = new Color(0f,1f,0f,0.5f);
+
+	private Color weaponColor = new Color(0f, 1f, 0f, 0.5f);
 	private GamePlayScreen gamePlayScreen;
 	private Texture footer;
 	private BitmapFont font = TrueTypeFont.SHARETECH_12.getFont();
@@ -40,13 +41,13 @@ public class DashBoard
 		super();
 		this.gamePlayScreen = gamePlayScreen;
 		this.footer = TextureAsset.FOOTER.get();
-		this.hauteurBarre = (Global.height - footer.getHeight() - (MARGE * 2) - 60 );
+		this.hauteurBarre = (Global.height - footer.getHeight() - (MARGE * 2) - 60);
 	}
-	
+
 	public void render()
 	{
-		
-		this.renderShieldBar();		
+
+		this.renderShieldBar();
 		this.renderSecondWeaponBar();
 		this.gamePlayScreen.getBatch().begin();
 		this.renderScore();
@@ -60,24 +61,23 @@ public class DashBoard
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 		ShapeRenderer shapeRenderer = gamePlayScreen.getShapeRenderer();
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(weaponColor); 
+		shapeRenderer.setColor(weaponColor);
 		float currentSize = gamePlayScreen.getShip().getSecondWeaponEnergy() * hauteurBarre / 100f;
-		shapeRenderer.rect(Global.width - 50f - MARGE, (float) footer.getHeight() + (float) MARGE , 50, currentSize);
+		shapeRenderer.rect(Global.width - 50f - MARGE, (float) footer.getHeight() + (float) MARGE, 50, currentSize);
 		shapeRenderer.end();
 	}
-
 
 	/**
 	 * affiche le niveau d'énergie du bouclier.
 	 */
 	public void renderShieldBar()
 	{
-		Ship ship = gamePlayScreen.getShip();	
+		Ship ship = gamePlayScreen.getShip();
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 		ShapeRenderer shapeRenderer = gamePlayScreen.getShapeRenderer();
 		Color color = computeShieldBarColor(ship);
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(color); 
+		shapeRenderer.setColor(color);
 		float currentSize = gamePlayScreen.getShip().getShieldEnergy() * hauteurBarre / 100f;
 		shapeRenderer.rect(MARGE, footer.getHeight() + (float) MARGE, 50, currentSize);
 		shapeRenderer.end();
@@ -89,31 +89,34 @@ public class DashBoard
 	 */
 	public Color computeShieldBarColor(Ship ship)
 	{
-		/* une jolie couleur dégradée du vert au rouge en fonction de la valeur du bouclier.
-		 * la teinte rouge est inversée par rapport à la teinte verte et transparence à 50 % */
+		/*
+		 * une jolie couleur dégradée du vert au rouge en fonction de la valeur du
+		 * bouclier. la teinte rouge est inversée par rapport à la teinte verte et
+		 * transparence à 50 %
+		 */
 		float currentValue = ship.getShieldEnergy() / 100f;
-		return new Color(1f - currentValue, currentValue, 0f, 0.5f);	
+		return new Color(1f - currentValue, currentValue, 0f, 0.5f);
 	}
-		
+
 	private void renderScore()
 	{
 		SpriteBatch batch = gamePlayScreen.getBatch();
 		FontUtils.print(batch, 5, Global.height - 43f, String.format("%06d", ScoreManager.getInstance().getScore()));
 	}
-	
+
 	private void renderLifeCount()
 	{
 		SpriteBatch batch = gamePlayScreen.getBatch();
 		Texture life = TextureAsset.LIFE.get();
-		
-		int offset = Global.width - (gamePlayScreen.getShip().getLifeCount() * ( life.getWidth() + PADDING));
-		
-		for(int i = 0 ; i < gamePlayScreen.getShip().getLifeCount() ; i++)
+
+		int offset = Global.width - (gamePlayScreen.getShip().getLifeCount() * (life.getWidth() + PADDING));
+
+		for (int i = 0; i < gamePlayScreen.getShip().getLifeCount(); i++)
 		{
-			batch.draw(TextureAsset.LIFE.get(), (float)offset + (i * (life.getWidth() + PADDING)), (float)Global.height - (life.getHeight() + PADDING));
+			batch.draw(TextureAsset.LIFE.get(), (float) offset + (i * (life.getWidth() + PADDING)), (float) Global.height - (life.getHeight() + PADDING));
 		}
 	}
-	
+
 	private void renderStatusBar()
 	{
 		SpriteBatch batch = gamePlayScreen.getBatch();

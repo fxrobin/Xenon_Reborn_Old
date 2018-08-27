@@ -47,7 +47,7 @@ public final class ModPlayer implements DspProcessorCallBack
 			log.info("Init ModPLayer");
 			Helpers.registerAllClasses();
 			log.info("Init ModPLayer : classes registered");
-			
+
 			props.setProperty(ModContainer.PROPERTY_PLAYER_ISP, "3");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_STEREO, "2");
 			props.setProperty(ModContainer.PROPERTY_PLAYER_WIDESTEREOMIX, "0");
@@ -98,7 +98,7 @@ public final class ModPlayer implements DspProcessorCallBack
 			ModContainer modContainer = new ModContainer();
 			if (log.isInfoEnabled()) log.info("Module " + module.getFileName());
 			mixer = modContainer.createNewMixer(module, props);
-			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());		
+			if (log.isInfoEnabled()) log.info("Playing " + getMusicName());
 		}
 		catch (Exception e)
 		{
@@ -108,7 +108,7 @@ public final class ModPlayer implements DspProcessorCallBack
 			}
 		}
 	}
-	
+
 	/**
 	 * lance la lecture du module sous forme de Thread daemon, en boucle
 	 */
@@ -121,11 +121,11 @@ public final class ModPlayer implements DspProcessorCallBack
 	 * lance la lecture du module sous forme de Thread daemon.
 	 */
 	public synchronized void play(String musicNameResource, boolean loop)
-	{		
-		Thread t = new Thread(() -> {		
+	{
+		Thread t = new Thread(() -> {
 			boolean mustLoop = false;
 			do
-			{	
+			{
 				this.load(musicNameResource);
 				ModMixer localMixer = mixer;
 				long mixLength = localMixer.getLengthInMilliseconds();
@@ -134,12 +134,12 @@ public final class ModPlayer implements DspProcessorCallBack
 				localMixer.startPlayback();
 				long position = localMixer.getMillisecondPosition();
 				log.info(String.format("loop : %b, mixLength : %d, mixPosition %d", loop, mixLength, position));
-				mustLoop = (position >= mixLength && loop);		
+				mustLoop = (position >= mixLength && loop);
 				log.info(mustLoop && log.isInfoEnabled() ? "Loop MOD !" : "No loop");
-	
+
 			} while (mustLoop);
 			log.info("End ModPlayer Thread");
-		});	
+		});
 		t.setDaemon(true);
 		t.start();
 	}

@@ -29,14 +29,16 @@ public final class CollisionManager
 	}
 
 	/**
-	 * vérifie les collisions entre une liste de cibles (targets), et une liste de projectiles (projectiles). 
+	 * vérifie les collisions entre une liste de cibles (targets), et une liste de
+	 * projectiles (projectiles).
 	 * 
 	 * @param targets
 	 * @param projectiles
 	 */
 	public void checkCollision(List<? extends Artefact> targets, List<? extends Artefact> projectiles)
 	{
-		// on vérifie la collision de tous les "targets" avec chacun des "projectiles".
+		// on vérifie la collision de tous les "targets" avec chacun des
+		// "projectiles".
 		for (Artefact t : targets)
 		{
 			for (Artefact p : projectiles)
@@ -47,9 +49,9 @@ public final class CollisionManager
 	}
 
 	/**
-	 * vérifie la collision entre deux artefacts, l'un "cible", l'autre "projectile".
-	 * Si c'est le cas, le calcul des impacts est lancé, puis la vérification de l'état
-	 * "alive" du target.
+	 * vérifie la collision entre deux artefacts, l'un "cible", l'autre
+	 * "projectile". Si c'est le cas, le calcul des impacts est lancé, puis la
+	 * vérification de l'état "alive" du target.
 	 * 
 	 * @param target
 	 * @param projectile
@@ -63,10 +65,10 @@ public final class CollisionManager
 			checkDestruction(target);
 		}
 	}
-	
+
 	/**
-	 * décrémente la vie de deux artefacts en fonction des forces d'impact
-	 * de leur opposant respectif.
+	 * décrémente la vie de deux artefacts en fonction des forces d'impact de leur
+	 * opposant respectif.
 	 * 
 	 * @param target
 	 * @param projectile
@@ -78,14 +80,14 @@ public final class CollisionManager
 	}
 
 	/**
-	 * vérifie si l'artefact est détruit en lui demandant s'il est "alive".
-	 * s'il est détruit, le score est incrémenté de 10 points et un bonus
-	 * sera éventuellement généré.
+	 * vérifie si l'artefact est détruit en lui demandant s'il est "alive". s'il
+	 * est détruit, le score est incrémenté de 10 points et un bonus sera
+	 * éventuellement généré.
 	 * 
 	 * @param target
 	 */
 	public void checkDestruction(Artefact target)
-	{	
+	{
 		if (!target.isAlive())
 		{
 			/* MAJ du score */
@@ -96,17 +98,19 @@ public final class CollisionManager
 	}
 
 	/**
-	 * génère éventuellement un bonus (une chance sur 2 de la générer).
-	 * Le bonus apparaitra là où l'artefact a été détruit.
+	 * génère éventuellement un bonus (une chance sur 2 de la générer). Le bonus
+	 * apparaitra là où l'artefact a été détruit.
 	 * 
 	 * @param target
 	 */
 	public void processBonus(Artefact target)
 	{
-		/* une destruction sur deux génère un bonus et les bullets sont ignorées*/
+		/* une destruction sur deux génère un bonus et les bullets sont ignorées */
 		if (randomGenerator.nextBoolean() && !(target instanceof Bullet))
 		{
-			/* puis on choisi au hasard, encore l'un ou l'autres des bonus potentiels.*/
+			/*
+			 * puis on choisi au hasard, encore l'un ou l'autres des bonus potentiels.
+			 */
 			BonusType bonusType = randomGenerator.nextBoolean() ? BonusType.NORMAL_BONUS : BonusType.POWER_UP_BONUS;
 			BonusManager.getInstance().addBonus(bonusType, target.getBoundingCircle().x, target.getBoundingCircle().y);
 		}

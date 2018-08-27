@@ -22,12 +22,11 @@ public interface Artefact extends Renderable
 	 * @return
 	 */
 	Circle getBoundingCircle();
-	
+
 	/**
 	 * retourne le nombre de point de vie de l'artefact.
 	 * 
-	 * @return
-	 * 		le nombre de points de vie.
+	 * @return le nombre de points de vie.
 	 */
 	int getLifePoints();
 
@@ -35,7 +34,7 @@ public interface Artefact extends Renderable
 	 * décrémente les points de vie en fonction de la force d'impact exercée.
 	 * 
 	 * @param force
-	 *            force d'impact.
+	 *          force d'impact.
 	 */
 	void decreaseLife(int force);
 
@@ -96,8 +95,8 @@ public interface Artefact extends Renderable
 	float getVectorX();
 
 	/**
-	 * déplace l'artefact en fonction de sa vitesse sur les 2 axes
-	 * et en fonction du temps delta écoulé.
+	 * déplace l'artefact en fonction de sa vitesse sur les 2 axes et en fonction
+	 * du temps delta écoulé.
 	 * 
 	 * @param delta
 	 */
@@ -109,14 +108,13 @@ public interface Artefact extends Renderable
 	 * @param radius
 	 */
 	void setRadius(float radius);
-	
+
 	/**
-	 * retourne vrai si cet artefact entre en collision
-	 * avec celui passé en paramètre.
+	 * retourne vrai si cet artefact entre en collision avec celui passé en
+	 * paramètre.
 	 * 
 	 * @param otherArtefact
-	 * @return
-	 * 	 	"true" si la collision est avérée, "false" sinon.
+	 * @return "true" si la collision est avérée, "false" sinon.
 	 */
 	boolean isCollision(Artefact otherArtefact);
 
@@ -124,8 +122,8 @@ public interface Artefact extends Renderable
 	 * augmente la vie de l'arteface (dans la limite de son maximum).
 	 * 
 	 * @param points
-	 * 		points de vie à ajouter.
+	 *          points de vie à ajouter.
 	 */
 	void increaseLife(final int points);
-	
+
 }

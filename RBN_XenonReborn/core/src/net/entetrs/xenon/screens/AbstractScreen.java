@@ -10,31 +10,30 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public abstract class AbstractScreen implements Screen
 {
 	private final Log log = LogFactory.getLog(AbstractScreen.class);
-	
+
 	private final SpriteBatch batch;
 	private XenonControler controler;
-	
+
 	public AbstractScreen(XenonControler controler, SpriteBatch batch)
 	{
-		this.controler =  controler;
+		this.controler = controler;
 		this.batch = batch;
 	}
-	
+
 	public SpriteBatch getBatch()
 	{
 		return batch;
 	}
-	
+
 	public XenonControler getControler()
 	{
 		return controler;
 	}
-	
+
 	public ShapeRenderer getShapeRenderer()
 	{
 		return controler.getShapeRenderer();
 	}
-	
 
 	@Override
 	public void hide()
@@ -66,5 +65,4 @@ public abstract class AbstractScreen implements Screen
 	{
 		log.info("DISPOSE SCREEN : NO ACTION");
 	}
-
 }

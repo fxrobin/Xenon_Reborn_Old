@@ -42,7 +42,7 @@ public final class BackgroundParallaxScrolling
 		if (Gdx.input.isKeyPressed(Keys.PAGE_UP))
 		{
 			speed += 0.5f;
-		    tiledMapScrolling.setSpeed(speed * 1.5f);
+			tiledMapScrolling.setSpeed(speed * 1.5f);
 		}
 
 		if (Gdx.input.isKeyPressed(Keys.PAGE_DOWN))

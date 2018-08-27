@@ -5,8 +5,9 @@ import net.entetrs.xenon.commons.libs.SoundAsset;
 
 /**
  * <p>
- * représente bouclier et son énergie. L'energie va de 100f : chargé au max, 0f déchargé. 
- * En dessous de 90f il n'est pas activable A 0.f il se désactive automatiquement.
+ * représente bouclier et son énergie. L'energie va de 100f : chargé au max, 0f
+ * déchargé. En dessous de 90f il n'est pas activable A 0.f il se désactive
+ * automatiquement.
  * </p>
  * 
  * <p>
@@ -74,7 +75,7 @@ public class Shield
 			SoundAsset.SHIELD_DOWN.play();
 		}
 		else
-		{ 
+		{
 			/* on active le bouclier seulement si c'est possible */
 			this.activateIfThresholdReached();
 		}

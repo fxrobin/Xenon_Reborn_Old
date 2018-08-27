@@ -12,16 +12,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import net.entetrs.xenon.commons.libs.TextureAsset;
 
-public final class FontUtils {
+public final class FontUtils
+{
 	private static final Log log = LogFactory.getLog(FontUtils.class);
 	private static BitmapFont bitmapFont;
 	private static int fontWidth;
 	private static int fontHeight;
 	private static String stringMap;
 
-	static {
+	static
+	{
 		Properties config = new Properties();
-		try {
+		try
+		{
 			Texture font = TextureAsset.FONT.get();
 			config.load(FontUtils.class.getResourceAsStream("/fonts/font-blue.properties"));
 			fontWidth = Integer.parseInt(config.getProperty("letter-width"));
@@ -29,17 +32,21 @@ public final class FontUtils {
 			stringMap = config.getProperty("string-map");
 			bitmapFont = BitmapFont.build(font, fontWidth, fontHeight, stringMap);
 			log.info("Font loaded");
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			log.error("Impossible de lire le fichier de ressource de font.");
 		}
 
 	}
 
-	private FontUtils() {
+	private FontUtils()
+	{
 		/* protection */
 	}
 
-	public static int getWidth(String txt) {
+	public static int getWidth(String txt)
+	{
 		return txt.length() * fontWidth;
 	}
 
@@ -48,27 +55,32 @@ public final class FontUtils {
 		return fontHeight;
 	}
 
-	public static int getFontWidth() {
+	public static int getFontWidth()
+	{
 		return fontWidth;
 	}
 
-	public static void setFontHeight(int fontHeight) {
+	public static void setFontHeight(int fontHeight)
+	{
 		FontUtils.fontHeight = fontHeight;
 	}
 
-	public static void print(Batch b, float x, float y, String txt) {
-		for (int i = 0; i < txt.length(); i++) {
+	public static void print(Batch b, float x, float y, String txt)
+	{
+		for (int i = 0; i < txt.length(); i++)
+		{
 			print(b, x + (i * fontWidth), y, txt.charAt(i));
 		}
 	}
 
-	public static void print(Batch batch, float positionX, float positionY, char character) {
+	public static void print(Batch batch, float positionX, float positionY, char character)
+	{
 		TextureRegion tr = bitmapFont.getChar(character);
 		if (tr != null) batch.draw(tr, positionX, positionY);
 	}
 
-
-	public static TextureRegion getTextureRegionOfChar(char character) {
+	public static TextureRegion getTextureRegionOfChar(char character)
+	{
 		return bitmapFont.getChar(character);
 	}
 

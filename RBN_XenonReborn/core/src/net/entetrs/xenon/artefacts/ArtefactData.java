@@ -24,7 +24,6 @@ public class ArtefactData
 	 */
 	private float vectorY;
 
-
 	public ArtefactData(int lifePoints, int impactForce, float vectorX, float vectorY)
 	{
 		super();
@@ -45,44 +44,34 @@ public class ArtefactData
 		return lifePoints;
 	}
 
-
 	public void setLifePoints(int lifePoints)
 	{
 		this.lifePoints = (lifePoints > maxLifePoints) ? maxLifePoints : lifePoints;
 	}
-
 
 	public float getVectorX()
 	{
 		return vectorX;
 	}
 
-
 	public void setVectorX(float vectorX)
 	{
 		this.vectorX = vectorX;
 	}
-
 
 	public float getVectorY()
 	{
 		return vectorY;
 	}
 
-
 	public void setVectorY(float vectorY)
 	{
 		this.vectorY = vectorY;
 	}
 
-
 	public int getImpactForce()
 	{
 		return impactForce;
 	}
-
-
-
-
 
 }

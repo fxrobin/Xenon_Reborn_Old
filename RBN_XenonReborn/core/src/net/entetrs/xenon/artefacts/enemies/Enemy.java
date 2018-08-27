@@ -20,18 +20,12 @@ public class Enemy extends AbstractArtefact
 {
 	private DeltaTimeAccumulator accumulator;
 	private Sprite sprite;
-	
+
 	public Enemy(Enemy other)
 	{
-		this(other.getSprite().getTexture(), 
-			 other.getLifePoints(), 
-			 other.getImpactForce(), 
-			 other.getBoundingCircle().radius,
-			 other.getVectorX(),
-			 other.getVectorY());
+		this(other.getSprite().getTexture(), other.getLifePoints(), other.getImpactForce(), other.getBoundingCircle().radius, other.getVectorX(), other.getVectorY());
 	}
 
-	
 	public Enemy(Texture texture, int force, int impactForce, float radius, float vX, float vY)
 	{
 		super(vX, vY, force, impactForce);
@@ -39,10 +33,10 @@ public class Enemy extends AbstractArtefact
 		sprite = new Sprite(texture);
 		this.setRadius(radius);
 	}
-	
+
 	public Enemy(Texture texture, int force, int impactForce, float radius)
 	{
-		this(texture, force, impactForce, radius,0,0);
+		this(texture, force, impactForce, radius, 0, 0);
 	}
 
 	@Override

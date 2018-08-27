@@ -69,8 +69,7 @@ public final class MainControler extends Game implements XenonControler
 	}
 
 	/**
-	 * cette méthode est déclenchée par LibGDX à 60 FPS (60 images par secondes
-	 * !)
+	 * cette méthode est déclenchée par LibGDX à 60 FPS (60 images par secondes !)
 	 */
 	@Override
 	public void render()

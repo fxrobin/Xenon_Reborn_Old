@@ -18,11 +18,11 @@ public class Ship extends AbstractArtefact
 
 	public Ship()
 	{
-		super(0,0, Global.SHIP_LIFE_POINTS, 20);
+		super(0, 0, Global.SHIP_LIFE_POINTS, 20);
 		shipRenderer = new ShipRenderer(this);
 		shield = new Shield();
 		secondWeapon = new SecondWeapon();
-		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2); 
+		this.setRadius(shipRenderer.getCurrentSprite().getWidth() / 2);
 		vulnerable = false;
 		lifeCount = 3;
 	}
@@ -41,19 +41,18 @@ public class Ship extends AbstractArtefact
 	{
 		return shield.isActivated();
 	}
-	
-	
-	/* redéfinition de "decreaseLife" et "increaseLife" 
-	 * pour que les méthodes n'aient aucune conséquence
-	 * en cas de bouclier activé.
+
+	/*
+	 * redéfinition de "decreaseLife" et "increaseLife" pour que les méthodes
+	 * n'aient aucune conséquence en cas de bouclier activé.
 	 */
-	
+
 	@Override
 	public void decreaseLife(int force)
 	{
 		if (!isShieldActivated() && vulnerable)
 		{
-			
+
 			super.decreaseLife(force);
 			checkShipIsAliveAndBlink();
 		}
@@ -74,15 +73,15 @@ public class Ship extends AbstractArtefact
 		this.setChanged();
 		if (lifeCount > 0)
 		{
-		    this.setLifePoints(Global.SHIP_LIFE_POINTS);
-		    this.notifyObservers(Event.HIT);
+			this.setLifePoints(Global.SHIP_LIFE_POINTS);
+			this.notifyObservers(Event.HIT);
 		}
 		else
 		{
-		    this.notifyObservers(Event.DESTROYED);
+			this.notifyObservers(Event.DESTROYED);
 		}
 	}
-	
+
 	@Override
 	public void increaseLife(int force)
 	{
@@ -98,7 +97,7 @@ public class Ship extends AbstractArtefact
 		vulnerable = !shipRenderer.isBlinking();
 		shipRenderer.render(batch, delta);
 	}
-	
+
 	public void switchShield()
 	{
 		shield.switchShield();
@@ -128,22 +127,22 @@ public class Ship extends AbstractArtefact
 	{
 		return this.shipRenderer.getCurrentSprite();
 	}
-	
+
 	public float getShieldEnergy()
 	{
 		return this.shield.getEnergy();
 	}
-	
+
 	public float getSecondWeaponEnergy()
 	{
 		return this.secondWeapon.getEnergy();
 	}
-	
+
 	public int getLifeCount()
 	{
 		return lifeCount;
 	}
-	
+
 	public boolean isFullyDestroyed()
 	{
 		return lifeCount <= 0;

@@ -36,25 +36,25 @@ public class EnemyManager implements Renderable
 				Enemy e = EnemyType.random();
 				enemies.add(e);
 			}
-			
+
 			/* et on génère une escadrille de 3 méchants */
 			this.generateEnemySquadron(3);
 		}
 	}
-	
+
 	public void generateEnemySquadron(int numbers)
 	{
 		Enemy original = EnemyType.random();
 		enemies.add(original);
-		for(int i=1 ; i<numbers; i++)
+		for (int i = 1; i < numbers; i++)
 		{
-		  Enemy e = new Enemy(original);
-		  e.setX(original.getX() - (original.getBoundingCircle().radius * 2));
-		  e.setY(original.getY() - original.getBoundingCircle().radius);
-		  enemies.add(e);
-		  original  = e;
+			Enemy e = new Enemy(original);
+			e.setX(original.getX() - (original.getBoundingCircle().radius * 2));
+			e.setY(original.getY() - original.getBoundingCircle().radius);
+			enemies.add(e);
+			original = e;
 		}
-		
+
 	}
 
 	public void act(float delta)

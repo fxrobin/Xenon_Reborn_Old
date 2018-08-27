@@ -12,19 +12,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * @author robin
  *
  */
-public class BitmapFont {
+public class BitmapFont
+{
 
 	private Map<Character, TextureRegion> regions = new HashMap<>();
 
-	private BitmapFont() {
+	private BitmapFont()
+	{
 		// protection du constructeur.
 	}
 
-	public static BitmapFont build(Texture t, int width, int height, String charMap) {
+	public static BitmapFont build(Texture t, int width, int height, String charMap)
+	{
 
 		BitmapFont bitmapFont = new BitmapFont();
 		int offset = 0;
-		for (char c : charMap.toCharArray()) {
+		for (char c : charMap.toCharArray())
+		{
 			TextureRegion tr = new TextureRegion(t, offset, 0, width, height);
 			bitmapFont.regions.put(c, tr);
 			offset += width;
@@ -32,8 +36,8 @@ public class BitmapFont {
 		return bitmapFont;
 	}
 
-	public TextureRegion getChar(char c) {
+	public TextureRegion getChar(char c)
+	{
 		return regions.get(c);
 	}
-
 }

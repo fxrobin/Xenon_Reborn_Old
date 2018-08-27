@@ -8,7 +8,7 @@ import net.entetrs.xenon.commons.libs.AnimationAsset;
 
 public enum BonusType
 {
-	NORMAL_BONUS(AnimationAsset.BONUS, 0, -60f, null, 5, 5),
+	NORMAL_BONUS(AnimationAsset.BONUS, 0, -60f, null, 5, 5), 
 	POWER_UP_BONUS(AnimationAsset.POWER_UP, 0, -60f, null, 5, 5);
 
 	private final AnimationAsset anim;

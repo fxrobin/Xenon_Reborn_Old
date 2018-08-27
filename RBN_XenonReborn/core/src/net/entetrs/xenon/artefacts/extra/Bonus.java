@@ -28,12 +28,11 @@ public class Bonus extends AbstractArtefact
 		this.animatedSprite.setCenter(x, y);
 		this.interpolator = new Interpolator(Interpolation.sine, 2f, 50, x);
 	}
-	
+
 	public BonusType getType()
 	{
 		return type;
 	}
-	
 
 	@Override
 	public void render(SpriteBatch batch, float delta)

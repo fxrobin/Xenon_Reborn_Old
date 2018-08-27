@@ -67,8 +67,7 @@ public class LoadingScreen extends AbstractScreen
 	{
 		GdxCommons.clearScreen(Color.WHITE);
 		this.checkInput();
-		
-		
+
 		this.getBatch().begin();
 		this.renderBackground(delta);
 		this.renderProgress();
@@ -81,12 +80,11 @@ public class LoadingScreen extends AbstractScreen
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 		ShapeRenderer shapeRenderer = this.getShapeRenderer();
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(Color.RED); 
-		shapeRenderer.rect(10 , 10 , 50, ModPlayer.getInstance().getLeftLevel());
-		shapeRenderer.setColor(Color.GREEN); 
-		shapeRenderer.rect(Global.width - 50f - 10 , 10 , 50, ModPlayer.getInstance().getRightLevel());
+		shapeRenderer.setColor(Color.RED);
+		shapeRenderer.rect(10, 10, 50, ModPlayer.getInstance().getLeftLevel());
+		shapeRenderer.setColor(Color.GREEN);
+		shapeRenderer.rect(Global.width - 50f - 10, 10, 50, ModPlayer.getInstance().getRightLevel());
 		shapeRenderer.end();
-		
 	}
 
 	private void renderProgress()
@@ -98,17 +96,9 @@ public class LoadingScreen extends AbstractScreen
 
 	private String getProgressString()
 	{
-		String message;
-		// quand le loader n'a pas fini, on affiche une progression à l'écran.
-		if (!AssetLib.getInstance().isLoadingFinished())
-		{
-			message = String.format("LOADING ... %02d %%", AssetLib.getInstance().getProgress());
-		}
-		else
-		{
-			message = "All resources are loaded ... PRESS SpaceBar";
-		}
-		return message;
+		return AssetLib.getInstance().isLoadingFinished() ?
+					 "All resources are loaded ... PRESS SpaceBar" :
+					 String.format("LOADING ... %02d %%", AssetLib.getInstance().getProgress());	
 	}
 
 	private void renderBackground(float delta)
@@ -130,5 +120,4 @@ public class LoadingScreen extends AbstractScreen
 			singleExecutor.execute(); // n'execute la méthode qu'une seule fois.
 		}
 	}
-
 }

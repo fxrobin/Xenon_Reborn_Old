@@ -19,66 +19,67 @@ import net.entetrs.xenon.commons.libs.SoundAsset;
 public class BonusManager
 {
 	private List<Bonus> bonuses = new LinkedList<>();
-	
+
 	private static BonusManager instance = new BonusManager();
-	
+
 	public static BonusManager getInstance()
 	{
 		return instance;
 	}
-	
+
 	private BonusManager()
 	{
 		// protection
 	}
-	
+
 	public void addBonus(BonusType bonusType, float x, float y)
 	{
 		Bonus bonus = new Bonus(bonusType, bonusType.getLifeForce(), bonusType.getLifeForce(), x, y, bonusType.getVX(), bonusType.getVY());
 		bonuses.add(bonus);
 	}
-	
+
 	public void render(SpriteBatch batch, float delta)
 	{
 		bonuses.forEach(bonus -> bonus.render(batch, delta));
 		bonuses.removeIf(e -> e.getBoundingCircle().y < -e.getBoundingCircle().radius || !e.isAlive());
 	}
-	
+
 	/**
-	 * vérifie les collisions des bonus avec le vaisseau.
-	 * Si tel est le cas, le bonus est "capturer" par le vaisseau, 
-	 * et le bonus est traité, en fonction de son type.
+	 * vérifie les collisions des bonus avec le vaisseau. Si tel est le cas, le
+	 * bonus est "capturer" par le vaisseau, et le bonus est traité, en fonction
+	 * de son type.
 	 * 
 	 * @param ship
 	 */
 	public void checkBonus(Ship ship)
 	{
-		for(Bonus bonus : bonuses)
+		for (Bonus bonus : bonuses)
 		{
 			if (bonus.isCollision(ship))
 			{
-				processBonus(ship, bonus);			
+				processBonus(ship, bonus);
 			}
 		}
 	}
-	
+
 	/**
-	 * traite le bonus en fonction de son type.
-	 * modifie l'état du vaisseau en fonction du bonus.
+	 * traite le bonus en fonction de son type. modifie l'état du vaisseau en
+	 * fonction du bonus.
 	 * 
 	 * @param ship
-	 * 		
+	 * 
 	 * @param bonus
 	 */
 	public void processBonus(Ship ship, Bonus bonus)
 	{
 		switch (bonus.getType())
 		{
-			case NORMAL_BONUS : break;
-			case POWER_UP_BONUS :
+			case NORMAL_BONUS:
+				break;
+			case POWER_UP_BONUS:
 				ship.increaseLife(10); // oula c'est moche, mais ça marche.
 				break;
-			default :
+			default:
 		}
 		bonus.decreaseLife(100); // on tue le bonus...
 		SoundAsset.BONUS.play();

@@ -19,10 +19,10 @@ public interface XenonControler
 	void showScreen(XenonScreen screen);
 
 	/**
-	 *  @return instance d'un shapeRender pour afficher des formes.
+	 * @return instance d'un shapeRender pour afficher des formes.
 	 */
 	ShapeRenderer getShapeRenderer();
-	
+
 	/**
 	 * @return le spritebatch courant.
 	 */

@@ -74,7 +74,7 @@ public class ShipRenderer implements Renderable
 	public void render(SpriteBatch batch, float delta)
 	{
 		this.setCorrectSprite();
-		
+
 		if (blinker.isBlinkingFinished())
 		{
 			currentSprite.draw(batch);
@@ -84,7 +84,7 @@ public class ShipRenderer implements Renderable
 			renderableAdapter.setSprite(currentSprite);
 			blinker.render(batch, delta);
 		}
-	
+
 		this.drawShieldIfActivated(batch);
 	}
 
@@ -135,12 +135,12 @@ public class ShipRenderer implements Renderable
 		currentSprite = newSprite;
 		currentSprite.setCenter(x, y);
 	}
-	
+
 	public void blink()
 	{
 		this.blinker.restart();
 	}
-	
+
 	public boolean isBlinking()
 	{
 		return !blinker.isBlinkingFinished();

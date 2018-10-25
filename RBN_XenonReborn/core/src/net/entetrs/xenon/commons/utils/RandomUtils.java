@@ -1,8 +1,5 @@
 package net.entetrs.xenon.commons.utils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -30,9 +27,7 @@ public final class RandomUtils
 	@SuppressWarnings("unchecked")
 	public static <T> T pick(T... values)
 	{
-		List<T> data = Arrays.asList(values);
-		Collections.shuffle(data);
-		return data.get(0);
+		return values[random.nextInt(values.length)];
 	}
 
 	/**

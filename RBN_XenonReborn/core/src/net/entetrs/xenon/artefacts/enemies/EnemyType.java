@@ -1,12 +1,11 @@
 package net.entetrs.xenon.artefacts.enemies;
 
-import java.util.Random;
-
 import com.badlogic.gdx.graphics.Texture;
 
 import net.entetrs.xenon.artefacts.ArtefactData;
 import net.entetrs.xenon.commons.Global;
 import net.entetrs.xenon.commons.libs.TextureAsset;
+import net.entetrs.xenon.commons.utils.RandomUtils;
 
 public enum EnemyType
 {
@@ -55,6 +54,13 @@ public enum EnemyType
 		return e;
 	}
 
+	private static Enemy selectRandom()
+	{
+		EnemyType enemyType = RandomUtils.pick(EnemyType.values());
+		Texture texture = enemyType.getTextureRef().get();
+		return new Enemy(texture, enemyType.getLifeForce(), enemyType.getImpactForce(), texture.getWidth() / 2f);
+	}
+
 	private static void randomCoords(Enemy e)
 	{
 		e.setOriginCenter();
@@ -62,15 +68,6 @@ public enum EnemyType
 		e.setY((float) Math.random() * 100 + Global.height);
 		e.setVectorX((float) Math.random() * 200f - 100);
 		e.setVectorY(-((float) Math.random() * 500f + 100f));
-	}
-
-	private static Enemy selectRandom()
-	{
-		Random randomGenerator = new Random();
-		int choosen = randomGenerator.nextInt(EnemyType.values().length);
-		EnemyType enemyType = EnemyType.values()[choosen];
-		Texture texture = enemyType.getTextureRef().get();
-		return new Enemy(texture, enemyType.getLifeForce(), enemyType.getImpactForce(), texture.getWidth() / 2f);
 	}
 
 }

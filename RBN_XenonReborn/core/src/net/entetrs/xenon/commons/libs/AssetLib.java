@@ -54,7 +54,7 @@ public final class AssetLib
 			if (!manager.isLoaded(fullFileName))
 			{
 				manager.load(fullFileName, clazz);
-				log.info("loading : " + fullFileName);
+				log.info("Loading : " + fullFileName);
 			}
 			else
 			{
@@ -68,7 +68,7 @@ public final class AssetLib
 		return manager;
 	}
 
-	public boolean isLoadingFinished()
+	public boolean isFullyLoaded()
 	{
 		return manager.update();
 	}

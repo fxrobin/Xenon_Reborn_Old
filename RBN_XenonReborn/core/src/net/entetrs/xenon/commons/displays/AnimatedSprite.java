@@ -15,36 +15,42 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AnimatedSprite extends Sprite
 {
-	private float stateTime;
+	private float elapsedTime;
 	private Animation<TextureRegion> animation;
 
-	public AnimatedSprite(Animation<TextureRegion> anim)
+	public AnimatedSprite(Animation<TextureRegion> animation)
 	{
-		super(anim.getKeyFrames()[0]);
-		stateTime = 0f;
-		this.animation = anim;
+		super(animation.getKeyFrames()[0]);
+		elapsedTime = 0f;
+		this.animation = animation;
 	}
 
-	public AnimatedSprite(Animation<TextureRegion> anim, float centerX, float centerY)
+	public AnimatedSprite(Animation<TextureRegion> animation, float centerX, float centerY)
 	{
-		this(anim);
+		this(animation);
 		this.setOrigin(centerX, centerY);
 	}
 
-	public void act(float delta)
+	private void update(float delta)
 	{
-		stateTime += delta;
-		this.setRegion(animation.getKeyFrame(stateTime));
+		elapsedTime += delta;
+		this.setRegion(animation.getKeyFrame(elapsedTime));
 	}
 
 	public void render(Batch batch, float delta)
 	{
-		this.act(delta);
+		this.update(delta);
 		this.draw(batch);
 	}
 
 	public boolean isFinished()
 	{
-		return animation.isAnimationFinished(stateTime);
+		return animation.isAnimationFinished(elapsedTime);
+	}
+	
+	public void setOriginCenterAtPosition(float centerX, float centerY)
+	{	
+		this.setOriginCenter();
+		this.setCenter(centerX, centerY);
 	}
 }

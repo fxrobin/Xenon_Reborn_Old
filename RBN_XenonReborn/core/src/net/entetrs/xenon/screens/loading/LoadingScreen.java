@@ -29,17 +29,23 @@ import net.entetrs.xenon.screens.XenonControler;
 import net.entetrs.xenon.screens.XenonScreen;
 
 /**
- * écran noir de chargement des assets.
+ * écran d'accueil de chargement des assets.
  * 
  * @author robin
  *
  */
 public class LoadingScreen extends AbstractScreen
 {
+	private static final String MSG_LOADED = "All resources are loaded ... Press SpaceBar";
 	private Log log = LogFactory.getLog(this.getClass());
+	
+	private AssetLib assetLib = AssetLib.getInstance();
+	private ModPlayer modPlayer = ModPlayer.getInstance();
+	
 	private GlyphLayout layout;
 	private BitmapFont font = TrueTypeFont.COMPUTER_30_BLACK.getFont();
-	private Texture background = TextureAsset.BACKGROUND_BOMBING_PIXELS.get();
+	private Texture logo = TextureAsset.BACKGROUND_BOMBING_PIXELS.get();
+	
 	private SingleExecutor singleExecutor;
 	private Interpolator interpolatorX = new Interpolator(Interpolation.sine, 2f, 20, 0);
 	private Interpolator interpolatorY = new Interpolator(Interpolation.pow2, 1f, 20, 0);
@@ -52,14 +58,14 @@ public class LoadingScreen extends AbstractScreen
 		layout = new GlyphLayout();
 		singleExecutor = new SingleExecutor(() -> {
 			this.getControler().showScreen(XenonScreen.MENU);
-			ModPlayer.getInstance().stop();
+			modPlayer.stop();
 		});
 	}
 
 	@Override
 	public void show()
 	{
-		ModPlayer.getInstance().playLoop(ModAsset.INTRO.toString());
+		modPlayer.playLoop(ModAsset.INTRO.toString());
 	}
 
 	@Override
@@ -67,7 +73,6 @@ public class LoadingScreen extends AbstractScreen
 	{
 		GdxCommons.clearScreen(Color.WHITE);
 		this.checkInput();
-
 		this.getBatch().begin();
 		this.renderBackground(delta);
 		this.renderProgress();
@@ -81,31 +86,24 @@ public class LoadingScreen extends AbstractScreen
 		ShapeRenderer shapeRenderer = this.getShapeRenderer();
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.RED);
-		shapeRenderer.rect(10, 10, 50, ModPlayer.getInstance().getLeftLevel());
+		shapeRenderer.rect(10, 10, 50, modPlayer.getLeftLevel());
 		shapeRenderer.setColor(Color.GREEN);
-		shapeRenderer.rect(Global.width - 50f - 10, 10, 50, ModPlayer.getInstance().getRightLevel());
+		shapeRenderer.rect(Global.width - 50f - 10, 10, 50, modPlayer.getRightLevel());
 		shapeRenderer.end();
 	}
 
 	private void renderProgress()
 	{
-		String message = getProgressString();
+		String message = assetLib.isFullyLoaded() ? MSG_LOADED : String.format("LOADING ... %02d %%", assetLib.getProgress());
 		layout.setText(font, message);
 		font.draw(this.getBatch(), message, (Global.width - layout.width) / 2, 80);
-	}
-
-	private String getProgressString()
-	{
-		return AssetLib.getInstance().isLoadingFinished() ?
-					 "All resources are loaded ... PRESS SpaceBar" :
-					 String.format("LOADING ... %02d %%", AssetLib.getInstance().getProgress());	
 	}
 
 	private void renderBackground(float delta)
 	{
 		float positionX = interpolatorX.calculate(delta);
 		float positionY = interpolatorY.calculate(delta);
-		this.getBatch().draw(background, positionX, positionY, Global.width, Global.height);
+		this.getBatch().draw(logo, positionX, positionY, Global.width, Global.height);
 	}
 
 	private void checkInput()
@@ -115,7 +113,7 @@ public class LoadingScreen extends AbstractScreen
 			GdxCommons.switchFullScreen();
 		}
 
-		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && AssetLib.getInstance().isLoadingFinished())
+		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && assetLib.isFullyLoaded())
 		{
 			singleExecutor.execute(); // n'execute la méthode qu'une seule fois.
 		}

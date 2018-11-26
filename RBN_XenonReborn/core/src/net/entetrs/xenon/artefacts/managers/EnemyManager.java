@@ -60,7 +60,7 @@ public class EnemyManager implements Renderable
 	public void act(float delta)
 	{
 		enemies.forEach(e -> {
-			e.act(delta);
+			e.update(delta);
 			if (!e.isAlive())
 			{
 				AnimationAsset anim = e instanceof Bullet ? AnimationAsset.EXPLOSION_LITTLE : AnimationAsset.EXPLOSION_BIG;

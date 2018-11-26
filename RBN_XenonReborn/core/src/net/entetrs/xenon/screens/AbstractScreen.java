@@ -51,7 +51,6 @@ public abstract class AbstractScreen implements Screen
 	public void resize(int arg0, int arg1)
 	{
 		log.info("RESIZE SCREEN : NO ACTION");
-
 	}
 
 	@Override

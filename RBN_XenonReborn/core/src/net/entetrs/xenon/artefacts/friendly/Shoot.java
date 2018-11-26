@@ -31,7 +31,7 @@ public class Shoot extends AbstractArtefact
 	public void render(SpriteBatch batch, float delta)
 	{
 		animatedSprite.setCenterX(interpolator.getOriginalValue());
-		this.act(delta);
+		this.update(delta);
 		float newPosition = interpolator.calculate(delta);
 		animatedSprite.setCenterX(newPosition);
 		this.getBoundingCircle().x = newPosition;

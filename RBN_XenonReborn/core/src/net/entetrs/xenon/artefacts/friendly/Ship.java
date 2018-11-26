@@ -104,9 +104,9 @@ public class Ship extends AbstractArtefact
 	}
 
 	@Override
-	public void act(float delta)
+	public void update(float delta)
 	{
-		super.act(delta);
+		super.update(delta);
 		shield.update(delta);
 		secondWeapon.update(delta);
 		this.controlPosition();

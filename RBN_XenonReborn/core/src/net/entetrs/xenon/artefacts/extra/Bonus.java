@@ -39,7 +39,7 @@ public class Bonus extends AbstractArtefact
 	{
 		float originalX = interpolator.getOriginalValue();
 		this.animatedSprite.setCenterX(originalX);
-		this.act(delta);
+		this.update(delta);
 		float newPosition = interpolator.calculate(delta);
 		this.animatedSprite.setCenterX(newPosition);
 		this.getBoundingCircle().x = newPosition;

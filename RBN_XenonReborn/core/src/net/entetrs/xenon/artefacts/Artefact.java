@@ -100,7 +100,7 @@ public interface Artefact extends Renderable
 	 * 
 	 * @param delta
 	 */
-	void act(float delta);
+	void update(float delta);
 
 	/**
 	 * affecte la taille du cercle de collision.

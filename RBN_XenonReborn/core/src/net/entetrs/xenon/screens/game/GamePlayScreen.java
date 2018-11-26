@@ -153,7 +153,7 @@ public class GamePlayScreen extends AbstractScreen implements ArtefactsScene
 	private void checkInputKeys(float delta)
 	{
 		ShipHandler.handle(ship);
-		ship.act(delta);
+		ship.update(delta);
 		ProjectileManager.checkFire(ship);
 		this.checkEscapeAndFullScreen();
 		this.scrolling.checkInput();

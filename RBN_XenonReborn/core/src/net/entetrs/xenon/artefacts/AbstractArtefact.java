@@ -68,7 +68,7 @@ public abstract class AbstractArtefact extends Observable implements Artefact
 	}
 
 	@Override
-	public void act(float delta)
+	public void update(float delta)
 	{
 		this.translateX(delta * data.getVectorX());
 		this.translateY(delta * data.getVectorY());

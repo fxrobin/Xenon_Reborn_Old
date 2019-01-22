@@ -36,7 +36,7 @@ import net.entetrs.xenon.screens.XenonScreen;
  */
 public class LoadingScreen extends AbstractScreen
 {
-	private static final String MSG_LOADED = "All resources are loaded ... Press SpaceBar";
+	private static final String MSG_LOADED = "All resources are loaded / Press SpaceBar / F1 for fullscreen";
 	private Log log = LogFactory.getLog(this.getClass());
 	
 	private AssetLib assetLib = AssetLib.getInstance();

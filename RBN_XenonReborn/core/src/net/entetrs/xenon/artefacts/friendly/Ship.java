@@ -143,9 +143,17 @@ public class Ship extends AbstractArtefact
 		return lifeCount;
 	}
 
+	// TODO
 	public boolean isFullyDestroyed()
 	{
-		return lifeCount <= 0;
+		if (lifeCount <= 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public void weaponCharge()

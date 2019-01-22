@@ -51,5 +51,14 @@ public class Bonus extends AbstractArtefact
 	{
 		return animatedSprite;
 	}
+	
+	/**
+	 * récupère le bonus et le fait disparaitre.
+	 */
+	public void grab()
+	{
+		// on tue le bonus.
+		this.decreaseLife(this.getLifePoints()+1);
+	}
 
 }

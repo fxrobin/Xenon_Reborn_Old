@@ -29,16 +29,20 @@ public class ProjectileManager
 
 	public static void checkFire(Ship ship)
 	{
-		if (!ship.isShieldActivated() && !ship.isFullyDestroyed())
+		if (canFire(ship))
 		{
 			checkNormalFire(ship);
 			checkBigFire(ship);
 		}
 	}
+	
+	public static boolean canFire(Ship ship)
+	{
+		return !ship.isShieldActivated() && !ship.isFullyDestroyed();
+	}
 
 	private static void checkBigFire(Ship ship)
 	{
-		// quand l'arme est chargée et qu'on relache la touche SHIFT.
 		if (ship.getSecondaryWeapon().isReady() && !Gdx.input.isKeyPressed(UserControls.get(Control.CHARGE_WEAPON)))
 		{
 			ship.getSecondaryWeapon().disable();
@@ -63,12 +67,12 @@ public class ProjectileManager
 		shoots.removeIf(s -> (s.getSprite().getY() > Global.height || !s.isAlive()));
 	}
 
-	public void addShoot(ShootType shootType, float centerX, float centerY)
+	private void addShoot(ShootType shootType, float centerX, float centerY)
 	{
-		// on va décaller le tir au hasard un peu à droite ou un peu à gauche pour
-		// faire joli.
+		// on va décaller le tir au hasard un peu à droite ou un peu à gauche pour faire joli.
 		float decallage = RandomUtils.randomRange(-4, 4);
-		Shoot s = new Shoot(shootType.createAnimatedSprite(), shootType.getLifeForce(), shootType.getImpactForce(), centerX + decallage, centerY, shootType.getVX(), shootType.getVY());
+		float x = centerX + decallage;
+		Shoot s = new Shoot(shootType.createAnimatedSprite(), shootType.getLifeForce(), shootType.getImpactForce(), x, centerY,  shootType.getVX(), shootType.getVY());
 		shoots.add(s);
 		shootType.getSound().play();
 	}

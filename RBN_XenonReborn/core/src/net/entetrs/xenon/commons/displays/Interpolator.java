@@ -21,8 +21,7 @@ public class Interpolator
 	public Interpolator(Interpolation interpolation, float interPolationTime, float distance, float originalValue)
 	{
 		super();
-		this.accumulatedTime = interPolationTime / 2f; // on commence au milieu de
-																										// l'anim.
+		this.accumulatedTime = interPolationTime / 2f; // on commence au milieu de l'anim.
 		this.interpolation = interpolation;
 		this.interPolationTime = interPolationTime;
 		this.distance = distance;

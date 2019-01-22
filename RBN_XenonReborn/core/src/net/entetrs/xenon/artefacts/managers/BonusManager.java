@@ -46,7 +46,7 @@ public class BonusManager
 
 	/**
 	 * vérifie les collisions des bonus avec le vaisseau. Si tel est le cas, le
-	 * bonus est "capturer" par le vaisseau, et le bonus est traité, en fonction
+	 * bonus est "capturé" par le vaisseau, et le bonus est traité, en fonction
 	 * de son type.
 	 * 
 	 * @param ship
@@ -77,11 +77,11 @@ public class BonusManager
 			case NORMAL_BONUS:
 				break;
 			case POWER_UP_BONUS:
-				ship.increaseLife(10); // oula c'est moche, mais ça marche.
+				ship.increaseLife(10); 
 				break;
 			default:
 		}
-		bonus.decreaseLife(100); // on tue le bonus...
-		SoundAsset.BONUS.play();
+		bonus.grab();
+		SoundAsset.BONUS.play();	
 	}
 }

@@ -29,32 +29,18 @@ public class ProjectileManager
 
 	public static void checkFire(Ship ship)
 	{
-		if (canFire(ship))
+		if (!ship.isShieldActivated() && !ship.isFullyDestroyed())
 		{
-			checkNormalFire(ship);
-			checkBigFire(ship);
-		}
-	}
-	
-	public static boolean canFire(Ship ship)
-	{
-		return !ship.isShieldActivated() && !ship.isFullyDestroyed();
-	}
-
-	private static void checkBigFire(Ship ship)
-	{
-		if (ship.getSecondaryWeapon().isReady() && !Gdx.input.isKeyPressed(UserControls.get(Control.CHARGE_WEAPON)))
-		{
-			ship.getSecondaryWeapon().disable();
-			pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
-		}
-	}
-
-	private static void checkNormalFire(Ship ship)
-	{
-		if (Gdx.input.isKeyJustPressed(UserControls.get(Control.NORMAL_FIRE)))
-		{
-			pm.addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
+			if (Gdx.input.isKeyJustPressed(UserControls.get(Control.NORMAL_FIRE)))
+			{
+				pm.addShoot(ShootType.NORMAL_LASER, ship.getCenterX(), ship.getCenterY());
+			}
+			
+			if (ship.getSecondaryWeapon().isReady() && !Gdx.input.isKeyPressed(UserControls.get(Control.CHARGE_WEAPON)))
+			{
+				ship.getSecondaryWeapon().disable();
+				pm.addShoot(ShootType.BIG_FLAMES, ship.getCenterX(), ship.getCenterY());
+			}
 		}
 	}
 
